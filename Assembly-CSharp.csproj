@@ -53,7 +53,9 @@
     </Reference>
   </ItemGroup>
   <ItemGroup>
+     <Compile Include="Assets\Scripts\CameraControl.cs" />
      <Compile Include="Assets\Scripts\PlayerAnimation.cs" />
+     <Compile Include="Assets\Scripts\PlayerControl.cs" />
      <Compile Include="Assets\Scripts\PlayerMove.cs" />
      <None Include="Assets\Sprite Pack\Tap and Fly\Readme.txt" />
  <Reference Include="UnityEditor.StandardEvents">
