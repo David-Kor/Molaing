@@ -1,6 +1,7 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using DIRECT = EnumInterface.DIRECT_TO_FLOAT;
 
 public class PlayerAnimation : MonoBehaviour
 {
@@ -8,34 +9,69 @@ public class PlayerAnimation : MonoBehaviour
     public Sprite backSprites;
     public Sprite rightSprites;
 
-    private PlayerControl playerControl;
-    private SpriteRenderer playerSprite;    //플레이어의 스프라이트(이미지)
-    private Vector2 spriteDirect;   //현재 바라보는 방향
+    private Animator playerAnimator;
+    private Vector2 curSpriteDirect;   //현재 바라보는 방향
+    private Vector2 nextSpriteDirect;   //다음 바라볼 방향
+    private bool isWalk;
+
+    // * 애니메이터의 Direct 속성값에 의해 바라보는 방향이 결정
+    // * Direct는 float형이므로 어느 방향을 의미하는지 가독성을 높이기 위해 상수형 변수 const 사용
+    private const float DOWN = (float)DIRECT.DOWN;
+    private const float UP = (float)DIRECT.UP;
+    private const float LEFT = (float)DIRECT.LEFT;
+    private const float RIGHT = (float)DIRECT.RIGHT;
 
     void Start()
     {
-        playerControl = GetComponentInParent<PlayerControl>();
-        playerSprite = GetComponent<SpriteRenderer>();
-        spriteDirect = Vector2.down;
+        playerAnimator = GetComponent<Animator>();
+        curSpriteDirect = Vector2.down;
+        nextSpriteDirect = Vector2.down;
+        isWalk = false;
     }
 
     void Update()
     {
-        //플레이어의 입력에 의해 이전과 다른 방향을 바라봐야 하는 경우
-        if (spriteDirect != playerControl.spriteDirect)
+        if (curSpriteDirect != nextSpriteDirect)
         {
-            spriteDirect = playerControl.spriteDirect;  //바뀐 방향으로 갱신
+            curSpriteDirect = nextSpriteDirect;
             transform.rotation = Quaternion.Euler(0, 0, 0);
 
-            //각각 아래, 위, 오른쪽, 왼쪽에 해당하는 스프라이트를 적용
-            if (spriteDirect == Vector2.down) { playerSprite.sprite = frontSprites; }
-            else if (spriteDirect == Vector2.up) { playerSprite.sprite = backSprites; }
-            else if (spriteDirect == Vector2.right) { playerSprite.sprite = rightSprites; }
-            else if (spriteDirect == Vector2.left)
+            if (curSpriteDirect == Vector2.down)
             {
-                playerSprite.sprite = rightSprites;
-                transform.rotation = Quaternion.Euler(0, 180, 0);   //스프라이트가 오른쪽 방향을 보는 이미지이므로 세로축으로 180도 회전하여 왼쪽을 보게 함
+                playerAnimator.SetFloat("Direct", DOWN);
+            }
+            if (curSpriteDirect == Vector2.up)
+            {
+                playerAnimator.SetFloat("Direct", UP);
+            }
+            if (curSpriteDirect == Vector2.right)
+            {
+                playerAnimator.SetFloat("Direct", RIGHT);
+            }
+            if (curSpriteDirect == Vector2.left)
+            {
+                transform.rotation = Quaternion.Euler(0, 180, 0);
+                playerAnimator.SetFloat("Direct", LEFT);   //Side Sprite가 오른쪽 방향 이미지이므로, 세로축으로 180도 회전하여 좌우반전
             }
         }
+
+        if (playerAnimator.GetBool("IsWalk") != isWalk)
+        {
+            playerAnimator.SetBool("IsWalk", isWalk);
+        }
     }
+
+
+    public void StartWalking() { isWalk = true; }
+
+
+    public void StopWalking() { isWalk = false; }
+
+
+    public void TurnPlayer(Vector2 _spriteDirect)
+    {
+        nextSpriteDirect = _spriteDirect;
+    }
+
+
 }

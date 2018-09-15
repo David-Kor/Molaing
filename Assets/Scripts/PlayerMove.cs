@@ -14,7 +14,7 @@ public class PlayerMove : MonoBehaviour
     {
     }
 
-    public void MovePlayer(Vector2 _moveDirect)
+    public void Move(Vector2 _moveDirect)
     {
         transform.Translate(_moveDirect * speed * Time.deltaTime, Space.World);
     }
