@@ -4,13 +4,15 @@ using UnityEngine;
 
 public class PlayerAttack : MonoBehaviour
 {
-    public float attackSpeedPerSec = 1.0f;  //초당 기본 공격속도
+    public float attackCountPerSec = 2.0f;  //초당 기본 공격횟수
 
-    private float basicAttackTimer;
+    private PlayerAnimation playerAnimation;
+    public float basicAttackTimer;
     private bool isAttackInput;
 
     void Start()
     {
+        playerAnimation = transform.parent.GetComponentInChildren<PlayerAnimation>();
         basicAttackTimer = 0f;
         isAttackInput = false;
     }
@@ -28,10 +30,13 @@ public class PlayerAttack : MonoBehaviour
         {
             if (basicAttackTimer <= 0)
             {
-                basicAttackTimer = attackSpeedPerSec;
-                Debug.Log("Attack");
+                basicAttackTimer = 1 / attackCountPerSec;
+                playerAnimation.SetAttackMotionSpeed(attackCountPerSec / 2.0f);
+                playerAnimation.StartAttack();
+                Debug.Log("Attack!");
             }
         }
+        else { playerAnimation.StopAttack(); }
     }
 
 

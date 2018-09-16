@@ -35,6 +35,7 @@ public class PlayerControl : MonoBehaviour
 
             //이동키 입력에 의한 플레이어 애니메이션 적용
             playerAnimation.TurnPlayer(spriteDirect);
+            playerAnimation.StopAttack();
             if (moveDirect == Vector2.zero) { playerAnimation.StopWalking(); }
             else { playerAnimation.StartWalking(); }
         }

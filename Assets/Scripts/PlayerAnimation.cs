@@ -13,6 +13,7 @@ public class PlayerAnimation : MonoBehaviour
     private Vector2 curSpriteDirect;   //현재 바라보는 방향
     private Vector2 nextSpriteDirect;   //다음 바라볼 방향
     private bool isWalk;
+    private bool isAttack;
 
     // * 애니메이터의 Direct 속성값에 의해 바라보는 방향이 결정
     // * Direct는 float형이므로 어느 방향을 의미하는지 가독성을 높이기 위해 상수형 변수 const 사용
@@ -20,6 +21,8 @@ public class PlayerAnimation : MonoBehaviour
     private const float UP = (float)DIRECT.UP;
     private const float LEFT = (float)DIRECT.LEFT;
     private const float RIGHT = (float)DIRECT.RIGHT;
+    private float timer;
+    private float attackMotionSpeed = 1.0f;     //default : 1
 
     void Start()
     {
@@ -27,6 +30,7 @@ public class PlayerAnimation : MonoBehaviour
         curSpriteDirect = Vector2.down;
         nextSpriteDirect = Vector2.down;
         isWalk = false;
+        timer = 0;
     }
 
     void Update()
@@ -59,6 +63,22 @@ public class PlayerAnimation : MonoBehaviour
         {
             playerAnimator.SetBool("IsWalk", isWalk);
         }
+
+        if (!isWalk)
+        {
+            playerAnimator.SetBool("IsAttack", isAttack);
+            if (isAttack)
+            {
+                timer += Time.deltaTime;
+                if (playerAnimator.GetCurrentAnimatorStateInfo(0).IsName("Attack"))
+                {
+                    playerAnimator.SetFloat("AttackMotionSpeed", attackMotionSpeed);
+                    if (playerAnimator.GetCurrentAnimatorStateInfo(0).length < timer) { isAttack = false; }
+                }
+            }
+            else { timer = 0; }
+        }
+
     }
 
 
@@ -66,6 +86,18 @@ public class PlayerAnimation : MonoBehaviour
 
 
     public void StopWalking() { isWalk = false; }
+
+
+    public void StartAttack() { isAttack = true; }
+
+
+    public void StopAttack() { isAttack = false; }
+
+
+    public void SetAttackMotionSpeed(float _speed)
+    {
+        attackMotionSpeed = _speed;
+    }
 
 
     public void TurnPlayer(Vector2 _spriteDirect)
