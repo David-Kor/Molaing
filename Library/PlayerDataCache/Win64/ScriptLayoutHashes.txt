@@ -1,6 +1,6 @@
 WindowsStandalone
 PlayerPath?
-C:/Users/David/Documents/공부자료/Unity/Molaing Build/Molaing.exe
+C:/Users/David/Documents/공부자료/Unity/MolaingBuild/Molaing.exe
 SceneListBegin?
 Assets/Scenes/MoveSample.unity
 SceneListEnd?
@@ -88,6 +88,7 @@ e90403eeda069970e0b9de1533de13a6 UnityEngine.UI.dll:UnityEngine.UI.ToggleGroup
 2d58ca16854b99daea8c45e9c0f367b7 UnityEngine.UI.dll:UnityEngine.EventSystems.TouchInputModule
 16da51d1b62ef6d4ee1849350434023b UnityEngine.UI.dll:UnityEngine.UI.VerticalLayoutGroup
 5b9b2f59726c6ff8c5be027e767006cf Assembly-CSharp.dll:.CameraControl
+7adc3e70ac54c73580353efaa9f4da1c Assembly-CSharp.dll:.PlayerAttack
 486cd95c82d8305219c352c06b776e1f UnityEngine.Timeline.dll:UnityEngine.Timeline.ActivationPlayableAsset
 9e61f3535f3c55760a1cedfbd114f4af UnityEngine.Timeline.dll:UnityEngine.Timeline.ActivationTrack
 754551afe4f2531f58476bf14c510657 UnityEngine.Timeline.dll:UnityEngine.Timeline.AnimationPlayableAsset
@@ -171,4 +172,3 @@ e04611b8715e6833d2bd7010fc6be10b Unity.TextMeshPro.dll:TMPro.TMP_StyleSheet
 2f9af06a78208a67db480e9bfed4a076 Unity.TextMeshPro.dll:TMPro.TextMeshPro
 9318334b30e9f195f573b2ce00154b95 Unity.TextMeshPro.dll:TMPro.TMP_ColorGradient
 93307bd34e39d73fd24e00ec39c25a91 Unity.TextMeshPro.dll:TMPro.TMP_SubMesh
-156e8e6bec791d35a807ebd54cf51ff7 Assembly-CSharp.dll:.PlayerAttack

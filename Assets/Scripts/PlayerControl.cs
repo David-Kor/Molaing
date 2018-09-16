@@ -32,6 +32,7 @@ public class PlayerControl : MonoBehaviour
         {
             SetSpriteDirect();  //바라볼 방향 결정
             playerMove.Move(moveDirect);   //플레이어 이동
+            playerAttack.StopAttack();  //공격 취소
 
             //이동키 입력에 의한 플레이어 애니메이션 적용
             playerAnimation.TurnPlayer(spriteDirect);
@@ -39,17 +40,18 @@ public class PlayerControl : MonoBehaviour
             if (moveDirect == Vector2.zero) { playerAnimation.StopWalking(); }
             else { playerAnimation.StartWalking(); }
         }
-        else    //이동키를 누르지 않았다면 대기 애니메이션 적용
+        else    //이동키를 누르지 않은 경우
         {
+            //대기 애니메이션 적용
             playerAnimation.StopWalking();
             firstDirect = Vector2.zero;
-        }
 
-        if (CheckAttackKeyInput())  //공격키를 눌렀는지 확인
-        {
-            playerAttack.Attack();  //플레이어의 공격
+            if (CheckAttackKeyInput())  //공격키를 눌렀는지 확인
+            {
+                playerAttack.Attack();  //플레이어의 공격
+            }
+            else { playerAttack.StopAttack(); } //공격 취소
         }
-        else { playerAttack.StopAttack(); } //공격 취소
     }
 
 

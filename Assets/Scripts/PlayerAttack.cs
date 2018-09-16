@@ -31,7 +31,7 @@ public class PlayerAttack : MonoBehaviour
             if (basicAttackTimer <= 0)
             {
                 basicAttackTimer = 1 / attackCountPerSec;
-                playerAnimation.SetAttackMotionSpeed(attackCountPerSec / 2.0f);
+                playerAnimation.SetAttackMotionSpeed(attackCountPerSec);
                 playerAnimation.StartAttack();
                 Debug.Log("Attack!");
             }

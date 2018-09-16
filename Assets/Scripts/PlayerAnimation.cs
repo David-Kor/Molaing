@@ -78,6 +78,11 @@ public class PlayerAnimation : MonoBehaviour
             }
             else { timer = 0; }
         }
+        else if (playerAnimator.GetBool("IsAttack"))
+        {
+            isAttack = false;
+            playerAnimator.SetBool("IsAttack", isAttack);
+        }
 
     }
 

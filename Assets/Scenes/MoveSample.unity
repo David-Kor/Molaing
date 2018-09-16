@@ -356,7 +356,7 @@ Prefab:
     - target: {fileID: 114564495464132942, guid: 7a558733239cec84d8fb7da029e6359f,
         type: 2}
       propertyPath: attackCountPerSec
-      value: 1.5
+      value: 1
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 7a558733239cec84d8fb7da029e6359f, type: 2}
