@@ -5,10 +5,6 @@ using DIRECT = EnumInterface.DIRECT_TO_FLOAT;
 
 public class PlayerAnimation : MonoBehaviour
 {
-    public Sprite frontSprites;
-    public Sprite backSprites;
-    public Sprite rightSprites;
-
     private Animator playerAnimator;
     private Vector2 curSpriteDirect;   //현재 바라보는 방향
     private Vector2 nextSpriteDirect;   //다음 바라볼 방향
@@ -99,16 +95,12 @@ public class PlayerAnimation : MonoBehaviour
     public void StopAttack() { isAttack = false; }
 
 
-    public void SetAttackMotionSpeed(float _speed)
-    {
-        attackMotionSpeed = _speed;
-    }
+    public void SetAttackMotionSpeed(float _speed) { attackMotionSpeed = _speed; }
 
 
-    public void TurnPlayer(Vector2 _spriteDirect)
-    {
-        nextSpriteDirect = _spriteDirect;
-    }
+    public void TurnPlayer(Vector2 _spriteDirect) { nextSpriteDirect = _spriteDirect; }
 
+
+    public Vector2 GetPlayerSpriteDirect() { return curSpriteDirect; }
 
 }

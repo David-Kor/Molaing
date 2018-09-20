@@ -4,19 +4,16 @@ using UnityEngine;
 
 public class PlayerMove : MonoBehaviour
 {
-    public float speed = 30.0f;
+    private PlayerState playerState;
 
     void Start()
     {
+        playerState = GetComponent<PlayerState>();
     }
-
-    void Update()
-    {
-    }
-
+    
     public void Move(Vector2 _moveDirect)
     {
-        transform.Translate(_moveDirect * speed * Time.deltaTime, Space.World);
+        transform.Translate(_moveDirect * playerState.moveSpeed * Time.deltaTime, Space.World);
     }
 
 }
