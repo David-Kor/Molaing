@@ -20,6 +20,7 @@ GameObject:
   m_Component:
   - component: {fileID: 4649324984966070}
   - component: {fileID: 61723325678026922}
+  - component: {fileID: 114207254938602596}
   m_Layer: 0
   m_Name: HitPoint
   m_TagString: HitPoint
@@ -38,7 +39,7 @@ GameObject:
   - component: {fileID: 114992375830163696}
   - component: {fileID: 114015992389519178}
   - component: {fileID: 95251518663956458}
-  - component: {fileID: 114949141329007602}
+  - component: {fileID: 114214224685982042}
   m_Layer: 0
   m_Name: Player
   m_TagString: Player
@@ -71,6 +72,7 @@ GameObject:
   m_Component:
   - component: {fileID: 4352083137576896}
   - component: {fileID: 212799343599136072}
+  - component: {fileID: 114160590285837904}
   - component: {fileID: 114437847078032964}
   - component: {fileID: 95623138654206314}
   m_Layer: 0
@@ -169,7 +171,7 @@ Animator:
   m_GameObject: {fileID: 1309920821025196}
   m_Enabled: 1
   m_Avatar: {fileID: 0}
-  m_Controller: {fileID: 0}
+  m_Controller: {fileID: 9100000, guid: c2afe9294c2c24b45865d37f9060cb65, type: 2}
   m_CullingMode: 0
   m_UpdateMode: 0
   m_ApplyRootMotion: 0
@@ -207,6 +209,50 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 414853f365ef0d641be6969c698435de, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+--- !u!114 &114160590285837904
+MonoBehaviour:
+  m_ObjectHideFlags: 1
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 1910079593288732}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: d2afc41fa849a47498ed164e432d7bfd, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+--- !u!114 &114207254938602596
+MonoBehaviour:
+  m_ObjectHideFlags: 1
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 1096211571124250}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: c1ecf3aac872d7744bd34548e6f45f59, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+--- !u!114 &114214224685982042
+MonoBehaviour:
+  m_ObjectHideFlags: 1
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 1309920821025196}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 34db68a30ac5b62499b1536afafb9ef5, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  objName: Player
+  maxHP: 100
+  maxMP: 100
+  currentHP: 0
+  currentMP: 0
+  strength: 5
+  agility: 5
+  intelligence: 5
+  attackDamage: 5
+  attackSpeed: 1.3
+  moveSpeed: 1.5
 --- !u!114 &114437847078032964
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -218,9 +264,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: a29921cae4cbb6f459797b0e5639d61a, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  frontSprites: {fileID: 21300000, guid: 0f39a9205e4394ee1b6ba8269428d176, type: 3}
-  backSprites: {fileID: 21300000, guid: 4fc82fadd0e1d4ed8a697be473d72842, type: 3}
-  rightSprites: {fileID: 21300000, guid: 21ae12909dfa64464820da55fc494021, type: 3}
 --- !u!114 &114564495464132942
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -232,27 +275,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 9c2471438643d604ea650005cf55db5d, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
---- !u!114 &114949141329007602
-MonoBehaviour:
-  m_ObjectHideFlags: 1
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInternal: {fileID: 100100000}
-  m_GameObject: {fileID: 1309920821025196}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: ef0de3b30c5f9e24cb1372d81c16ab66, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  maxHP: 100
-  maxMP: 50
-  currentHP: 100
-  currentMP: 50
-  strength: 0
-  agility: 0
-  intelligence: 0
-  attackPoint: 5
-  attackSpeed: 1.5
-  moveSpeed: 1.2
+  attackDistance: 0.1
 --- !u!114 &114992375830163696
 MonoBehaviour:
   m_ObjectHideFlags: 1

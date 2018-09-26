@@ -4,11 +4,11 @@ using UnityEngine;
 
 public class PlayerMove : MonoBehaviour
 {
-    private PlayerState playerState;
+    private PlayerStatus playerState;
 
     void Start()
     {
-        playerState = GetComponent<PlayerState>();
+        playerState = GetComponent<PlayerStatus>();
     }
     
     public void Move(Vector2 _moveDirect)

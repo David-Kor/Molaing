@@ -20,9 +20,10 @@ GameObject:
   m_Component:
   - component: {fileID: 4762736451404580}
   - component: {fileID: 61564835251250504}
+  - component: {fileID: 114905742248602252}
   m_Layer: 0
-  m_Name: Hit_Point
-  m_TagString: Untagged
+  m_Name: HitPoint
+  m_TagString: HitPoint
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -35,9 +36,10 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 4784433464632770}
+  - component: {fileID: 114101211495959794}
   m_Layer: 0
   m_Name: mob
-  m_TagString: Untagged
+  m_TagString: Enemy
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -51,9 +53,10 @@ GameObject:
   m_Component:
   - component: {fileID: 4962163627479608}
   - component: {fileID: 212959643329093822}
+  - component: {fileID: 114497256265949160}
   m_Layer: 0
   m_Name: MobSprite
-  m_TagString: Untagged
+  m_TagString: Enemy
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -111,7 +114,7 @@ BoxCollider2D:
   m_IsTrigger: 0
   m_UsedByEffector: 0
   m_UsedByComposite: 0
-  m_Offset: {x: 0.0017703772, y: -0.0281488}
+  m_Offset: {x: 0, y: -0.01}
   m_SpriteTilingProperty:
     border: {x: 0, y: 0, z: 0, w: 0}
     pivot: {x: 0, y: 0}
@@ -122,8 +125,52 @@ BoxCollider2D:
     adaptiveTiling: 0
   m_AutoTiling: 0
   serializedVersion: 2
-  m_Size: {x: 0.14318037, y: 0.23150688}
+  m_Size: {x: 0.22427335, y: 0.28867197}
   m_EdgeRadius: 0
+--- !u!114 &114101211495959794
+MonoBehaviour:
+  m_ObjectHideFlags: 1
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 1378976376931740}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 288a30b217f110347946ad9b215e4c0e, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  objName: Ent
+  maxHP: 30
+  maxMP: 0
+  currentHP: 0
+  currentMP: 0
+  strength: 0
+  agility: 0
+  intelligence: 10
+  attackDamage: 5
+  attackSpeed: 0.7
+  moveSpeed: 0.5
+--- !u!114 &114497256265949160
+MonoBehaviour:
+  m_ObjectHideFlags: 1
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 1996036131074222}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: d2afc41fa849a47498ed164e432d7bfd, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+--- !u!114 &114905742248602252
+MonoBehaviour:
+  m_ObjectHideFlags: 1
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 1353198552256318}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: c1ecf3aac872d7744bd34548e6f45f59, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!212 &212959643329093822
 SpriteRenderer:
   m_ObjectHideFlags: 1

@@ -54,14 +54,22 @@
   </ItemGroup>
   <ItemGroup>
      <Compile Include="Assets\Scripts\CameraControl.cs" />
+     <Compile Include="Assets\Scripts\Enemy\EnemyMove.cs" />
+     <Compile Include="Assets\Scripts\Enemy\EnemyStatus.cs" />
      <Compile Include="Assets\Scripts\EnumInterface.cs" />
+     <Compile Include="Assets\Scripts\HitObject.cs" />
+     <Compile Include="Assets\Scripts\ObjectStatus.cs" />
      <Compile Include="Assets\Scripts\Player\PlayerAnimation.cs" />
      <Compile Include="Assets\Scripts\Player\PlayerAttack.cs" />
      <Compile Include="Assets\Scripts\Player\PlayerControl.cs" />
      <Compile Include="Assets\Scripts\Player\PlayerMove.cs" />
-     <Compile Include="Assets\Scripts\Player\PlayerState.cs" />
+     <Compile Include="Assets\Scripts\Player\PlayerStatus.cs" />
+     <Compile Include="Assets\Scripts\Skills\AttackSkill.cs" />
+     <Compile Include="Assets\Scripts\Skills\BasicAttack.cs" />
      <Compile Include="Assets\Scripts\Skills\Skill.cs" />
      <Compile Include="Assets\Scripts\Skills\Smite.cs" />
+     <Compile Include="Assets\Scripts\Skills\SupportSkill.cs" />
+     <Compile Include="Assets\Scripts\SpriteOrder.cs" />
      <None Include="Assets\Sprite Pack\Tap and Fly\Readme.txt" />
  <Reference Include="UnityEditor.StandardEvents">
  <HintPath>C:/Users/David/Documents/공부자료/Unity/Molaing/Library/ScriptAssemblies/UnityEditor.StandardEvents.dll</HintPath>

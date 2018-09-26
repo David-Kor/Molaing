@@ -9,7 +9,7 @@ public class EnumInterface
 {
     /* DIRECT_TO_FLOAT */
     /* 모든 캐릭터 애니메이터에서 각각 바라보는 방향의 속성 값을 통일하기 위해 사용 */
-    public enum DIRECT_TO_FLOAT { DOWN, UP, LEFT, RIGHT = 2 }
+    public enum DIRECT_TO_FLOAT { DOWN, UP, LEFT, RIGHT = 2 }   //좌우 방향은 y축 대칭으로 뒤집기 때문에 같은 값을 갖게 함.
 
     /* TYPE_OF_SKILL */
      /* 스킬의 종류를 구분하기 위해 사용 (공격 , 지원 , 채집 순)*/

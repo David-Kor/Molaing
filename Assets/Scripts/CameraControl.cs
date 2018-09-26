@@ -12,6 +12,9 @@ public class CameraControl : MonoBehaviour
 
     void Update()
     {
-        transform.position = player.transform.position + (Vector3.back * 10);
+        if (player != null)
+        {
+            transform.position = player.transform.position + (Vector3.back * 10);
+        }
     }
 }

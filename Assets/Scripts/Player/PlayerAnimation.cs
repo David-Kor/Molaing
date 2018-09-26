@@ -5,7 +5,7 @@ using DIRECT = EnumInterface.DIRECT_TO_FLOAT;
 
 public class PlayerAnimation : MonoBehaviour
 {
-    private Animator playerAnimator;
+    private Animator playerAnimator;    //에니메이션 관리 컴포넌트
     private Vector2 curSpriteDirect;   //현재 바라보는 방향
     private Vector2 nextSpriteDirect;   //다음 바라볼 방향
     private bool isWalk;
@@ -31,11 +31,13 @@ public class PlayerAnimation : MonoBehaviour
 
     void Update()
     {
+        //바라보는 방향이 바뀌면
         if (curSpriteDirect != nextSpriteDirect)
         {
             curSpriteDirect = nextSpriteDirect;
-            transform.rotation = Quaternion.Euler(0, 0, 0);
+            transform.rotation = Quaternion.Euler(0, 0, 0); //회전값 초기화
 
+            //Animator의 파라미터 Direct에 의해 어느 방향의 애니메이션을 실행할 것인지 결정
             if (curSpriteDirect == Vector2.down)
             {
                 playerAnimator.SetFloat("Direct", DOWN);
@@ -55,25 +57,31 @@ public class PlayerAnimation : MonoBehaviour
             }
         }
 
+        //이동 중인 상태라면 이동 애니메이션으로 전환
         if (playerAnimator.GetBool("IsWalk") != isWalk)
         {
             playerAnimator.SetBool("IsWalk", isWalk);
         }
 
+        //이동 중이 아닌 경우
         if (!isWalk)
         {
             playerAnimator.SetBool("IsAttack", isAttack);
+            //기본 공격 중인 경우
             if (isAttack)
             {
                 timer += Time.deltaTime;
+                //현재 실행중인 애니메이션이 Attack인 경우
                 if (playerAnimator.GetCurrentAnimatorStateInfo(0).IsName("Attack"))
                 {
                     playerAnimator.SetFloat("AttackMotionSpeed", attackMotionSpeed);
-                    if (playerAnimator.GetCurrentAnimatorStateInfo(0).length < timer) { isAttack = false; }
+                    if (playerAnimator.GetCurrentAnimatorStateInfo(0).length < timer) { isAttack = false; } //애니메이션 재생이 끝나면 isAttack를 초기화
                 }
             }
             else { timer = 0; }
         }
+        //공격 중에 이동하거나 이동 중에 공격하는 경우
+        //공격 애니메이션을 재생하지 않게 함
         else if (playerAnimator.GetBool("IsAttack"))
         {
             isAttack = false;
