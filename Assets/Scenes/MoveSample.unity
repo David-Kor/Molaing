@@ -288,6 +288,21 @@ Prefab:
       propertyPath: m_RootOrder
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 50261641072922728, guid: 7a558733239cec84d8fb7da029e6359f,
+        type: 2}
+      propertyPath: m_Constraints
+      value: 4
+      objectReference: {fileID: 0}
+    - target: {fileID: 50261641072922728, guid: 7a558733239cec84d8fb7da029e6359f,
+        type: 2}
+      propertyPath: m_BodyType
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 114564495464132942, guid: 7a558733239cec84d8fb7da029e6359f,
+        type: 2}
+      propertyPath: attackRange
+      value: 0.1
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 7a558733239cec84d8fb7da029e6359f, type: 2}
   m_IsPrefabAsset: 0

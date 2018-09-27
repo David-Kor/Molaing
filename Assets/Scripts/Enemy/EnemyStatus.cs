@@ -4,5 +4,5 @@ using UnityEngine;
 
 public class EnemyStatus : ObjectStatus
 {
-
+    public float attackRange;
 }

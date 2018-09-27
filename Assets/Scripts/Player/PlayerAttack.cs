@@ -2,7 +2,7 @@
 
 public class PlayerAttack : MonoBehaviour
 {
-    public float attackDistance;
+    public float attackRange;
 
     private PlayerAnimation playerAnimation;
     private PlayerStatus playerState;
@@ -59,7 +59,7 @@ public class PlayerAttack : MonoBehaviour
     /* 기본 공격 사거리 안에 HitPoint가 있는지 검사 */
     void OnHitAttack()
     {
-        float distance = attackDistance;
+        float distance = attackRange;
         if (attackDirect == Vector2.down) { distance += 0.07f; }
 
         RaycastHit2D[] hit = Physics2D.RaycastAll(transform.position, attackDirect, distance);
@@ -69,9 +69,10 @@ public class PlayerAttack : MonoBehaviour
             //HitPoint가 감지되면 기본 공격에 대한 정보를 넘김
             if (hit[i].collider != null && hit[i].collider.CompareTag("HitPoint"))
             {
-                if (hit[i].transform.parent.CompareTag("Player")) { continue; } //플레이어의 HitPoint면 무시
+                HitObject hitComponent = hit[i].transform.GetComponent<HitObject>();
+                if (hitComponent.GetName() == "Player") { continue; } //플레이어의 HitPoint면 무시
 
-                hit[i].transform.GetComponent<HitObject>().OnHitSkill(basicAttack);
+                hitComponent.OnHitSkill(basicAttack);
                 break;
             }
         }

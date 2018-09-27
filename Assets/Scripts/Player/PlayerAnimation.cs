@@ -17,8 +17,8 @@ public class PlayerAnimation : MonoBehaviour
     private const float UP = (float)DIRECT.UP;
     private const float LEFT = (float)DIRECT.LEFT;
     private const float RIGHT = (float)DIRECT.RIGHT;
-    private float timer;
-    private float attackMotionSpeed = 1.0f;     //default : 1
+    private float atkMotionTimer;
+    private float atkMotionSpeed = 1.0f;     //default : 1
 
     void Start()
     {
@@ -26,7 +26,7 @@ public class PlayerAnimation : MonoBehaviour
         curSpriteDirect = Vector2.down;
         nextSpriteDirect = Vector2.down;
         isWalk = false;
-        timer = 0;
+        atkMotionTimer = 0;
     }
 
     void Update()
@@ -66,19 +66,42 @@ public class PlayerAnimation : MonoBehaviour
         //이동 중이 아닌 경우
         if (!isWalk)
         {
-            playerAnimator.SetBool("IsAttack", isAttack);
-            //기본 공격 중인 경우
+            //공격 애니메이션 실행 중 공격키를 뗀 경우
+            //마지막 공격 모션이 끝날 때까지 애니메이션이 계속됨
+            //(공격키를 땠을 때 모션이 캔슬되는 것을 방지하기 위함)
+            if (playerAnimator.GetBool("IsAttack") && !isAttack)
+            {
+                atkMotionTimer += Time.deltaTime;
+                if (playerAnimator.GetCurrentAnimatorStateInfo(0).length < atkMotionTimer)
+                {
+                    isAttack = false;
+                    playerAnimator.SetBool("IsAttack", isAttack);
+                    atkMotionTimer = 0;
+                }
+            }
+            //공격키를 계속 누르고 있는 상태이면 isAttack과 동기화
+            //모션이 한 번 사이클할 때마다 false로 변한 후 공격 딜레이가 끝나면 다시 true로 변함
+            else { playerAnimator.SetBool("IsAttack", isAttack); }
+
+            //기본 공격키가 입력 중인 경우
             if (isAttack)
             {
-                timer += Time.deltaTime;
+                atkMotionTimer += Time.deltaTime;
                 //현재 실행중인 애니메이션이 Attack인 경우
                 if (playerAnimator.GetCurrentAnimatorStateInfo(0).IsName("Attack"))
                 {
-                    playerAnimator.SetFloat("AttackMotionSpeed", attackMotionSpeed);
-                    if (playerAnimator.GetCurrentAnimatorStateInfo(0).length < timer) { isAttack = false; } //애니메이션 재생이 끝나면 isAttack를 초기화
+                    playerAnimator.SetFloat("AttackMotionSpeed", atkMotionSpeed);
+
+                    //애니메이션 재생이 끝나면 초기화
+                    if (playerAnimator.GetCurrentAnimatorStateInfo(0).length < atkMotionTimer)
+                    {
+                        isAttack = false;
+                        playerAnimator.SetBool("IsAttack", isAttack);
+                        atkMotionTimer = 0;
+                    }
                 }
             }
-            else { timer = 0; }
+            else if (playerAnimator.GetBool("IsAttack") == isAttack) { atkMotionTimer = 0; }
         }
         //공격 중에 이동하거나 이동 중에 공격하는 경우
         //공격 애니메이션을 재생하지 않게 함
@@ -103,7 +126,7 @@ public class PlayerAnimation : MonoBehaviour
     public void StopAttack() { isAttack = false; }
 
 
-    public void SetAttackMotionSpeed(float _speed) { attackMotionSpeed = _speed; }
+    public void SetAttackMotionSpeed(float _speed) { atkMotionSpeed = _speed; }
 
 
     public void TurnPlayer(Vector2 _spriteDirect) { nextSpriteDirect = _spriteDirect; }

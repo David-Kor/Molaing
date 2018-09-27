@@ -4,11 +4,13 @@ using UnityEngine;
 
 public class HitObject : MonoBehaviour
 {
+    private string objName;
     private ObjectStatus status;
 
     void Start()
     {
         status = GetComponentInParent<ObjectStatus>();
+        objName = status.objName;
     }
 
 
@@ -22,5 +24,8 @@ public class HitObject : MonoBehaviour
             status.TakeDamage((_skill as AttackSkill).damage);
         }
     }
+
+
+    public string GetName() { return objName; }
 
 }
