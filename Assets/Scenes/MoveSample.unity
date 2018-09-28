@@ -246,6 +246,16 @@ Prefab:
       propertyPath: m_Name
       value: Mob
       objectReference: {fileID: 0}
+    - target: {fileID: 114101211495959794, guid: cd28ad5c1307ba4478e1eeeaaa097aa6,
+        type: 2}
+      propertyPath: autoAggro
+      value: 100
+      objectReference: {fileID: 0}
+    - target: {fileID: 114540941118327218, guid: cd28ad5c1307ba4478e1eeeaaa097aa6,
+        type: 2}
+      propertyPath: aggroDelay
+      value: 0.35
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: cd28ad5c1307ba4478e1eeeaaa097aa6, type: 2}
   m_IsPrefabAsset: 0
