@@ -39,7 +39,7 @@ GameObject:
   - component: {fileID: 114101211495959794}
   - component: {fileID: 114501911872196970}
   m_Layer: 0
-  m_Name: mob
+  m_Name: Ent
   m_TagString: Enemy
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -73,6 +73,7 @@ GameObject:
   - component: {fileID: 4962163627479608}
   - component: {fileID: 212959643329093822}
   - component: {fileID: 114497256265949160}
+  - component: {fileID: 114974477352970994}
   m_Layer: 0
   m_Name: MobSprite
   m_TagString: Enemy
@@ -216,8 +217,9 @@ MonoBehaviour:
   intelligence: 10
   attackDamage: 5
   attackSpeed: 0.7
-  moveSpeed: 0.3
+  moveSpeed: 0.5
   attackRange: 0.05
+  autoAggro: 100
 --- !u!114 &114497256265949160
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -240,6 +242,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 0820544d455665346a8a0a2260b3721c, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  minPatrolDelay: 1
+  maxPatrolDelay: 5
+  maxDistancePatrol: 1
 --- !u!114 &114540941118327218
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -251,7 +256,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 21d7f5a204608de4c97d454524ccb2d3, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  isKOS: 1
+  aggroDelay: 0.35
 --- !u!114 &114905742248602252
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -263,6 +268,18 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: c1ecf3aac872d7744bd34548e6f45f59, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+--- !u!114 &114974477352970994
+MonoBehaviour:
+  m_ObjectHideFlags: 1
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 1996036131074222}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: ca9ec7d5d6c78ed4aa830133bcbfd7ac, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  animator: {fileID: 0}
 --- !u!212 &212959643329093822
 SpriteRenderer:
   m_ObjectHideFlags: 1

@@ -16,14 +16,14 @@ public class EnemyAggro : MonoBehaviour
     private int distY;  //타겟과의 Y값 거리
 
     private EnemyStatus status;
-    private EnemyMove enemyMove;
+    private EnemyControl control;
     private GameObject target;
-
+    private bool isAggro;
 
     void Start()
     {
         status = GetComponentInParent<EnemyStatus>();
-        enemyMove = GetComponentInParent<EnemyMove>();
+        control = GetComponentInParent<EnemyControl>();
         target = null;
         autoAggro = status.autoAggro;
         aggroTimer = 0f;
@@ -44,20 +44,21 @@ public class EnemyAggro : MonoBehaviour
             //소수점이하 버림
             maxRandRange = Mathf.FloorToInt(1000 - (1000 / ((distX + distY) * (distX + distY) + 1)));
 
+            //딜레이만큼의 시간이 지나면 확률적으로 선제공격(어그로) 결정
+            //선제공격 확률은 거리가 가까울수록 높아짐
             if (aggroTimer >= aggroDelay)
             {
                 aggroTimer = 0;
                 
+                // 1 ~ maxRandRange 범위의 정수
+                //거리가 가까울수록 위의 범위가 줄어듦으로써 확률 증가
+                //확률에 당첨되면 컨트롤 클래스에 알려줌
                 if (Random.Range(1, maxRandRange) <= autoAggro)
                 {
-                    enemyMove.MoveToThisObject(target);
+                    isAggro = true;
+                    control.DiscoverTarget(target);
                 }
             }
-        }
-        else
-        {
-            maxRandRange = 1000;
-            enemyMove.MoveToThisObject(target);
         }
     }
 
@@ -83,6 +84,9 @@ public class EnemyAggro : MonoBehaviour
         {
             aggroTimer = 0;
             target = null;
+            maxRandRange = 1000;
+            if (isAggro) { control.TargetLost(); }
+            isAggro = false;
         }
     }
 }
