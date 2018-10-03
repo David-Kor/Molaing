@@ -4,9 +4,8 @@
 TagManager:
   serializedVersion: 2
   tags:
-  - Ground
-  - HitPoint
   - Enemy
+  - HitPoint
   layers:
   - Default
   - TransparentFX
@@ -39,11 +38,11 @@ TagManager:
   - 
   - 
   - 
-  - 
+  - UI
   m_SortingLayers:
-  - name: Background
-    uniqueID: 2726918441
-    locked: 0
   - name: Default
     uniqueID: 0
+    locked: 0
+  - name: UI
+    uniqueID: 3648235681
     locked: 0

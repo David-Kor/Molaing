@@ -81,6 +81,7 @@
     <Compile Include="Assets\Scripts\Skills\Smite.cs" />
     <Compile Include="Assets\Scripts\Skills\SupportSkill.cs" />
     <Compile Include="Assets\Scripts\SpriteOrder.cs" />
+    <Compile Include="Assets\Scripts\TalkTest.cs" />
     <None Include="Assets\Sprite Pack\Tap and Fly\Readme.txt" />
     <Reference Include="UnityEditor.StandardEvents">
       <HintPath>C:/Users/csh82/Desktop/새 폴더/Library/ScriptAssemblies/UnityEditor.StandardEvents.dll</HintPath>
