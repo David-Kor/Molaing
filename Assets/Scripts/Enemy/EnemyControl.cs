@@ -16,6 +16,9 @@ public class EnemyControl : MonoBehaviour {
         move = GetComponent<EnemyMove>();
         status = GetComponent<EnemyStatus>();
         patrolDirect = Vector2.zero;
+
+        //적끼리의 물리적 충돌 무시 (밀림현상 방지)
+        Physics2D.IgnoreLayerCollision(LayerMask.NameToLayer("Enemy"), LayerMask.NameToLayer("Enemy"), true);
     }
 
     

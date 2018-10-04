@@ -68,6 +68,8 @@ public class EnemyAggro : MonoBehaviour
     {
         if (autoAggro <= 0) { return; }
 
+        if (!col.CompareTag("HitPoint")) { return; }
+
         if (col.transform.parent.name == "Player")
         {
             aggroTimer = 0;
@@ -79,6 +81,8 @@ public class EnemyAggro : MonoBehaviour
     void OnTriggerExit2D(Collider2D col)
     {
         if (autoAggro <= 0) { return; }
+
+        if (!col.CompareTag("HitPoint")) { return; }
 
         if (col.transform.parent.name == "Player")
         {
