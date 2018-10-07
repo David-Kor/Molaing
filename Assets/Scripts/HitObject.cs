@@ -5,12 +5,12 @@ using UnityEngine;
 public class HitObject : MonoBehaviour
 {
     private string objName;
-    private ObjectStatus status;
+    private ObjectControl control;
 
     void Start()
     {
-        status = GetComponentInParent<ObjectStatus>();
-        objName = status.objName;
+        control = GetComponentInParent<ObjectControl>();
+        objName = control.gameObject.name;
     }
 
 
@@ -19,9 +19,7 @@ public class HitObject : MonoBehaviour
         //_skill이 AttackSkill의 서브 클래스인 경우 -> 공격 스킬에 맞은 경우
         if (_skill.GetType().IsSubclassOf(typeof(AttackSkill)))
         {
-            Debug.Log((_skill as AttackSkill).damage);
-            //스탯에 피해량(damage) 정보를 넘김
-            status.TakeDamage((_skill as AttackSkill).damage);
+            control.OnHitAttack(_skill as AttackSkill);
         }
     }
 

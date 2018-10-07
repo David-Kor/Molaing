@@ -2,9 +2,10 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-public class PlayerControl : MonoBehaviour
+public class PlayerControl : ObjectControl
 {
 
+    private PlayerStatus status;
     private PlayerMove playerMove;
     private PlayerAnimation playerAnimation;
     private PlayerAttack playerAttack;
@@ -12,7 +13,7 @@ public class PlayerControl : MonoBehaviour
     private Vector2 moveDirect;  //움직이는 방향
     private float axisX;    //수평 입력값 (-1 ~ 1)
     private float axisY;    //수직 입력값 (-1 ~ 1)
-    public Vector2 firstDirect;
+    private Vector2 firstDirect;
 
 
     void Start()
@@ -172,6 +173,15 @@ public class PlayerControl : MonoBehaviour
             if (Input.GetKey("down")) { spriteDirect = Vector2.down; }
             if (Input.GetKey("up")) { spriteDirect = Vector2.up; }
         }
+    }
+
+
+    public override void OnHitAttack(AttackSkill _skill)
+    {
+        playerAnimation.ShowGetDamage();
+        Debug.Log(_skill.damage);
+        //스탯에 피해량(damage) 정보를 넘김
+        status.TakeDamage(_skill.damage);
     }
 
 

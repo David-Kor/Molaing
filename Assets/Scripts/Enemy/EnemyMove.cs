@@ -112,4 +112,11 @@ public class EnemyMove : MonoBehaviour
 
     public void StopMove() { targetObject = null; }
 
+
+    public void KnockBack(Vector2 dir_dist)
+    {
+        transform.Translate(dir_dist, Space.World);
+    }
+
+
 }

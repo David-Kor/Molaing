@@ -15,8 +15,20 @@ public class EnemyAnimation : MonoBehaviour
     private const float LEFT = (float)DIRECT.LEFT;
     private const float RIGHT = (float)DIRECT.RIGHT;
 
+    private SpriteRenderer sprite;
     private GameObject target;
     private Vector2 directToTarget;
+
+    private bool isGetDamage;
+    private float dmgMotionTimer;
+    private Color dmgMotionColor;
+
+    void Start()
+    {
+        sprite = GetComponent<SpriteRenderer>();
+        dmgMotionColor = new Color(1.0f, 0.2f, 0.2f, 0.5f);
+        dmgMotionTimer = 0;
+    }
 
     void Update()
     {
@@ -38,6 +50,18 @@ public class EnemyAnimation : MonoBehaviour
 
             PlayPatrol(directToTarget);
         }
+        
+        if (isGetDamage)
+        {
+            dmgMotionTimer += Time.deltaTime;
+            if (dmgMotionTimer >= 0.15f)
+            {
+                dmgMotionTimer = 0;
+                isGetDamage = false;
+                sprite.color = Color.white;
+            }
+        }
+
     }
 
 
@@ -74,5 +98,13 @@ public class EnemyAnimation : MonoBehaviour
         animator.SetBool("IsWalk", false);
         target = null;
     }
+
+
+    public void ShowGetDamage()
+    {
+        isGetDamage = true;
+        sprite.color = dmgMotionColor;
+    }
+
 
 }

@@ -134,4 +134,10 @@ public class PlayerAnimation : MonoBehaviour
 
     public Vector2 GetPlayerSpriteDirect() { return curSpriteDirect; }
 
+
+    public void ShowGetDamage()
+    {
+
+    }
+
 }
