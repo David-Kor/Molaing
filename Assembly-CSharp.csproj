@@ -56,6 +56,7 @@
      <Compile Include="Assets\Scripts\CameraControl.cs" />
      <Compile Include="Assets\Scripts\Enemy\EnemyAggro.cs" />
      <Compile Include="Assets\Scripts\Enemy\EnemyAnimation.cs" />
+     <Compile Include="Assets\Scripts\Enemy\EnemyAttack.cs" />
      <Compile Include="Assets\Scripts\Enemy\EnemyControl.cs" />
      <Compile Include="Assets\Scripts\Enemy\EnemyMove.cs" />
      <Compile Include="Assets\Scripts\Enemy\EnemyStatus.cs" />
@@ -73,6 +74,7 @@
      <Compile Include="Assets\Scripts\Skills\Skill.cs" />
      <Compile Include="Assets\Scripts\Skills\Smite.cs" />
      <Compile Include="Assets\Scripts\Skills\SupportSkill.cs" />
+     <Compile Include="Assets\Scripts\Skills\Tackle.cs" />
      <Compile Include="Assets\Scripts\SpriteOrder.cs" />
      <None Include="Assets\Sprite Pack\Tap and Fly\Readme.txt" />
  <Reference Include="UnityEditor.StandardEvents">

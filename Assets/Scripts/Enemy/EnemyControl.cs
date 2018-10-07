@@ -4,6 +4,7 @@ using UnityEngine;
 
 public class EnemyControl : ObjectControl
 {
+    private Vector2 lookDirect;
 
     private GameObject target;  // 공격 대상
     private EnemyAnimation aniControl;
@@ -15,7 +16,7 @@ public class EnemyControl : ObjectControl
         aniControl = GetComponentInChildren<EnemyAnimation>();
         move = GetComponent<EnemyMove>();
         status = GetComponent<EnemyStatus>();
-
+        lookDirect = aniControl.GetDirect();
         //적끼리의 물리적 충돌 무시 (밀림현상 방지)
         Physics2D.IgnoreLayerCollision(LayerMask.NameToLayer("Enemy"), LayerMask.NameToLayer("Enemy"), true);
     }
@@ -55,8 +56,12 @@ public class EnemyControl : ObjectControl
         //스탯에 피해량(damage) 정보를 넘김
         status.TakeDamage(_skill.damage);
 
-        if (_skill.isKnockBack) { move.KnockBack(_skill.attackDirect); }
+        move.MoveToThisObject(_skill.skillCaster);
+        if (_skill.isKnockBack) { move.KnockBack(_skill.attackDirect * _skill.knockBackPower); }
     }
 
+
+    public Vector2 GetLookDirect() { return lookDirect; }
+    public void SetLookDirect(Vector2 _direct) { lookDirect = _direct; }
 
 }

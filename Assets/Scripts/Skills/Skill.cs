@@ -6,6 +6,7 @@ using UnityEngine;
 public class Skill
 {
     public string skillName;
+    public GameObject skillCaster;
     public GameObject[] target;
 
     /* 생성자 */

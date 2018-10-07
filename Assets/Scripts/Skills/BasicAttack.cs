@@ -6,7 +6,5 @@
 
 public class BasicAttack : AttackSkill
 {
-    public BasicAttack(string _name = "Basic Attack") : base(_name)
-    {
-    }
+    public BasicAttack(string _name = "Basic Attack") : base(_name) { }
 }

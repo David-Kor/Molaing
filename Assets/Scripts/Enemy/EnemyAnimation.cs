@@ -15,6 +15,7 @@ public class EnemyAnimation : MonoBehaviour
     private const float LEFT = (float)DIRECT.LEFT;
     private const float RIGHT = (float)DIRECT.RIGHT;
 
+    private EnemyControl control;
     private SpriteRenderer sprite;
     private GameObject target;
     private Vector2 directToTarget;
@@ -25,8 +26,9 @@ public class EnemyAnimation : MonoBehaviour
 
     void Start()
     {
+        control = GetComponentInParent<EnemyControl>();
         sprite = GetComponent<SpriteRenderer>();
-        dmgMotionColor = new Color(1.0f, 0.2f, 0.2f, 0.5f);
+        dmgMotionColor = new Color(1.0f, 0.2f, 0.2f, 0.8f);
         dmgMotionTimer = 0;
     }
 
@@ -90,6 +92,8 @@ public class EnemyAnimation : MonoBehaviour
             transform.rotation = Quaternion.Euler(0, 180, 0);
             animator.SetFloat("Direct", LEFT);
         }
+
+        control.SetLookDirect(_direct);
     }
 
 
@@ -106,5 +110,7 @@ public class EnemyAnimation : MonoBehaviour
         sprite.color = dmgMotionColor;
     }
 
+
+    public Vector2 GetDirect() { return directToTarget; }
 
 }

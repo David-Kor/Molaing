@@ -15,9 +15,13 @@ public class PlayerControl : ObjectControl
     private float axisY;    //수직 입력값 (-1 ~ 1)
     private Vector2 firstDirect;
 
+    private bool isAttackable;
+    private float gracePeriodTimer;
 
     void Start()
     {
+        isAttackable = true;
+        status = GetComponent<PlayerStatus>();
         playerMove = GetComponent<PlayerMove>();
         playerAnimation = GetComponentInChildren<PlayerAnimation>();
         playerAttack = GetComponentInChildren<PlayerAttack>();
@@ -55,6 +59,16 @@ public class PlayerControl : ObjectControl
                 playerAttack.Attack();  //플레이어의 공격
             }
             else { playerAttack.StopAttack(); } //공격 취소
+        }
+
+        if (!isAttackable)
+        {
+            gracePeriodTimer += Time.deltaTime;
+            if (gracePeriodTimer >= status.gracePeriod)
+            {
+                gracePeriodTimer = 0;
+                isAttackable = true;
+            }
         }
     }
 
@@ -178,11 +192,21 @@ public class PlayerControl : ObjectControl
 
     public override void OnHitAttack(AttackSkill _skill)
     {
+        //무적 상태에 있으면 공격받지 않음
+        if (!isAttackable) { return; }
+
+        isAttackable = false;
         playerAnimation.ShowGetDamage();
         Debug.Log(_skill.damage);
         //스탯에 피해량(damage) 정보를 넘김
         status.TakeDamage(_skill.damage);
+        playerMove.HitStun();
+
+        if (_skill.isKnockBack) { playerMove.KnockBack(_skill.attackDirect * _skill.knockBackPower); }
     }
+
+
+    public bool IsAttackable() { return isAttackable; }
 
 
 }

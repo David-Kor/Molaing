@@ -281,6 +281,8 @@ MonoBehaviour:
   attackDamage: 5
   attackSpeed: 1.3
   moveSpeed: 1.5
+  knockBackResistance: 0
+  gracePeriod: 0.5
 --- !u!114 &114437847078032964
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -315,7 +317,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 6dc401569312bb94bb37c66314b30d69, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  firstDirect: {x: 0, y: 0}
 --- !u!212 &212799343599136072
 SpriteRenderer:
   m_ObjectHideFlags: 1
