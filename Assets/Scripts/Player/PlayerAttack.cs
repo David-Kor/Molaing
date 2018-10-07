@@ -17,6 +17,7 @@ public class PlayerAttack : MonoBehaviour
         playerState = transform.parent.GetComponent<PlayerStatus>();
         playerAnimation = transform.parent.GetComponentInChildren<PlayerAnimation>();
         basicAttack = new BasicAttack();
+        basicAttack.isKnockBack = true;
         basicAttack.SetDamage(playerState.attackDamage);
         attackTimer = 0f;
         isAttackInput = false;
@@ -69,9 +70,11 @@ public class PlayerAttack : MonoBehaviour
             //HitPoint가 감지되면 기본 공격에 대한 정보를 넘김
             if (hit[i].collider != null && hit[i].collider.CompareTag("HitPoint"))
             {
-                HitObject hitComponent = hit[i].transform.GetComponent<HitObject>();
+                HitObject hitComponent = hit[i].collider.GetComponent<HitObject>();
+
                 if (hitComponent.GetName() == "Player") { continue; } //플레이어의 HitPoint면 무시
 
+                basicAttack.attackDirect = attackDirect * 0.1f;
                 hitComponent.OnHitSkill(basicAttack);
                 break;
             }
