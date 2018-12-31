@@ -5,7 +5,7 @@ public class PlayerAttack : MonoBehaviour
     public float attackRange;
 
     private PlayerAnimation playerAnimation;
-    private PlayerStatus playerState;
+    private PlayerStatus playerStatus;
     private BasicAttack basicAttack;    //플레이어의 기본 공격에 대한 정보가 담긴 객체
 
     private Vector2 attackDirect;
@@ -14,10 +14,13 @@ public class PlayerAttack : MonoBehaviour
 
     void Start()
     {
-        playerState = transform.parent.GetComponent<PlayerStatus>();
+        playerStatus = transform.parent.GetComponent<PlayerStatus>();
         playerAnimation = transform.parent.GetComponentInChildren<PlayerAnimation>();
         basicAttack = new BasicAttack();
-        basicAttack.SetDamage(playerState.attackDamage);
+        basicAttack.knockBackPower = 0.4f;
+        basicAttack.skillCaster = transform.parent.gameObject;
+        basicAttack.isKnockBack = true;
+        basicAttack.SetDamage(playerStatus.attackDamage);
         attackTimer = 0f;
         isAttackInput = false;
         attackDirect = Vector2.down;
@@ -37,10 +40,10 @@ public class PlayerAttack : MonoBehaviour
             if (attackTimer <= 0)
             {
                 //공격 속도가 0인 경우(공격 불가 상태) 실행 안함 / Divid zero 예외처리 겸용
-                if (playerState.attackSpeed == 0) { return; }
+                if (playerStatus.attackSpeed == 0) { return; }
 
-                attackTimer = 1 / playerState.attackSpeed;
-                playerAnimation.SetAttackMotionSpeed(playerState.attackSpeed);
+                attackTimer = 1 / playerStatus.attackSpeed;
+                playerAnimation.SetAttackMotionSpeed(playerStatus.attackSpeed);
                 playerAnimation.StartAttack();
                 attackDirect = playerAnimation.GetPlayerSpriteDirect();
                 OnHitAttack();
@@ -69,9 +72,11 @@ public class PlayerAttack : MonoBehaviour
             //HitPoint가 감지되면 기본 공격에 대한 정보를 넘김
             if (hit[i].collider != null && hit[i].collider.CompareTag("HitPoint"))
             {
-                HitObject hitComponent = hit[i].transform.GetComponent<HitObject>();
+                HitObject hitComponent = hit[i].collider.GetComponent<HitObject>();
+
                 if (hitComponent.GetName() == "Player") { continue; } //플레이어의 HitPoint면 무시
 
+                basicAttack.attackDirect = attackDirect;
                 hitComponent.OnHitSkill(basicAttack);
                 break;
             }

@@ -2,9 +2,10 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-public class PlayerControl : MonoBehaviour
+public class PlayerControl : ObjectControl
 {
 
+    private PlayerStatus status;
     private PlayerMove playerMove;
     private PlayerAnimation playerAnimation;
     private PlayerAttack playerAttack;
@@ -12,17 +13,24 @@ public class PlayerControl : MonoBehaviour
     private Vector2 moveDirect;  //움직이는 방향
     private float axisX;    //수평 입력값 (-1 ~ 1)
     private float axisY;    //수직 입력값 (-1 ~ 1)
-    public Vector2 firstDirect;
+    private Vector2 firstDirect;
 
+    private bool isAttackable;
+    private float gracePeriodTimer;
 
     void Start()
     {
+        isAttackable = true;
+        status = GetComponent<PlayerStatus>();
         playerMove = GetComponent<PlayerMove>();
         playerAnimation = GetComponentInChildren<PlayerAnimation>();
         playerAttack = GetComponentInChildren<PlayerAttack>();
         moveDirect = Vector2.zero;
         spriteDirect = Vector2.down;
         firstDirect = Vector2.zero;
+
+        //플레이어와 적 간의 물리적 충돌 무시 (밀림현상 방지)
+        Physics2D.IgnoreLayerCollision(LayerMask.NameToLayer("Player"), LayerMask.NameToLayer("Enemy"), true);
     }
 
 
@@ -51,6 +59,16 @@ public class PlayerControl : MonoBehaviour
                 playerAttack.Attack();  //플레이어의 공격
             }
             else { playerAttack.StopAttack(); } //공격 취소
+        }
+
+        if (!isAttackable)
+        {
+            gracePeriodTimer += Time.deltaTime;
+            if (gracePeriodTimer >= status.gracePeriod)
+            {
+                gracePeriodTimer = 0;
+                isAttackable = true;
+            }
         }
     }
 
@@ -170,6 +188,25 @@ public class PlayerControl : MonoBehaviour
             if (Input.GetKey("up")) { spriteDirect = Vector2.up; }
         }
     }
+
+
+    public override void OnHitAttack(AttackSkill _skill)
+    {
+        //무적 상태에 있으면 공격받지 않음
+        if (!isAttackable) { return; }
+
+        isAttackable = false;
+        playerAnimation.ShowGetDamage();
+        Debug.Log(_skill.damage);
+        //스탯에 피해량(damage) 정보를 넘김
+        status.TakeDamage(_skill.damage);
+        playerMove.HitStun();
+
+        if (_skill.isKnockBack) { playerMove.KnockBack(_skill.attackDirect * _skill.knockBackPower); }
+    }
+
+
+    public bool IsAttackable() { return isAttackable; }
 
 
 }

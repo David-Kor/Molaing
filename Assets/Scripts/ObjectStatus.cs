@@ -22,6 +22,8 @@ public class ObjectStatus : MonoBehaviour
     public float attackSpeed;    //초당 기본 공격횟수
     public float moveSpeed;     //이동 속도
 
+    public int knockBackResistance;  //넉백 저항률
+    public int hitStunResistance;      //피격 시 경직 저항률
 
     void Start()
     {

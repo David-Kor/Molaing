@@ -2,23 +2,26 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-public class EnemyControl : MonoBehaviour {
+public class EnemyControl : ObjectControl
+{
+    private Vector2 lookDirect;
 
     private GameObject target;  // 공격 대상
     private EnemyAnimation aniControl;
     private EnemyMove move;
     private EnemyStatus status;
-    private Vector2 patrolDirect;
 
     void Start()
     {
         aniControl = GetComponentInChildren<EnemyAnimation>();
         move = GetComponent<EnemyMove>();
         status = GetComponent<EnemyStatus>();
-        patrolDirect = Vector2.zero;
+        lookDirect = aniControl.GetDirect();
+        //적끼리의 물리적 충돌 무시 (밀림현상 방지)
+        Physics2D.IgnoreLayerCollision(LayerMask.NameToLayer("Enemy"), LayerMask.NameToLayer("Enemy"), true);
     }
 
-    
+
     /* 타겟 발견 */
     public void DiscoverTarget(GameObject _target)
     {
@@ -45,5 +48,20 @@ public class EnemyControl : MonoBehaviour {
 
     public void Hold() { aniControl.Standing(); }
 
+
+    public override void OnHitAttack(AttackSkill _skill)
+    {
+        aniControl.ShowGetDamage();
+        Debug.Log(_skill.damage);
+        //스탯에 피해량(damage) 정보를 넘김
+        status.TakeDamage(_skill.damage);
+
+        move.MoveToThisObject(_skill.skillCaster);
+        if (_skill.isKnockBack) { move.KnockBack(_skill.attackDirect * _skill.knockBackPower); }
+    }
+
+
+    public Vector2 GetLookDirect() { return lookDirect; }
+    public void SetLookDirect(Vector2 _direct) { lookDirect = _direct; }
 
 }

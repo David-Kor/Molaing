@@ -9,17 +9,18 @@ public class SpriteOrder : MonoBehaviour
 
     void Start()
     {
-        prevPosition = transform.position;
+        prevPosition = transform.parent.position;
         spriteRenderer = GetComponent<SpriteRenderer>();
+        spriteRenderer.sortingOrder = -1 * Mathf.RoundToInt(transform.parent.position.y * 50);
     }
 
     // Update is called once per frame
     void Update()
     {
-        if (transform.position.y != prevPosition.y)
+        if (transform.parent.position.y != prevPosition.y)
         {
-            spriteRenderer.sortingOrder = -1 * Mathf.RoundToInt(transform.position.y * 50);
-            prevPosition = transform.position;
+            spriteRenderer.sortingOrder = -1 * Mathf.RoundToInt(transform.parent.position.y * 50);
+            prevPosition = transform.parent.position;
         }
     }
 }

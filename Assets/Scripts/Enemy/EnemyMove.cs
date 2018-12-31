@@ -10,6 +10,7 @@ public class EnemyMove : MonoBehaviour
     public float maxPatrolDelay;
     public float maxDistancePatrol;
 
+    private const float DEFAULT_HIT_STUN_TIME = 0.25f;
     private const int DOWN = (int)DIRECT.DOWN;
     private const int UP = (int)DIRECT.UP;
     private const int LEFT = (int)DIRECT.LEFT;
@@ -17,6 +18,7 @@ public class EnemyMove : MonoBehaviour
 
     private EnemyStatus status;
     private EnemyControl control;
+    private Rigidbody2D rigid2D;
     private GameObject targetObject;
     private Vector2 targetPosition;
 
@@ -26,26 +28,36 @@ public class EnemyMove : MonoBehaviour
     private float patrolTimer;
     private bool isPatrol;
 
+    private float hitStunTime;
+
     void Start()
     {
         control = GetComponent<EnemyControl>();
         status = GetComponent<EnemyStatus>();
+        rigid2D = GetComponent<Rigidbody2D>();
         targetObject = null;
         targetPosition = transform.position;
         patrolTimer = 0f;
         patrolDelay = Random.Range(minPatrolDelay, maxPatrolDelay);
         isPatrol = false;
+        hitStunTime = 0;
     }
 
 
     void Update()
     {
+        if (hitStunTime > 0) { hitStunTime -= Time.deltaTime; }
+
         if (targetObject != null)
         {
             //순찰 중지
             isPatrol = false;
             iTween.Stop(gameObject);
-            transform.Translate((targetObject.transform.position - transform.position).normalized * status.moveSpeed * Time.deltaTime);
+            if (hitStunTime <= 0)
+            {
+                transform.Translate((targetObject.transform.position - transform.position).normalized * status.moveSpeed * Time.deltaTime);
+            }
+
         }
         else if (!isPatrol)
         {
@@ -88,6 +100,11 @@ public class EnemyMove : MonoBehaviour
             }
 
         }
+
+        if (rigid2D.velocity != Vector2.zero && hitStunTime <= 0)
+        {
+            rigid2D.velocity = Vector2.zero;
+        }
     }
 
 
@@ -111,5 +128,13 @@ public class EnemyMove : MonoBehaviour
 
 
     public void StopMove() { targetObject = null; }
+
+
+    public void KnockBack(Vector2 dir_dist)
+    {
+        rigid2D.velocity = dir_dist * (100 - status.knockBackResistance) / 100;
+        hitStunTime = DEFAULT_HIT_STUN_TIME * (100 - status.hitStunResistance) / 100;
+    }
+
 
 }

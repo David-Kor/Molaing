@@ -5,7 +5,9 @@ using DIRECT = EnumInterface.DIRECT_TO_FLOAT;
 
 public class PlayerAnimation : MonoBehaviour
 {
+    private PlayerControl control;
     private Animator playerAnimator;    //에니메이션 관리 컴포넌트
+    private SpriteRenderer sprite;
     private Vector2 curSpriteDirect;   //현재 바라보는 방향
     private Vector2 nextSpriteDirect;   //다음 바라볼 방향
     private bool isWalk;
@@ -20,13 +22,22 @@ public class PlayerAnimation : MonoBehaviour
     private float atkMotionTimer;
     private float atkMotionSpeed = 1.0f;     //default : 1
 
+    private bool isGetDamage;
+    private float dmgMotionTimer;
+    private Color[] dmgMotionColor;
+
     void Start()
     {
+        control = GetComponentInParent<PlayerControl>();
         playerAnimator = GetComponent<Animator>();
+        sprite = GetComponent<SpriteRenderer>();
         curSpriteDirect = Vector2.down;
         nextSpriteDirect = Vector2.down;
         isWalk = false;
         atkMotionTimer = 0;
+        dmgMotionColor = new Color[2];
+        dmgMotionColor[0] = new Color(1.0f, 0.4f, 0.4f, 0.8f);
+        dmgMotionColor[1] = new Color(1.0f, 0.4f, 0.4f, 0.4f);
     }
 
     void Update()
@@ -111,6 +122,18 @@ public class PlayerAnimation : MonoBehaviour
             playerAnimator.SetBool("IsAttack", isAttack);
         }
 
+        if (isGetDamage)
+        {
+            dmgMotionTimer += Time.deltaTime;
+            if (Mathf.FloorToInt(dmgMotionTimer * 10) % 2 == 0) { sprite.color = dmgMotionColor[0]; }
+            else { sprite.color = dmgMotionColor[1]; }
+
+            if(control.IsAttackable()){
+                isGetDamage = false;
+                sprite.color = Color.white;
+                dmgMotionTimer = 0;
+            }
+        }
     }
 
 
@@ -133,5 +156,12 @@ public class PlayerAnimation : MonoBehaviour
 
 
     public Vector2 GetPlayerSpriteDirect() { return curSpriteDirect; }
+
+
+    public void ShowGetDamage()
+    {
+        isGetDamage = true;
+        sprite.color = dmgMotionColor[0];
+    }
 
 }
