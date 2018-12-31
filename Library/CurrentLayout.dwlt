@@ -15,12 +15,21 @@ MonoBehaviour:
     serializedVersion: 2
     x: 0
     y: 43
+<<<<<<< HEAD
     width: 1366
     height: 685
   m_ShowMode: 4
   m_Title: 
   m_RootView: {fileID: 2}
   m_MinSize: {x: 950, y: 542}
+=======
+    width: 1360
+    height: 725
+  m_ShowMode: 4
+  m_Title: 
+  m_RootView: {fileID: 2}
+  m_MinSize: {x: 950, y: 300}
+>>>>>>> 임시저장
   m_MaxSize: {x: 10000, y: 10000}
 --- !u!114 &2
 MonoBehaviour:
@@ -41,9 +50,15 @@ MonoBehaviour:
     serializedVersion: 2
     x: 0
     y: 0
+<<<<<<< HEAD
     width: 1366
     height: 685
   m_MinSize: {x: 950, y: 542}
+=======
+    width: 1360
+    height: 725
+  m_MinSize: {x: 950, y: 300}
+>>>>>>> 임시저장
   m_MaxSize: {x: 10000, y: 10000}
 --- !u!114 &3
 MonoBehaviour:
@@ -61,7 +76,11 @@ MonoBehaviour:
     serializedVersion: 2
     x: 0
     y: 0
+<<<<<<< HEAD
     width: 1366
+=======
+    width: 1360
+>>>>>>> 임시저장
     height: 30
   m_MinSize: {x: 0, y: 0}
   m_MaxSize: {x: 0, y: 0}
@@ -81,8 +100,13 @@ MonoBehaviour:
   m_Position:
     serializedVersion: 2
     x: 0
+<<<<<<< HEAD
     y: 665
     width: 1366
+=======
+    y: 705
+    width: 1360
+>>>>>>> 임시저장
     height: 20
   m_MinSize: {x: 0, y: 0}
   m_MaxSize: {x: 0, y: 0}
@@ -103,12 +127,21 @@ MonoBehaviour:
     serializedVersion: 2
     x: 0
     y: 30
+<<<<<<< HEAD
     width: 1366
     height: 635
   m_MinSize: {x: 713, y: 492}
   m_MaxSize: {x: 18008, y: 14042}
   vertical: 1
   controlID: 70
+=======
+    width: 1360
+    height: 675
+  m_MinSize: {x: 713, y: 492}
+  m_MaxSize: {x: 18008, y: 14042}
+  vertical: 1
+  controlID: 166
+>>>>>>> 임시저장
 --- !u!114 &6
 MonoBehaviour:
   m_ObjectHideFlags: 52
@@ -127,12 +160,21 @@ MonoBehaviour:
     serializedVersion: 2
     x: 0
     y: 0
+<<<<<<< HEAD
     width: 1366
     height: 635
   m_MinSize: {x: 713, y: 492}
   m_MaxSize: {x: 18008, y: 14042}
   vertical: 0
   controlID: 71
+=======
+    width: 1360
+    height: 675
+  m_MinSize: {x: 713, y: 492}
+  m_MaxSize: {x: 18008, y: 14042}
+  vertical: 0
+  controlID: 167
+>>>>>>> 임시저장
 --- !u!114 &7
 MonoBehaviour:
   m_ObjectHideFlags: 52
@@ -151,12 +193,21 @@ MonoBehaviour:
     serializedVersion: 2
     x: 0
     y: 0
+<<<<<<< HEAD
     width: 968
     height: 635
   m_MinSize: {x: 436, y: 492}
   m_MaxSize: {x: 14006, y: 14042}
   vertical: 0
   controlID: 72
+=======
+    width: 963
+    height: 675
+  m_MinSize: {x: 436, y: 492}
+  m_MaxSize: {x: 14006, y: 14042}
+  vertical: 0
+  controlID: 76
+>>>>>>> 임시저장
 --- !u!114 &8
 MonoBehaviour:
   m_ObjectHideFlags: 52
@@ -175,12 +226,21 @@ MonoBehaviour:
     serializedVersion: 2
     x: 0
     y: 0
+<<<<<<< HEAD
     width: 652
     height: 635
   m_MinSize: {x: 232, y: 492}
   m_MaxSize: {x: 10002, y: 14042}
   vertical: 1
   controlID: 73
+=======
+    width: 648
+    height: 675
+  m_MinSize: {x: 232, y: 492}
+  m_MaxSize: {x: 10002, y: 14042}
+  vertical: 1
+  controlID: 77
+>>>>>>> 임시저장
 --- !u!114 &9
 MonoBehaviour:
   m_ObjectHideFlags: 52
@@ -197,8 +257,13 @@ MonoBehaviour:
     serializedVersion: 2
     x: 0
     y: 0
+<<<<<<< HEAD
     width: 652
     height: 318
+=======
+    width: 648
+    height: 303
+>>>>>>> 임시저장
   m_MinSize: {x: 202, y: 221}
   m_MaxSize: {x: 4002, y: 4021}
   m_ActualView: {fileID: 16}
@@ -225,9 +290,15 @@ MonoBehaviour:
   m_Position:
     serializedVersion: 2
     x: 0
+<<<<<<< HEAD
     y: 318
     width: 652
     height: 317
+=======
+    y: 303
+    width: 648
+    height: 372
+>>>>>>> 임시저장
   m_MinSize: {x: 232, y: 271}
   m_MaxSize: {x: 10002, y: 10021}
   m_ActualView: {fileID: 20}
@@ -251,10 +322,17 @@ MonoBehaviour:
   - {fileID: 13}
   m_Position:
     serializedVersion: 2
+<<<<<<< HEAD
     x: 652
     y: 0
     width: 316
     height: 635
+=======
+    x: 648
+    y: 0
+    width: 315
+    height: 675
+>>>>>>> 임시저장
   m_MinSize: {x: 204, y: 342}
   m_MaxSize: {x: 4004, y: 8042}
   vertical: 1
@@ -275,8 +353,13 @@ MonoBehaviour:
     serializedVersion: 2
     x: 0
     y: 0
+<<<<<<< HEAD
     width: 316
     height: 335
+=======
+    width: 315
+    height: 355
+>>>>>>> 임시저장
   m_MinSize: {x: 204, y: 221}
   m_MaxSize: {x: 4004, y: 4021}
   m_ActualView: {fileID: 21}
@@ -299,11 +382,19 @@ MonoBehaviour:
   m_Position:
     serializedVersion: 2
     x: 0
+<<<<<<< HEAD
     y: 335
     width: 316
     height: 300
   m_MinSize: {x: 104, y: 121}
   m_MaxSize: {x: 4004, y: 4021}
+=======
+    y: 355
+    width: 315
+    height: 320
+  m_MinSize: {x: 100, y: 100}
+  m_MaxSize: {x: 4000, y: 4000}
+>>>>>>> 임시저장
   m_ActualView: {fileID: 22}
   m_Panes:
   - {fileID: 22}
@@ -323,10 +414,17 @@ MonoBehaviour:
   m_Children: []
   m_Position:
     serializedVersion: 2
+<<<<<<< HEAD
     x: 968
     y: 0
     width: 398
     height: 635
+=======
+    x: 963
+    y: 0
+    width: 397
+    height: 675
+>>>>>>> 임시저장
   m_MinSize: {x: 277, y: 71}
   m_MaxSize: {x: 4002, y: 4021}
   m_ActualView: {fileID: 23}
@@ -355,9 +453,15 @@ MonoBehaviour:
   m_Pos:
     serializedVersion: 2
     x: 0
+<<<<<<< HEAD
     y: 92
     width: 650
     height: 297
+=======
+    y: 19
+    width: 646
+    height: 282
+>>>>>>> 임시저장
   m_PersistentViewDataDictionary: {fileID: 0}
   m_MaximizeOnPlay: 0
   m_Gizmos: 0
@@ -369,10 +473,17 @@ MonoBehaviour:
     m_VRangeLocked: 0
     hZoomLockedByDefault: 0
     vZoomLockedByDefault: 0
+<<<<<<< HEAD
     m_HBaseRangeMin: -325
     m_HBaseRangeMax: 325
     m_VBaseRangeMin: -140
     m_VBaseRangeMax: 140
+=======
+    m_HBaseRangeMin: -323
+    m_HBaseRangeMax: 323
+    m_VBaseRangeMin: -132.5
+    m_VBaseRangeMax: 132.5
+>>>>>>> 임시저장
     m_HAllowExceedBaseRangeMin: 1
     m_HAllowExceedBaseRangeMax: 1
     m_VAllowExceedBaseRangeMin: 1
@@ -390,25 +501,43 @@ MonoBehaviour:
       serializedVersion: 2
       x: 0
       y: 17
+<<<<<<< HEAD
       width: 650
       height: 280
     m_Scale: {x: 1, y: 1}
     m_Translation: {x: 325, y: 140}
+=======
+      width: 646
+      height: 265
+    m_Scale: {x: 1, y: 1}
+    m_Translation: {x: 323, y: 132.5}
+>>>>>>> 임시저장
     m_MarginLeft: 0
     m_MarginRight: 0
     m_MarginTop: 0
     m_MarginBottom: 0
     m_LastShownAreaInsideMargins:
       serializedVersion: 2
+<<<<<<< HEAD
       x: -325
       y: -140
       width: 650
       height: 280
+=======
+      x: -323
+      y: -132.5
+      width: 646
+      height: 265
+>>>>>>> 임시저장
     m_MinimalGUI: 1
   m_defaultScale: 1
   m_TargetTexture: {fileID: 0}
   m_CurrentColorSpace: 0
+<<<<<<< HEAD
   m_LastWindowPixelSize: {x: 650, y: 297}
+=======
+  m_LastWindowPixelSize: {x: 646, y: 282}
+>>>>>>> 임시저장
   m_ClearInEditMode: 1
   m_NoCameraWarning: 1
   m_LowResolutionForAspectRatios: 01000000000000000100
@@ -435,18 +564,32 @@ MonoBehaviour:
     serializedVersion: 2
     x: 0
     y: 92
+<<<<<<< HEAD
     width: 650
     height: 297
   m_PersistentViewDataDictionary: {fileID: 0}
   m_SceneLighting: 1
   lastFramingTime: 20584.191019840382
+=======
+    width: 646
+    height: 282
+  m_PersistentViewDataDictionary: {fileID: 0}
+  m_SceneLighting: 1
+  lastFramingTime: 48784.604598469756
+>>>>>>> 임시저장
   m_2DMode: 1
   m_isRotationLocked: 0
   m_AudioPlay: 0
   m_Position:
+<<<<<<< HEAD
     m_Target: {x: -0.51017773, y: -0.017634835, z: -0.10546875}
     speed: 2
     m_Value: {x: -0.51017773, y: -0.017634835, z: -0.10546875}
+=======
+    m_Target: {x: 0.13528298, y: 0.018347934, z: 90.22266}
+    speed: 2
+    m_Value: {x: 0.13528298, y: 0.018347934, z: 90.22266}
+>>>>>>> 임시저장
   m_RenderMode: 0
   m_CameraMode:
     drawMode: 0
@@ -478,9 +621,15 @@ MonoBehaviour:
     speed: 2
     m_Value: {x: 0, y: 0, z: 0, w: 1}
   m_Size:
+<<<<<<< HEAD
     m_Target: 3.397702
     speed: 2
     m_Value: 3.397702
+=======
+    m_Target: 2.6164598
+    speed: 2
+    m_Value: 2.6164598
+>>>>>>> 임시저장
   m_Ortho:
     m_Target: 1
     speed: 2
@@ -706,7 +855,11 @@ MonoBehaviour:
   m_AnimEditor: {fileID: 0}
   m_LockTracker:
     m_IsLocked: 0
+<<<<<<< HEAD
   m_LastSelectedObjectID: 5038
+=======
+  m_LastSelectedObjectID: 5112
+>>>>>>> 임시저장
 --- !u!114 &20
 MonoBehaviour:
   m_ObjectHideFlags: 52
@@ -728,9 +881,15 @@ MonoBehaviour:
   m_Pos:
     serializedVersion: 2
     x: 0
+<<<<<<< HEAD
     y: 410
     width: 650
     height: 296
+=======
+    y: 395
+    width: 646
+    height: 351
+>>>>>>> 임시저장
   m_PersistentViewDataDictionary: {fileID: 0}
   m_SearchFilter:
     m_NameFilter: 
@@ -744,6 +903,7 @@ MonoBehaviour:
     m_ShowAllHits: 0
     m_SearchArea: 1
     m_Folders:
+<<<<<<< HEAD
     - Assets/Scripts/Enemy
   m_ViewMode: 1
   m_StartGridSize: 64
@@ -758,6 +918,22 @@ MonoBehaviour:
     m_SelectedIDs: 3c130000
     m_LastClickedID: 4924
     m_ExpandedIDs: 000000007c090000d2090000ae0a0000d60a0000460b0000d80e0000e40e000020100000b8100000c8100000f41000003011000070110000ce110000da110000f811000000ca9a3b
+=======
+    - Assets/Objects
+  m_ViewMode: 1
+  m_StartGridSize: 64
+  m_LastFolders:
+  - Assets/Objects
+  m_LastFoldersGridSize: -1
+  m_LastProjectPath: C:\Users\csh82\Desktop\Molaing-jiHo_Work
+  m_LockTracker:
+    m_IsLocked: 0
+  m_FolderTreeState:
+    scrollPos: {x: 0, y: 0}
+    m_SelectedIDs: 4e0b0000
+    m_LastClickedID: 2894
+    m_ExpandedIDs: 0000000084090000da090000b60a0000de0a00004e0b0000e00e0000ec0e000028100000c0100000d0100000fc10000038110000781100000012000000ca9a3b
+>>>>>>> 임시저장
     m_RenameOverlay:
       m_UserAcceptedRename: 0
       m_Name: 
@@ -785,7 +961,11 @@ MonoBehaviour:
     scrollPos: {x: 0, y: 0}
     m_SelectedIDs: 
     m_LastClickedID: 0
+<<<<<<< HEAD
     m_ExpandedIDs: 000000007c090000d2090000ae0a0000d60a0000460b0000d80e0000e40e000020100000b8100000c8100000f41000003011000070110000ce110000da110000f8110000
+=======
+    m_ExpandedIDs: 0000000084090000da090000b60a0000de0a00004e0b0000e00e0000ec0e000028100000c0100000d0100000fc100000381100007811000000120000
+>>>>>>> 임시저장
     m_RenameOverlay:
       m_UserAcceptedRename: 0
       m_Name: 
@@ -812,8 +992,13 @@ MonoBehaviour:
   m_ListAreaState:
     m_SelectedInstanceIDs: 
     m_LastClickedInstanceID: 0
+<<<<<<< HEAD
     m_HadKeyboardFocusLastEvent: 1
     m_ExpandedInstanceIDs: c623000086270000a0420000d298feff022800008c270000740b000074090000f20a0000fe0a0000ac0c0000680d0000826b000000000000700d0000fc0900000a110000580f0000b80f00007e0a00001a3300004c44ffff
+=======
+    m_HadKeyboardFocusLastEvent: 0
+    m_ExpandedInstanceIDs: c623000086270000a0420000d298feff022800008c270000740b000074090000f20a0000fe0a0000ac0c0000680d0000826b0000700d0000fc0900000a110000580f0000b80f00007e0a00001a3300004c44ffff00000000
+>>>>>>> 임시저장
     m_RenameOverlay:
       m_UserAcceptedRename: 0
       m_Name: 
@@ -860,6 +1045,7 @@ MonoBehaviour:
     m_Tooltip: 
   m_Pos:
     serializedVersion: 2
+<<<<<<< HEAD
     x: 654
     y: 92
     width: 312
@@ -870,6 +1056,18 @@ MonoBehaviour:
     m_SelectedIDs: 
     m_LastClickedID: 0
     m_ExpandedIDs: 1092f5ff52a9f8ff2a00f9ffa6f4faff5abdfdff1ed4feffe6fbffff00000000be130000
+=======
+    x: 650
+    y: 92
+    width: 311
+    height: 334
+  m_PersistentViewDataDictionary: {fileID: 0}
+  m_TreeViewState:
+    scrollPos: {x: 0, y: 0}
+    m_SelectedIDs: c8130000
+    m_LastClickedID: 5064
+    m_ExpandedIDs: d2fbffff00000000
+>>>>>>> 임시저장
     m_RenameOverlay:
       m_UserAcceptedRename: 0
       m_Name: 
@@ -913,10 +1111,17 @@ MonoBehaviour:
     m_Tooltip: 
   m_Pos:
     serializedVersion: 2
+<<<<<<< HEAD
     x: 654
     y: 427
     width: 312
     height: 279
+=======
+    x: 650
+    y: 447
+    width: 311
+    height: 299
+>>>>>>> 임시저장
   m_PersistentViewDataDictionary: {fileID: 0}
 --- !u!114 &23
 MonoBehaviour:
@@ -938,10 +1143,17 @@ MonoBehaviour:
     m_Tooltip: 
   m_Pos:
     serializedVersion: 2
+<<<<<<< HEAD
     x: 970
     y: 92
     width: 396
     height: 614
+=======
+    x: 965
+    y: 92
+    width: 395
+    height: 654
+>>>>>>> 임시저장
   m_PersistentViewDataDictionary: {fileID: 0}
   m_ObjectsLockedBeforeSerialization: []
   m_InstanceIDsLockedBeforeSerialization: 
