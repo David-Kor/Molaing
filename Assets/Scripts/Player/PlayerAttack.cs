@@ -3,6 +3,7 @@
 public class PlayerAttack : MonoBehaviour
 {
     public float attackRange;
+    public GameObject basicAttackObject;
 
     private PlayerAnimation playerAnimation;
     private PlayerStatus playerStatus;
@@ -16,10 +17,12 @@ public class PlayerAttack : MonoBehaviour
     {
         playerStatus = transform.parent.GetComponent<PlayerStatus>();
         playerAnimation = transform.parent.GetComponentInChildren<PlayerAnimation>();
-        basicAttack = new BasicAttack();
-        basicAttack.knockBackPower = 0.4f;
-        basicAttack.skillCaster = transform.parent.gameObject;
-        basicAttack.isKnockBack = true;
+        basicAttack = new BasicAttack
+        {
+            knockBackPower = playerStatus.basicKnockBackPower,
+            skillCaster = transform.parent.gameObject,
+            isKnockBack = true
+        };
         basicAttack.SetDamage(playerStatus.attackDamage);
         attackTimer = 0f;
         isAttackInput = false;
@@ -46,7 +49,29 @@ public class PlayerAttack : MonoBehaviour
                 playerAnimation.SetAttackMotionSpeed(playerStatus.attackSpeed);
                 playerAnimation.StartAttack();
                 attackDirect = playerAnimation.GetPlayerSpriteDirect();
-                OnHitAttack();
+
+                GameObject newAttack;
+                if (attackDirect == Vector2.up)
+                {
+                    newAttack = Instantiate(basicAttackObject, transform.GetChild(0));
+                }
+                else if (attackDirect == Vector2.down)
+                {
+                    newAttack = Instantiate(basicAttackObject, transform.GetChild(1));
+                }
+                else if (attackDirect == Vector2.left)
+                {
+                    newAttack = Instantiate(basicAttackObject, transform.GetChild(2));
+                    newAttack.transform.Rotate(0, 0, 90);
+                }
+                else
+                {
+                    newAttack = Instantiate(basicAttackObject, transform.GetChild(3));
+                    newAttack.transform.Rotate(0, 0, 90);
+                }
+
+                OnHitBasicAttack(newAttack.GetComponent<Collider2D>());
+                Destroy(newAttack);
             }
         }
         else { playerAnimation.StopAttack(); }
@@ -60,26 +85,25 @@ public class PlayerAttack : MonoBehaviour
 
 
     /* 기본 공격 사거리 안에 HitPoint가 있는지 검사 */
-    void OnHitAttack()
+    private void OnHitBasicAttack(Collider2D col)
     {
-        float distance = attackRange;
-        if (attackDirect == Vector2.down) { distance += 0.07f; }
-
-        RaycastHit2D[] hit = Physics2D.RaycastAll(transform.position, attackDirect, distance);
-
-        for (int i = 0; i < hit.Length; i++)
+        Collider2D[] hits = new Collider2D[10];
+        ContactFilter2D filter = new ContactFilter2D()
         {
-            //HitPoint가 감지되면 기본 공격에 대한 정보를 넘김
-            if (hit[i].collider != null && hit[i].collider.CompareTag("HitPoint"))
-            {
-                HitObject hitComponent = hit[i].collider.GetComponent<HitObject>();
+            useTriggers = true,
+            useLayerMask = true,
+            layerMask = new LayerMask() { value = (1 << LayerMask.NameToLayer("HitPoint")) }
+        };
 
-                if (hitComponent.GetName() == "Player") { continue; } //플레이어의 HitPoint면 무시
+        int count = Physics2D.OverlapCollider(col, filter, hits);
 
-                basicAttack.attackDirect = attackDirect;
-                hitComponent.OnHitSkill(basicAttack);
-                break;
-            }
+        HitObject hitObj;
+        for (int i = 0; i < count; i++)
+        {
+            hitObj = hits[i].GetComponent<HitObject>();
+            if (hitObj.GetName() == "Player") { continue; }
+            basicAttack.attackDirect = attackDirect;
+            hitObj.OnHitSkill(basicAttack);
         }
     }
 }

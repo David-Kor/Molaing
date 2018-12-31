@@ -14,7 +14,7 @@ public class SpriteOrder : MonoBehaviour
         spriteRenderer.sortingOrder = -1 * Mathf.RoundToInt(transform.parent.position.y * 50);
     }
 
-    // Update is called once per frame
+
     void Update()
     {
         if (transform.parent.position.y != prevPosition.y)

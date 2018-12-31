@@ -16,7 +16,7 @@ public class PlayerControl : ObjectControl
     private Vector2 firstDirect;
 
     private bool isAttackable;
-    private float gracePeriodTimer;
+    private float gracePeriodTimer;  //피격 시 무적 타이머
 
     void Start()
     {
@@ -197,7 +197,7 @@ public class PlayerControl : ObjectControl
 
         isAttackable = false;
         playerAnimation.ShowGetDamage();
-        Debug.Log(_skill.damage);
+//        Debug.Log(_skill.damage);
         //스탯에 피해량(damage) 정보를 넘김
         status.TakeDamage(_skill.damage);
         playerMove.HitStun();

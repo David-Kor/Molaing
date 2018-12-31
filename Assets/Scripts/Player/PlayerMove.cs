@@ -7,7 +7,7 @@ public class PlayerMove : MonoBehaviour
     private PlayerStatus playerStatus;
     private Rigidbody2D rigid2D;
 
-    private const float DEFAULT_HIT_STUN_TIME = 0.15f;
+    private const float DEFAULT_HIT_STUN_TIME = 0.25f;
     private float hitStunTimer;
 
     void Start()

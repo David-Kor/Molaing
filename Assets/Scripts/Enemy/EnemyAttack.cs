@@ -12,11 +12,13 @@ public class EnemyAttack : MonoBehaviour
     {
         control = GetComponentInParent<EnemyControl>();
         status = GetComponentInParent<EnemyStatus>();
-        tackle = new Tackle();
+        tackle = new Tackle
+        {
+            isKnockBack = true,
+            knockBackPower = status.tackleKnockBackPower,
+            skillCaster = transform.parent.gameObject
+        };
         tackle.SetDamage(status.tackleDamage);
-        tackle.isKnockBack = true;
-        tackle.knockBackPower = 0.05f;
-        tackle.skillCaster = transform.parent.gameObject;
     }
 
     void OnTriggerStay2D(Collider2D col)

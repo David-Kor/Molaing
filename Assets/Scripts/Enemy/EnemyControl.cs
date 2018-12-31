@@ -52,7 +52,6 @@ public class EnemyControl : ObjectControl
     public override void OnHitAttack(AttackSkill _skill)
     {
         aniControl.ShowGetDamage();
-        Debug.Log(_skill.damage);
         //스탯에 피해량(damage) 정보를 넘김
         status.TakeDamage(_skill.damage);
 

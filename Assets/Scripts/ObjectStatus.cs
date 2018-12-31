@@ -45,7 +45,11 @@ public class ObjectStatus : MonoBehaviour
 
 
     /* 공격을 받으면 데미지 수치만큼 현재 hp 감소 */
-    public void TakeDamage(int _dmg) { currentHP -= _dmg;Debug.Log(objName + "  Take Damage " + _dmg); }
+    public void TakeDamage(int _dmg)
+    {
+        currentHP -= _dmg;
+//        Debug.Log(objName + "  Take Damage " + _dmg);
+    }
 
 
     /* 스킬 사용 요구 mp만큼 감소 */
