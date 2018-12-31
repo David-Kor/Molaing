@@ -18,7 +18,7 @@ public class EnemyAttack : MonoBehaviour
             knockBackPower = status.tackleKnockBackPower,
             skillCaster = transform.parent.gameObject
         };
-        tackle.SetDamage(status.tackleDamage);
+        tackle.damage = status.tackleDamage;
     }
 
     void OnTriggerStay2D(Collider2D col)

@@ -6,22 +6,24 @@ using DIRECT = EnumInterface.DIRECT_TO_FLOAT;
 public class PlayerAnimation : MonoBehaviour
 {
     private PlayerControl control;
-    private Animator playerAnimator;    //에니메이션 관리 컴포넌트
+    private Animator playerAnimator;   //에니메이션 관리 컴포넌트
     private SpriteRenderer sprite;
-    private Vector2 curSpriteDirect;   //현재 바라보는 방향
+    private Vector2 curSpriteDirect;     //현재 바라보는 방향
     private Vector2 nextSpriteDirect;   //다음 바라볼 방향
     private bool isWalk;
     private bool isAttack;
 
-    // * 애니메이터의 Direct 속성값에 의해 바라보는 방향이 결정
-    // * Direct는 float형이므로 어느 방향을 의미하는지 가독성을 높이기 위해 상수형 변수 const 사용
+    // * 애니메이터의 Direct 패러미터에 의해 바라보는 방향이 결정
+    // * Direct는 float형이므로 어느 방향을 의미하는지 쉽게 알기 위해 상수형 변수 const 사용
     private const float DOWN = (float)DIRECT.DOWN;
     private const float UP = (float)DIRECT.UP;
     private const float LEFT = (float)DIRECT.LEFT;
     private const float RIGHT = (float)DIRECT.RIGHT;
-    private float atkMotionTimer;
-    private float atkMotionSpeed = 1.0f;     //default : 1
 
+    private float atkMotionTimer;            //공격 모션 타이머
+    private float atkMotionSpeed = 1.0f;  //공격 모션 속도 (기본값 : 1)
+
+    //데미지를 입었을 때 사용 변수들
     private bool isGetDamage;
     private float dmgMotionTimer;
     private Color[] dmgMotionColor;
@@ -122,6 +124,7 @@ public class PlayerAnimation : MonoBehaviour
             playerAnimator.SetBool("IsAttack", isAttack);
         }
 
+        //데미지를 입은 경우 피격 모션
         if (isGetDamage)
         {
             dmgMotionTimer += Time.deltaTime;
@@ -158,6 +161,7 @@ public class PlayerAnimation : MonoBehaviour
     public Vector2 GetPlayerSpriteDirect() { return curSpriteDirect; }
 
 
+    /* 데미지 피격 모션 실행 */
     public void ShowGetDamage()
     {
         isGetDamage = true;

@@ -270,9 +270,9 @@ Rigidbody2D:
   m_AngularDrag: 0
   m_GravityScale: 0
   m_Material: {fileID: 0}
-  m_Interpolate: 0
+  m_Interpolate: 2
   m_SleepingMode: 1
-  m_CollisionDetection: 0
+  m_CollisionDetection: 1
   m_Constraints: 4
 --- !u!61 &61016270325780910
 BoxCollider2D:
@@ -387,6 +387,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   objName: Player
+  level: 1
   maxHP: 100
   maxMP: 100
   currentHP: 0
@@ -399,8 +400,9 @@ MonoBehaviour:
   moveSpeed: 1.5
   knockBackResistance: 0
   hitStunResistance: 0
-  gracePeriod: 0.5
-  basicKnockBackPower: 0.5
+  gracePeriod: 0.8
+  basicKnockBackPower: 1
+  exp: 0
 --- !u!114 &114437847078032964
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -423,8 +425,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 9c2471438643d604ea650005cf55db5d, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  attackRange: 0.1
-  basicAttackObject: {fileID: 1687743756728968, guid: 6395d7c270e771a4390583bd4de1b7df,
+  basicAttackPrefab: {fileID: 1687743756728968, guid: 6395d7c270e771a4390583bd4de1b7df,
     type: 2}
 --- !u!114 &114992375830163696
 MonoBehaviour:

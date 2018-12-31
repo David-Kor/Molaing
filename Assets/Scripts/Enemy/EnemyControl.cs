@@ -55,8 +55,8 @@ public class EnemyControl : ObjectControl
         //스탯에 피해량(damage) 정보를 넘김
         status.TakeDamage(_skill.damage);
 
-        move.MoveToThisObject(_skill.skillCaster);
-        if (_skill.isKnockBack) { move.KnockBack(_skill.attackDirect * _skill.knockBackPower); }
+        DiscoverTarget(_skill.skillCaster);
+        if (_skill.isKnockBack) { move.GetDamage(_skill.attackDirect * _skill.knockBackPower); }
     }
 
 

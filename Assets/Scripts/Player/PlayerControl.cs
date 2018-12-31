@@ -15,7 +15,7 @@ public class PlayerControl : ObjectControl
     private float axisY;    //수직 입력값 (-1 ~ 1)
     private Vector2 firstDirect;
 
-    private bool isAttackable;
+    private bool isAttackable;         //피격 가능 상태
     private float gracePeriodTimer;  //피격 시 무적 타이머
 
     void Start()
@@ -61,9 +61,11 @@ public class PlayerControl : ObjectControl
             else { playerAttack.StopAttack(); } //공격 취소
         }
 
+        //피격 시 무적 상태인 경우
         if (!isAttackable)
         {
             gracePeriodTimer += Time.deltaTime;
+            //지속시간이 지나면 해제
             if (gracePeriodTimer >= status.gracePeriod)
             {
                 gracePeriodTimer = 0;
@@ -197,7 +199,6 @@ public class PlayerControl : ObjectControl
 
         isAttackable = false;
         playerAnimation.ShowGetDamage();
-//        Debug.Log(_skill.damage);
         //스탯에 피해량(damage) 정보를 넘김
         status.TakeDamage(_skill.damage);
         playerMove.HitStun();

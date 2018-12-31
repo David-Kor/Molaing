@@ -9,6 +9,8 @@ public class ObjectStatus : MonoBehaviour
 {
     public string objName;
 
+    public int level;   //레벨
+
     public int maxHP;       //최대 체력
     public int maxMP;      //최대 마력
     public int currentHP;   //현재 체력

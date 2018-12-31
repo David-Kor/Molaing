@@ -10,7 +10,6 @@ public class EnemyMove : MonoBehaviour
     public float maxPatrolDelay;
     public float maxDistancePatrol;
 
-    private const float DEFAULT_HIT_STUN_TIME = 0.25f;
     private const int DOWN = (int)DIRECT.DOWN;
     private const int UP = (int)DIRECT.UP;
     private const int LEFT = (int)DIRECT.LEFT;
@@ -28,7 +27,10 @@ public class EnemyMove : MonoBehaviour
     private float patrolTimer;
     private bool isPatrol;
 
-    private float hitStunTime;
+    private const float DEFAULT_HIT_STUN_TIME = 0.25f;       //피격 경직시간 기본값
+    private const float DEFAULT_KNOCK_BACK_TIME = 0.05f;  //넉백시간 기본값
+    private float knockBackTimer;    //넉백 타이머
+    private float hitStunTime;         //경직 타이머 
 
     void Start()
     {
@@ -47,6 +49,7 @@ public class EnemyMove : MonoBehaviour
     void Update()
     {
         if (hitStunTime > 0) { hitStunTime -= Time.deltaTime; }
+        if (knockBackTimer > 0) { knockBackTimer -= Time.deltaTime; }
 
         if (targetObject != null)
         {
@@ -101,7 +104,7 @@ public class EnemyMove : MonoBehaviour
 
         }
 
-        if (rigid2D.velocity != Vector2.zero && hitStunTime <= 0)
+        if (rigid2D.velocity != Vector2.zero && knockBackTimer <= 0)
         {
             rigid2D.velocity = Vector2.zero;
         }
@@ -130,10 +133,11 @@ public class EnemyMove : MonoBehaviour
     public void StopMove() { targetObject = null; }
 
 
-    public void KnockBack(Vector2 dir_dist)
+    public void GetDamage(Vector2 dir_val)
     {
-        rigid2D.velocity = dir_dist * (100 - status.knockBackResistance) / 100;
+        rigid2D.velocity = dir_val * (100 - status.knockBackResistance) / 100;
         hitStunTime = DEFAULT_HIT_STUN_TIME * (100 - status.hitStunResistance) / 100;
+        knockBackTimer = DEFAULT_KNOCK_BACK_TIME;
     }
 
 

@@ -2,15 +2,12 @@
 
 public class AttackSkill : Skill
 {
-    public bool isKnockBack;
-    public float knockBackPower;
-    public Vector2 attackDirect = Vector2.zero;
+    public bool isKnockBack;          //넉백 사용
+    public float knockBackPower;    //넉백 강도
+    public Vector2 attackDirect = Vector2.zero;     //공격 방향 (동시에 넉백 방향)
     public int damage;
 
     public AttackSkill(string _name) : base(_name)
     {
     }
-
-    public void SetDamage(int _dmg) { damage = _dmg; }
-    public int GetDamage() { return damage; }
 }
