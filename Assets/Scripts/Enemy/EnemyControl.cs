@@ -62,7 +62,7 @@ public class EnemyControl : ObjectControl
         }
 
         DiscoverTarget(_skill.skillCaster);
-        if (_skill.isKnockBack) { move.GetDamage(_skill.attackDirect * _skill.knockBackPower); }
+        if (_skill.isKnockBack) { move.GetDamage(_skill.skillDirect * _skill.knockBackPower); }
     }
 
 

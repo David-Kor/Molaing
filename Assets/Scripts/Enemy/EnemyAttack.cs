@@ -12,12 +12,10 @@ public class EnemyAttack : MonoBehaviour
     {
         control = GetComponentInParent<EnemyControl>();
         status = GetComponentInParent<EnemyStatus>();
-        tackle = new Tackle
-        {
-            isKnockBack = true,
-            knockBackPower = status.tackleKnockBackPower,
-            skillCaster = transform.parent.gameObject
-        };
+        tackle = gameObject.AddComponent<Tackle>();
+        tackle.isKnockBack = true;
+        tackle.knockBackPower = status.tackleKnockBackPower;
+        tackle.skillCaster = transform.parent.gameObject;
         tackle.damage = status.tackleDamage;
     }
 
@@ -26,7 +24,7 @@ public class EnemyAttack : MonoBehaviour
         if (col.CompareTag("HitPoint")) {
 
             if (col.transform.parent.CompareTag("Player")) {
-                tackle.attackDirect = control.GetLookDirect();
+                tackle.skillDirect = control.GetLookDirect();
                 col.GetComponent<HitObject>().OnHitSkill(tackle);
             }
 

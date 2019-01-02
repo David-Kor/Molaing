@@ -6,5 +6,18 @@
 
 public class BasicAttack : AttackSkill
 {
-    public BasicAttack(string _name = "Basic Attack") : base(_name) { }
+    void Awake()
+    {
+        skillName = "Basic Attack";
+        effects = null;
+    }
+
+    public override void ActivateSkill()
+    {
+    }
+
+    public override void ReleaseSkill()
+    {
+    }
+
 }

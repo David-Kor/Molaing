@@ -2,9 +2,10 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-public class SupportSkill : Skill
+public abstract class SupportSkill : Skill
 {
-    public SupportSkill(string _name) : base(_name)
-    {
-    }
+    public override abstract void ActivateSkill();
+
+
+    public override abstract void ReleaseSkill();
 }

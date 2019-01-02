@@ -1,4 +1,17 @@
 ﻿
-public class Tackle : AttackSkill {
-    public Tackle(string _name = "Tackle") : base(_name) { }
+public class Tackle : AttackSkill
+{
+    void Awake()
+    {
+        skillName = "Tackle";
+        effects = null;
+    }
+
+    public override void ActivateSkill()
+    {
+    }
+
+    public override void ReleaseSkill()
+    {
+    }
 }

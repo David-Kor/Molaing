@@ -68,6 +68,7 @@
      <Compile Include="Assets\Scripts\Player\PlayerAttack.cs" />
      <Compile Include="Assets\Scripts\Player\PlayerControl.cs" />
      <Compile Include="Assets\Scripts\Player\PlayerMove.cs" />
+     <Compile Include="Assets\Scripts\Player\PlayerSkill.cs" />
      <Compile Include="Assets\Scripts\Player\PlayerStatus.cs" />
      <Compile Include="Assets\Scripts\Skills\AttackSkill.cs" />
      <Compile Include="Assets\Scripts\Skills\BasicAttack.cs" />

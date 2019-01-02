@@ -9,6 +9,7 @@ public class PlayerControl : ObjectControl
     private PlayerMove playerMove;
     private PlayerAnimation playerAnimation;
     private PlayerAttack playerAttack;
+    private PlayerSkill playerSkill;
     private Vector2 spriteDirect;  //바라보는 방향
     private Vector2 moveDirect;  //움직이는 방향
     private float axisX;    //수평 입력값 (-1 ~ 1)
@@ -19,15 +20,19 @@ public class PlayerControl : ObjectControl
     private float gracePeriodTimer;  //피격 시 무적 타이머
 
     private bool inventoryActive;    //인벤토리 창의 활성화 여부
+    private int skillIndex;              //스킬 입력 인덱스(1~4)
+    private bool isDelay;              //딜레이 상태
 
     void Start()
     {
         inventoryActive = false;
+        isDelay = false;
         isAttackable = true;
         status = GetComponent<PlayerStatus>();
         playerMove = GetComponent<PlayerMove>();
         playerAnimation = GetComponentInChildren<PlayerAnimation>();
         playerAttack = GetComponentInChildren<PlayerAttack>();
+        playerSkill = GetComponentInChildren<PlayerSkill>();
         moveDirect = Vector2.zero;
         spriteDirect = Vector2.down;
         firstDirect = Vector2.zero;
@@ -39,6 +44,7 @@ public class PlayerControl : ObjectControl
 
     void Update()
     {
+        //인벤토리 키 입력 확인
         if (CheckInventoryKeyInput())
         {
             inventoryActive = !inventoryActive;
@@ -59,7 +65,7 @@ public class PlayerControl : ObjectControl
             }
         }
 
-        if (!inventoryActive)
+        if (!inventoryActive && !isDelay)
         {
             //이동키를 눌렀는지 확인
             if (CheckMoveKeyInput())
@@ -87,6 +93,11 @@ public class PlayerControl : ObjectControl
                     playerAttack.Attack();
                 }
                 else { playerAttack.StopAttack(); }
+
+                if ((skillIndex = CheckSkillKeyInput()) >= 0)
+                {
+                    playerSkill.UseSkill(skillIndex, spriteDirect);
+                }
             }
         }
 
@@ -188,6 +199,29 @@ public class PlayerControl : ObjectControl
     }
 
 
+    /* 스킬 사용 키 입력 확인 */
+    private int CheckSkillKeyInput()
+    {
+        if (Input.GetButtonDown("Skill_1"))
+        {
+            return 0;
+        }
+        else if (Input.GetButtonDown("Skill_2"))
+        {
+            return 1;
+        }
+        else if (Input.GetButtonDown("Skill_3"))
+        {
+            return 2;
+        }
+        else if (Input.GetButtonDown("Skill_4"))
+        {
+            return 3;
+        }
+        return -1;
+    }
+
+
     /* 캐릭터가 바라볼 방향을 결정 */
     private void SetSpriteDirect()
     {
@@ -227,7 +261,7 @@ public class PlayerControl : ObjectControl
         }
     }
 
-
+    
     /* 공격 받을 때 호출되는 함수 */
     public override void OnHitAttack(AttackSkill _skill)
     {
@@ -240,7 +274,7 @@ public class PlayerControl : ObjectControl
         status.TakeDamage(_skill.damage);
         playerMove.HitStun();
 
-        if (_skill.isKnockBack) { playerMove.KnockBack(_skill.attackDirect * _skill.knockBackPower); }
+        if (_skill.isKnockBack) { playerMove.KnockBack(_skill.skillDirect * _skill.knockBackPower); }
 
         //현재 체력이 바닥났을 경우
         if (status.currentHP <= 0)
@@ -250,9 +284,11 @@ public class PlayerControl : ObjectControl
     }
 
 
+    /* 피격 무적상태 확인 */
     public bool IsAttackable() { return isAttackable; }
 
 
+    /* 경험치 획득 */
     public void TakeEXP(float exp)
     {
         status.currentEXP += exp;
@@ -260,8 +296,14 @@ public class PlayerControl : ObjectControl
     }
 
 
+    /* HP가 0이하로 내려갔을 때 호출됨 */
     public void PlayerDead()
     {
         Debug.Log("플레이어 사망");
     }
+
+
+    /* 딜레이 상태 Set / Get */
+    public void SetIsDelay(bool value) { isDelay = value; }
+    public bool GetIsDelay() { return isDelay; }
 }

@@ -8,6 +8,8 @@ public class PlayerStatus : ObjectStatus
     public float basicKnockBackPower;   //기본공격 넉백 수치
     public float currentEXP;    //경험치
     public float requireEXP;    //다음 레벨까지 필요한 경험치
+    public int statusPoint = 0;      //스탯을 올릴 수 있는 횟수
+
 
     void Update()
     {
@@ -25,6 +27,10 @@ public class PlayerStatus : ObjectStatus
     {
         level++;
         currentEXP -= requireEXP;
+        statusPoint += 5;
+        int bonusHP = (maxHP / 100) + 1;
+        maxHP += bonusHP;
+        currentHP += bonusHP;
     }
 
 }
