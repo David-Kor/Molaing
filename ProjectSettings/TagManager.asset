@@ -8,6 +8,7 @@ TagManager:
   - HitPoint
   - Enemy
   - FieldObject
+  - Item DataBase
   layers:
   - Default
   - TransparentFX

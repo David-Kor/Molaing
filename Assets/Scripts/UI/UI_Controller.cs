@@ -7,12 +7,12 @@ public class UI_Controller : MonoBehaviour {
     GameObject Player;
     GameObject Inventory;
 
-    Text LV;
-    Text HP;
+ //   Text LV;
+ //   Text HP;
     Text STR;
-    Text DEX;
+    Text AGI;
     Text INT;
-    Text Point;
+ //   Text Point;
 
     bool bInventory;
 	// Use this for initialization
@@ -22,12 +22,12 @@ public class UI_Controller : MonoBehaviour {
 
         Inventory = transform.GetChild(0).GetChild(1).gameObject; //Main Camera/Canvas/Inventory
 
-        LV = Inventory.transform.GetChild(0).GetChild(1).GetChild(1).GetComponent<Text>();  //Inventory/Left/Bottom/LV
-        HP = Inventory.transform.GetChild(0).GetChild(1).GetChild(3).GetComponent<Text>();  //Inventory/Left/Bottom/HP
-        STR = Inventory.transform.GetChild(0).GetChild(1).GetChild(5).GetComponent<Text>(); //Inventory/Left/Bottom/STR
-        DEX = Inventory.transform.GetChild(0).GetChild(1).GetChild(7).GetComponent<Text>(); //Inventory/Left/Bottom/DEX
-        INT = Inventory.transform.GetChild(0).GetChild(1).GetChild(9).GetComponent<Text>(); //Inventory/Left/Bottom/INT
-        Point = Inventory.transform.GetChild(0).GetChild(1).GetChild(11).GetComponent<Text>();  //Inventory/Left/Bottom/Point
+//        LV = Inventory.transform.GetChild(0).GetChild(1).GetChild(2).GetComponent<Text>();  //Inventory/Left/Bottom/LV
+//        HP = Inventory.transform.GetChild(0).GetChild(1).GetChild(4).GetComponent<Text>();  //Inventory/Left/Bottom/HP
+        STR = Inventory.transform.GetChild(0).GetChild(1).GetChild(6).GetComponent<Text>(); //Inventory/Left/Bottom/STR
+        AGI = Inventory.transform.GetChild(0).GetChild(1).GetChild(8).GetComponent<Text>(); //Inventory/Left/Bottom/AGI
+        INT = Inventory.transform.GetChild(0).GetChild(1).GetChild(10).GetComponent<Text>(); //Inventory/Left/Bottom/INT
+//        Point = Inventory.transform.GetChild(0).GetChild(1).GetChild(12).GetComponent<Text>();  //Inventory/Left/Bottom/Point
 
         bInventory = false;
 	}
@@ -59,7 +59,7 @@ public class UI_Controller : MonoBehaviour {
         }
 
         STR.text = Player.GetComponentInChildren<PlayerStatus>().strength.ToString();
-        DEX.text = Player.GetComponentInChildren<PlayerStatus>().agility.ToString();
+        AGI.text = Player.GetComponentInChildren<PlayerStatus>().agility.ToString();
         INT.text = Player.GetComponentInChildren<PlayerStatus>().intelligence.ToString();
 
     }

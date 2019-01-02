@@ -61,7 +61,6 @@
     </Reference>
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="Assets\InGameStatus.cs" />
     <Compile Include="Assets\Scripts\CameraControl.cs" />
     <Compile Include="Assets\Scripts\Enemy\EnemyAggro.cs" />
     <Compile Include="Assets\Scripts\Enemy\EnemyAnimation.cs" />
@@ -85,6 +84,10 @@
     <Compile Include="Assets\Scripts\Skills\SupportSkill.cs" />
     <Compile Include="Assets\Scripts\Skills\Tackle.cs" />
     <Compile Include="Assets\Scripts\SpriteOrder.cs" />
+    <Compile Include="Assets\Scripts\UI\InGameStatus.cs" />
+    <Compile Include="Assets\Scripts\UI\Item.cs" />
+    <Compile Include="Assets\Scripts\UI\itemDateBase.cs" />
+    <Compile Include="Assets\Scripts\UI\ItemSlot.cs" />
     <Compile Include="Assets\Scripts\UI\UI_Controller.cs" />
     <None Include="Assets\Sprite Pack\Tap and Fly\Readme.txt" />
     <Reference Include="UnityEditor.StandardEvents">
