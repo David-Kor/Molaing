@@ -5,7 +5,7 @@ using UnityEngine;
 /* 모든 오브젝트의 스탯 클래스
  * 각 NPC(미정), 플레이어, 몬스터로 나뉘어 상속받는다.
  */
-public class ObjectStatus : MonoBehaviour
+public abstract class ObjectStatus : MonoBehaviour
 {
     public string objName;
 
@@ -31,18 +31,6 @@ public class ObjectStatus : MonoBehaviour
     {
         currentHP = maxHP;
         currentMP = maxMP;
-    }
-
-    void Update()
-    {
-        if (currentHP <= 0)
-        {
-            /*
-             * 체력을 전부 잃었을 경우의 모든 행동을 이곳에 넣어야 함
-             */
-            Debug.Log(gameObject.name + " is dead");
-            Destroy(gameObject);
-        }
     }
 
 

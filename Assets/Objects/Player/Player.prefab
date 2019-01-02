@@ -401,8 +401,9 @@ MonoBehaviour:
   knockBackResistance: 0
   hitStunResistance: 0
   gracePeriod: 0.8
-  basicKnockBackPower: 1
+  basicKnockBackPower: 2
   exp: 0
+  requireEXP: 50
 --- !u!114 &114437847078032964
 MonoBehaviour:
   m_ObjectHideFlags: 1

@@ -310,7 +310,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   objName: Ent
-  level: 0
+  level: 1
   maxHP: 30
   maxMP: 0
   currentHP: 0
@@ -327,6 +327,7 @@ MonoBehaviour:
   tackleKnockBackPower: 1
   attackRange: 0.05
   autoAggro: 100
+  exp: 10
 --- !u!114 &114497256265949160
 MonoBehaviour:
   m_ObjectHideFlags: 1

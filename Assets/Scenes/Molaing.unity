@@ -123,7 +123,7 @@ GameObject:
   - component: {fileID: 132742992}
   m_Layer: 0
   m_Name: Tree
-  m_TagString: Untagged
+  m_TagString: FieldObject
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -359,11 +359,6 @@ Prefab:
       propertyPath: m_RootOrder
       value: 0
       objectReference: {fileID: 0}
-    - target: {fileID: 114214224685982042, guid: 7a558733239cec84d8fb7da029e6359f,
-        type: 2}
-      propertyPath: basicKnockBackPower
-      value: 2
-      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 7a558733239cec84d8fb7da029e6359f, type: 2}
   m_IsPrefabAsset: 0
@@ -428,7 +423,7 @@ GameObject:
   - component: {fileID: 905340665}
   m_Layer: 0
   m_Name: rpg-game-scenery-background-pixel-art-tutorial
-  m_TagString: Untagged
+  m_TagString: Ground
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0

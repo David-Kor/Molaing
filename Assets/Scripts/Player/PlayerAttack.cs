@@ -108,7 +108,7 @@ public class PlayerAttack : MonoBehaviour
         for (int i = 0; i < count; i++)
         {
             hitObj = hits[i].GetComponent<HitObject>();
-            //대상이 Player이면 무시
+            //대상이 Player자신이면 무시
             if (hitObj.GetName() == "Player") { continue; }
 
             basicAttack.attackDirect = attackDirect;
