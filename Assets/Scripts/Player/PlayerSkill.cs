@@ -45,6 +45,8 @@ public class PlayerSkill : MonoBehaviour
     {
         //딜레이가 남아있으면 스킬을 사용할 수 없음
         if (skillDelay > 0) { return; }
+        //스킬이 없으면 사용 불가
+        if (skill_List[index] == null) { return; }
         //해당 스킬의 쿨타임이 남아있으면 사용 불가
         if (coolTimerList[index] > 0) { return; }
 
@@ -70,6 +72,7 @@ public class PlayerSkill : MonoBehaviour
             skillObj.transform.Rotate(0, 0, 90);
         }
 
+        skillObj.transform.position = transform.position;
         Skill skill = skillObj.GetComponent<Skill>();
         skill.skillCaster = playerControl.gameObject;
         skill.skillDirect = direct;

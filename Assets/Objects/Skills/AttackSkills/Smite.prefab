@@ -82,7 +82,7 @@ MonoBehaviour:
   skillCaster: {fileID: 0}
   skill_IMG: {fileID: 21300000, guid: 5d787b3952954e44da80e9908fa7ffd6, type: 3}
   coolDown: 3
-  delay: 0.6
+  delay: 0.4
   skillDirect: {x: 0, y: 0}
   effects:
   - {fileID: 21300000, guid: 5d787b3952954e44da80e9908fa7ffd6, type: 3}

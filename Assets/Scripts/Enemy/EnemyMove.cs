@@ -133,7 +133,7 @@ public class EnemyMove : MonoBehaviour
     public void StopMove() { targetObject = null; }
 
 
-    public void GetDamage(Vector2 dir_val)
+    public void KnockBack(Vector2 dir_val)
     {
         rigid2D.velocity = dir_val * (100 - status.knockBackResistance) / 100;
         hitStunTime = DEFAULT_HIT_STUN_TIME * (100 - status.hitStunResistance) / 100;

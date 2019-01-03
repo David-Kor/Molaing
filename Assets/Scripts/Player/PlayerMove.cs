@@ -4,19 +4,21 @@ using UnityEngine;
 
 public class PlayerMove : MonoBehaviour
 {
+    public float hitStunTimer;           //경직 타이머
+    public float knockBackTimer;        //넉백 타이머
+
     private PlayerStatus playerStatus;  //플레이어의 스탯 클래스
     private Rigidbody2D rigid2D;       //물리 클래스
 
     private const float DEFAULT_HIT_STUN_TIME = 0.25f;  //피격시 경직시간 기본값
     private const float DEFAULT_KNOCK_BACK_TIME = 0.1f;  //넉백시간 기본값
-    private float hitStunTimer;           //경직 타이머
-    private float knockBackTimer;        //넉백 타이머
 
     void Start()
     {
         playerStatus = GetComponent<PlayerStatus>();
         rigid2D = GetComponent<Rigidbody2D>();
         hitStunTimer = 0;
+        knockBackTimer = 0;
     }
 
     void Update()
@@ -41,7 +43,10 @@ public class PlayerMove : MonoBehaviour
 
 
     /* 피격 시 경직 적용 */
-    public void HitStun() { hitStunTimer = DEFAULT_HIT_STUN_TIME * (100 - playerStatus.hitStunResistance) / 100; }
+    public void HitStun()
+    {
+        hitStunTimer = (DEFAULT_HIT_STUN_TIME) * (100 - playerStatus.hitStunResistance) / 100;
+    }
 
 
     /* 넉백 적용 */

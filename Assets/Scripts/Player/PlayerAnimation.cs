@@ -54,19 +54,23 @@ public class PlayerAnimation : MonoBehaviour
             if (curSpriteDirect == Vector2.down)
             {
                 playerAnimator.SetFloat("Direct", DOWN);
+                transform.localPosition = Vector2.left * 0.03f;
             }
             if (curSpriteDirect == Vector2.up)
             {
                 playerAnimator.SetFloat("Direct", UP);
+                transform.localPosition = Vector2.right * 0.03f;
             }
             if (curSpriteDirect == Vector2.right)
             {
                 playerAnimator.SetFloat("Direct", RIGHT);
+                transform.localPosition = Vector2.left * 0.03f;
             }
             if (curSpriteDirect == Vector2.left)
             {
                 transform.rotation = Quaternion.Euler(0, 180, 0);
                 playerAnimator.SetFloat("Direct", LEFT);   //Side Sprite가 오른쪽 방향 이미지이므로, 세로축으로 180도 회전하여 좌우반전
+                transform.localPosition = Vector2.right * 0.03f;
             }
         }
 

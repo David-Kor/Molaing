@@ -38,7 +38,7 @@ public abstract class ObjectStatus : MonoBehaviour
     public void TakeDamage(int _dmg)
     {
         currentHP -= _dmg;
-//        Debug.Log(objName + "  Take Damage " + _dmg);
+        Debug.Log(objName + "  Take Damage " + _dmg);
     }
 
 

@@ -104,11 +104,10 @@ public class PlayerControl : ObjectControl
         //피격 시 무적 상태인 경우
         if (!isAttackable)
         {
-            gracePeriodTimer += Time.deltaTime;
+            gracePeriodTimer -= Time.deltaTime;
             //지속시간이 지나면 해제
-            if (gracePeriodTimer >= status.gracePeriod)
+            if (gracePeriodTimer <= 0)
             {
-                gracePeriodTimer = 0;
                 isAttackable = true;
             }
         }
@@ -268,7 +267,7 @@ public class PlayerControl : ObjectControl
         //무적 상태에 있으면 공격받지 않음
         if (!isAttackable) { return; }
 
-        isAttackable = false;
+        SetInvincibleTime(status.gracePeriod);
         playerAnimation.ShowGetDamage();
         //스탯에 피해량(damage) 정보를 넘김
         status.TakeDamage(_skill.damage);
@@ -281,6 +280,14 @@ public class PlayerControl : ObjectControl
         {
             PlayerDead();
         }
+    }
+
+
+    /* 일정 시간동안 무적상태 활성화 */
+    public void SetInvincibleTime(float time)
+    {
+        gracePeriodTimer = time;
+        isAttackable = false;
     }
 
 
@@ -306,4 +313,8 @@ public class PlayerControl : ObjectControl
     /* 딜레이 상태 Set / Get */
     public void SetIsDelay(bool value) { isDelay = value; }
     public bool GetIsDelay() { return isDelay; }
+
+    public PlayerMove GetPlayerMove() { return playerMove; }
+    public PlayerAnimation GetPlayerAnimation() { return playerAnimation; }
+    public PlayerStatus GetPlayerStatus() { return status; }
 }

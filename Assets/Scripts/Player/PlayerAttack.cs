@@ -16,12 +16,6 @@ public class PlayerAttack : MonoBehaviour
     {
         playerStatus = transform.parent.GetComponent<PlayerStatus>();
         playerAnimation = transform.parent.GetComponentInChildren<PlayerAnimation>();
-        //기본공격 정보 설정
-        basicAttack = gameObject.AddComponent<BasicAttack>();
-        basicAttack.knockBackPower = playerStatus.basicKnockBackPower;
-        basicAttack.skillCaster = transform.parent.gameObject;
-        basicAttack.isKnockBack = true;
-        basicAttack.damage = playerStatus.attackDamage;
         attackTimer = 0f;
         isAttackInput = false;
         attackDirect = Vector2.down;
@@ -74,8 +68,14 @@ public class PlayerAttack : MonoBehaviour
                     newAttack.transform.Rotate(0, 0, 90);
                 }
 
-                OnHitBasicAttack(newAttack.GetComponent<Collider2D>());
-                Destroy(newAttack);
+                //기본공격 정보 설정
+                basicAttack = newAttack.GetComponent<BasicAttack>();
+                basicAttack.skillDirect = attackDirect;
+                basicAttack.knockBackPower += playerStatus.basicKnockBackPower;
+                basicAttack.isKnockBack = true;
+                basicAttack.skillCaster = transform.parent.gameObject;
+                basicAttack.damage += playerStatus.attackDamage;
+                basicAttack.ActivateSkill();
             }
         }
         else { playerAnimation.StopAttack(); }
