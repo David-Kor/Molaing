@@ -1,7 +1,7 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
-using DIRECT = EnumInterface.DIRECT_TO_INT;
+using DIRECTION = EnumInterface.DIRECTTION_TO_INT;
 
 
 public class EnemyMove : MonoBehaviour
@@ -10,10 +10,10 @@ public class EnemyMove : MonoBehaviour
     public float maxPatrolDelay;
     public float maxDistancePatrol;
 
-    private const int DOWN = (int)DIRECT.DOWN;
-    private const int UP = (int)DIRECT.UP;
-    private const int LEFT = (int)DIRECT.LEFT;
-    private const int RIGHT = (int)DIRECT.RIGHT;
+    private const int DOWN = (int)DIRECTION.DOWN;
+    private const int UP = (int)DIRECTION.UP;
+    private const int LEFT = (int)DIRECTION.LEFT;
+    private const int RIGHT = (int)DIRECTION.RIGHT;
 
     private EnemyStatus status;
     private EnemyControl control;
@@ -21,7 +21,7 @@ public class EnemyMove : MonoBehaviour
     private GameObject targetObject;
     private Vector2 targetPosition;
 
-    private Vector2 randDirect;
+    private Vector2 randDirection;
     private float distance;
     private float patrolDelay;
     private float patrolTimer;
@@ -78,22 +78,22 @@ public class EnemyMove : MonoBehaviour
                 switch (Random.Range(0, 4))
                 {
                     case DOWN:
-                        randDirect = Vector2.down;
+                        randDirection = Vector2.down;
                         break;
                     case UP:
-                        randDirect = Vector2.up;
+                        randDirection = Vector2.up;
                         break;
                     case LEFT:
-                        randDirect = Vector2.left;
+                        randDirection = Vector2.left;
                         break;
                     case RIGHT:
-                        randDirect = Vector2.right;
+                        randDirection = Vector2.right;
                         break;
                 }
 
                 iTween.MoveBy(gameObject, iTween.Hash(
-                    "x", randDirect.x * distance,
-                    "y", randDirect.y * distance,
+                    "x", randDirection.x * distance,
+                    "y", randDirection.y * distance,
                     "speed", status.moveSpeed,
                     "easetype", iTween.EaseType.linear,
                     "onstart", "StartPatrol",
@@ -114,7 +114,7 @@ public class EnemyMove : MonoBehaviour
     void StartPatrol()
     {
         isPatrol = true;
-        control.Patrol(randDirect);
+        control.Patrol(randDirection);
     }
 
     void CompletePatrol()

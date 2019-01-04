@@ -1,24 +1,24 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
-using DIRECT = EnumInterface.DIRECT_TO_FLOAT;
+using DIRECTION = EnumInterface.DIRECTION_TO_FLOAT;
 
 public class PlayerAnimation : MonoBehaviour
 {
     private PlayerControl control;
     private Animator playerAnimator;   //에니메이션 관리 컴포넌트
     private SpriteRenderer sprite;
-    private Vector2 curSpriteDirect;     //현재 바라보는 방향
-    private Vector2 nextSpriteDirect;   //다음 바라볼 방향
+    private Vector2 curSpriteDirection;     //현재 바라보는 방향
+    private Vector2 nextSpriteDirection;   //다음 바라볼 방향
     private bool isWalk;
     private bool isAttack;
 
-    // * 애니메이터의 Direct 패러미터에 의해 바라보는 방향이 결정
-    // * Direct는 float형이므로 어느 방향을 의미하는지 쉽게 알기 위해 상수형 변수 const 사용
-    private const float DOWN = (float)DIRECT.DOWN;
-    private const float UP = (float)DIRECT.UP;
-    private const float LEFT = (float)DIRECT.LEFT;
-    private const float RIGHT = (float)DIRECT.RIGHT;
+    // * 애니메이터의 Direction 패러미터에 의해 바라보는 방향이 결정
+    // * Direction는 float형이므로 어느 방향을 의미하는지 쉽게 알기 위해 상수형 변수 const 사용
+    private const float DOWN = (float)DIRECTION.DOWN;
+    private const float UP = (float)DIRECTION.UP;
+    private const float LEFT = (float)DIRECTION.LEFT;
+    private const float RIGHT = (float)DIRECTION.RIGHT;
 
     private float atkMotionTimer;            //공격 모션 타이머
     private float atkMotionSpeed = 1.0f;  //공격 모션 속도 (기본값 : 1)
@@ -33,8 +33,8 @@ public class PlayerAnimation : MonoBehaviour
         control = GetComponentInParent<PlayerControl>();
         playerAnimator = GetComponent<Animator>();
         sprite = GetComponent<SpriteRenderer>();
-        curSpriteDirect = Vector2.down;
-        nextSpriteDirect = Vector2.down;
+        curSpriteDirection = Vector2.down;
+        nextSpriteDirection = Vector2.down;
         isWalk = false;
         atkMotionTimer = 0;
         dmgMotionColor = new Color[2];
@@ -45,31 +45,31 @@ public class PlayerAnimation : MonoBehaviour
     void Update()
     {
         //바라보는 방향이 바뀌면
-        if (curSpriteDirect != nextSpriteDirect)
+        if (curSpriteDirection != nextSpriteDirection)
         {
-            curSpriteDirect = nextSpriteDirect;
+            curSpriteDirection = nextSpriteDirection;
             transform.rotation = Quaternion.Euler(0, 0, 0); //회전값 초기화
 
-            //Animator의 파라미터 Direct에 의해 어느 방향의 애니메이션을 실행할 것인지 결정
-            if (curSpriteDirect == Vector2.down)
+            //Animator의 파라미터 Direction에 의해 어느 방향의 애니메이션을 실행할 것인지 결정
+            if (curSpriteDirection == Vector2.down)
             {
-                playerAnimator.SetFloat("Direct", DOWN);
+                playerAnimator.SetFloat("Direction", DOWN);
                 transform.localPosition = Vector2.left * 0.03f;
             }
-            if (curSpriteDirect == Vector2.up)
+            if (curSpriteDirection == Vector2.up)
             {
-                playerAnimator.SetFloat("Direct", UP);
+                playerAnimator.SetFloat("Direction", UP);
                 transform.localPosition = Vector2.right * 0.03f;
             }
-            if (curSpriteDirect == Vector2.right)
+            if (curSpriteDirection == Vector2.right)
             {
-                playerAnimator.SetFloat("Direct", RIGHT);
+                playerAnimator.SetFloat("Direction", RIGHT);
                 transform.localPosition = Vector2.left * 0.03f;
             }
-            if (curSpriteDirect == Vector2.left)
+            if (curSpriteDirection == Vector2.left)
             {
                 transform.rotation = Quaternion.Euler(0, 180, 0);
-                playerAnimator.SetFloat("Direct", LEFT);   //Side Sprite가 오른쪽 방향 이미지이므로, 세로축으로 180도 회전하여 좌우반전
+                playerAnimator.SetFloat("Direction", LEFT);   //Side Sprite가 오른쪽 방향 이미지이므로, 세로축으로 180도 회전하여 좌우반전
                 transform.localPosition = Vector2.right * 0.03f;
             }
         }
@@ -159,10 +159,10 @@ public class PlayerAnimation : MonoBehaviour
     public void SetAttackMotionSpeed(float _speed) { atkMotionSpeed = _speed; }
 
 
-    public void TurnPlayer(Vector2 _spriteDirect) { nextSpriteDirect = _spriteDirect; }
+    public void TurnPlayer(Vector2 _spriteDirection) { nextSpriteDirection = _spriteDirection; }
 
 
-    public Vector2 GetPlayerSpriteDirect() { return curSpriteDirect; }
+    public Vector2 GetPlayerSpriteDirection() { return curSpriteDirection; }
 
 
     /* 데미지 피격 모션 실행 */

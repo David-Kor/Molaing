@@ -53,6 +53,7 @@
     </Reference>
   </ItemGroup>
   <ItemGroup>
+     <Compile Include="Assets\Scripts\Bullet.cs" />
      <Compile Include="Assets\Scripts\CameraControl.cs" />
      <Compile Include="Assets\Scripts\Enemy\EnemyAggro.cs" />
      <Compile Include="Assets\Scripts\Enemy\EnemyAnimation.cs" />
@@ -75,6 +76,8 @@
      <Compile Include="Assets\Scripts\Skills\Avoid.cs" />
      <Compile Include="Assets\Scripts\Skills\BackStep.cs" />
      <Compile Include="Assets\Scripts\Skills\BasicAttack.cs" />
+     <Compile Include="Assets\Scripts\Skills\BulletDagger.cs" />
+     <Compile Include="Assets\Scripts\Skills\DaggerThrowing.cs" />
      <Compile Include="Assets\Scripts\Skills\Dash.cs" />
      <Compile Include="Assets\Scripts\Skills\Skill.cs" />
      <Compile Include="Assets\Scripts\Skills\Smite.cs" />

@@ -4,8 +4,5 @@ using UnityEngine;
 
 public abstract class SupportSkill : Skill
 {
-    public override abstract void ActivateSkill();
 
-
-    public override abstract void ReleaseSkill();
 }

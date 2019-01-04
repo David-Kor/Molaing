@@ -41,7 +41,7 @@ public class PlayerSkill : MonoBehaviour
         }
     }
 
-    public void UseSkill(int index, Vector2 direct)
+    public void UseSkill(int index, Vector2 direction)
     {
         //스킬이 없으면 사용 불가
         if (skill_List[index] == null) { return; }
@@ -49,17 +49,17 @@ public class PlayerSkill : MonoBehaviour
         if (coolTimerList[index] > 0) { return; }
 
         GameObject skillObj;
-        if (direct == Vector2.up)
+        if (direction == Vector2.up)
         {
             skillObj = Instantiate(skill_List[index], transform.GetChild(0));
             skillObj.transform.Rotate(0, 0, 180);
         }
-        else if (direct == Vector2.down)
+        else if (direction == Vector2.down)
         {
             skillObj = Instantiate(skill_List[index], transform.GetChild(1));
             skillObj.transform.Rotate(0, 0, 0);
         }
-        else if (direct == Vector2.left)
+        else if (direction == Vector2.left)
         {
             skillObj = Instantiate(skill_List[index], transform.GetChild(2));
             skillObj.transform.Rotate(0, 0, -90);
@@ -72,7 +72,7 @@ public class PlayerSkill : MonoBehaviour
 
         Skill skill = skillObj.GetComponent<Skill>();
         skill.skillCaster = playerControl.gameObject;
-        skill.skillDirect = direct;
+        skill.skillDirection = direction;
         if (skill.isOnHead) { skillObj.transform.position = transform.position; }   //스킬 범위가 자신의 위치가 중심인 경우
         skill.ActivateSkill();
         coolTimerList[index] = skill.coolDown;

@@ -12,7 +12,7 @@ public abstract class Skill : MonoBehaviour
     public bool usableOnMove;      //이동 중 사용 가능한 스킬
     public bool delayCancelable;     //딜레이를 캔슬하여 사용할 수 있는 스킬
     public bool isOnHead;             //자기 자신을 중심으로한 범위 스킬
-    public Vector2 skillDirect = Vector2.zero;     //스킬 시전 방향 및 넉백 방향
+    public Vector2 skillDirection = Vector2.zero;     //스킬 시전 방향 및 넉백 방향
     public Sprite skill_IMG;             //스킬 이미지(UI)
     public Sprite[] effects;              //스킬 이펙트 이미지
     public float frameTime;            //이펙트 이미지 1개당 출력시간
@@ -57,7 +57,7 @@ public abstract class Skill : MonoBehaviour
         }
 
         //frameTime 시간에 한 번씩 이펙트 이미지 변경
-        if (e_timer >= frameTime)
+        if ((e_timer >= frameTime))
         {
             //Loop 미사용 시 이펙트가 끝나면 스킬 소멸
             if (!isLoop && index >= effects.Length)
@@ -66,7 +66,7 @@ public abstract class Skill : MonoBehaviour
                 Destroy(gameObject);
             }
 
-            if (index < effects.Length) { GetComponent<SpriteRenderer>().sprite = effects[index]; }
+            if ((effects.Length > 0) && (index < effects.Length)) { GetComponent<SpriteRenderer>().sprite = effects[index]; }
             e_timer = 0;
             index++;
         }

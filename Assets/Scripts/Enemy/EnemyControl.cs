@@ -4,7 +4,7 @@ using UnityEngine;
 
 public class EnemyControl : ObjectControl
 {
-    private Vector2 lookDirect;
+    private Vector2 lookDirection;
 
     private GameObject target;  // 공격 대상
     private EnemyAnimation aniControl;
@@ -16,7 +16,7 @@ public class EnemyControl : ObjectControl
         aniControl = GetComponentInChildren<EnemyAnimation>();
         move = GetComponent<EnemyMove>();
         status = GetComponent<EnemyStatus>();
-        lookDirect = aniControl.GetDirect();
+        lookDirection = aniControl.GetDirection();
         //적끼리의 물리적 충돌 무시 (밀림현상 방지)
         Physics2D.IgnoreLayerCollision(LayerMask.NameToLayer("Enemy"), LayerMask.NameToLayer("Enemy"), true);
     }
@@ -41,7 +41,7 @@ public class EnemyControl : ObjectControl
 
 
     /* 순찰 중 */
-    public void Patrol(Vector2 _direct) { aniControl.PlayPatrol(_direct); }
+    public void Patrol(Vector2 _direction) { aniControl.PlayPatrol(_direction); }
 
 
     /* 대기 중 */
@@ -62,14 +62,14 @@ public class EnemyControl : ObjectControl
         }
 
         DiscoverTarget(_skill.skillCaster);
-        if (_skill.isKnockBack) { move.KnockBack(_skill.skillDirect * _skill.knockBackPower); }
+        if (_skill.isKnockBack) { move.KnockBack(_skill.skillDirection * _skill.knockBackPower); }
     }
 
 
-    public Vector2 GetLookDirect() { return lookDirect; }
+    public Vector2 GetLookDirection() { return lookDirection; }
 
 
-    public void SetLookDirect(Vector2 _direct) { lookDirect = _direct; }
+    public void SetLookDirection(Vector2 _direction) { lookDirection = _direction; }
 
 
     /* HP가 0이하로 떨어졌을 때 호출 됨 */

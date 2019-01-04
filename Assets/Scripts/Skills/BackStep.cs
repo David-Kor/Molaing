@@ -13,7 +13,7 @@ public class BackStep : SupportSkill
     {
         skillCaster.GetComponent<PlayerControl>().GetPlayerMove().knockBackTimer = delay;
         skillCaster.GetComponent<PlayerControl>().SetInvincibleTime(delay);
-        skillCaster.GetComponent<Rigidbody2D>().velocity = skillDirect * value * -1;
+        skillCaster.GetComponent<Rigidbody2D>().velocity = skillDirection * value * -1;
     }
 
     public override void ReleaseSkill()

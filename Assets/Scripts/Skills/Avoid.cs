@@ -12,7 +12,7 @@ public class Avoid : SupportSkill
         transform.SetParent(null);
         skillCaster.GetComponent<PlayerControl>().GetPlayerMove().knockBackTimer = delay;
         skillCaster.GetComponent<PlayerControl>().SetInvincibleTime(delay);
-        skillCaster.GetComponent<Rigidbody2D>().velocity = skillDirect * value;
+        skillCaster.GetComponent<Rigidbody2D>().velocity = skillDirection * value;
     }
 
     public override void ReleaseSkill()

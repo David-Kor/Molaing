@@ -24,7 +24,7 @@ GameObject:
   - component: {fileID: 114964762956445940}
   m_Layer: 0
   m_Name: Basic Attack
-  m_TagString: Untagged
+  m_TagString: Skill
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -86,7 +86,7 @@ MonoBehaviour:
   usableOnMove: 0
   delayCancelable: 0
   isOnHead: 0
-  skillDirect: {x: 0, y: 0}
+  skillDirection: {x: 0, y: 0}
   skill_IMG: {fileID: 0}
   effects: []
   frameTime: 0

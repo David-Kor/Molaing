@@ -8,6 +8,7 @@ TagManager:
   - HitPoint
   - Enemy
   - FieldObject
+  - Skill
   layers:
   - Default
   - TransparentFX

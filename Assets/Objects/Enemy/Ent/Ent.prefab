@@ -318,7 +318,7 @@ MonoBehaviour:
   strength: 0
   agility: 0
   intelligence: 10
-  attackDamage: 5
+  attackDamage: 1
   attackSpeed: 0.7
   moveSpeed: 0.5
   knockBackResistance: 0

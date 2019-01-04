@@ -445,7 +445,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   skill_List:
   - {fileID: 1301543405181514, guid: e61eb787bd6768340a62cf8c4beadeab, type: 2}
-  - {fileID: 1338790028357304, guid: 197ffd10dd80cd642bbd6bb44e312dfb, type: 2}
+  - {fileID: 1057665496507564, guid: 20f512dbb78c5f64eb84109f69909b6f, type: 2}
   - {fileID: 1338790028357304, guid: 617243720105fca448a740948448c949, type: 2}
   - {fileID: 1338790028357304, guid: dfde64a2c8920a740a5e1d03d31f4572, type: 2}
 --- !u!114 &114992375830163696

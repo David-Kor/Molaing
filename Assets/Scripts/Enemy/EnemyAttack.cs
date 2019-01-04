@@ -24,7 +24,7 @@ public class EnemyAttack : MonoBehaviour
         if (col.CompareTag("HitPoint")) {
 
             if (col.transform.parent.CompareTag("Player")) {
-                tackle.skillDirect = control.GetLookDirect();
+                tackle.skillDirection = control.GetLookDirection();
                 col.GetComponent<HitObject>().OnHitSkill(tackle);
             }
 

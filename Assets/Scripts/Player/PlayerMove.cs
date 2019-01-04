@@ -34,11 +34,11 @@ public class PlayerMove : MonoBehaviour
 
 
     /* 해당 방향으로 이동 */
-    public void Move(Vector2 _moveDirect)
+    public void Move(Vector2 _moveDirection)
     {
         if (hitStunTimer > 0) { return; }
 
-        transform.Translate(_moveDirect * playerStatus.moveSpeed * Time.deltaTime, Space.World);
+        transform.Translate(_moveDirection * playerStatus.moveSpeed * Time.deltaTime, Space.World);
     }
 
 
