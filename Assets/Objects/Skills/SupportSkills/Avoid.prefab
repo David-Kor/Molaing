@@ -55,10 +55,11 @@ MonoBehaviour:
   skillName: Dash
   skillCaster: {fileID: 0}
   maxHitCount: 0
-  coolDown: 0
+  coolDown: 5
   delay: 0.05
-  skillDirect: {x: 0, y: 0}
+  usableOnMove: 1
   isOnHead: 1
+  skillDirect: {x: 0, y: 0}
   skill_IMG: {fileID: 21300000, guid: 2052f0f9c5f95a046b3840aa5c09cc12, type: 3}
   effects:
   - {fileID: 21300000, guid: 2052f0f9c5f95a046b3840aa5c09cc12, type: 3}
@@ -70,7 +71,7 @@ MonoBehaviour:
   frameTime: 0.05
   isLoop: 0
   lifeTime: 0
-  value: 5
+  value: 14
 --- !u!212 &212506023120852224
 SpriteRenderer:
   m_ObjectHideFlags: 1

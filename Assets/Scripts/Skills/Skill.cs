@@ -9,8 +9,10 @@ public abstract class Skill : MonoBehaviour
     public int maxHitCount = 10;    //최대 Hit 대상의 수
     public float coolDown;             //쿨타임
     public float delay;                   //스킬 딜레이(후딜)
-    public Vector2 skillDirect = Vector2.zero;     //스킬 시전 방향 및 넉백 방향
+    public bool usableOnMove;      //이동 중 사용 가능한 스킬
+    public bool delayCancelable;     //딜레이를 캔슬하여 사용할 수 있는 스킬
     public bool isOnHead;             //자기 자신을 중심으로한 범위 스킬
+    public Vector2 skillDirect = Vector2.zero;     //스킬 시전 방향 및 넉백 방향
     public Sprite skill_IMG;             //스킬 이미지(UI)
     public Sprite[] effects;              //스킬 이펙트 이미지
     public float frameTime;            //이펙트 이미지 1개당 출력시간

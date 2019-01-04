@@ -6,11 +6,6 @@ public class Avoid : SupportSkill
 {
     public float value;
 
-    void Update()
-    {
-        SkillProduction();
-    }
-
     public override void ActivateSkill()
     {
         transform.localEulerAngles = Vector3.zero;

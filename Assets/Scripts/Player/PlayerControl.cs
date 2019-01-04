@@ -65,36 +65,61 @@ public class PlayerControl : ObjectControl
             }
         }
 
-        if (!inventoryActive && !isDelay)
+        if (!inventoryActive)
         {
-            //이동키를 눌렀는지 확인
-            if (CheckMoveKeyInput())
-            {
-                SetSpriteDirect();  //바라볼 방향 결정
-                playerMove.Move(moveDirect);   //플레이어 이동
-                playerAttack.StopAttack();  //공격 취소
+            //스킬 키를 눌렀는지 확인
+            skillIndex = CheckSkillKeyInput();
 
-                //이동키 입력에 의한 플레이어 애니메이션 적용
-                playerAnimation.TurnPlayer(spriteDirect);
-                playerAnimation.StopAttack();
-                if (moveDirect == Vector2.zero) { playerAnimation.StopWalking(); }
-                else { playerAnimation.StartWalking(); }
+            //딜레이 상태가 아니라면
+            if (!isDelay)
+            {
+                //이동키를 눌렀는지 확인
+                if (CheckMoveKeyInput())
+                {
+                    SetSpriteDirect();                      //바라볼 방향 결정
+                    playerMove.Move(moveDirect);   //플레이어 이동
+                    playerAttack.StopAttack();          //공격 취소
+
+                    //이동키 입력에 의한 플레이어 애니메이션 적용
+                    playerAnimation.TurnPlayer(spriteDirect);
+                    playerAnimation.StopAttack();
+                    if (moveDirect == Vector2.zero) { playerAnimation.StopWalking(); }
+                    else { playerAnimation.StartWalking(); }
+
+                    //이동 중 사용 가능한 스킬을 사용했을 경우
+                    if (skillIndex >= 0)
+                    {
+                        if (playerSkill.GetSkill(skillIndex).usableOnMove)
+                        {
+                            playerSkill.UseSkill(skillIndex, spriteDirect);
+                        }
+                    }
+                }
+                //이동키를 누르지 않은 경우
+                else
+                {
+                    //대기 애니메이션 적용
+                    playerAnimation.StopWalking();
+                    firstDirect = Vector2.zero;
+
+                    //공격키를 눌렀는지 확인
+                    if (CheckAttackKeyInput())
+                    {
+                        playerAttack.Attack();
+                    }
+                    else { playerAttack.StopAttack(); }
+
+                    //스킬 사용
+                    if (skillIndex >= 0)
+                    {
+                        playerSkill.UseSkill(skillIndex, spriteDirect);
+                    }
+                }
             }
-            //이동키를 누르지 않은 경우
+            //딜레이 상태인 경우
             else
             {
-                //대기 애니메이션 적용
-                playerAnimation.StopWalking();
-                firstDirect = Vector2.zero;
-
-                //공격키를 눌렀는지 확인
-                if (CheckAttackKeyInput())
-                {
-                    playerAttack.Attack();
-                }
-                else { playerAttack.StopAttack(); }
-
-                if ((skillIndex = CheckSkillKeyInput()) >= 0)
+                if (skillIndex >= 0 && playerSkill.GetSkill(skillIndex).delayCancelable)
                 {
                     playerSkill.UseSkill(skillIndex, spriteDirect);
                 }

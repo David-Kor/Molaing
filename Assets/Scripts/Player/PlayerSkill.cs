@@ -43,8 +43,6 @@ public class PlayerSkill : MonoBehaviour
 
     public void UseSkill(int index, Vector2 direct)
     {
-        //딜레이가 남아있으면 스킬을 사용할 수 없음
-        if (skillDelay > 0) { return; }
         //스킬이 없으면 사용 불가
         if (skill_List[index] == null) { return; }
         //해당 스킬의 쿨타임이 남아있으면 사용 불가
@@ -72,13 +70,19 @@ public class PlayerSkill : MonoBehaviour
             skillObj.transform.Rotate(0, 0, 90);
         }
 
-        skillObj.transform.position = transform.position;
         Skill skill = skillObj.GetComponent<Skill>();
         skill.skillCaster = playerControl.gameObject;
         skill.skillDirect = direct;
+        if (skill.isOnHead) { skillObj.transform.position = transform.position; }   //스킬 범위가 자신의 위치가 중심인 경우
         skill.ActivateSkill();
         coolTimerList[index] = skill.coolDown;
         skillDelay = skill.delay;
         playerControl.SetIsDelay(true);
+    }
+
+    public Skill GetSkill(int index)
+    {
+        if (index < 0 || skill_List.Length < index) { return null; }
+        return skill_List[index].GetComponent<Skill>();
     }
 }

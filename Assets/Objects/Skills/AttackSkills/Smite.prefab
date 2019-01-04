@@ -80,10 +80,13 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   skillName: Smite
   skillCaster: {fileID: 0}
-  skill_IMG: {fileID: 21300000, guid: 5d787b3952954e44da80e9908fa7ffd6, type: 3}
+  maxHitCount: 10
   coolDown: 3
   delay: 0.4
+  usableOnMove: 0
+  isOnHead: 0
   skillDirect: {x: 0, y: 0}
+  skill_IMG: {fileID: 21300000, guid: 5d787b3952954e44da80e9908fa7ffd6, type: 3}
   effects:
   - {fileID: 21300000, guid: 5d787b3952954e44da80e9908fa7ffd6, type: 3}
   - {fileID: 21300000, guid: 2f0a563f16f2e5e4e9136bbb38a809d4, type: 3}
