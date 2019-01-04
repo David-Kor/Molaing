@@ -85,6 +85,7 @@
     <Compile Include="Assets\Scripts\Skills\Tackle.cs" />
     <Compile Include="Assets\Scripts\SpriteOrder.cs" />
     <Compile Include="Assets\Scripts\UI\InGameStatus.cs" />
+    <Compile Include="Assets\Scripts\UI\InventorySystem.cs" />
     <Compile Include="Assets\Scripts\UI\Item.cs" />
     <Compile Include="Assets\Scripts\UI\itemDateBase.cs" />
     <Compile Include="Assets\Scripts\UI\ItemSlot.cs" />
