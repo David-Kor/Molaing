@@ -280,6 +280,7 @@ public class PlayerControl : ObjectControl
         //무적 상태에 있으면 공격받지 않음
         if (!isAttackable) { return; }
 
+        Debug.Log("[ " + name + " ]" + " Take [" + _skill.damage + "] Damage From [ " + _skill.skillCaster.name + " ]");
         SetInvincibleTime(status.gracePeriod);
         playerAnimation.ShowGetDamage();
         //스탯에 피해량(damage) 정보를 넘김
@@ -311,7 +312,8 @@ public class PlayerControl : ObjectControl
     /* 경험치 획득 */
     public void TakeEXP(float exp)
     {
-        status.currentEXP += exp;
+        status.EXP_Up(exp);
+        ui.Exp(status.currentEXP, status.requireEXP);
         Debug.Log("경험치 획득 : " + exp);
     }
 

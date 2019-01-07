@@ -14,7 +14,7 @@ public class EnemyAttack : MonoBehaviour
         status = GetComponentInParent<EnemyStatus>();
         tackle = gameObject.AddComponent<Tackle>();
         tackle.isKnockBack = true;
-        tackle.knockBackPower = status.tackleKnockBackPower;
+        tackle.knockBackPower = status.knockBackPower;
         tackle.skillCaster = transform.parent.gameObject;
         tackle.damage = status.tackleDamage;
     }

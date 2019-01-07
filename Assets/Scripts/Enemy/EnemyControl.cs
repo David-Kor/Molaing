@@ -51,6 +51,7 @@ public class EnemyControl : ObjectControl
     /* 공격당할 때 호출되는 함수 */
     public override void OnHitAttack(AttackSkill _skill)
     {
+        Debug.Log("[ " + name + " ]" + " Take [" + _skill.damage + "] Damage From [ " + _skill.skillCaster.name + " ]");
         aniControl.ShowGetDamage();
         //스탯에 피해량(damage) 정보를 넘김
         status.TakeDamage(_skill.damage);
