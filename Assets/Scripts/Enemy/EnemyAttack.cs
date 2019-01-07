@@ -12,11 +12,11 @@ public class EnemyAttack : MonoBehaviour
     {
         control = GetComponentInParent<EnemyControl>();
         status = GetComponentInParent<EnemyStatus>();
-        tackle = new Tackle();
-        tackle.SetDamage(status.tackleDamage);
+        tackle = gameObject.AddComponent<Tackle>();
         tackle.isKnockBack = true;
-        tackle.knockBackPower = 0.05f;
+        tackle.knockBackPower = status.tackleKnockBackPower;
         tackle.skillCaster = transform.parent.gameObject;
+        tackle.damage = status.tackleDamage;
     }
 
     void OnTriggerStay2D(Collider2D col)
@@ -24,7 +24,7 @@ public class EnemyAttack : MonoBehaviour
         if (col.CompareTag("HitPoint")) {
 
             if (col.transform.parent.CompareTag("Player")) {
-                tackle.attackDirect = control.GetLookDirect();
+                tackle.skillDirection = control.GetLookDirection();
                 col.GetComponent<HitObject>().OnHitSkill(tackle);
             }
 

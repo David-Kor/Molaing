@@ -2,28 +2,23 @@
 
 public class PlayerAttack : MonoBehaviour
 {
-    public float attackRange;
+    public GameObject basicAttackPrefab;    //기본공격 프리팹
 
-    private PlayerAnimation playerAnimation;
-    private PlayerStatus playerStatus;
-    private BasicAttack basicAttack;    //플레이어의 기본 공격에 대한 정보가 담긴 객체
+    private PlayerAnimation playerAnimation;    //플레이어의 애니메이션 담당 클래스
+    private PlayerStatus playerStatus;              //스탯 클래스
+    private BasicAttack basicAttack;                //기본공격 스킬 정보 클래스
 
-    private Vector2 attackDirect;
-    private float attackTimer;
-    private bool isAttackInput;
+    private Vector2 attackDirection;   //기본공격 방향
+    private float attackTimer;       //기본공격 타이머
+    private bool isAttackInput;     //기본공격 키 입력
 
     void Start()
     {
         playerStatus = transform.parent.GetComponent<PlayerStatus>();
         playerAnimation = transform.parent.GetComponentInChildren<PlayerAnimation>();
-        basicAttack = new BasicAttack();
-        basicAttack.knockBackPower = 0.4f;
-        basicAttack.skillCaster = transform.parent.gameObject;
-        basicAttack.isKnockBack = true;
-        basicAttack.SetDamage(playerStatus.attackDamage);
         attackTimer = 0f;
         isAttackInput = false;
-        attackDirect = Vector2.down;
+        attackDirection = Vector2.down;
     }
 
     void Update()
@@ -42,11 +37,45 @@ public class PlayerAttack : MonoBehaviour
                 //공격 속도가 0인 경우(공격 불가 상태) 실행 안함 / Divid zero 예외처리 겸용
                 if (playerStatus.attackSpeed == 0) { return; }
 
+                //공격 모션 적용
                 attackTimer = 1 / playerStatus.attackSpeed;
                 playerAnimation.SetAttackMotionSpeed(playerStatus.attackSpeed);
                 playerAnimation.StartAttack();
-                attackDirect = playerAnimation.GetPlayerSpriteDirect();
-                OnHitAttack();
+                attackDirection = playerAnimation.GetPlayerSpriteDirection();
+
+                //기본공격 프리팹을 인스턴스화
+                //공격 방향에 따라 범위 회전 및 위치 변경
+                //상하좌우 순서로 transform자식이 각각의 위치에 배치되어있음
+                GameObject newAttack;
+                if (attackDirection == Vector2.up)
+                {
+                    newAttack = Instantiate(basicAttackPrefab, transform.GetChild(0));
+                    newAttack.transform.Rotate(0, 0, 180);
+                }
+                else if (attackDirection == Vector2.down)
+                {
+                    newAttack = Instantiate(basicAttackPrefab, transform.GetChild(1));
+                    newAttack.transform.Rotate(0, 0, 0);
+                }
+                else if (attackDirection == Vector2.left)
+                {
+                    newAttack = Instantiate(basicAttackPrefab, transform.GetChild(2));
+                    newAttack.transform.Rotate(0, 0, -90);
+                }
+                else
+                {
+                    newAttack = Instantiate(basicAttackPrefab, transform.GetChild(3));
+                    newAttack.transform.Rotate(0, 0, 90);
+                }
+
+                //기본공격 정보 설정
+                basicAttack = newAttack.GetComponent<BasicAttack>();
+                basicAttack.skillDirection = attackDirection;
+                basicAttack.knockBackPower += playerStatus.basicKnockBackPower;
+                basicAttack.isKnockBack = true;
+                basicAttack.skillCaster = transform.parent.gameObject;
+                basicAttack.damage += playerStatus.attackDamage;
+                basicAttack.ActivateSkill();
             }
         }
         else { playerAnimation.StopAttack(); }
@@ -59,27 +88,31 @@ public class PlayerAttack : MonoBehaviour
     public void StopAttack() { isAttackInput = false; }
 
 
-    /* 기본 공격 사거리 안에 HitPoint가 있는지 검사 */
-    void OnHitAttack()
+    /* 기본공격 판정 범위 안에 HitPoint가 있는지 검사 */
+    private void OnHitBasicAttack(Collider2D col)
     {
-        float distance = attackRange;
-        if (attackDirect == Vector2.down) { distance += 0.07f; }
-
-        RaycastHit2D[] hit = Physics2D.RaycastAll(transform.position, attackDirect, distance);
-
-        for (int i = 0; i < hit.Length; i++)
+        Collider2D[] hits = new Collider2D[10];
+        ContactFilter2D filter = new ContactFilter2D()
         {
-            //HitPoint가 감지되면 기본 공격에 대한 정보를 넘김
-            if (hit[i].collider != null && hit[i].collider.CompareTag("HitPoint"))
-            {
-                HitObject hitComponent = hit[i].collider.GetComponent<HitObject>();
+            useTriggers = true,     //isTrigger 충돌체도 검사함
+            useLayerMask = true,  //레이어 마스크 사용함
+            //HitPoint 레이어 외 전부 무시
+            layerMask = new LayerMask() { value = (1 << LayerMask.NameToLayer("HitPoint")) }
+        };
 
-                if (hitComponent.GetName() == "Player") { continue; } //플레이어의 HitPoint면 무시
+        int count = Physics2D.OverlapCollider(col, filter, hits);
 
-                basicAttack.attackDirect = attackDirect;
-                hitComponent.OnHitSkill(basicAttack);
-                break;
-            }
+        HitObject hitObj;
+        for (int i = 0; i < count; i++)
+        {
+            hitObj = hits[i].GetComponent<HitObject>();
+            //대상이 Player자신이면 무시
+            if (hitObj.GetName() == "Player") { continue; }
+
+            basicAttack.skillDirection = attackDirection;
+            hitObj.OnHitSkill(basicAttack);
         }
     }
+
+    
 }

@@ -61,6 +61,7 @@
     </Reference>
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Assets\Scripts\Bullet.cs" />
     <Compile Include="Assets\Scripts\CameraControl.cs" />
     <Compile Include="Assets\Scripts\Enemy\EnemyAggro.cs" />
     <Compile Include="Assets\Scripts\Enemy\EnemyAnimation.cs" />
@@ -76,9 +77,16 @@
     <Compile Include="Assets\Scripts\Player\PlayerAttack.cs" />
     <Compile Include="Assets\Scripts\Player\PlayerControl.cs" />
     <Compile Include="Assets\Scripts\Player\PlayerMove.cs" />
+    <Compile Include="Assets\Scripts\Player\PlayerSkill.cs" />
     <Compile Include="Assets\Scripts\Player\PlayerStatus.cs" />
+    <Compile Include="Assets\Scripts\Skills\AffterImage.cs" />
     <Compile Include="Assets\Scripts\Skills\AttackSkill.cs" />
+    <Compile Include="Assets\Scripts\Skills\Avoid.cs" />
+    <Compile Include="Assets\Scripts\Skills\BackStep.cs" />
     <Compile Include="Assets\Scripts\Skills\BasicAttack.cs" />
+    <Compile Include="Assets\Scripts\Skills\BulletDagger.cs" />
+    <Compile Include="Assets\Scripts\Skills\DaggerThrowing.cs" />
+    <Compile Include="Assets\Scripts\Skills\Dash.cs" />
     <Compile Include="Assets\Scripts\Skills\Skill.cs" />
     <Compile Include="Assets\Scripts\Skills\Smite.cs" />
     <Compile Include="Assets\Scripts\Skills\SupportSkill.cs" />

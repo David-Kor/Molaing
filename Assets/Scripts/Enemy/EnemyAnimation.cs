@@ -1,24 +1,24 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
-using DIRECT = EnumInterface.DIRECT_TO_FLOAT;
+using DIRECTION = EnumInterface.DIRECTION_TO_FLOAT;
 
 public class EnemyAnimation : MonoBehaviour
 {
 
     public Animator animator;
 
-    // * 애니메이터의 Direct 속성값에 의해 바라보는 방향이 결정
-    // * Direct는 float형이므로 어느 방향을 의미하는지 가독성을 높이기 위해 상수형 변수 const 사용
-    private const float DOWN = (float)DIRECT.DOWN;
-    private const float UP = (float)DIRECT.UP;
-    private const float LEFT = (float)DIRECT.LEFT;
-    private const float RIGHT = (float)DIRECT.RIGHT;
+    // * 애니메이터의 Direction 속성값에 의해 바라보는 방향이 결정
+    // * Direction는 float형이므로 어느 방향을 의미하는지 가독성을 높이기 위해 상수형 변수 const 사용
+    private const float DOWN = (float)DIRECTION.DOWN;
+    private const float UP = (float)DIRECTION.UP;
+    private const float LEFT = (float)DIRECTION.LEFT;
+    private const float RIGHT = (float)DIRECTION.RIGHT;
 
     private EnemyControl control;
     private SpriteRenderer sprite;
     private GameObject target;
-    private Vector2 directToTarget;
+    private Vector2 directionToTarget;
 
     private bool isGetDamage;
     private float dmgMotionTimer;
@@ -41,16 +41,16 @@ public class EnemyAnimation : MonoBehaviour
 
             if (Mathf.Abs(x) >= Mathf.Abs(y))
             {
-                if (x < 0) { directToTarget = Vector2.left; }
-                else { directToTarget = Vector2.right; }
+                if (x < 0) { directionToTarget = Vector2.left; }
+                else { directionToTarget = Vector2.right; }
             }
             else
             {
-                if (y < 0) { directToTarget = Vector2.down; }
-                else { directToTarget = Vector2.up; }
+                if (y < 0) { directionToTarget = Vector2.down; }
+                else { directionToTarget = Vector2.up; }
             }
 
-            PlayPatrol(directToTarget);
+            PlayPatrol(directionToTarget);
         }
         
         if (isGetDamage)
@@ -70,30 +70,30 @@ public class EnemyAnimation : MonoBehaviour
     public void LookAtTarget(GameObject _target) { target = _target; }
 
 
-    public void PlayPatrol(Vector2 _direct)
+    public void PlayPatrol(Vector2 _direction)
     {
         animator.SetBool("IsWalk", true);
         transform.rotation = Quaternion.Euler(0, 0, 0);
 
-        if (_direct == Vector2.down)
+        if (_direction == Vector2.down)
         {
-            animator.SetFloat("Direct", DOWN);
+            animator.SetFloat("Direction", DOWN);
         }
-        if (_direct == Vector2.up)
+        if (_direction == Vector2.up)
         {
-            animator.SetFloat("Direct", UP);
+            animator.SetFloat("Direction", UP);
         }
-        if (_direct == Vector2.right)
+        if (_direction == Vector2.right)
         {
-            animator.SetFloat("Direct", RIGHT);
+            animator.SetFloat("Direction", RIGHT);
         }
-        if (_direct == Vector2.left)
+        if (_direction == Vector2.left)
         {
             transform.rotation = Quaternion.Euler(0, 180, 0);
-            animator.SetFloat("Direct", LEFT);
+            animator.SetFloat("Direction", LEFT);
         }
 
-        control.SetLookDirect(_direct);
+        control.SetLookDirection(_direction);
     }
 
 
@@ -111,6 +111,6 @@ public class EnemyAnimation : MonoBehaviour
     }
 
 
-    public Vector2 GetDirect() { return directToTarget; }
+    public Vector2 GetDirection() { return directionToTarget; }
 
 }

@@ -1,13 +1,23 @@
-﻿using System.Collections;
-using System.Collections.Generic;
+﻿using System.Collections.Generic;
 using UnityEngine;
 
 /*
  * Sample Child Of Skill
  */
-public class Smite : Skill
+public class Smite : AttackSkill
 {
-    public Smite(string _name) : base(_name)
+    public override void ActivateSkill()
+    {
+        transform.SetParent(null);
+        List<HitObject> hitObjects = OnHitCheck();
+
+        for (int i = 0; i < hitObjects.Count; i++)
+        {
+            hitObjects[i].OnHitSkill(this);
+        }
+    }
+
+    public override void ReleaseSkill()
     {
     }
 }

@@ -8,7 +8,7 @@ TagManager:
   - HitPoint
   - Enemy
   - FieldObject
-  - Item DataBase
+  - Skill
   layers:
   - Default
   - TransparentFX
@@ -20,7 +20,7 @@ TagManager:
   - 
   - Player
   - Enemy
-  - 
+  - HitPoint
   - 
   - 
   - 
@@ -49,6 +49,9 @@ TagManager:
   - name: Default
     uniqueID: 0
     locked: 0
+  - name: Effect
+    uniqueID: 3996582121
+    locked: 0
   - name: UI
-    uniqueID: 2105318971
+    uniqueID: 1252071099
     locked: 0

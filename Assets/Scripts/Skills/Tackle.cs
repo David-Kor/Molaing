@@ -1,7 +1,17 @@
-﻿using System.Collections;
-using System.Collections.Generic;
-using UnityEngine;
+﻿
+public class Tackle : AttackSkill
+{
+    void Awake()
+    {
+        skillName = "Tackle";
+        effects = null;
+    }
 
-public class Tackle : AttackSkill {
-    public Tackle(string _name = "Tackle") : base(_name) { }
+    public override void ActivateSkill()
+    {
+    }
+
+    public override void ReleaseSkill()
+    {
+    }
 }

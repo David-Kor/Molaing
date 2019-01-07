@@ -35,25 +35,17 @@ public class UI_Controller : MonoBehaviour {
     // Update is called once per frame
     void Update()
     {
-        if (Input.GetKeyDown(KeyCode.I) == true)
-        {
-            Control_Inventory();
-        }
-        else
-        {
-            bInventory = true;  //키가 눌렸을 때 반복되는 것을 막기 위한 bool 변수
-        }
+        
     }
 
-    void Control_Inventory()
+    public void Control_Inventory(bool i)
     {
-        if (Inventory.activeSelf == false && bInventory == true)
+        if (i == true)
         {
             bInventory = false;
             Inventory.SetActive(true);
         }
-        if (Inventory.activeSelf == true && bInventory == true)
-        {
+        else{
             bInventory = false;
             Inventory.SetActive(false);
         }
