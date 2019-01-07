@@ -10,6 +10,7 @@ public class PlayerControl : ObjectControl
     private PlayerAnimation playerAnimation;
     private PlayerAttack playerAttack;
     private PlayerSkill playerSkill;
+    private UI_Controller ui;
     private Vector2 spriteDirection;  //바라보는 방향
     private Vector2 moveDirection;  //움직이는 방향
     private float axisX;    //수평 입력값 (-1 ~ 1)
@@ -33,6 +34,7 @@ public class PlayerControl : ObjectControl
         playerAnimation = GetComponentInChildren<PlayerAnimation>();
         playerAttack = GetComponentInChildren<PlayerAttack>();
         playerSkill = GetComponentInChildren<PlayerSkill>();
+        ui = Camera.main.GetComponent<UI_Controller>();
         moveDirection = Vector2.zero;
         spriteDirection = Vector2.down;
         firstDirection = Vector2.zero;
@@ -48,21 +50,7 @@ public class PlayerControl : ObjectControl
         if (CheckInventoryKeyInput())
         {
             inventoryActive = !inventoryActive;
-
-            if (inventoryActive)
-            {
-                Debug.Log("인벤토리 활성화");
-                /*
-                 * 인벤토리 창 활성화 함수 호출할 것
-                 */
-            }
-            else
-            {
-                Debug.Log("인벤토리 비활성화");
-                /*
-                 * 인벤토리 창 비활성화 함수 호출할 것
-                 */
-            }
+            ui.Control_Inventory(inventoryActive);
         }
 
         if (!inventoryActive)
