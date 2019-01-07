@@ -24,11 +24,14 @@ public class PlayerControl : ObjectControl
     private int skillIndex;              //스킬 입력 인덱스(1~4)
     private bool isDelay;              //딜레이 상태
 
+    private bool controllable;
+
     void Start()
     {
         inventoryActive = false;
         isDelay = false;
         isAttackable = true;
+        controllable = true;
         status = GetComponent<PlayerStatus>();
         playerMove = GetComponent<PlayerMove>();
         playerAnimation = GetComponentInChildren<PlayerAnimation>();
@@ -39,6 +42,7 @@ public class PlayerControl : ObjectControl
         spriteDirection = Vector2.down;
         firstDirection = Vector2.zero;
 
+        TakeEXP(0f);
         //플레이어와 적 간의 물리적 충돌 무시 (밀림현상 방지)
         Physics2D.IgnoreLayerCollision(LayerMask.NameToLayer("Player"), LayerMask.NameToLayer("Enemy"), true);
     }
@@ -46,6 +50,9 @@ public class PlayerControl : ObjectControl
 
     void Update()
     {
+        //조작키(Control)가 블록 되어있으면 동작 안함
+        if (controllable == false) { return; }
+
         //인벤토리 키 입력 확인
         if (CheckInventoryKeyInput())
         {
@@ -280,6 +287,7 @@ public class PlayerControl : ObjectControl
         //무적 상태에 있으면 공격받지 않음
         if (!isAttackable) { return; }
 
+        Debug.Log("[ " + name + " ]" + " Take [" + _skill.damage + "] Damage From [ " + _skill.skillCaster.name + " ]");
         SetInvincibleTime(status.gracePeriod);
         playerAnimation.ShowGetDamage();
         //스탯에 피해량(damage) 정보를 넘김
@@ -311,7 +319,8 @@ public class PlayerControl : ObjectControl
     /* 경험치 획득 */
     public void TakeEXP(float exp)
     {
-        status.currentEXP += exp;
+        status.EXP_Up(exp);
+        ui.Exp(status.currentEXP, status.requireEXP, status.level);
         Debug.Log("경험치 획득 : " + exp);
     }
 
@@ -330,4 +339,9 @@ public class PlayerControl : ObjectControl
     public PlayerMove GetPlayerMove() { return playerMove; }
     public PlayerAnimation GetPlayerAnimation() { return playerAnimation; }
     public PlayerStatus GetPlayerStatus() { return status; }
+
+    /* 조작키 입력을 막음 */
+    public void BlockControlInput() { controllable = false; }
+    /* 조작키 입력을 허용 */
+    public void UnblockControlInput() { controllable = true; }
 }

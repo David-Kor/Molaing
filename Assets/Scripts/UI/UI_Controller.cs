@@ -55,4 +55,6 @@ public class UI_Controller : MonoBehaviour {
         INT.text = Player.GetComponentInChildren<PlayerStatus>().intelligence.ToString();
 
     }
+
+    public void Exp(float a, float b, int level) { }
 }

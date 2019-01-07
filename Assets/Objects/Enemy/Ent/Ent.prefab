@@ -312,19 +312,17 @@ MonoBehaviour:
   objName: Ent
   level: 1
   maxHP: 30
-  maxMP: 0
   currentHP: 0
-  currentMP: 0
   strength: 0
   agility: 0
   intelligence: 10
   attackDamage: 1
   attackSpeed: 0.7
   moveSpeed: 0.5
+  knockBackPower: 1
   knockBackResistance: 0
   hitStunResistance: 0
   tackleDamage: 10
-  tackleKnockBackPower: 1
   attackRange: 0.05
   autoAggro: 100
   exp: 10

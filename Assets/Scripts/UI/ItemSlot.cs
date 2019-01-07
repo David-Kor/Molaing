@@ -4,9 +4,8 @@ using UnityEngine;
 
 public class ItemSlot : MonoBehaviour
 {
-    
-    public GameObject[] slots = new GameObject[49];
-    public List<Item> item = new List<Item>();
+    public GameObject[] slots;
+    public List<Item> item;
     public itemDateBase db;
     public GUISkin skin;
     private Item draggedItem;
@@ -18,7 +17,9 @@ public class ItemSlot : MonoBehaviour
     
     void Start()
     {
-        Debug.Log(gameObject);
+
+        slots = new GameObject[49];
+        item = new List<Item>();
         for(int i = 0; i < 49; i++)
         {
             slots[i] = gameObject.transform.GetChild(0).GetChild(i).gameObject;
@@ -51,11 +52,6 @@ public class ItemSlot : MonoBehaviour
     {
         Event e = Event.current;
         
-        int xMin = 575;
-        int yMin = 170;
-
-        int xMax = xMin + 55 * 6;
-        int yMax = yMin + 55 * 6;
     }
 
     string CreateTooltip(Item item)

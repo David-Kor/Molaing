@@ -392,19 +392,17 @@ MonoBehaviour:
   objName: Player
   level: 1
   maxHP: 100
-  maxMP: 100
-  currentHP: 0
-  currentMP: 0
+  currentHP: 100
   strength: 5
   agility: 5
   intelligence: 5
   attackDamage: 5
   attackSpeed: 1.8
   moveSpeed: 1.5
+  knockBackPower: 2
   knockBackResistance: 0
   hitStunResistance: 0
   gracePeriod: 0.8
-  basicKnockBackPower: 2
   currentEXP: 0
   requireEXP: 50
   statusPoint: 0
