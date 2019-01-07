@@ -84,6 +84,12 @@
      <Compile Include="Assets\Scripts\Skills\SupportSkill.cs" />
      <Compile Include="Assets\Scripts\Skills\Tackle.cs" />
      <Compile Include="Assets\Scripts\SpriteOrder.cs" />
+     <Compile Include="Assets\Scripts\UI\InGameStatus.cs" />
+     <Compile Include="Assets\Scripts\UI\InventorySystem.cs" />
+     <Compile Include="Assets\Scripts\UI\Item.cs" />
+     <Compile Include="Assets\Scripts\UI\itemDateBase.cs" />
+     <Compile Include="Assets\Scripts\UI\ItemSlot.cs" />
+     <Compile Include="Assets\Scripts\UI\UI_Controller.cs" />
      <None Include="Assets\Sprite Pack\Tap and Fly\Readme.txt" />
  <Reference Include="UnityEditor.StandardEvents">
  <HintPath>C:/Users/David/Documents/공부자료/Unity/Molaing/Library/ScriptAssemblies/UnityEditor.StandardEvents.dll</HintPath>
