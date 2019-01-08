@@ -31,7 +31,7 @@ public class Item
 
     }
 
-    public Item(string name, int id, string desc, ItemType type, int Max, int amount =1)
+    public Item(string name, int id, string desc, ItemType type, int Max, int amount = 1)
     // 아이템의 필요한 속성을 모두 위에 적을 것.
     // 아이템 추가는 itemDataBase에서 할 것.
     {

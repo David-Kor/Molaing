@@ -14,7 +14,8 @@ public class UI_Controller : MonoBehaviour {
     Text STR;
     Text AGI;
     Text INT;
-    Text Point;
+    public Text Point;
+    public int point = 0;
 
     bool bInventory;
 	// Use this for initialization
@@ -63,6 +64,5 @@ public class UI_Controller : MonoBehaviour {
         STR.text = Player.GetComponentInChildren<PlayerStatus>().strength.ToString();
         AGI.text = Player.GetComponentInChildren<PlayerStatus>().agility.ToString();
         INT.text = Player.GetComponentInChildren<PlayerStatus>().intelligence.ToString();
-
     }
 }

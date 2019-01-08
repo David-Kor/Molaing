@@ -8,7 +8,7 @@ public class InGameStatus : MonoBehaviour {
     Text HP_Text;
     Image Exp_bar;
     Image HP_Bar;
-
+    UI_Controller uI_Controller;
     PlayerStatus Player;
 
     float MAX_HP;
@@ -21,8 +21,10 @@ public class InGameStatus : MonoBehaviour {
 
         HP_Bar = transform.GetChild(0).GetChild(1).GetComponent<Image>();
         Exp_bar = transform.GetChild(1).GetComponent<Image>();
+
         Player = GameObject.Find("Player").gameObject.GetComponentInChildren<PlayerStatus>();
-	}
+        uI_Controller = gameObject.transform.parent.parent.GetComponentInChildren<UI_Controller>();
+    }
 	
 	// Update is called once per frame
 	void Update () {
@@ -33,13 +35,21 @@ public class InGameStatus : MonoBehaviour {
 
     void Level()
     {
-        if(level.text != Player.level.ToString()) { level.text = Player.level.ToString(); }
+        if(level.text != Player.level.ToString())
+        {
+            level.text = Player.level.ToString();
+            if (int.Parse(level.text) > 1)
+            {
+                uI_Controller.point += 5;       //레벨이 오르면 UI_Controller.cs의 Point를 5 증가시킴.
+                                                //레벨마다 오르는 Point는 여기서 설정.
+                uI_Controller.Point.text = uI_Controller.point.ToString();
+            }
+        }
     }
     void HP()
     {
         HP_Text.text = Player.currentHP + "/" + Player.maxHP;
-        HP_Bar.fillAmount = (float)(Player.currentHP/Player.maxHP);
-        Debug.Log(HP_Bar.fillAmount);
+        HP_Bar.fillAmount = (float)Player.currentHP / (float)Player.maxHP;
     }
 
     void EXP()
