@@ -61,14 +61,14 @@ MonoBehaviour:
   delayCancelable: 0
   isOnHead: 1
   skillDirection: {x: 0, y: 0}
-  skill_IMG: {fileID: 21300000, guid: 2052f0f9c5f95a046b3840aa5c09cc12, type: 3}
+  skill_IMG: {fileID: 21300000, guid: cfe5140ae2811fe458805e07f3de2fba, type: 3}
   effects:
-  - {fileID: 21300000, guid: 2052f0f9c5f95a046b3840aa5c09cc12, type: 3}
-  - {fileID: 21300000, guid: d2df970b20d2e2f4ba4f98b1b5dd9104, type: 3}
-  - {fileID: 21300000, guid: 7165ed21094c94d40a4b98fcfb731b84, type: 3}
-  - {fileID: 21300000, guid: ac57116fcda346d4b9d043d9e688245a, type: 3}
-  - {fileID: 21300000, guid: 5998a853310a5ef4b8368ea05cb64678, type: 3}
-  - {fileID: 21300000, guid: 4b725ff242d99c843a6a0e32d37bbea3, type: 3}
+  - {fileID: 21300000, guid: 8e5f2c508262b794eae65753c5c6b945, type: 3}
+  - {fileID: 21300000, guid: ca701bbe2cb57b04ab96f7fe2d7ac086, type: 3}
+  - {fileID: 21300000, guid: b7a2980ea31f1c94da94cfe95f8c82cf, type: 3}
+  - {fileID: 21300000, guid: 7e9b0c52a94acf64e88da0f9f9067fd1, type: 3}
+  - {fileID: 21300000, guid: 18759da1238a73446a77a1a455885f26, type: 3}
+  - {fileID: 21300000, guid: 006dfb383995af8439c9e05a301ba21e, type: 3}
   frameTime: 0.05
   isLoop: 0
   lifeTime: 0

@@ -494,6 +494,12 @@ Prefab:
       propertyPath: m_RootOrder
       value: 1
       objectReference: {fileID: 0}
+    - target: {fileID: 114730042164526702, guid: 7a558733239cec84d8fb7da029e6359f,
+        type: 2}
+      propertyPath: skill_List.Array.data[0]
+      value: 
+      objectReference: {fileID: 1338790028357304, guid: 197ffd10dd80cd642bbd6bb44e312dfb,
+        type: 2}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 7a558733239cec84d8fb7da029e6359f, type: 2}
   m_IsPrefabAsset: 0

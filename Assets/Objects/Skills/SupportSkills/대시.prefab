@@ -61,7 +61,7 @@ MonoBehaviour:
   delayCancelable: 0
   isOnHead: 1
   skillDirection: {x: 0, y: 0}
-  skill_IMG: {fileID: 0}
+  skill_IMG: {fileID: 21300000, guid: 559c67659312949469c635e69abba211, type: 3}
   effects: []
   frameTime: 0
   isLoop: 1
