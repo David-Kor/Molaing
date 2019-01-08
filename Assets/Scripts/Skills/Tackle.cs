@@ -1,7 +1,7 @@
 ﻿
 public class Tackle : AttackSkill
 {
-    void Awake()
+    void Start()
     {
         skillName = "Tackle";
         effects = null;

@@ -21,7 +21,7 @@ GameObject:
   - component: {fileID: 4343673970371642}
   - component: {fileID: 114465660671288942}
   m_Layer: 0
-  m_Name: DaggerThrowing
+  m_Name: "\uB2E8\uAC80 \uD22C\uCC99"
   m_TagString: Skill
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -51,7 +51,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 9806290580bfbeb489047500a66e91a0, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  skillName: Dagger Throwing
+  skillName: "\uB2E8\uAC80 \uD22C\uCC99"
   skillCaster: {fileID: 0}
   maxHitCount: 1
   coolDown: 1
@@ -66,8 +66,8 @@ MonoBehaviour:
   isLoop: 1
   lifeTime: 0.3
   isKnockBack: 1
-  knockBackPower: 0.5
+  knockBackPower: 0.2
   damage: 5
-  daggerSpeed: 3
+  daggerSpeed: 2.35
   bullet_dagger: {fileID: 1090007511327314, guid: 3657fb429908e4548b51341151b926df,
     type: 2}

@@ -325,7 +325,7 @@ MonoBehaviour:
   tackleDamage: 10
   attackRange: 0.05
   autoAggro: 100
-  exp: 10
+  gainableEXP: 10
 --- !u!114 &114497256265949160
 MonoBehaviour:
   m_ObjectHideFlags: 1

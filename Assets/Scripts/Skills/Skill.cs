@@ -23,7 +23,7 @@ public abstract class Skill : MonoBehaviour
     private float l_timer;   //지속시간 타이머
     private int index;       //현재 출력될 이펙트 이미지
 
-    void Start()
+    void Awake()
     {
         l_timer = 0f;
         e_timer = frameTime;

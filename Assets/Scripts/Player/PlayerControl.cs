@@ -280,7 +280,11 @@ public class PlayerControl : ObjectControl
         }
     }
 
-    
+
+    /* 이동 방향을 반환 */
+    public Vector2 GetMoveDirection() { return moveDirection; }
+
+
     /* 공격 받을 때 호출되는 함수 */
     public override void OnHitAttack(AttackSkill _skill)
     {

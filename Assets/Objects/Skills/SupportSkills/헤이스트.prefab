@@ -20,9 +20,9 @@ GameObject:
   m_Component:
   - component: {fileID: 4463898537309804}
   - component: {fileID: 212506023120852224}
-  - component: {fileID: 114221459249191212}
+  - component: {fileID: 114426500705134768}
   m_Layer: 0
-  m_Name: Avoid
+  m_Name: "\uD5E4\uC774\uC2A4\uD2B8"
   m_TagString: Skill
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -41,7 +41,7 @@ Transform:
   m_Father: {fileID: 0}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!114 &114221459249191212
+--- !u!114 &114426500705134768
 MonoBehaviour:
   m_ObjectHideFlags: 1
   m_CorrespondingSourceObject: {fileID: 0}
@@ -49,30 +49,27 @@ MonoBehaviour:
   m_GameObject: {fileID: 1338790028357304}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 2117d529c7aa8eb44a5f0553f3038a19, type: 3}
+  m_Script: {fileID: 11500000, guid: 8eb868d5eff102e4db7febd81b80d27a, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  skillName: Dash
+  skillName: "\uD5E4\uC774\uC2A4\uD2B8"
   skillCaster: {fileID: 0}
   maxHitCount: 0
-  coolDown: 5
-  delay: 0.05
+  coolDown: 15
+  delay: 0
   usableOnMove: 1
   delayCancelable: 0
   isOnHead: 1
   skillDirection: {x: 0, y: 0}
-  skill_IMG: {fileID: 21300000, guid: 2052f0f9c5f95a046b3840aa5c09cc12, type: 3}
-  effects:
-  - {fileID: 21300000, guid: 2052f0f9c5f95a046b3840aa5c09cc12, type: 3}
-  - {fileID: 21300000, guid: d2df970b20d2e2f4ba4f98b1b5dd9104, type: 3}
-  - {fileID: 21300000, guid: 7165ed21094c94d40a4b98fcfb731b84, type: 3}
-  - {fileID: 21300000, guid: ac57116fcda346d4b9d043d9e688245a, type: 3}
-  - {fileID: 21300000, guid: 5998a853310a5ef4b8368ea05cb64678, type: 3}
-  - {fileID: 21300000, guid: 4b725ff242d99c843a6a0e32d37bbea3, type: 3}
-  frameTime: 0.05
-  isLoop: 0
-  lifeTime: 0
-  value: 14
+  skill_IMG: {fileID: 0}
+  effects: []
+  frameTime: 0
+  isLoop: 1
+  lifeTime: 10
+  intervalTime: 0.03
+  durationTime: 0.1
+  effectObj: {fileID: 1323501045341022, guid: 9b7a027b77074534eaf3eb18fc83afbc, type: 2}
+  value: 0.5
 --- !u!212 &212506023120852224
 SpriteRenderer:
   m_ObjectHideFlags: 1
@@ -108,14 +105,14 @@ SpriteRenderer:
   m_SortingLayerID: -298385175
   m_SortingLayer: 1
   m_SortingOrder: 0
-  m_Sprite: {fileID: 21300000, guid: 2052f0f9c5f95a046b3840aa5c09cc12, type: 3}
+  m_Sprite: {fileID: 0}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
   m_FlipX: 0
   m_FlipY: 0
   m_DrawMode: 0
-  m_Size: {x: 0.14117648, y: 0.2764706}
+  m_Size: {x: 0.14705883, y: 0.2764706}
   m_AdaptiveModeThreshold: 0.5
   m_SpriteTileMode: 0
-  m_WasSpriteAssigned: 1
+  m_WasSpriteAssigned: 0
   m_MaskInteraction: 0
   m_SpriteSortPoint: 0

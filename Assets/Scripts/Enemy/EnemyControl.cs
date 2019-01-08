@@ -78,7 +78,7 @@ public class EnemyControl : ObjectControl
     {
         if (killer.CompareTag("Player"))
         {
-            killer.GetComponent<PlayerControl>().TakeEXP(status.exp);
+            killer.GetComponent<PlayerControl>().TakeEXP(status.gainableEXP);
         }
         Destroy(gameObject);
     }

@@ -77,12 +77,15 @@
      <Compile Include="Assets\Scripts\Skills\BackStep.cs" />
      <Compile Include="Assets\Scripts\Skills\BasicAttack.cs" />
      <Compile Include="Assets\Scripts\Skills\BulletDagger.cs" />
+     <Compile Include="Assets\Scripts\Skills\BulletTanGang.cs" />
      <Compile Include="Assets\Scripts\Skills\DaggerThrowing.cs" />
      <Compile Include="Assets\Scripts\Skills\Dash.cs" />
+     <Compile Include="Assets\Scripts\Skills\Haste.cs" />
      <Compile Include="Assets\Scripts\Skills\Skill.cs" />
      <Compile Include="Assets\Scripts\Skills\Smite.cs" />
      <Compile Include="Assets\Scripts\Skills\SupportSkill.cs" />
      <Compile Include="Assets\Scripts\Skills\Tackle.cs" />
+     <Compile Include="Assets\Scripts\Skills\TanGang.cs" />
      <Compile Include="Assets\Scripts\SpriteOrder.cs" />
      <Compile Include="Assets\Scripts\UI\InGameStatus.cs" />
      <Compile Include="Assets\Scripts\UI\InventorySystem.cs" />

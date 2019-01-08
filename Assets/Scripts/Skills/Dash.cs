@@ -7,6 +7,12 @@ public class Dash : SupportSkill
     public GameObject effectObj;
 
     private float timer;
+    private GameObject effectClone;
+
+    void Start()
+    {
+        timer = 0;
+    }
 
     void Update()
     {
@@ -15,7 +21,9 @@ public class Dash : SupportSkill
         if (timer >= 0.03f)
         {
             timer = 0;
-            Instantiate(effectObj).transform.position = transform.position;
+            effectClone = Instantiate(effectObj);
+            effectClone.transform.position = transform.position;
+            effectClone.GetComponent<AffterImage>().Init(skillCaster.GetComponent<SpriteRenderer>(), null, 0);
         }
     }
 
