@@ -16,6 +16,12 @@ public class Dash : SupportSkill
 
     void Update()
     {
+        if (!f_delayEnd)
+        {
+            WaitFirstDelay();
+            return;
+        }
+
         timer += Time.deltaTime;
         SkillProduction();
         if (timer >= 0.03f)

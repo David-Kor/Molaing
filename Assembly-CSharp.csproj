@@ -80,6 +80,7 @@
      <Compile Include="Assets\Scripts\Skills\BulletTanGang.cs" />
      <Compile Include="Assets\Scripts\Skills\DaggerThrowing.cs" />
      <Compile Include="Assets\Scripts\Skills\Dash.cs" />
+     <Compile Include="Assets\Scripts\Skills\FloatingSword.cs" />
      <Compile Include="Assets\Scripts\Skills\Haste.cs" />
      <Compile Include="Assets\Scripts\Skills\Skill.cs" />
      <Compile Include="Assets\Scripts\Skills\Smite.cs" />

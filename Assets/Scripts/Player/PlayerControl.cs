@@ -116,6 +116,7 @@ public class PlayerControl : ObjectControl
             {
                 if (skillIndex >= 0 && playerSkill.GetSkill(skillIndex).delayCancelable)
                 {
+                    playerSkill.CancelSpell();
                     playerSkill.UseSkill(skillIndex, spriteDirection);
                 }
             }
@@ -348,4 +349,11 @@ public class PlayerControl : ObjectControl
     public void BlockControlInput() { controllable = false; }
     /* 조작키 입력을 허용 */
     public void UnblockControlInput() { controllable = true; }
+
+
+    /* 쿨타임 활성화 */
+    public override void CoolDownActive(int _index, float _value)
+    {
+        playerSkill.CoolDownTimerActive(_index, _value);
+    }
 }

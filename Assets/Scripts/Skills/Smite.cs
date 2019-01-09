@@ -9,7 +9,7 @@ public class Smite : AttackSkill
     public override void ActivateSkill()
     {
         transform.SetParent(null);
-        List<HitObject> hitObjects = OnHitCheck();
+        List<HitObject> hitObjects = OnHitCheck(GetComponent<Collider2D>());
 
         for (int i = 0; i < hitObjects.Count; i++)
         {

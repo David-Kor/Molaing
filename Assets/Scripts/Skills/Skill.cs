@@ -8,7 +8,8 @@ public abstract class Skill : MonoBehaviour
     public GameObject skillCaster;   //시전자
     public int maxHitCount = 10;    //최대 Hit 대상의 수
     public float coolDown;             //쿨타임
-    public float delay;                   //스킬 딜레이(후딜)
+    public float firstDelay;              //시전시간(선딜)
+    public float delay;                   //스킬 딜레이(선딜+후딜) -> 스킬 키를 누른 순간부터의 총 딜레이
     public bool usableOnMove;      //이동 중 사용 가능한 스킬
     public bool delayCancelable;     //딜레이를 캔슬하여 사용할 수 있는 스킬
     public bool isOnHead;             //자기 자신을 중심으로한 범위 스킬
@@ -19,20 +20,31 @@ public abstract class Skill : MonoBehaviour
     public bool isLoop;                 //이펙트 루프
     public float lifeTime;               //(루프 사용 시)스킬 지속시간
 
-    private float e_timer;  //이펙트 타이머
-    private float l_timer;   //지속시간 타이머
-    private int index;       //현재 출력될 이펙트 이미지
+    protected bool f_delayEnd;
+    protected int skillIndex;
+
+    private float e_timer;     //이펙트 타이머
+    private float l_timer;      //지속시간 타이머
+    private int img_index;    //현재 출력될 이펙트 이미지
+    private SpriteRenderer spriteRenderer;
 
     void Awake()
     {
         l_timer = 0f;
         e_timer = frameTime;
-        index = 0;
-
+        img_index = 0;
+        f_delayEnd = false;
+        spriteRenderer = GetComponent<SpriteRenderer>();
+        if (spriteRenderer != null) { spriteRenderer.enabled = false; }
     }
 
     void Update()
     {
+        if (!f_delayEnd)
+        {
+            WaitFirstDelay();
+            return;
+        }
         SkillProduction();
     }
 
@@ -53,28 +65,28 @@ public abstract class Skill : MonoBehaviour
                 Destroy(gameObject);
             }
             //스킬 이펙트를 처음부터 반복
-            else if (index >= effects.Length) { index = 0; }
+            else if (img_index >= effects.Length) { img_index = 0; }
         }
 
         //frameTime 시간에 한 번씩 이펙트 이미지 변경
         if ((e_timer >= frameTime))
         {
             //Loop 미사용 시 이펙트가 끝나면 스킬 소멸
-            if (!isLoop && index >= effects.Length)
+            if (!isLoop && img_index >= effects.Length)
             {
                 ReleaseSkill();
                 Destroy(gameObject);
             }
 
-            if ((effects.Length > 0) && (index < effects.Length)) { GetComponent<SpriteRenderer>().sprite = effects[index]; }
+            if ((effects.Length > 0) && (img_index < effects.Length)) { spriteRenderer.sprite = effects[img_index]; }
             e_timer = 0;
-            index++;
+            img_index++;
         }
     }
 
 
     /* 스킬 범위 내 대상 체크 */
-    protected List<HitObject> OnHitCheck()
+    protected List<HitObject> OnHitCheck(Collider2D collider)
     {
         List<HitObject> hitObjects = new List<HitObject>();
         Collider2D[] hits = new Collider2D[maxHitCount];
@@ -88,7 +100,7 @@ public abstract class Skill : MonoBehaviour
         };
 
         //오브젝트가 가진 Collider2D의 충돌검사
-        int count = Physics2D.OverlapCollider(GetComponent<Collider2D>(), filter, hits);
+        int count = Physics2D.OverlapCollider(collider, filter, hits);
 
         HitObject hitObj;
         for (int i = 0; i < count; i++)
@@ -103,6 +115,39 @@ public abstract class Skill : MonoBehaviour
 
         return hitObjects;
     }
+
+
+    /* 스킬 시전시간(선딜)을 기다림 */
+    protected void WaitFirstDelay()
+    {
+        l_timer += Time.deltaTime;
+        if (l_timer >= firstDelay)
+        {
+            l_timer = 0f;
+            f_delayEnd = true;
+            if (spriteRenderer != null) { spriteRenderer.enabled = true; }
+            CoolDownStart();
+        }
+    }
+
+
+    protected void CoolDownStart()
+    {
+        skillCaster.GetComponent<ObjectControl>().CoolDownActive(skillIndex, coolDown);
+    }
+
+
+    /* 스킬 시전을 취소 -> 이미 시전이 됐다면 취소불가 */
+    public void CancelFirstDelay()
+    {
+        if (f_delayEnd) { return; }
+
+        CoolDownStart();
+        Destroy(gameObject);
+    }
+
+
+    public void SetSkillIndex(int _index) { skillIndex = _index; }
 
 
     /* 스킬이 시전될 때 동작 */

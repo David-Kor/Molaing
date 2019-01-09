@@ -20,6 +20,12 @@ public class Haste : SupportSkill
 
     void Update()
     {
+        if (!f_delayEnd)
+        {
+            WaitFirstDelay();
+            return;
+        }
+
         SkillProduction();
         timer += Time.deltaTime;
 

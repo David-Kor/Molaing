@@ -82,4 +82,11 @@ public class EnemyControl : ObjectControl
         }
         Destroy(gameObject);
     }
+
+
+    /* 쿨타임 활성화 */
+    public override void CoolDownActive(int _index, float _value)
+    {
+        /* 추후 추가 예정 */
+    }
 }
