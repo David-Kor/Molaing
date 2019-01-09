@@ -95,6 +95,7 @@
     <Compile Include="Assets\Scripts\UI\InGameStatus.cs" />
     <Compile Include="Assets\Scripts\UI\Inventory.cs" />
     <Compile Include="Assets\Scripts\UI\Inventory_Slot.cs" />
+    <Compile Include="Assets\Scripts\UI\Item Drag.cs" />
     <Compile Include="Assets\Scripts\UI\Item.cs" />
     <Compile Include="Assets\Scripts\UI\itemDateBase.cs" />
     <Compile Include="Assets\Scripts\UI\PickupItem.cs" />

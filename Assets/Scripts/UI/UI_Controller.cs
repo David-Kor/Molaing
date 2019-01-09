@@ -21,6 +21,7 @@ public class UI_Controller : MonoBehaviour {
 	// Use this for initialization
 	void Awake()
     {
+        bInventory = false;
         Player = GameObject.Find("Player").gameObject;
 
         Inventory = transform.GetChild(0).GetChild(1).gameObject; //Main Camera/Canvas/Inventory
