@@ -392,19 +392,17 @@ MonoBehaviour:
   objName: Player
   level: 1
   maxHP: 100
-  maxMP: 100
-  currentHP: 0
-  currentMP: 0
+  currentHP: 100
   strength: 5
   agility: 5
   intelligence: 5
   attackDamage: 5
   attackSpeed: 1.8
   moveSpeed: 1.5
+  knockBackPower: 2
   knockBackResistance: 0
   hitStunResistance: 0
   gracePeriod: 0.8
-  basicKnockBackPower: 2
   currentEXP: 0
   requireEXP: 50
   statusPoint: 0
@@ -444,9 +442,9 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   skill_List:
-  - {fileID: 1301543405181514, guid: e61eb787bd6768340a62cf8c4beadeab, type: 2}
-  - {fileID: 1057665496507564, guid: 20f512dbb78c5f64eb84109f69909b6f, type: 2}
   - {fileID: 1338790028357304, guid: 617243720105fca448a740948448c949, type: 2}
+  - {fileID: 1057665496507564, guid: e1e00485915983e4a80e45a2281042ab, type: 2}
+  - {fileID: 1301543405181514, guid: e61eb787bd6768340a62cf8c4beadeab, type: 2}
   - {fileID: 1338790028357304, guid: dfde64a2c8920a740a5e1d03d31f4572, type: 2}
 --- !u!114 &114992375830163696
 MonoBehaviour:

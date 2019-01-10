@@ -4,7 +4,7 @@ public class BackStep : SupportSkill
 {
     public float value;
 
-    void Awake()
+    void Start()
     {
         GetComponent<SpriteRenderer>().sprite = effects[0];
     }

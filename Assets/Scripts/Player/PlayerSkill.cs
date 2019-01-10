@@ -41,6 +41,8 @@ public class PlayerSkill : MonoBehaviour
         }
     }
 
+
+    /* 스킬 하나를 사용 */
     public void UseSkill(int index, Vector2 direction)
     {
         //스킬이 없으면 사용 불가
@@ -72,17 +74,44 @@ public class PlayerSkill : MonoBehaviour
 
         Skill skill = skillObj.GetComponent<Skill>();
         skill.skillCaster = playerControl.gameObject;
+        skill.SetSkillIndex(index);
         skill.skillDirection = direction;
         if (skill.isOnHead) { skillObj.transform.position = transform.position; }   //스킬 범위가 자신의 위치가 중심인 경우
         skill.ActivateSkill();
-        coolTimerList[index] = skill.coolDown;
         skillDelay = skill.delay;
         playerControl.SetIsDelay(true);
     }
 
+
+    /* 플레이어가 가진 스킬 하나를 반환 */
     public Skill GetSkill(int index)
     {
         if (index < 0 || skill_List.Length < index) { return null; }
         return skill_List[index].GetComponent<Skill>();
+    }
+
+
+    /* 시전중인 스킬을 찾아서 취소시킴 */
+    public void CancelSpell()
+    {
+        int i, j;
+        Skill[] skills;
+
+        for (i = 0; i < transform.childCount; i++)
+        {
+            skills = GetComponentsInChildren<Skill>();
+            //시전중인 스킬이 없으면
+            if (skills == null) { continue; }
+
+            for (j = 0; j < skills.Length; j++)
+            {
+                skills[j].CancelFirstDelay();
+            }
+        }
+    }
+
+    public void CoolDownTimerActive(int _index, float _value)
+    {
+        coolTimerList[_index] = _value;
     }
 }

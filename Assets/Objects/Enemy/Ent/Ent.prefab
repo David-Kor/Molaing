@@ -147,7 +147,7 @@ Transform:
   m_PrefabInternal: {fileID: 100100000}
   m_GameObject: {fileID: 1378976376931740}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0.648, y: 0, z: 0}
+  m_LocalPosition: {x: 0.7, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children:
   - {fileID: 4962163627479608}
@@ -312,22 +312,20 @@ MonoBehaviour:
   objName: Ent
   level: 1
   maxHP: 30
-  maxMP: 0
   currentHP: 0
-  currentMP: 0
   strength: 0
   agility: 0
   intelligence: 10
   attackDamage: 1
   attackSpeed: 0.7
   moveSpeed: 0.5
+  knockBackPower: 1
   knockBackResistance: 0
   hitStunResistance: 0
   tackleDamage: 10
-  tackleKnockBackPower: 1
   attackRange: 0.05
   autoAggro: 100
-  exp: 10
+  gainableEXP: 10
 --- !u!114 &114497256265949160
 MonoBehaviour:
   m_ObjectHideFlags: 1

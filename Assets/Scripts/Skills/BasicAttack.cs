@@ -5,12 +5,13 @@
  */
 
 using System.Collections.Generic;
+using UnityEngine;
 
 public class BasicAttack : AttackSkill
 {
     public override void ActivateSkill()
     {
-        List<HitObject> hitObjects = OnHitCheck();
+        List<HitObject> hitObjects = OnHitCheck(GetComponent<Collider2D>());
 
         for (int i = 0; i < hitObjects.Count; i++)
         {

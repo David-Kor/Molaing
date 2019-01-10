@@ -140,5 +140,4 @@ public class EnemyMove : MonoBehaviour
         knockBackTimer = DEFAULT_KNOCK_BACK_TIME;
     }
 
-
 }
