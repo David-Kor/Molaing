@@ -4,7 +4,8 @@ using UnityEngine;
 using UnityEngine.UI;
 using UnityEngine.EventSystems;
 
-public class Inventory_Slot : MonoBehaviour {
+public class Inventory_Slot : MonoBehaviour
+{
     public Text itemCount;
     public Image icon;
     public int itemID;
@@ -36,19 +37,7 @@ public class Inventory_Slot : MonoBehaviour {
 
     void Update()
     {
-        if (!Input.GetMouseButtonDown(0))       //좌클릭을 안했을 때 레이캐스트 발생. 저렇게 설정한 이유는 아이템을 드래그 할 때 방해되기 때문.
-        {
-            CastRay();
-            if (target == this.gameObject)  {   Tooltip();  }
-            else {  showTooltip = false;    }
-        }
-        //else
-        //{
-        //    if (target.transform.position == this.transform.position)
-        //    {
-        //        DragItem(this.transform.position);
-        //    }
-        //}
+
     }
 
     void CastRay()
@@ -96,7 +85,7 @@ public class Inventory_Slot : MonoBehaviour {
             showTooltip = true;
             CreateToolTip(itemID);
         }
-        else if(bDragItem == true)
+        else if (bDragItem == true)
         {
             showTooltip = false;
         }
@@ -112,7 +101,7 @@ public class Inventory_Slot : MonoBehaviour {
         icon.sprite = item.itemIcon;    //
         itemID = item.itemID;
         Amount = i;
-        if(item.itemType == Item.ItemType.Use || item.itemType == Item.ItemType.Material)
+        if (item.itemType == Item.ItemType.Use || item.itemType == Item.ItemType.Material)
         {
             if (item.itemAmount > 0) { itemCount.text = i.ToString(); }
             else { RemoveItem(); }      //아이템의 갯수가 0보다 작으면 RemoveItem()을 이용하여 슬롯을 비움.
@@ -141,13 +130,21 @@ public class Inventory_Slot : MonoBehaviour {
         gameObject.transform.GetChild(1).gameObject.SetActive(false);       //아이콘일 표시하는 오브젝트를 비활성화 시켜준다. 안하면 슬롯에 하얀 사각형이 남음.
     }
 
-    public void Drag()
+    public void OnMouseEnter()
     {
-        gameObject.transform.position = Input.mousePosition;
+        if (!Input.GetMouseButtonDown(0))       //좌클릭을 안했을 때 레이캐스트 발생. 저렇게 설정한 이유는 아이템을 드래그 할 때 방해되기 때문.
+        {
+            CastRay();
+            if (target == this.gameObject)
+            {
+                Tooltip();
+            }
+            else { showTooltip = false; }
+        }
     }
 
-    public void DragEnd()
+    public void OnMouseExit()
     {
-       
+        showTooltip = false;
     }
 }

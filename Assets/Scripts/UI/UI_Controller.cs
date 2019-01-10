@@ -47,6 +47,7 @@ public class UI_Controller : MonoBehaviour {
     public void HP(int currentHP, int maxHP)
     {
         InGameStatus.GetComponent<InGameStatus>().HP_Bar(currentHP,maxHP);
+        InGameStatus.GetComponent<InGameStatus>().hpText.text = currentHP + "/" + maxHP;
     }
 
     public void Control_Inventory(bool i)

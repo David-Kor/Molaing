@@ -27,16 +27,13 @@ public abstract class ObjectStatus : MonoBehaviour
     public int knockBackResistance;  //넉백 저항률(KBR)
     public int hitStunResistance;      //피격 시 경직 저항률(HSR)
 
-    void Start()
+    void Awake()
     {
         currentHP = maxHP;
     }
 
 
     /* 공격을 받으면 데미지 수치만큼 현재 hp 감소 */
-    public void TakeDamage(int _dmg)
-    {
-        currentHP -= _dmg;
-    }
+    public abstract void TakeDamage(int _dmg);
 
 }

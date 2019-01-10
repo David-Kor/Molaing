@@ -5,10 +5,9 @@ using UnityEngine.UI;
 
 public class InGameStatus : MonoBehaviour {
     public Text level;
-    Text hpText;
+    public Text hpText;
     public Image expBar;
-    Image hpBar;
-    UI_Controller uI_Controller;
+    public Image hpBar;
     PlayerStatus Player;
 
     float MAX_HP;
@@ -18,12 +17,11 @@ public class InGameStatus : MonoBehaviour {
     void Start () {
         level = transform.GetChild(2).GetChild(0).GetComponent<Text>();
         hpText = transform.GetChild(0).GetChild(2).GetComponent<Text>();   //HP게이지 위에 CurrentHP/MaxHP 형식으로 표시
-
         hpBar = transform.GetChild(0).GetChild(1).GetComponent<Image>();
         expBar = transform.GetChild(1).GetComponent<Image>();
-
         Player = GameObject.Find("Player").gameObject.GetComponentInChildren<PlayerStatus>();
-        uI_Controller = gameObject.transform.parent.parent.GetComponentInChildren<UI_Controller>();
+        level.text = Player.level.ToString();
+        hpText.text = Player.currentHP + "/" + Player.maxHP;
     }
 	
 	// Update is called once per frame

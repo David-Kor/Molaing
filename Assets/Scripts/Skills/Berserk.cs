@@ -4,7 +4,7 @@ using UnityEngine;
 
 public class Berserk : SupportSkill
 {
-    public float costTime;
+    public float costTimeCycle;
     public int costHP;
     public int bonusATK;
     public float bonusASP;
@@ -32,7 +32,7 @@ public class Berserk : SupportSkill
         if (isActSkill)
         {
             timer += Time.deltaTime;
-            if (timer >= costTime)
+            if (timer >= costTimeCycle)
             {
                 timer = 0;
                 //현재 체력이 소모비용보다 많으면 지속데미지
@@ -61,6 +61,7 @@ public class Berserk : SupportSkill
             berserkAlready.ReleaseSkill();
             Destroy(berserkAlready.gameObject);
             Destroy(gameObject);
+            skillCaster.GetComponent<PlayerControl>().SetIsDelay(false);
             return;
         }
         

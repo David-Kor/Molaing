@@ -42,7 +42,6 @@ public class PlayerControl : ObjectControl
         spriteDirection = Vector2.down;
         firstDirection = Vector2.zero;
 
-        TakeEXP(0f);
         //플레이어와 적 간의 물리적 충돌 무시 (밀림현상 방지)
         Physics2D.IgnoreLayerCollision(LayerMask.NameToLayer("Player"), LayerMask.NameToLayer("Enemy"), true);
     }
@@ -114,6 +113,10 @@ public class PlayerControl : ObjectControl
             //딜레이 상태인 경우
             else
             {
+                playerAttack.StopAttack();
+                playerAnimation.StopAttack();
+                playerAnimation.StopWalking();
+
                 if (skillIndex >= 0 && playerSkill.GetSkill(skillIndex).delayCancelable)
                 {
                     playerSkill.CancelSpell();
@@ -297,7 +300,6 @@ public class PlayerControl : ObjectControl
         playerAnimation.ShowGetDamage();
         //스탯에 피해량(damage) 정보를 넘김
         status.TakeDamage(_skill.damage);
-        ui.HP(status.currentHP, status.maxHP);
         playerMove.HitStun();
 
         if (_skill.isKnockBack) { playerMove.KnockBack(_skill.skillDirection * _skill.knockBackPower); }
@@ -326,7 +328,6 @@ public class PlayerControl : ObjectControl
     public void TakeEXP(float exp)
     {
         status.EXP_Up(exp);
-        ui.Exp(status.currentEXP, status.requireEXP, status.level);
         Debug.Log("경험치 획득 : " + exp);
     }
 

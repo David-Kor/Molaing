@@ -288,6 +288,18 @@ Prefab:
       value: 
       objectReference: {fileID: 1141174192972318, guid: ccc8dd3edaa451e488a2f8782915069e,
         type: 2}
+    - target: {fileID: 114730042164526702, guid: 7a558733239cec84d8fb7da029e6359f,
+        type: 2}
+      propertyPath: skill_List.Array.data[0]
+      value: 
+      objectReference: {fileID: 1718895619159584, guid: 05baa5f78c0b4ee498ef80bc65621ed8,
+        type: 2}
+    - target: {fileID: 114730042164526702, guid: 7a558733239cec84d8fb7da029e6359f,
+        type: 2}
+      propertyPath: skill_List.Array.data[3]
+      value: 
+      objectReference: {fileID: 1141174192972318, guid: 03dfc95a28b1fda4e9c4b8ff40877b41,
+        type: 2}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 7a558733239cec84d8fb7da029e6359f, type: 2}
   m_IsPrefabAsset: 0

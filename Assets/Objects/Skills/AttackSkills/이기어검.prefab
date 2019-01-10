@@ -196,7 +196,7 @@ MonoBehaviour:
   coolDown: 10
   firstDelay: 0.8
   delay: 1
-  usableOnMove: 0
+  usableOnMove: 1
   delayCancelable: 0
   isOnHead: 1
   skillDirection: {x: 0, y: 0}

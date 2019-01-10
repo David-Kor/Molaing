@@ -88,11 +88,11 @@
      <Compile Include="Assets\Scripts\Skills\SupportSkill.cs" />
      <Compile Include="Assets\Scripts\Skills\Tackle.cs" />
      <Compile Include="Assets\Scripts\Skills\TanGang.cs" />
+     <Compile Include="Assets\Scripts\Skills\Vigor.cs" />
      <Compile Include="Assets\Scripts\SpriteOrder.cs" />
      <Compile Include="Assets\Scripts\UI\InGameStatus.cs" />
      <Compile Include="Assets\Scripts\UI\Inventory.cs" />
      <Compile Include="Assets\Scripts\UI\Inventory_Slot.cs" />
-     <Compile Include="Assets\Scripts\UI\Item Drag.cs" />
      <Compile Include="Assets\Scripts\UI\Item.cs" />
      <Compile Include="Assets\Scripts\UI\itemDateBase.cs" />
      <Compile Include="Assets\Scripts\UI\PickupItem.cs" />

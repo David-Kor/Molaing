@@ -8,7 +8,13 @@ public class PlayerStatus : ObjectStatus
     public float currentEXP;    //경험치
     public float requireEXP;    //다음 레벨까지 필요한 경험치
     public int statusPoint = 0;      //스탯을 올릴 수 있는 횟수
-    
+
+    private UI_Controller ui;
+
+    void Start()
+    {
+        ui = Camera.main.GetComponent<UI_Controller>();
+    }
 
     /* 레벨 업에 관한 처리 */
     public void LevelUp()
@@ -30,6 +36,7 @@ public class PlayerStatus : ObjectStatus
             Debug.Log("레벨 업!");
             LevelUp();
         }
+        ui.Exp(currentEXP, requireEXP, level);
     }
 
 
@@ -39,6 +46,7 @@ public class PlayerStatus : ObjectStatus
     {
         maxHP += bonusHP;
         currentHP += bonusHP;
+        ui.HP(currentHP, maxHP);
     }
 
     /* 최대 HP 감소 */
@@ -46,6 +54,7 @@ public class PlayerStatus : ObjectStatus
     {
         maxHP -= bonusHP;
         if (currentHP > maxHP) { currentHP = maxHP; }
+        ui.HP(currentHP, maxHP);
     }
 
     /* STR 증가 */
@@ -109,4 +118,11 @@ public class PlayerStatus : ObjectStatus
 
     /* 경직저항(KBR) 감소 */
     public void CancelBonusHSR(int bonusHSR) { hitStunResistance -= bonusHSR; }
+
+    public override void TakeDamage(int _dmg)
+    {
+        currentHP -= _dmg;
+        if (currentHP > maxHP) { currentHP = maxHP; }
+        ui.HP(currentHP, maxHP);
+    }
 }
