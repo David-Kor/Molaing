@@ -297,6 +297,7 @@ public class PlayerControl : ObjectControl
         playerAnimation.ShowGetDamage();
         //스탯에 피해량(damage) 정보를 넘김
         status.TakeDamage(_skill.damage);
+        ui.HP(status.currentHP, status.maxHP);
         playerMove.HitStun();
 
         if (_skill.isKnockBack) { playerMove.KnockBack(_skill.skillDirection * _skill.knockBackPower); }
