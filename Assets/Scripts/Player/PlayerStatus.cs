@@ -73,31 +73,39 @@ public class PlayerStatus : ObjectStatus
     public void CancelBonusATK(int bonusATK) { attackDamage -= bonusATK; }
 
     /* 공속(ASP) 증가 */
-    public void BonusASP(int bonusASP) { attackSpeed += bonusASP; }
+    public void BonusASP(float bonusASP) { attackSpeed += bonusASP; }
 
     /* 공속(ASP) 감소 */
-    public void CancelBonusASP(int bonusASP) { attackSpeed -= bonusASP; }
+    public void CancelBonusASP(float bonusASP) { attackSpeed -= bonusASP; }
 
     /* 이속(MSP) 증가 */
-    public void BonusMSP(int bonusMSP) { moveSpeed += bonusMSP; }
+    public void BonusMSP(float bonusMSP) { moveSpeed += bonusMSP; }
 
     /* 이속(MSP) 감소 */
-    public void CancelBonusMSP(int bonusMSP) { moveSpeed -= bonusMSP; }
+    public void CancelBonusMSP(float bonusMSP) { moveSpeed -= bonusMSP; }
 
     /* 넉백(KBP) 증가 */
-    public void BonusKBP(int bonusKBP) { knockBackResistance += bonusKBP; }
+    public void BonusKBP(float bonusKBP) { knockBackPower += bonusKBP; }
 
     /* 넉백(KBP) 감소 */
-    public void CancelBonusKBP(int bonusKBP) { knockBackResistance -= bonusKBP; }
+    public void CancelBonusKBP(float bonusKBP) { knockBackPower -= bonusKBP; }
 
     /* 넉백저항(KBR) 증가 */
-    public void BonusKBR(int bonusKBR) { knockBackResistance += bonusKBR; }
+    public void BonusKBR(int bonusKBR)
+    {
+        knockBackResistance += bonusKBR;
+        if (knockBackResistance > 100) { knockBackResistance = 100; }
+    }
 
     /* 넉백저항(KBR) 감소 */
     public void CancelBonusKBR(int bonusKBR) { knockBackResistance -= bonusKBR; }
 
     /* 경직저항(KBR) 증가 */
-    public void BonusHSR(int bonusHSR) { hitStunResistance += bonusHSR; }
+    public void BonusHSR(int bonusHSR)
+    {
+        hitStunResistance += bonusHSR;
+        if (hitStunResistance > 100) { hitStunResistance = 100; }
+    }
 
     /* 경직저항(KBR) 감소 */
     public void CancelBonusHSR(int bonusHSR) { hitStunResistance -= bonusHSR; }
