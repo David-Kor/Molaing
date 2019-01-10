@@ -9,6 +9,9 @@ TagManager:
   - Enemy
   - FieldObject
   - Skill
+  - Item DataBase
+  - ItemSlot
+  - DragObj
   layers:
   - Default
   - TransparentFX
