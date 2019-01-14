@@ -2,6 +2,12 @@
 using System.Collections.Generic;
 using UnityEngine;
 
+/*
+ * 스킬 : 광폭
+ * 분류 : 활성화/비활성화 버프 스킬
+ * 효과 : 일정시간마다 지속적으로 체력감소
+ *         공격력, 공격속도, 넉백, 넉백저항력, 경직저항력 증가
+ */
 public class Berserk : SupportSkill
 {
     public float costTimeCycle;

@@ -19,10 +19,13 @@ public class UI_Controller : MonoBehaviour {
     public int point = 0;
 
     public bool bInventory;
+    public bool bMouse0Down;
 	// Use this for initialization
 	void Awake()
     {
         bInventory = false;
+        bMouse0Down = false;
+
         Player = GameObject.Find("Player").gameObject;
 
         Inventory = transform.GetChild(0).GetChild(1).gameObject; //Main Camera/Canvas/Inventory

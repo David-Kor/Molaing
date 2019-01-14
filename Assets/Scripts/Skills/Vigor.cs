@@ -2,6 +2,12 @@
 using System.Collections.Generic;
 using UnityEngine;
 
+/*
+ * 스킬 : 활력
+ * 분류 : 활성화/비활성화 버프 스킬
+ * 효과 : 일정시간마다 지속적으로 체력회복
+ *         이동속도 감소
+ */
 public class Vigor : SupportSkill
 {
     public float costMSP;

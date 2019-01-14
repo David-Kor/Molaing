@@ -55,6 +55,7 @@
   <ItemGroup>
      <Compile Include="Assets\Scripts\Bullet.cs" />
      <Compile Include="Assets\Scripts\CameraControl.cs" />
+     <Compile Include="Assets\Scripts\Database.cs" />
      <Compile Include="Assets\Scripts\Enemy\EnemyAggro.cs" />
      <Compile Include="Assets\Scripts\Enemy\EnemyAnimation.cs" />
      <Compile Include="Assets\Scripts\Enemy\EnemyAttack.cs" />
@@ -71,6 +72,7 @@
      <Compile Include="Assets\Scripts\Player\PlayerMove.cs" />
      <Compile Include="Assets\Scripts\Player\PlayerSkill.cs" />
      <Compile Include="Assets\Scripts\Player\PlayerStatus.cs" />
+     <Compile Include="Assets\Scripts\SaveNLoad.cs" />
      <Compile Include="Assets\Scripts\Skills\AffterImage.cs" />
      <Compile Include="Assets\Scripts\Skills\AttackSkill.cs" />
      <Compile Include="Assets\Scripts\Skills\Avoid.cs" />
@@ -94,7 +96,6 @@
      <Compile Include="Assets\Scripts\UI\Inventory.cs" />
      <Compile Include="Assets\Scripts\UI\Inventory_Slot.cs" />
      <Compile Include="Assets\Scripts\UI\Item.cs" />
-     <Compile Include="Assets\Scripts\UI\itemDateBase.cs" />
      <Compile Include="Assets\Scripts\UI\PickupItem.cs" />
      <Compile Include="Assets\Scripts\UI\UI_Controller.cs" />
      <None Include="Assets\Sprite Pack\Tap and Fly\Readme.txt" />
