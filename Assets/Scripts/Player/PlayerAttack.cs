@@ -70,10 +70,11 @@ public class PlayerAttack : MonoBehaviour
 
                 //기본공격 정보 설정
                 basicAttack = newAttack.GetComponent<BasicAttack>();
+                basicAttack.skillCaster = transform.parent.gameObject;
+                basicAttack.SetSkillIndex(-1);
                 basicAttack.skillDirection = attackDirection;
                 basicAttack.knockBackPower += playerStatus.knockBackPower;
                 basicAttack.isKnockBack = true;
-                basicAttack.skillCaster = transform.parent.gameObject;
                 basicAttack.damage += playerStatus.attackDamage;
                 basicAttack.ActivateSkill();
             }

@@ -77,9 +77,9 @@ public class PlayerSkill : MonoBehaviour
         skill.SetSkillIndex(index);
         skill.skillDirection = direction;
         if (skill.isOnHead) { skillObj.transform.position = transform.position; }   //스킬 범위가 자신의 위치가 중심인 경우
-        skill.ActivateSkill();
         skillDelay = skill.delay;
         playerControl.SetIsDelay(true);
+        skill.ActivateSkill();
     }
 
 
@@ -110,8 +110,11 @@ public class PlayerSkill : MonoBehaviour
         }
     }
 
+
+    /* 쿨타임 활성화 */
     public void CoolDownTimerActive(int _index, float _value)
     {
+        if (_index < 0) { return; }
         coolTimerList[_index] = _value;
     }
 }
