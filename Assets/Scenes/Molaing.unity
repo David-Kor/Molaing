@@ -156,6 +156,10 @@ Prefab:
       propertyPath: m_Name
       value: Green Slime (3)
       objectReference: {fileID: 0}
+    - target: {fileID: 4962163627479608, guid: e88d9a610a820254e85efb7d2615338d, type: 2}
+      propertyPath: m_LocalPosition.x
+      value: 0
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: e88d9a610a820254e85efb7d2615338d, type: 2}
   m_IsPrefabAsset: 0
