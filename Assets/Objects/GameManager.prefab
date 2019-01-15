@@ -19,8 +19,8 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 4743849800103012}
-  - component: {fileID: 114689329948059576}
   - component: {fileID: 114353285768158564}
+  - component: {fileID: 114511958375730658}
   m_Layer: 0
   m_Name: GameManager
   m_TagString: Item DataBase
@@ -52,7 +52,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 1c1c470807860e04c9738cd034c59d66, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
---- !u!114 &114689329948059576
+--- !u!114 &114511958375730658
 MonoBehaviour:
   m_ObjectHideFlags: 1
   m_CorrespondingSourceObject: {fileID: 0}

@@ -402,7 +402,7 @@ MonoBehaviour:
   knockBackPower: 2
   knockBackResistance: 0
   hitStunResistance: 0
-  gracePeriod: 0.8
+  gracePeriodTime: 0.8
   currentEXP: 0
   requireEXP: 50
   statusPoint: 0
@@ -442,10 +442,10 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   skill_List:
-  - {fileID: 1338790028357304, guid: 617243720105fca448a740948448c949, type: 2}
+  - {fileID: 1718895619159584, guid: 05baa5f78c0b4ee498ef80bc65621ed8, type: 2}
   - {fileID: 1057665496507564, guid: e1e00485915983e4a80e45a2281042ab, type: 2}
-  - {fileID: 1301543405181514, guid: e61eb787bd6768340a62cf8c4beadeab, type: 2}
-  - {fileID: 1338790028357304, guid: dfde64a2c8920a740a5e1d03d31f4572, type: 2}
+  - {fileID: 1141174192972318, guid: ccc8dd3edaa451e488a2f8782915069e, type: 2}
+  - {fileID: 1141174192972318, guid: 03dfc95a28b1fda4e9c4b8ff40877b41, type: 2}
 --- !u!114 &114992375830163696
 MonoBehaviour:
   m_ObjectHideFlags: 1

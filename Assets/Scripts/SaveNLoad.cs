@@ -1,16 +1,45 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.SceneManagement;
 
 public class SaveNLoad : MonoBehaviour
 {
-    void Start()
+    [System.Serializable]
+    public class SaveData
     {
-        GameObject[] obj = Resources.LoadAll<GameObject>("Skills");
-        //Debug.Log(obj.Length);
-        for (int i = 0; i < obj.Length; i++)
+        //저장된 씬의 이름
+        public string scene;
+
+        //플레이어의 위치
+        public float pX;
+        public float pY;
+        public float pZ;
+
+        public int pLevel;
+        public int pMaxHP;
+        public int pCurHP;
+    }
+
+    void Awake()
+    {
+        StartCoroutine("Aasdf");
+    }
+
+    public void SaveGame()
+    {
+    }
+
+    private IEnumerator Aasdf()
+    {
+        while (true)
         {
-            //Debug.Log(obj[i].GetComponent<Skill>().skillName);
+            Debug.Log(Database.IsInitialized());
+            if (Database.IsInitialized())
+            {
+                StopCoroutine("Aasdf");
+            }
+            yield return null;
         }
     }
 }
