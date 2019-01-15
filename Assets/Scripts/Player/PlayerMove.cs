@@ -28,7 +28,7 @@ public class PlayerMove : MonoBehaviour
 
         if (rigid2D.velocity != Vector2.zero && knockBackTimer <= 0)
         {
-            rigid2D.velocity = Vector2.zero;
+            //rigid2D.velocity = Vector2.zero;
         }
     }
 

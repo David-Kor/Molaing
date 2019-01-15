@@ -34,7 +34,6 @@ public class SaveNLoad : MonoBehaviour
     {
         while (true)
         {
-            Debug.Log(Database.IsInitialized());
             if (Database.IsInitialized())
             {
                 StopCoroutine("Aasdf");

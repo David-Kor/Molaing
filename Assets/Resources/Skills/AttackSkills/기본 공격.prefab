@@ -82,6 +82,7 @@ MonoBehaviour:
   skillCaster: {fileID: 0}
   maxHitCount: 10
   coolDown: 0
+  firstDelay: 0
   delay: 0
   usableOnMove: 0
   delayCancelable: 0
