@@ -21,6 +21,7 @@ public abstract class ObjectStatus : MonoBehaviour
     public int attackDamage;    //기본 공격력(ATK)
     public float attackSpeed;    //초당 기본 공격횟수(ASP)
     public float moveSpeed;     //이동 속도(MSP)
+    public float jumpPower;
 
     public float knockBackPower;  //넉백 수치(KBP)
 

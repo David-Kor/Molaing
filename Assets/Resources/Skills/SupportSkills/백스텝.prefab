@@ -71,6 +71,7 @@ MonoBehaviour:
   isLoop: 0
   lifeTime: 0
   value: 4.5
+  moveTime: 0.1
 --- !u!212 &212506023120852224
 SpriteRenderer:
   m_ObjectHideFlags: 1

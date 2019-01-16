@@ -9,8 +9,8 @@ public class PlayerAttack : MonoBehaviour
     private BasicAttack basicAttack;                //기본공격 스킬 정보 클래스
 
     private Vector2 attackDirection;   //기본공격 방향
-    private float attackTimer;       //기본공격 타이머
-    private bool isAttackInput;     //기본공격 키 입력
+    private float attackTimer;           //기본공격 타이머
+    private bool isAttackInput;         //기본공격 키 입력
 
     void Start()
     {

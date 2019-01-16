@@ -57,7 +57,7 @@ MonoBehaviour:
   maxHitCount: 10
   coolDown: 1
   firstDelay: 0
-  delay: 0.25
+  delay: 0.35
   usableOnMove: 1
   delayCancelable: 0
   isOnHead: 1
@@ -68,7 +68,7 @@ MonoBehaviour:
   isLoop: 1
   lifeTime: 0.2
   value: 4
-  dashTime: 0.2
+  dashTime: 0.3
   effectObj: {fileID: 1323501045341022, guid: cffd2452fb0823544b59b7764a5d3c4f, type: 2}
 --- !u!212 &212506023120852224
 SpriteRenderer:

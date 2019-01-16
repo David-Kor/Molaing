@@ -37,7 +37,7 @@ public class Dash : SupportSkill
     {
         timer = 0;
         skillCaster.GetComponent<PlayerControl>().GetPlayerMove().knockBackTimer = dashTime;
-        skillCaster.GetComponent<Rigidbody2D>().velocity = skillDirection * value;
+        skillCaster.GetComponent<Rigidbody2D>().velocity += skillDirection * value;
     }
 
 

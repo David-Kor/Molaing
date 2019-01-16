@@ -12,6 +12,12 @@ TagManager:
   - Item DataBase
   - ItemSlot
   - DragObj
+  - Body
+  - Head
+  - Hand
+  - Weapon
+  - Foot
+  - Wall
   layers:
   - Default
   - TransparentFX
@@ -24,8 +30,8 @@ TagManager:
   - Player
   - Enemy
   - HitPoint
-  - 
-  - 
+  - Wall
+  - Ground
   - 
   - 
   - 

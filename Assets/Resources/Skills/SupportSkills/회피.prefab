@@ -55,9 +55,9 @@ MonoBehaviour:
   skillName: "\uD68C\uD53C"
   skillCaster: {fileID: 0}
   maxHitCount: 0
-  coolDown: 5
+  coolDown: 1
   firstDelay: 0.05
-  delay: 0.1
+  delay: 0.15
   usableOnMove: 1
   delayCancelable: 0
   isOnHead: 1
@@ -74,6 +74,7 @@ MonoBehaviour:
   isLoop: 0
   lifeTime: 0
   value: 15
+  moveTime: 0.1
 --- !u!212 &212506023120852224
 SpriteRenderer:
   m_ObjectHideFlags: 1

@@ -66,6 +66,7 @@
      <Compile Include="Assets\Scripts\HitObject.cs" />
      <Compile Include="Assets\Scripts\ObjectControl.cs" />
      <Compile Include="Assets\Scripts\ObjectStatus.cs" />
+     <Compile Include="Assets\Scripts\OnGroundCheck.cs" />
      <Compile Include="Assets\Scripts\Player\PlayerAnimation.cs" />
      <Compile Include="Assets\Scripts\Player\PlayerAttack.cs" />
      <Compile Include="Assets\Scripts\Player\PlayerControl.cs" />

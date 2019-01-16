@@ -9,7 +9,6 @@ public class PlayerMove : MonoBehaviour
 
     private PlayerStatus playerStatus;  //플레이어의 스탯 클래스
     private Rigidbody2D rigid2D;       //물리 클래스
-
     private const float DEFAULT_HIT_STUN_TIME = 0.25f;  //피격시 경직시간 기본값
     private const float DEFAULT_KNOCK_BACK_TIME = 0.1f;  //넉백시간 기본값
 
@@ -28,7 +27,7 @@ public class PlayerMove : MonoBehaviour
 
         if (rigid2D.velocity != Vector2.zero && knockBackTimer <= 0)
         {
-            //rigid2D.velocity = Vector2.zero;
+            rigid2D.velocity = rigid2D.velocity.y * Vector2.up;
         }
     }
 
@@ -41,6 +40,11 @@ public class PlayerMove : MonoBehaviour
         transform.Translate(_moveDirection * playerStatus.moveSpeed * Time.deltaTime, Space.World);
     }
 
+
+    public void Jump(float force)
+    {
+        rigid2D.AddForce(Vector2.up * force, ForceMode2D.Impulse);
+    }
 
     /* 피격 시 경직 적용 */
     public void HitStun()
