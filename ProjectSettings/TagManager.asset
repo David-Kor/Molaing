@@ -12,6 +12,11 @@ TagManager:
   - Item DataBase
   - ItemSlot
   - DragObj
+  - Weapon
+  - Head
+  - Body
+  - Hand
+  - Foot
   layers:
   - Default
   - TransparentFX

@@ -9,10 +9,16 @@ public class Item
     public string itemName;         // 아이템의 이름
     public int itemID;              // 아이템의 고유번호
     public string itemDes;          // 아이템의 설명
-    public ItemType itemType;       // 아이템의 속성 설정
+    public int itemType;       // 아이템의 속성 설정
     public Sprite itemIcon;      // 아이템의 아이콘(2D)
     public int maxAmount;
     public int itemAmount;
+    public int attackPoint;
+    public int healthPoint;
+    public int strengthPoint;
+    public int agilityPoint;
+    public int intelligencePoint;
+    public int healthHeal;
     // 아이템의 속성 설정에 대한 갯수.
     // 추후 추가 가능
     public enum ItemType            
@@ -31,7 +37,7 @@ public class Item
 
     }
 
-    public Item(string name, int id, string desc, ItemType type, int Max, int amount = 1)
+    public Item(string name, int id, string desc, int type, int Max, int amount = 1)
     // 아이템의 필요한 속성을 모두 위에 적을 것.
     // 아이템 추가는 itemDataBase에서 할 것.
     {

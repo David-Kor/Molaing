@@ -11,11 +11,15 @@ public class Inventory_Slot : MonoBehaviour
     public int itemID;
     public int Amount;
     public int nstSlot;
+    public int itemType;
     public GUISkin skin;
     public bool showTooltip;
     private bool bDragItem;
-    private GameObject thisSlot;
+    GameObject thisSlot;
     private Image image;
+
+    public Inventory_Slot thisObject;
+    public Inventory_Slot targetObject;
 
 
     RaycastHit hit;
@@ -25,23 +29,17 @@ public class Inventory_Slot : MonoBehaviour
     Text thisText;
 
     private string tooltip;
-    private Item item;
-    private itemDateBase db;
+    private bool itemOption;
     void Start()
     {
         showTooltip = false;
         bDragItem = false;
-        item = new Item();
-        mainCamera = transform.parent.parent.parent.parent.parent.gameObject;
-        db = GameObject.FindGameObjectWithTag("Item DataBase").GetComponent<itemDateBase>();
-        image = transform.parent.GetChild(49).GetComponent<Image>();
+        mainCamera = Camera.main.gameObject;
+        image = mainCamera.transform.GetChild(0).GetChild(1).GetChild(2).GetComponent<Image>();
+        thisObject = this.GetComponent<Inventory_Slot>();
         takeObject();
     }
 
-    void Update()
-    {
-
-    }
 
     void CastRay()
     {
@@ -53,6 +51,7 @@ public class Inventory_Slot : MonoBehaviour
         if (hit.collider != null)
         {
             target = hit.collider.gameObject;  //히트 된 게임 오브젝트를 타겟으로 지정
+            targetObject = target.GetComponent<Inventory_Slot>();
         }
     }
 
@@ -65,18 +64,54 @@ public class Inventory_Slot : MonoBehaviour
     string CreateToolTip(int itemID)
     {
         int num = 0;
-        for (int i = 0; i < db.item.Count; i++)
+        for (int i = 0; i < Database.item.Count; i++)
         {
-            if (itemID == db.item[i].itemID)
+            if (itemID == Database.item[i].itemID)
             {
                 num = i;
                 break;
             }
         }
-        tooltip = "itemName: <color=#a10000><b>" + db.item[num].itemName + "</b></color>\n";
-        //이어서 계속 추가 가능.
-        //font와 관련된 html 코드를 사용 가능한 것을 확인.
+        itemOption = false;
+        tooltip = Database.item[num].itemName;
+        tooltip += "\n" + Database.item[num].itemDes;
+        tooltip += "\n\n효과";
+        if (Database.item[num].attackPoint != 0)
+        {
+            tooltip += "\n공격력: " + Database.item[num].attackPoint;
+            itemOption = true;
+        }
+        if (Database.item[num].healthPoint != 0)
+        {
+            tooltip += "\nHP: " + Database.item[num].healthPoint;
+            itemOption = true;
+        }
+        if (Database.item[num].strengthPoint != 0)
+        {
+            tooltip += "\nSTR: " + Database.item[num].strengthPoint;
+            itemOption = true;
+        }
+        if (Database.item[num].agilityPoint != 0)
+        {
+            tooltip += "\nAGI: " + Database.item[num].agilityPoint;
+            itemOption = true;
+        }
+        if (Database.item[num].intelligencePoint != 0)
+        {
+            tooltip += "\nINT: " + Database.item[num].intelligencePoint;
+            itemOption = true;
+        }
+        if (Database.item[num].healthHeal != 0)
+        {
+            tooltip += "\nHP " + Database.item[num].healthHeal;
+            itemOption = true;
+        }
+        if (itemOption == false)
+        {
+            tooltip += "\n없음";
+        }
 
+        itemOption = false;
         return tooltip;
     }
 
@@ -88,30 +123,34 @@ public class Inventory_Slot : MonoBehaviour
             showTooltip = true;
         }
     }
-
     public void AddItem(Item item, int i)   //아이템 추가 함수
     {
         takeObject();
         icon.sprite = item.itemIcon;    //
         itemID = item.itemID;
+        itemType = item.itemType;
         Amount = i;
-        if (item.itemType == Item.ItemType.Use || item.itemType == Item.ItemType.Material)
+        if (item.itemType ==  5 || item.itemType == 6)
         {
             if (item.itemAmount > 0) { itemCount.text = i.ToString(); }
             else { RemoveItem(); }      //아이템의 갯수가 0보다 작으면 RemoveItem()을 이용하여 슬롯을 비움.
         }
         else { itemCount.text = ""; }   //소비템이나 재료템이 아니면 아이템 갯수 표시 안함. 장비는 어차피 한 슬롯에 1개가 최대.
     }
-
     void OnGUI()
     {
+        GUIStyle style = new GUIStyle();
         GUI.skin = skin;
-        if (showTooltip && !mainCamera.GetComponent<UI_Controller>().bMouse0Down) { GUI.Box(new Rect(Event.current.mousePosition.x + 5, Event.current.mousePosition.y + 2, 200, 200), tooltip, skin.GetStyle("tooltip")); }
+        if (showTooltip && !mainCamera.GetComponent<UI_Controller>().bMouse0Down)
+        {
+            style.richText = true;
+            GUI.Box(new Rect(Event.current.mousePosition.x + 5, Event.current.mousePosition.y + 2, 200, 200), tooltip, skin.GetStyle("tooltip"));
+        }
         //showTooltip이 true가 되면 마우스를 따라다니는 툴팁틀 생성한다.
+
         if (mainCamera.GetComponent<UI_Controller>().bMouse0Down) { GUI.DrawTexture(new Rect(Input.mousePosition.x, Event.current.mousePosition.y, 50, 50), image.mainTexture); }
 
     }
-
     public void RemoveItem()
     {
         itemCount.text = "";    //인벤토리 창에서 보여지는 아이템 수량을 지워준다.
@@ -120,7 +159,6 @@ public class Inventory_Slot : MonoBehaviour
         Amount = 0;             //슬롯에 저장된 아이템 갯수를 초기화시킨다.
         gameObject.transform.GetChild(1).gameObject.SetActive(false);       //아이콘일 표시하는 오브젝트를 비활성화 시켜준다. 안하면 슬롯에 하얀 사각형이 남음.
     }
-
     public void OnMouseEnter()
     {
         if (mainCamera.GetComponent<UI_Controller>().bMouse0Down == false)       //좌클릭을 안했을 때 레이캐스트 발생. 저렇게 설정한 이유는 아이템을 드래그 할 때 방해되기 때문.
@@ -158,54 +196,111 @@ public class Inventory_Slot : MonoBehaviour
             mainCamera.GetComponent<UI_Controller>().bMouse0Down = true;
         }
     }
-
     public void OnMouseUp()
     {
+        CastRay();
         if (this.itemID == 0)
         {
+            mainCamera.GetComponent<UI_Controller>().bMouse0Down = false;
             return;
+        }
+        else if(!thisObject.CompareTag("ItemSlot"))
+        {
+            if(targetObject.CompareTag("ItemSlot") && targetObject.itemID != 0)
+            {
+                thisSlot = null;
+                thisText = null;
+                thisImage = null;
+                image.sprite = null;
+                mainCamera.GetComponent<UI_Controller>().bMouse0Down = false;
+                return;
+            }
+            else if(targetObject.CompareTag("ItemSlot") && targetObject.itemID == 0)
+            {
+                MoveSlot();
+                this.transform.GetChild(1).gameObject.SetActive(false);
+            }
         }
         else
         {
-            CastRay();
-
-
-            Debug.Log(target.GetComponent<Inventory_Slot>().itemID);
             if (target == null)
             {
                 return;
             }
-            else if (target.GetComponent<Inventory_Slot>().itemID == 0)
+            else if (target.CompareTag("ItemSlot"))
             {
-                MoveSlot(target);
-                RemoveItem();
+                if (targetObject.itemID == 0)
+                {
+                    MoveSlot();
+                }
             }
             else
             {
-                SwapSlot();
+                if(targetObject.itemID == 0)
+                {
+                    if(target.CompareTag("Weapon") && thisObject.itemType == 0)
+                    {
+                        MoveSlot();
+                    }
+                    else if(target.CompareTag("Head") && thisObject.itemType == 1)
+                    {
+                        MoveSlot();
+                    }
+                    else if(target.CompareTag("Body") && thisObject.itemType == 2)
+                    {
+                        MoveSlot();
+                    }
+                    else if(target.CompareTag("Hand") && thisObject.itemType == 3)
+                    {
+                        MoveSlot();
+                    }
+                    else if(target.CompareTag("Foot") && thisObject.itemType == 4)
+                    {
+                        MoveSlot();
+                    }
+                    else
+                    {
+                        mainCamera.GetComponent<UI_Controller>().bMouse0Down = false;
+                        return;
+                    }
+                }
+                else
+                {
+                    SwapSlot();
+                }
             }
             bDragItem = false;
-            mainCamera.GetComponent<UI_Controller>().bMouse0Down = false;
         }
     }
 
-    void MoveSlot(GameObject gameSlot)
+    void MoveSlot()
     {
-        gameSlot.GetComponent<Inventory_Slot>().itemID = thisSlot.GetComponent<Inventory_Slot>().itemID;
-        gameSlot.GetComponent<Inventory_Slot>().Amount = thisSlot.GetComponent<Inventory_Slot>().Amount;
+        if (targetObject.CompareTag("ItemSlot"))
+        {
+            targetObject.itemID = thisObject.itemID;
+            targetObject.Amount = thisObject.Amount;
+        }
+        else
+        {
+            targetObject.itemID = thisObject.itemID;
+            targetObject.Amount = thisObject.Amount;
+        }
 
-        gameSlot.transform.GetChild(0).GetComponent<Text>().text = thisText.text;
-        gameSlot.transform.GetChild(1).GetComponent<Image>().sprite = thisImage.sprite;
-        gameSlot.transform.GetChild(1).gameObject.SetActive(true);
+        target.transform.GetChild(0).GetComponent<Text>().text = thisText.text;
+        target.transform.GetChild(1).GetComponent<Image>().sprite = thisImage.sprite;
+        RemoveItem();
+        target.transform.GetChild(1).gameObject.SetActive(true);
+        this.transform.GetChild(1).gameObject.SetActive(false);
+        mainCamera.GetComponent<UI_Controller>().bMouse0Down = false;
     }
     void SwapSlot()
     {
+        Debug.Log("교체");
         int i;
-        Sprite sprite; ;
-
+        Sprite sprite;
         i = this.gameObject.GetComponent<Inventory_Slot>().itemID;
-        this.gameObject.GetComponent<Inventory_Slot>().itemID = target.GetComponent<Inventory_Slot>().itemID;
-        target.GetComponent<Inventory_Slot>().itemID = i;
+        this.gameObject.GetComponent<Inventory_Slot>().itemID = target.gameObject.GetComponent<Inventory_Slot>().itemID;
+        target.gameObject.GetComponent<Inventory_Slot>().itemID = i;
 
         i = this.gameObject.GetComponent<Inventory_Slot>().Amount;
         this.gameObject.GetComponent<Inventory_Slot>().Amount = target.gameObject.transform.GetComponent<Inventory_Slot>().Amount;
@@ -215,8 +310,21 @@ public class Inventory_Slot : MonoBehaviour
         this.gameObject.transform.GetChild(1).GetComponent<Image>().sprite = target.transform.GetChild(1).GetComponent<Image>().sprite;
         target.transform.GetChild(1).GetComponent<Image>().sprite = sprite;
 
-        Debug.Log(this.gameObject.transform.GetChild(0).GetComponent<Text>().text);
-        this.gameObject.transform.GetChild(0).GetComponent<Text>().text = this.gameObject.GetComponent<Inventory_Slot>().Amount.ToString();
-        target.transform.GetChild(0).GetComponent<Text>().text = target.GetComponent<Inventory_Slot>().Amount.ToString();
+        if (this.gameObject.GetComponent<Inventory_Slot>().Amount > 1)
+        {
+            this.gameObject.transform.GetChild(0).GetComponent<Text>().text = this.gameObject.GetComponent<Inventory_Slot>().Amount.ToString();
+        }
+        else
+        {
+            this.gameObject.transform.GetChild(0).GetComponent<Text>().text = "";
+        }
+        if (target.GetComponent<Inventory_Slot>().Amount > 1)
+        {
+            target.transform.GetChild(0).GetComponent<Text>().text = target.GetComponent<Inventory_Slot>().Amount.ToString();
+        }
+        else
+        {
+            target.transform.GetChild(0).GetComponent<Text>().text = "";
+        }
     }
 }

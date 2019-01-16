@@ -296,7 +296,7 @@ public class PlayerControl : ObjectControl
         if (!isAttackable) { return; }
 
         Debug.Log("[ " + name + " ]" + " Take [" + _skill.damage + "] Damage From [ " + _skill.skillCaster.name + " ]");
-        SetInvincibleTime(status.gracePeriod);
+        SetInvincibleTime(status.gracePeriodTime);
         playerAnimation.ShowGetDamage();
         //스탯에 피해량(damage) 정보를 넘김
         status.TakeDamage(_skill.damage);
