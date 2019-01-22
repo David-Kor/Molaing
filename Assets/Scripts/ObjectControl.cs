@@ -3,8 +3,6 @@ using UnityEngine;
 
 public abstract class ObjectControl : MonoBehaviour
 {
-    private string my_layer_name;
-
     protected Rigidbody2D rigid;
 
     public bool onGround;
@@ -13,22 +11,17 @@ public abstract class ObjectControl : MonoBehaviour
 
     void Awake()
     {
-        my_layer_name = LayerMask.LayerToName(gameObject.layer);
         rigid = GetComponent<Rigidbody2D>();
         rigid.velocity += Vector2.down * 0.001f;
         StartCoroutine("VelocityYCheck");
     }
 
-    public void OnGround(string col_tag)
-    {
-        onGround = true;
-        StartCoroutine("VelocityYCheck");
-        if (col_tag == "Wall")
-        {
-            Physics2D.IgnoreLayerCollision(LayerMask.NameToLayer(my_layer_name), LayerMask.NameToLayer("Ground"), true);
-        }
-    }
+    
+    /* 땅 위에 착지할 때 호출됨 */
+    public abstract void OnGround(string col_tag);
 
+
+    /* 땅에서 발이 떨어지면 호출됨 */
     public void ExitGround()
     {
         onGround = false;
@@ -36,38 +29,13 @@ public abstract class ObjectControl : MonoBehaviour
     }
 
 
-    protected IEnumerator VelocityYCheck()
-    {
-        bool f_detect = false;
-        while (true)
-        {
-            if (rigid.velocity.y > 0)
-            {
-                isJumping = true;
-                isFalling = false;
-            }
-            else if (rigid.velocity.y < 0)
-            {
-                isFalling = true;
-                if (isFalling != f_detect)
-                {
-                    f_detect = isFalling;
-                    Physics2D.IgnoreLayerCollision(LayerMask.NameToLayer(my_layer_name), LayerMask.NameToLayer("Ground"), false);
-                }
-            }
-            else
-            {
-                isFalling = false;
-                isJumping = false;
-                StopCoroutine("VelocityYCheck");
-            }
-
-            yield return null;
-        }
-    }
+    /* Y방향 속도에 따라 변수 조정 */
+    protected abstract IEnumerator VelocityYCheck();
+    
 
     /* 공격받은 경우 호출되는 함수 */
     public abstract void OnHitAttack(AttackSkill _skill);
+
 
     /* 쿨타임 활성화 함수 */
     public abstract void CoolDownActive(int _index, float _value);

@@ -56,6 +56,8 @@
      <Compile Include="Assets\Scripts\Bullet.cs" />
      <Compile Include="Assets\Scripts\CameraControl.cs" />
      <Compile Include="Assets\Scripts\Database.cs" />
+     <Compile Include="Assets\Scripts\Enemy\E_Ent.cs" />
+     <Compile Include="Assets\Scripts\Enemy\E_Slime.cs" />
      <Compile Include="Assets\Scripts\Enemy\EnemyAggro.cs" />
      <Compile Include="Assets\Scripts\Enemy\EnemyAnimation.cs" />
      <Compile Include="Assets\Scripts\Enemy\EnemyAttack.cs" />

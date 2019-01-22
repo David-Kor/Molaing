@@ -13,7 +13,7 @@ public class OnGroundCheck : MonoBehaviour
 
     void OnTriggerEnter2D(Collider2D col)
     {
-        if (col.CompareTag("Ground") || col.CompareTag("Wall"))
+        if (col.CompareTag("Ground") || col.CompareTag("Earth"))
         {
             control.OnGround(col.tag);
         }
@@ -21,7 +21,7 @@ public class OnGroundCheck : MonoBehaviour
 
     void OnTriggerExit2D(Collider2D col)
     {
-        if (col.CompareTag("Ground") || col.CompareTag("Wall"))
+        if (col.CompareTag("Ground") || col.CompareTag("Earth"))
         {
             control.ExitGround();
         }

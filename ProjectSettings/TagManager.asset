@@ -18,6 +18,7 @@ TagManager:
   - Weapon
   - Foot
   - Wall
+  - Earth
   layers:
   - Default
   - TransparentFX
@@ -30,9 +31,9 @@ TagManager:
   - Player
   - Enemy
   - HitPoint
-  - Wall
+  - Earth
   - Ground
-  - 
+  - MobOnly
   - 
   - 
   - 

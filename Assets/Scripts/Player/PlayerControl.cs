@@ -43,6 +43,8 @@ public class PlayerControl : ObjectControl
 
         //플레이어와 적 간의 물리적 충돌 무시 (밀림현상 방지)
         Physics2D.IgnoreLayerCollision(LayerMask.NameToLayer("Player"), LayerMask.NameToLayer("Enemy"), true);
+        //몬스터 전용 투명벽을 무시
+        Physics2D.IgnoreLayerCollision(LayerMask.NameToLayer("Player"), LayerMask.NameToLayer("MobOnly"), true);
     }
 
 
@@ -68,7 +70,7 @@ public class PlayerControl : ObjectControl
             {
                 if (CheckJumpKeyInput())
                 {
-                    if (!isFalling && !isJumping)
+                    if (!isFalling && !isJumping && onGround)
                     {
                         ForceJump(status.jumpPower);
                     }
@@ -315,10 +317,55 @@ public class PlayerControl : ObjectControl
         playerSkill.CoolDownTimerActive(_index, _value);
     }
 
+
     public void ForceJump(float force_value)
     {
         isJumping = true;
         playerMove.Jump(force_value);
         Physics2D.IgnoreLayerCollision(LayerMask.NameToLayer("Player"), LayerMask.NameToLayer("Ground"), true);
+    }
+
+    
+    /* 땅 위에 착지할 때 호출됨 */
+    public override void OnGround(string col_tag)
+    {
+        onGround = true;
+        StartCoroutine("VelocityYCheck");
+        if (col_tag.Equals("Earth"))
+        {
+            Physics2D.IgnoreLayerCollision(LayerMask.NameToLayer("Player"), LayerMask.NameToLayer("Ground"), true);
+        }
+    }
+
+
+    /* Y방향 속도에 따라 변수 조정 */
+    protected override IEnumerator VelocityYCheck()
+    {
+        bool f_detect = false;
+        while (true)
+        {
+            if (rigid.velocity.y > 0)
+            {
+                isJumping = true;
+                isFalling = false;
+            }
+            else if (rigid.velocity.y < 0)
+            {
+                isFalling = true;
+                if (isFalling != f_detect)
+                {
+                    f_detect = isFalling;
+                    Physics2D.IgnoreLayerCollision(LayerMask.NameToLayer("Player"), LayerMask.NameToLayer("Ground"), false);
+                }
+            }
+            else
+            {
+                isFalling = false;
+                isJumping = false;
+                StopCoroutine("VelocityYCheck");
+            }
+
+            yield return null;
+        }
     }
 }

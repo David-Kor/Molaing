@@ -151,7 +151,6 @@ GameObject:
   m_Component:
   - component: {fileID: 4352083137576896}
   - component: {fileID: 212799343599136072}
-  - component: {fileID: 114160590285837904}
   - component: {fileID: 114437847078032964}
   - component: {fileID: 95623138654206314}
   m_Layer: 0
@@ -412,17 +411,6 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   hitStunTimer: 0
   knockBackTimer: 0
---- !u!114 &114160590285837904
-MonoBehaviour:
-  m_ObjectHideFlags: 1
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInternal: {fileID: 100100000}
-  m_GameObject: {fileID: 1910079593288732}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: d2afc41fa849a47498ed164e432d7bfd, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
 --- !u!114 &114207254938602596
 MonoBehaviour:
   m_ObjectHideFlags: 1

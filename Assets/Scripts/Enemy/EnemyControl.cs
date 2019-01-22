@@ -2,14 +2,15 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-public class EnemyControl : ObjectControl
+public abstract class EnemyControl : ObjectControl
 {
-    private Vector2 lookDirection;
-
-    private GameObject target;  // 공격 대상
-    private EnemyAnimation aniControl;
-    private EnemyMove move;
-    private EnemyStatus status;
+    protected Vector2 lookDirection;
+    protected GameObject target;  // 공격 대상
+    protected EnemyAnimation aniControl;
+    protected EnemyMove move;
+    protected EnemyStatus status;
+    protected Collider2D[] allGround;
+    protected Collider2D myCollider;
 
     void Start()
     {
@@ -19,6 +20,14 @@ public class EnemyControl : ObjectControl
         lookDirection = aniControl.GetDirection();
         //적끼리의 물리적 충돌 무시 (밀림현상 방지)
         Physics2D.IgnoreLayerCollision(LayerMask.NameToLayer("Enemy"), LayerMask.NameToLayer("Enemy"), true);
+        myCollider = GetComponent<Collider2D>();
+
+        GameObject[] grounds = GameObject.FindGameObjectsWithTag("Ground");
+        allGround = new Collider2D[grounds.Length];
+        for (int i = 0; i < grounds.Length; i++)
+        {
+            allGround[i] = grounds[i].GetComponent<Collider2D>();
+        }
     }
 
 
@@ -84,9 +93,68 @@ public class EnemyControl : ObjectControl
     }
 
 
-    /* 쿨타임 활성화 */
-    public override void CoolDownActive(int _index, float _value)
+    /* 땅 위에 착지할 때 호출됨 */
+    public override void OnGround(string col_tag)
     {
-        /* 추후 추가 예정 */
+        onGround = true;
+        StartCoroutine("VelocityYCheck");
+        if (col_tag.Equals("Earth"))
+        {
+            IgnoreAllGround();
+        }
+    }
+
+
+    /* Y방향 속도에 따라 변수 조정 */
+    protected override IEnumerator VelocityYCheck()
+    {
+        bool f_detect = false;
+        while (true)
+        {
+            if (rigid.velocity.y > 0)
+            {
+                isJumping = true;
+                isFalling = false;
+            }
+            else if (rigid.velocity.y < 0)
+            {
+                isFalling = true;
+                if (isFalling != f_detect)
+                {
+                    f_detect = isFalling;
+                    NoIgnoreAllGround();
+                }
+            }
+            else
+            {
+                isFalling = false;
+                isJumping = false;
+                StopCoroutine("VelocityYCheck");
+            }
+
+            yield return null;
+        }
+    }
+
+
+    /* 모든 Ground 충돌체와의 충돌 무시 */
+    private void IgnoreAllGround()
+    {
+        if (allGround == null) { return; }
+        for (int i = 0; i < allGround.Length; i++)
+        {
+            Physics2D.IgnoreCollision(myCollider, allGround[i], true);
+        }
+    }
+
+
+    /* 모든 Ground 충돌체와의 충돌 허용 */
+    private void NoIgnoreAllGround()
+    {
+        if (allGround == null) { return; }
+        for (int i = 0; i < allGround.Length; i++)
+        {
+            Physics2D.IgnoreCollision(myCollider, allGround[i], false);
+        }
     }
 }
