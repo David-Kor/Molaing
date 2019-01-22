@@ -5,18 +5,9 @@ using UnityEngine;
 public class FloatingSword : AttackSkill
 {
     public float turnSpeed;                 //회전 속도(초당 회전 수)
-    public float collisionCheckInterval;  //충돌 검사 간격
 
-    private float timer;
-    private List<HitObject> hitObjects;
-    private Collider2D[] colliders;
     private SpriteRenderer[] childRenderers;
 
-    void Start()
-    {
-        timer = 0;
-        colliders = GetComponentsInChildren<Collider2D>();
-    }
 
     void Update()
     {
@@ -28,13 +19,6 @@ public class FloatingSword : AttackSkill
 
         SkillProduction();
         transform.Rotate(0, 0, turnSpeed * Time.deltaTime * 360);
-        timer += Time.deltaTime;
-
-        if (timer >= collisionCheckInterval)
-        {
-            timer = 0;
-            CollisionCheck();
-        }
     }
 
     private void WaitFirstDelayWithSprites()
@@ -55,25 +39,22 @@ public class FloatingSword : AttackSkill
     }
 
 
-    private void CollisionCheck()
+    private void OnTriggerEnter2D(Collider2D col)
     {
-        int i, j;
-
-        for (i = 0; i < colliders.Length; i++)
+        //시전시간이 끝나지 않았으면 무시
+        if (!f_delayEnd) { return; }
+        if (col.CompareTag("HitPoint"))
         {
-            hitObjects = OnHitCheck(colliders[i]);
-
-            for (j = 0; j < hitObjects.Count; j++)
-            {
-                hitObjects[j].OnHitSkill(this);
-            }
+            HitObject hit = col.GetComponent<HitObject>();
+            if (hit == null) { return; }
+            if (hit.GetName() == skillCaster.name) { return; }      //시전자라면 무시
+            col.GetComponent<HitObject>().OnHitSkill(this);
         }
     }
 
 
     public override void ActivateSkill()
     {
-        timer = 0;
         childRenderers = GetComponentsInChildren<SpriteRenderer>();
 
         for (int i = 0; i < childRenderers.Length; i++)

@@ -1,5 +1,4 @@
 ﻿using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
 
 public class PlayerMove : MonoBehaviour
@@ -8,12 +7,14 @@ public class PlayerMove : MonoBehaviour
     public float knockBackTimer;        //넉백 타이머
 
     private PlayerStatus playerStatus;  //플레이어의 스탯 클래스
+    private PlayerControl playerControl;
     private Rigidbody2D rigid2D;       //물리 클래스
     private const float DEFAULT_HIT_STUN_TIME = 0.25f;  //피격시 경직시간 기본값
     private const float DEFAULT_KNOCK_BACK_TIME = 0.1f;  //넉백시간 기본값
 
     void Start()
     {
+        playerControl = GetComponent<PlayerControl>();
         playerStatus = GetComponent<PlayerStatus>();
         rigid2D = GetComponent<Rigidbody2D>();
         hitStunTimer = 0;
@@ -25,10 +26,19 @@ public class PlayerMove : MonoBehaviour
         if (hitStunTimer > 0) { hitStunTimer -= Time.deltaTime; }
         if (knockBackTimer > 0) { knockBackTimer -= Time.deltaTime; }
 
-        if (rigid2D.velocity != Vector2.zero && knockBackTimer <= 0)
+        if (rigid2D.velocity.x != 0f && knockBackTimer <= 0)
         {
             rigid2D.velocity = rigid2D.velocity.y * Vector2.up;
         }
+    }
+
+
+    /* 경직 지속 시간동안 입력 불가 */
+    private IEnumerator StunBlock(float _time)
+    {
+        playerControl.SetIsDelay(true);
+        yield return new WaitForSeconds(_time);
+        playerControl.SetIsDelay(false);
     }
 
 
@@ -50,6 +60,7 @@ public class PlayerMove : MonoBehaviour
     public void HitStun()
     {
         hitStunTimer = (DEFAULT_HIT_STUN_TIME) * (100 - playerStatus.hitStunResistance) / 100;
+        StartCoroutine("StunBlock", hitStunTimer);
     }
 
 
@@ -57,6 +68,6 @@ public class PlayerMove : MonoBehaviour
     public void KnockBack(Vector2 dir_dist)
     {
         knockBackTimer = DEFAULT_KNOCK_BACK_TIME;
-        rigid2D.velocity = dir_dist * (100 - playerStatus.knockBackResistance) / 100;
+        rigid2D.velocity = dir_dist * (100 - playerStatus.knockBackResistance) / 100 + rigid2D.velocity.y * Vector2.up;
     }
 }

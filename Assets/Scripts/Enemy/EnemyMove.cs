@@ -10,8 +10,6 @@ public class EnemyMove : MonoBehaviour
     public float maxPatrolDelay;
     public float maxDistancePatrol;
 
-    private const int DOWN = (int)DIRECTION.DOWN;
-    private const int UP = (int)DIRECTION.UP;
     private const int LEFT = (int)DIRECTION.LEFT;
     private const int RIGHT = (int)DIRECTION.RIGHT;
 
@@ -94,7 +92,6 @@ public class EnemyMove : MonoBehaviour
 
                 iTween.MoveBy(gameObject, iTween.Hash(
                     "x", randDirection.x * distance,
-                    "y", randDirection.y * distance,
                     "speed", status.moveSpeed,
                     "easetype", iTween.EaseType.linear,
                     "onstart", "StartPatrol",
@@ -136,7 +133,7 @@ public class EnemyMove : MonoBehaviour
 
     public void KnockBack(Vector2 dir_val)
     {
-        rigid2D.velocity = dir_val * (100 - status.knockBackResistance) / 100;
+        rigid2D.velocity = dir_val * (100 - status.knockBackResistance) / 100 + rigid2D.velocity.y * Vector2.up;
         hitStunTime = DEFAULT_HIT_STUN_TIME * (100 - status.hitStunResistance) / 100;
         knockBackTimer = DEFAULT_KNOCK_BACK_TIME;
     }

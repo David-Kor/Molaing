@@ -6,7 +6,6 @@ public class PlayerSkill : MonoBehaviour
 {
     public GameObject[] skill_List;     //스킬 프리팹 목록
 
-    private float skillDelay;              //딜레이 타이머
     private float[] coolTimerList;       //스킬별 쿨타임 타이머
 
     private PlayerControl playerControl;
@@ -16,7 +15,6 @@ public class PlayerSkill : MonoBehaviour
     {
         playerControl = GetComponentInParent<PlayerControl>();
         coolTimerList = new float[skill_List.Length];
-        skillDelay = 0f;
 
         for (i = 0; i < coolTimerList.Length; i++)
         {
@@ -26,12 +24,6 @@ public class PlayerSkill : MonoBehaviour
 
     void Update()
     {
-        if (skillDelay > 0)
-        {
-            skillDelay -= Time.deltaTime;
-        }
-        else if (playerControl.GetIsDelay()) { playerControl.SetIsDelay(false); }
-
         for (i = 0; i < coolTimerList.Length; i++)
         {
             if (coolTimerList[i] > 0)
@@ -39,6 +31,14 @@ public class PlayerSkill : MonoBehaviour
                 coolTimerList[i] -= Time.deltaTime;
             }
         }
+    }
+
+
+    private IEnumerator SkillDelay(float _delay)
+    {
+        playerControl.SetIsDelay(true);
+        yield return new WaitForSeconds(_delay);
+        playerControl.SetIsDelay(false);
     }
 
 
@@ -77,8 +77,7 @@ public class PlayerSkill : MonoBehaviour
         skill.SetSkillIndex(index);
         skill.skillDirection = direction;
         if (skill.isOnHead) { skillObj.transform.position = transform.position; }   //스킬 범위가 자신의 위치가 중심인 경우
-        skillDelay = skill.delay;
-        playerControl.SetIsDelay(true);
+        StartCoroutine("SkillDelay", skill.delay);
         skill.ActivateSkill();
     }
 

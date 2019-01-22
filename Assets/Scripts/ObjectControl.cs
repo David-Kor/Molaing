@@ -3,13 +3,17 @@ using UnityEngine;
 
 public abstract class ObjectControl : MonoBehaviour
 {
+    private string my_layer_name;
+
     protected Rigidbody2D rigid;
+
     public bool onGround;
     public bool isFalling;
     public bool isJumping;
 
     void Awake()
     {
+        my_layer_name = LayerMask.LayerToName(gameObject.layer);
         rigid = GetComponent<Rigidbody2D>();
         rigid.velocity += Vector2.down * 0.001f;
         StartCoroutine("VelocityYCheck");
@@ -21,7 +25,7 @@ public abstract class ObjectControl : MonoBehaviour
         StartCoroutine("VelocityYCheck");
         if (col_tag == "Wall")
         {
-            Physics2D.IgnoreLayerCollision(LayerMask.NameToLayer("Player"), LayerMask.NameToLayer("Ground"), true);
+            Physics2D.IgnoreLayerCollision(LayerMask.NameToLayer(my_layer_name), LayerMask.NameToLayer("Ground"), true);
         }
     }
 
@@ -48,7 +52,7 @@ public abstract class ObjectControl : MonoBehaviour
                 if (isFalling != f_detect)
                 {
                     f_detect = isFalling;
-                    Physics2D.IgnoreLayerCollision(LayerMask.NameToLayer("Player"), LayerMask.NameToLayer("Ground"), false);
+                    Physics2D.IgnoreLayerCollision(LayerMask.NameToLayer(my_layer_name), LayerMask.NameToLayer("Ground"), false);
                 }
             }
             else

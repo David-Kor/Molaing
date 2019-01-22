@@ -21,7 +21,7 @@ public class PlayerControl : ObjectControl
 
     private bool inventoryActive;    //인벤토리 창의 활성화 여부
     private int skillIndex;              //스킬 입력 인덱스(1~4)
-    private bool isDelay;              //딜레이 상태
+    public bool isDelay;              //딜레이 상태
 
     private bool controllable;
 
@@ -82,13 +82,6 @@ public class PlayerControl : ObjectControl
                     //이동키 입력에 의한 플레이어 애니메이션 적용
                     playerAnimation.TurnPlayer(spriteDirection);
 
-                    //공격키를 눌렀는지 확인
-                    if (CheckAttackKeyInput())
-                    {
-                        playerAttack.Attack();
-                    }
-                    else { playerAttack.StopAttack(); }
-
                     if (moveDirection == Vector2.zero) { playerAnimation.StopWalking(); }
                     else { playerAnimation.StartWalking(); }
 
@@ -108,24 +101,25 @@ public class PlayerControl : ObjectControl
                     playerAnimation.StopWalking();
                     firstDirection = Vector2.zero;
 
-                    //공격키를 눌렀는지 확인
-                    if (CheckAttackKeyInput())
-                    {
-                        playerAttack.Attack();
-                    }
-                    else { playerAttack.StopAttack(); }
-
                     //스킬 사용
                     if (skillIndex >= 0)
                     {
                         playerSkill.UseSkill(skillIndex, spriteDirection);
                     }
                 }
+
+                //공격키를 눌렀는지 확인
+                if (CheckAttackKeyInput())
+                {
+                    playerAttack.Attack();
+                }
+                else { playerAttack.StopAttack(); }
             }
             //딜레이 상태인 경우
             else
             {
                 playerAnimation.StopWalking();
+                playerAnimation.StopAttack();
 
                 if (skillIndex >= 0 && playerSkill.GetSkill(skillIndex).delayCancelable)
                 {
@@ -273,7 +267,11 @@ public class PlayerControl : ObjectControl
     /* 일정 시간동안 무적상태 활성화 */
     public void SetInvincibleTime(float time)
     {
-        gracePeriodTimer = time;
+        //이미 무적상태이면 시간이 더 긴 쪽을 선택
+        if (gracePeriodTimer < time)
+        {
+            gracePeriodTimer = time;
+        }
         isAttackable = false;
     }
 

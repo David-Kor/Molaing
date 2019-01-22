@@ -51,16 +51,6 @@ public class PlayerAnimation : MonoBehaviour
             transform.rotation = Quaternion.Euler(0, 0, 0); //회전값 초기화
 
             //Animator의 파라미터 Direction에 의해 어느 방향의 애니메이션을 실행할 것인지 결정
-            if (curSpriteDirection == Vector2.down)
-            {
-                playerAnimator.SetFloat("Direction", DOWN);
-                transform.localPosition = Vector2.left * 0.03f;
-            }
-            if (curSpriteDirection == Vector2.up)
-            {
-                playerAnimator.SetFloat("Direction", UP);
-                transform.localPosition = Vector2.right * 0.03f;
-            }
             if (curSpriteDirection == Vector2.right)
             {
                 playerAnimator.SetFloat("Direction", RIGHT);
@@ -75,20 +65,38 @@ public class PlayerAnimation : MonoBehaviour
         }
 
         //이동 중인 상태라면 이동 애니메이션으로 전환
-        if (playerAnimator.GetBool("IsWalk") != isWalk)
+        if (playerAnimator.GetBool("IsWalk") != isWalk && !playerAnimator.GetBool("IsAttack"))
         {
             playerAnimator.SetBool("IsWalk", isWalk);
         }
 
-        //이동 중이 아닌 경우
-        if (!isWalk)
+        //공격 애니메이션 실행 중 공격키를 뗀 경우
+        //마지막 공격 모션이 끝날 때까지 애니메이션이 계속됨
+        //(공격키를 땠을 때 모션이 캔슬되는 것을 방지하기 위함)
+        if (playerAnimator.GetBool("IsAttack") && !isAttack)
         {
-            //공격 애니메이션 실행 중 공격키를 뗀 경우
-            //마지막 공격 모션이 끝날 때까지 애니메이션이 계속됨
-            //(공격키를 땠을 때 모션이 캔슬되는 것을 방지하기 위함)
-            if (playerAnimator.GetBool("IsAttack") && !isAttack)
+            atkMotionTimer += Time.deltaTime;
+            if (playerAnimator.GetCurrentAnimatorStateInfo(0).length < atkMotionTimer)
             {
-                atkMotionTimer += Time.deltaTime;
+                isAttack = false;
+                playerAnimator.SetBool("IsAttack", isAttack);
+                atkMotionTimer = 0;
+            }
+        }
+        //공격키를 계속 누르고 있는 상태이면 isAttack과 동기화
+        //모션이 한 번 사이클할 때마다 false로 변한 후 공격 딜레이가 끝나면 다시 true로 변함
+        else { playerAnimator.SetBool("IsAttack", isAttack); }
+
+        //기본 공격키가 입력 중인 경우
+        if (isAttack)
+        {
+            atkMotionTimer += Time.deltaTime;
+            //현재 실행중인 애니메이션이 Attack인 경우
+            if (playerAnimator.GetCurrentAnimatorStateInfo(0).IsName("Attack"))
+            {
+                playerAnimator.SetFloat("AttackMotionSpeed", atkMotionSpeed);
+
+                //애니메이션 재생이 끝나면 초기화
                 if (playerAnimator.GetCurrentAnimatorStateInfo(0).length < atkMotionTimer)
                 {
                     isAttack = false;
@@ -96,37 +104,8 @@ public class PlayerAnimation : MonoBehaviour
                     atkMotionTimer = 0;
                 }
             }
-            //공격키를 계속 누르고 있는 상태이면 isAttack과 동기화
-            //모션이 한 번 사이클할 때마다 false로 변한 후 공격 딜레이가 끝나면 다시 true로 변함
-            else { playerAnimator.SetBool("IsAttack", isAttack); }
-
-            //기본 공격키가 입력 중인 경우
-            if (isAttack)
-            {
-                atkMotionTimer += Time.deltaTime;
-                //현재 실행중인 애니메이션이 Attack인 경우
-                if (playerAnimator.GetCurrentAnimatorStateInfo(0).IsName("Attack"))
-                {
-                    playerAnimator.SetFloat("AttackMotionSpeed", atkMotionSpeed);
-
-                    //애니메이션 재생이 끝나면 초기화
-                    if (playerAnimator.GetCurrentAnimatorStateInfo(0).length < atkMotionTimer)
-                    {
-                        isAttack = false;
-                        playerAnimator.SetBool("IsAttack", isAttack);
-                        atkMotionTimer = 0;
-                    }
-                }
-            }
-            else if (playerAnimator.GetBool("IsAttack") == isAttack) { atkMotionTimer = 0; }
         }
-        //공격 중에 이동하거나 이동 중에 공격하는 경우
-        //공격 애니메이션을 재생하지 않게 함
-        else if (playerAnimator.GetBool("IsAttack"))
-        {
-            isAttack = false;
-            playerAnimator.SetBool("IsAttack", isAttack);
-        }
+        else if (playerAnimator.GetBool("IsAttack") == isAttack) { atkMotionTimer = 0; }
 
         //데미지를 입은 경우 피격 모션
         if (isGetDamage)
@@ -135,7 +114,8 @@ public class PlayerAnimation : MonoBehaviour
             if (Mathf.FloorToInt(dmgMotionTimer * 10) % 2 == 0) { sprite.color = dmgMotionColor[0]; }
             else { sprite.color = dmgMotionColor[1]; }
 
-            if(control.IsAttackable()){
+            if (control.IsAttackable())
+            {
                 isGetDamage = false;
                 sprite.color = Color.white;
                 dmgMotionTimer = 0;
