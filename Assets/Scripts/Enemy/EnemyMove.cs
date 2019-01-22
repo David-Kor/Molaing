@@ -58,7 +58,14 @@ public class EnemyMove : MonoBehaviour
             iTween.Stop(gameObject);
             if (hitStunTime <= 0)
             {
-                transform.Translate((targetObject.transform.position - transform.position).normalized * status.moveSpeed * Time.deltaTime);
+                if (targetObject.transform.position.x < transform.position.x)
+                {
+                    transform.Translate(Vector2.left * status.moveSpeed * Time.deltaTime);
+                }
+                else
+                {
+                    transform.Translate(Vector2.right* status.moveSpeed * Time.deltaTime);
+                }
             }
 
         }
@@ -75,14 +82,8 @@ public class EnemyMove : MonoBehaviour
                 //임의의 거리 (0 ~ maxDistancePatrol 실수)
                 distance = Random.Range(0, maxDistancePatrol);
                 //임의의 정수 (0~3)
-                switch (Random.Range(0, 4))
+                switch (Random.Range(2, 4))
                 {
-                    case DOWN:
-                        randDirection = Vector2.down;
-                        break;
-                    case UP:
-                        randDirection = Vector2.up;
-                        break;
                     case LEFT:
                         randDirection = Vector2.left;
                         break;
@@ -106,7 +107,7 @@ public class EnemyMove : MonoBehaviour
 
         if (rigid2D.velocity != Vector2.zero && knockBackTimer <= 0)
         {
-            rigid2D.velocity = Vector2.zero;
+            rigid2D.velocity = rigid2D.velocity.y * Vector2.up;
         }
     }
 

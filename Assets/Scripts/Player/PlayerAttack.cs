@@ -1,4 +1,5 @@
-﻿using UnityEngine;
+﻿using System.Collections;
+using UnityEngine;
 
 public class PlayerAttack : MonoBehaviour
 {
@@ -18,7 +19,7 @@ public class PlayerAttack : MonoBehaviour
         playerAnimation = transform.parent.GetComponentInChildren<PlayerAnimation>();
         attackTimer = 0f;
         isAttackInput = false;
-        attackDirection = Vector2.down;
+        attackDirection = Vector2.right;
     }
 
     void Update()
@@ -76,10 +77,19 @@ public class PlayerAttack : MonoBehaviour
                 basicAttack.knockBackPower += playerStatus.knockBackPower;
                 basicAttack.isKnockBack = true;
                 basicAttack.damage += playerStatus.attackDamage;
+                StartCoroutine("AttackDelay", basicAttack.delay);
                 basicAttack.ActivateSkill();
             }
         }
         else { playerAnimation.StopAttack(); }
+    }
+
+
+    private IEnumerator AttackDelay(float _delay)
+    {
+        GetComponentInParent<PlayerControl>().SetIsDelay(true);
+        yield return new WaitForSeconds(_delay);
+        GetComponentInParent<PlayerControl>().SetIsDelay(false);
     }
 
 

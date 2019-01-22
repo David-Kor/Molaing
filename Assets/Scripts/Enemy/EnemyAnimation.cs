@@ -37,18 +37,9 @@ public class EnemyAnimation : MonoBehaviour
         if (target != null)
         {
             float x = target.transform.position.x - transform.position.x;
-            float y = target.transform.position.y - transform.position.y;
 
-            if (Mathf.Abs(x) >= Mathf.Abs(y))
-            {
-                if (x < 0) { directionToTarget = Vector2.left; }
-                else { directionToTarget = Vector2.right; }
-            }
-            else
-            {
-                if (y < 0) { directionToTarget = Vector2.down; }
-                else { directionToTarget = Vector2.up; }
-            }
+            if (x < 0) { directionToTarget = Vector2.left; }
+            else { directionToTarget = Vector2.right; }
 
             PlayPatrol(directionToTarget);
         }

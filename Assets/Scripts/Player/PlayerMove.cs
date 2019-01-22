@@ -36,13 +36,13 @@ public class PlayerMove : MonoBehaviour
     public void Move(Vector2 _moveDirection)
     {
         if (hitStunTimer > 0) { return; }
-
         transform.Translate(_moveDirection * playerStatus.moveSpeed * Time.deltaTime, Space.World);
     }
 
 
     public void Jump(float force)
     {
+        if (hitStunTimer > 0) { return; }
         rigid2D.AddForce(Vector2.up * force, ForceMode2D.Impulse);
     }
 

@@ -38,7 +38,7 @@ public class PlayerControl : ObjectControl
         playerSkill = GetComponentInChildren<PlayerSkill>();
         ui = Camera.main.GetComponent<UI_Controller>();
         moveDirection = Vector2.zero;
-        spriteDirection = Vector2.down;
+        spriteDirection = Vector2.right;
         firstDirection = Vector2.zero;
 
         //플레이어와 적 간의 물리적 충돌 무시 (밀림현상 방지)
@@ -78,11 +78,17 @@ public class PlayerControl : ObjectControl
                 {
                     SetSpriteDirection();                      //바라볼 방향 결정
                     playerMove.Move(moveDirection);   //플레이어 이동
-                    playerAttack.StopAttack();          //공격 취소
 
                     //이동키 입력에 의한 플레이어 애니메이션 적용
                     playerAnimation.TurnPlayer(spriteDirection);
-                    playerAnimation.StopAttack();
+
+                    //공격키를 눌렀는지 확인
+                    if (CheckAttackKeyInput())
+                    {
+                        playerAttack.Attack();
+                    }
+                    else { playerAttack.StopAttack(); }
+
                     if (moveDirection == Vector2.zero) { playerAnimation.StopWalking(); }
                     else { playerAnimation.StartWalking(); }
 
@@ -119,8 +125,6 @@ public class PlayerControl : ObjectControl
             //딜레이 상태인 경우
             else
             {
-                playerAttack.StopAttack();
-                playerAnimation.StopAttack();
                 playerAnimation.StopWalking();
 
                 if (skillIndex >= 0 && playerSkill.GetSkill(skillIndex).delayCancelable)
@@ -152,63 +156,22 @@ public class PlayerControl : ObjectControl
         //이동직전 최초 입력키를 저장
         if (firstDirection == Vector2.zero)
         {
-            /*
-            //수직과 수평 방향키를 동시에 누른 경우
-            if ((Input.GetKey("down") || Input.GetKey("up"))
-                && (Input.GetKey("left") || Input.GetKey("right")))
-            {
-                if (Input.GetKey("left")) { firstDirection = Vector2.left; }
-                if (Input.GetKey("right")) { firstDirection = Vector2.right; }
-            }*/
-            //각각의 방향
-            /*else if (Input.GetKey("down")) { firstDirection = Vector2.down; }
-            else if (Input.GetKey("up")) { firstDirection = Vector2.up; }
-            else */if (Input.GetKey("right")) { firstDirection = Vector2.right; }
+            if (Input.GetKey("right")) { firstDirection = Vector2.right; }
             else if (Input.GetKey("left")) { firstDirection = Vector2.left; }
         }
 
 
-        //각각의 방향에 대한 입력
-        //첫번째 if는 반대방향을 동시 입력 시 방향값(Vector)을 0(zero)으로 하여 어느 쪽으로도 움직이지 못하게 한다.
-        //두번째, 세번째 if는 수직 방향과 수평 방향이 같이 눌려있을 경우 해당 방향으로의 방향값을 추가
-        //두번째, 세번째 if가 모두 참일 경우 방향값은 0이 된다.
-        /*
-        if (Input.GetKey("down"))
-        {
-            moveDirection = Vector2.down;
-            if (Input.GetKey("up")) { moveDirection = Vector2.zero; }
-
-            if (Input.GetKey("left")) { moveDirection += Vector2.left; }
-            if (Input.GetKey("right")) { moveDirection += Vector2.right; }
-            return true;
-        }
-        else if (Input.GetKey("up"))
-        {
-            moveDirection = Vector2.up;
-            if (Input.GetKey("down")) { moveDirection = Vector2.zero; }
-
-            if (Input.GetKey("left")) { moveDirection += Vector2.left; }
-            if (Input.GetKey("right")) { moveDirection += Vector2.right; }
-            return true;
-        }
-        else */if (Input.GetKey("left"))
+        //반대방향을 동시 입력 시 방향값(Vector)을 0(zero)으로 하여 어느 쪽으로도 움직이지 못하게 한다.
+        if (Input.GetKey("left"))
         {
             moveDirection = Vector2.left;
             if (Input.GetKey("right")) { moveDirection = Vector2.zero; }
-
-            /*
-            if (Input.GetKey("down")) { moveDirection += Vector2.down; }
-            if (Input.GetKey("up")) { moveDirection += Vector2.up; }*/
             return true;
         }
         else if (Input.GetKey("right"))
         {
             moveDirection = Vector2.right;
             if (Input.GetKey("left")) { moveDirection = Vector2.zero; }
-
-            /*
-            if (Input.GetKey("down")) { moveDirection += Vector2.down; }
-            if (Input.GetKey("up")) { moveDirection += Vector2.up; }*/
             return true;
         }
 
@@ -267,17 +230,6 @@ public class PlayerControl : ObjectControl
     {
         //먼저 입력된 방향(firstDirection)을 바라보게 함
         //먼저 입력된 방향키가 현재는 입력되고 있지 않을 때 firstDirection초기화
-        /*
-        if (firstDirection == Vector2.down)
-        {
-            if (!Input.GetKey("down")) { firstDirection = Vector2.zero; }
-            else { spriteDirection = firstDirection; }
-        }
-        if (firstDirection == Vector2.up)
-        {
-            if (!Input.GetKey("up")) { firstDirection = Vector2.zero; }
-            else { spriteDirection = firstDirection; }
-        }*/
         if (firstDirection == Vector2.right)
         {
             if (!Input.GetKey("right")) { firstDirection = Vector2.zero; }
@@ -288,18 +240,6 @@ public class PlayerControl : ObjectControl
             if (!Input.GetKey("left")) { firstDirection = Vector2.zero; }
             else { spriteDirection = firstDirection; }
         }
-
-        //상하키 또는 좌우키가 동시에 눌린 상태에서 움직일 때 방향처리
-        /*if ((Input.GetKey("down") && Input.GetKey("up")))
-        {
-            if (Input.GetKey("left")) { spriteDirection = Vector2.left; }
-            if (Input.GetKey("right")) { spriteDirection = Vector2.right; }
-        }
-        if ((Input.GetKey("left") && Input.GetKey("right")))
-        {
-            if (Input.GetKey("down")) { spriteDirection = Vector2.down; }
-            if (Input.GetKey("up")) { spriteDirection = Vector2.up; }
-        }*/
     }
 
 

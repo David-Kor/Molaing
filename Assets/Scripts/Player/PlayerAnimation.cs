@@ -33,8 +33,8 @@ public class PlayerAnimation : MonoBehaviour
         control = GetComponentInParent<PlayerControl>();
         playerAnimator = GetComponent<Animator>();
         sprite = GetComponent<SpriteRenderer>();
-        curSpriteDirection = Vector2.down;
-        nextSpriteDirection = Vector2.down;
+        curSpriteDirection = Vector2.right;
+        nextSpriteDirection = Vector2.right;
         isWalk = false;
         atkMotionTimer = 0;
         dmgMotionColor = new Color[2];
