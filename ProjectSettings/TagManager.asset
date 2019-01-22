@@ -17,6 +17,7 @@ TagManager:
   - Body
   - Hand
   - Foot
+  - QuickSlot
   layers:
   - Default
   - TransparentFX

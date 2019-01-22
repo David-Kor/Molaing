@@ -106,6 +106,7 @@
     <Compile Include="Assets\Scripts\UI\Item.cs" />
     <Compile Include="Assets\Scripts\UI\PickupItem.cs" />
     <Compile Include="Assets\Scripts\UI\Potion.cs" />
+    <Compile Include="Assets\Scripts\UI\QuickSlot.cs" />
     <Compile Include="Assets\Scripts\UI\UI_Controller.cs" />
     <Compile Include="Assets\Scripts\UI\UI_Equipment.cs" />
     <None Include="Assets\Sprite Pack\Tap and Fly\Readme.txt" />

@@ -10,8 +10,7 @@ public class Inventory : MonoBehaviour
     public Inventory_Slot[] eSlots;
     bool bRemove = true;
 
-
-    UI_Controller ui_controller;
+    
 
 
     private int prevIndex;
@@ -94,7 +93,6 @@ public class Inventory : MonoBehaviour
     }
     void AddObject()
     { 
-        ui_controller = Camera.main.GetComponent<UI_Controller>();
         slots = new Inventory_Slot[49];
         eSlots = new Inventory_Slot[5];
     }

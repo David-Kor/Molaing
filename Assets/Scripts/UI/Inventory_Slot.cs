@@ -12,6 +12,7 @@ public class Inventory_Slot : MonoBehaviour
     public int Amount;
     public int nstSlot;
     public int itemType;
+    public int layerMask;
     public GUISkin skin;
     public bool showTooltip;
     private bool bDragItem;
@@ -46,12 +47,16 @@ public class Inventory_Slot : MonoBehaviour
         target = null;
 
         Vector2 pos = Camera.main.ScreenToWorldPoint(Input.mousePosition);
+
+        //layerMask = (-1) - (1 << 11);
+        //layerMask = ~layerMask;
         RaycastHit2D hit = Physics2D.Raycast(pos, Vector2.zero, 0f);
 
         if (hit.collider != null)
         {
             target = hit.collider.gameObject;  //히트 된 게임 오브젝트를 타겟으로 지정
             targetObject = target.GetComponent<Inventory_Slot>();
+            Debug.Log(target);
         }
     }
 
@@ -130,7 +135,7 @@ public class Inventory_Slot : MonoBehaviour
         itemID = item.itemID;
         itemType = item.itemType;
         Amount = i;
-        if (item.itemType ==  5 || item.itemType == 6)
+        if (item.itemType == 5 || item.itemType == 6)
         {
             if (item.itemAmount > 0) { itemCount.text = i.ToString(); }
             else { RemoveItem(); }      //아이템의 갯수가 0보다 작으면 RemoveItem()을 이용하여 슬롯을 비움.
@@ -190,7 +195,14 @@ public class Inventory_Slot : MonoBehaviour
         {
             thisSlot = this.GetComponent<Inventory_Slot>().gameObject;
             thisText = this.transform.GetChild(0).GetComponent<Text>();
-            thisImage = this.transform.GetChild(1).GetComponent<Image>();
+            if (thisObject.CompareTag("QuickSlot"))
+            {
+                thisImage = this.transform.GetChild(0).GetComponent<Image>();
+            }
+            else
+            {
+                thisImage = this.transform.GetChild(1).GetComponent<Image>();
+            }
             image.sprite = thisImage.sprite;
             image.transform.position = Input.mousePosition;
             mainCamera.GetComponent<UI_Controller>().bMouse0Down = true;
@@ -204,18 +216,24 @@ public class Inventory_Slot : MonoBehaviour
             mainCamera.GetComponent<UI_Controller>().bMouse0Down = false;
             return;
         }
-        else if(!thisObject.CompareTag("ItemSlot"))
+        else if (targetObject == null)
         {
-            if(targetObject.CompareTag("ItemSlot") && targetObject.itemID != 0)
+            mainCamera.GetComponent<UI_Controller>().bMouse0Down = false;
+            return;
+        }
+        else if (!thisObject.CompareTag("ItemSlot"))
+        {
+            if (targetObject.CompareTag("ItemSlot") && targetObject.itemID != 0)
             {
                 thisSlot = null;
                 thisText = null;
                 thisImage = null;
                 image.sprite = null;
                 mainCamera.GetComponent<UI_Controller>().bMouse0Down = false;
+                showTooltip = false;
                 return;
             }
-            else if(targetObject.CompareTag("ItemSlot") && targetObject.itemID == 0)
+            else if (targetObject.CompareTag("ItemSlot") && targetObject.itemID == 0)
             {
                 MoveSlot();
                 this.transform.GetChild(1).gameObject.SetActive(false);
@@ -223,45 +241,86 @@ public class Inventory_Slot : MonoBehaviour
         }
         else
         {
-            if (target == null)
-            {
-                return;
-            }
-            else if (target.CompareTag("ItemSlot"))
+            if (targetObject.CompareTag("ItemSlot"))
             {
                 if (targetObject.itemID == 0)
                 {
                     MoveSlot();
                 }
+                else
+                {
+                    SwapSlot();
+                }
+            }
+            else if(targetObject.CompareTag("QuickSlot"))
+            {
+                EquipSlot();
             }
             else
             {
-                if(targetObject.itemID == 0)
+                if (targetObject.itemID == 0)
                 {
-                    if(target.CompareTag("Weapon") && thisObject.itemType == 0)
+                    if (target.CompareTag("Weapon") && thisObject.itemType == 0)
                     {
                         MoveSlot();
                     }
-                    else if(target.CompareTag("Head") && thisObject.itemType == 1)
+                    else if (target.CompareTag("Head") && thisObject.itemType == 1)
                     {
                         MoveSlot();
                     }
-                    else if(target.CompareTag("Body") && thisObject.itemType == 2)
+                    else if (target.CompareTag("Body") && thisObject.itemType == 2)
                     {
                         MoveSlot();
                     }
-                    else if(target.CompareTag("Hand") && thisObject.itemType == 3)
+                    else if (target.CompareTag("Hand") && thisObject.itemType == 3)
                     {
                         MoveSlot();
                     }
-                    else if(target.CompareTag("Foot") && thisObject.itemType == 4)
+                    else if (target.CompareTag("Foot") && thisObject.itemType == 4)
                     {
                         MoveSlot();
                     }
                     else
                     {
                         mainCamera.GetComponent<UI_Controller>().bMouse0Down = false;
+                        showTooltip = false;
                         return;
+                    }
+                }
+                else if (targetObject.itemID != 0)
+                {
+                    if (target.CompareTag("Weapon") && thisObject.itemType == 0)
+                    {
+                        SwapSlot();
+                    }
+                    else if (target.CompareTag("Head") && thisObject.itemType == 1)
+                    {
+                        SwapSlot();
+                    }
+                    else if (target.CompareTag("Body") && thisObject.itemType == 2)
+                    {
+                        SwapSlot();
+                    }
+                    else if (target.CompareTag("Hand") && thisObject.itemType == 3)
+                    {
+                        SwapSlot();
+                    }
+                    else if (target.CompareTag("Foot") && thisObject.itemType == 4)
+                    {
+                        SwapSlot();
+                    }
+                    else
+                    {
+                        mainCamera.GetComponent<UI_Controller>().bMouse0Down = false;
+                        showTooltip = false;
+                        return;
+                    }
+                }
+                else if (target.CompareTag("QuickSlot"))
+                {
+                    if (thisObject.itemType == 5)
+                    {
+                        Debug.Log("작동됨");
                     }
                 }
                 else
@@ -271,6 +330,8 @@ public class Inventory_Slot : MonoBehaviour
             }
             bDragItem = false;
         }
+        mainCamera.GetComponent<UI_Controller>().bMouse0Down = false;
+        showTooltip = false;
     }
 
     void MoveSlot()
@@ -291,7 +352,6 @@ public class Inventory_Slot : MonoBehaviour
         RemoveItem();
         target.transform.GetChild(1).gameObject.SetActive(true);
         this.transform.GetChild(1).gameObject.SetActive(false);
-        mainCamera.GetComponent<UI_Controller>().bMouse0Down = false;
     }
     void SwapSlot()
     {
@@ -326,5 +386,22 @@ public class Inventory_Slot : MonoBehaviour
         {
             target.transform.GetChild(0).GetComponent<Text>().text = "";
         }
+    }
+
+    void EquipSlot()
+    {
+        int count = 0;
+        for (int i = 0; i < 49; i++)
+        {
+            if (thisObject.transform.parent.GetChild(i).GetComponent<Inventory_Slot>().itemID == thisObject.itemID)
+            {
+                count += thisObject.transform.parent.GetChild(i).GetComponent<Inventory_Slot>().Amount;
+            }
+        }
+        targetObject.itemID = thisObject.itemID;
+        targetObject.Amount = count;
+        target.transform.GetChild(0).GetComponent<Image>().sprite = thisImage.sprite;
+        target.transform.GetChild(0).gameObject.SetActive(true);
+        target.transform.GetChild(2).GetComponent<Text>().text = targetObject.Amount.ToString();
     }
 }
