@@ -379,7 +379,7 @@ MonoBehaviour:
   knockBackResistance: 30
   hitStunResistance: 0
   tackleDamage: 5
-  autoAggro: 10
+  autoAggro: 0
   gainableEXP: 5
 --- !u!114 &114424583690214152
 MonoBehaviour:

@@ -10,6 +10,7 @@ public class PlayerAnimation : MonoBehaviour
     private SpriteRenderer sprite;
     private Vector2 curSpriteDirection;     //현재 바라보는 방향
     private Vector2 nextSpriteDirection;   //다음 바라볼 방향
+    //private GameObject helperCanvas;
     private bool isWalk;
     private bool isAttack;
 
@@ -40,6 +41,7 @@ public class PlayerAnimation : MonoBehaviour
         dmgMotionColor = new Color[2];
         dmgMotionColor[0] = new Color(1.0f, 0.4f, 0.4f, 0.8f);
         dmgMotionColor[1] = new Color(1.0f, 0.4f, 0.4f, 0.4f);
+        //helperCanvas = transform.GetChild(1).gameObject;
     }
 
     void Update()
@@ -48,20 +50,24 @@ public class PlayerAnimation : MonoBehaviour
         if (curSpriteDirection != nextSpriteDirection)
         {
             curSpriteDirection = nextSpriteDirection;
-            transform.rotation = Quaternion.Euler(0, 0, 0); //회전값 초기화
 
             //Animator의 파라미터 Direction에 의해 어느 방향의 애니메이션을 실행할 것인지 결정
             if (curSpriteDirection == Vector2.right)
             {
+                //X스케일을 1로 하여 원래 방향을 보게 함
+                transform.localScale = Vector2.right + Vector2.up;
                 playerAnimator.SetFloat("Direction", RIGHT);
                 transform.localPosition = Vector2.left * 0.03f;
             }
             if (curSpriteDirection == Vector2.left)
             {
-                transform.rotation = Quaternion.Euler(0, 180, 0);
-                playerAnimator.SetFloat("Direction", LEFT);   //Side Sprite가 오른쪽 방향 이미지이므로, 세로축으로 180도 회전하여 좌우반전
+                //X스케일을 -1로 하여 반대 방향을 보게 함
+                transform.localScale = Vector2.left + Vector2.up;
+                playerAnimator.SetFloat("Direction", LEFT);
                 transform.localPosition = Vector2.right * 0.03f;
             }
+            //헬퍼 UI는 X스케일이 항상 0보다 커야함(텍스트가 뒤집힘)
+            //if (helperCanvas.transform.lossyScale.x < 0) { helperCanvas.transform.localScale *= Vector2.left + Vector2.up; }
         }
 
         //이동 중인 상태라면 이동 애니메이션으로 전환

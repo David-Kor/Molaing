@@ -51,24 +51,14 @@ public class PlayerSkill : MonoBehaviour
         if (coolTimerList[index] > 0) { return; }
 
         GameObject skillObj;
-        if (direction == Vector2.up)
+        if (direction == Vector2.left)
         {
             skillObj = Instantiate(skill_List[index], transform.GetChild(0));
-            skillObj.transform.Rotate(0, 0, 180);
-        }
-        else if (direction == Vector2.down)
-        {
-            skillObj = Instantiate(skill_List[index], transform.GetChild(1));
-            skillObj.transform.Rotate(0, 0, 0);
-        }
-        else if (direction == Vector2.left)
-        {
-            skillObj = Instantiate(skill_List[index], transform.GetChild(2));
             skillObj.transform.Rotate(0, 0, -90);
         }
         else
         {
-            skillObj = Instantiate(skill_List[index], transform.GetChild(3));
+            skillObj = Instantiate(skill_List[index], transform.GetChild(1));
             skillObj.transform.Rotate(0, 0, 90);
         }
 

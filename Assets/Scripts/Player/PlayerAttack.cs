@@ -48,24 +48,14 @@ public class PlayerAttack : MonoBehaviour
                 //공격 방향에 따라 범위 회전 및 위치 변경
                 //상하좌우 순서로 transform자식이 각각의 위치에 배치되어있음
                 GameObject newAttack;
-                if (attackDirection == Vector2.up)
+                if (attackDirection == Vector2.left)
                 {
                     newAttack = Instantiate(basicAttackPrefab, transform.GetChild(0));
-                    newAttack.transform.Rotate(0, 0, 180);
-                }
-                else if (attackDirection == Vector2.down)
-                {
-                    newAttack = Instantiate(basicAttackPrefab, transform.GetChild(1));
-                    newAttack.transform.Rotate(0, 0, 0);
-                }
-                else if (attackDirection == Vector2.left)
-                {
-                    newAttack = Instantiate(basicAttackPrefab, transform.GetChild(2));
                     newAttack.transform.Rotate(0, 0, -90);
                 }
                 else
                 {
-                    newAttack = Instantiate(basicAttackPrefab, transform.GetChild(3));
+                    newAttack = Instantiate(basicAttackPrefab, transform.GetChild(1));
                     newAttack.transform.Rotate(0, 0, 90);
                 }
 
