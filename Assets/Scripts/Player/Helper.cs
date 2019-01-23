@@ -5,18 +5,16 @@ using UnityEngine;
 
 public class Helper : MonoBehaviour
 {
-    public float xDist;
-    public float yDist;
-    public float floatingSpeed;
+    public float sqrt_maxDist;
+    public float moveSpeed;
 
     public float txtPrintSpeed;      //문자 출력 속도
     public float defaultPrintTime;  //문자 출력 시간
     public GameObject canvas;
+    public GameObject player;
 
     private Queue<string> msgQueue;
     private Text msgUI;       //텍스트 UI
-    private Vector2 originPos;
-    private Vector2 direction;
 
     void Awake()
     {
@@ -28,52 +26,26 @@ public class Helper : MonoBehaviour
         msgUI = transform.parent.GetComponentInChildren<Text>();
         msgUI.text = "";
         SetActiveHelpMassage(false);
+        AddHelpMassage("일뚜이이이이이이이이이이이이이이이이이이이이이이이이이이이이이이이이이이이이이이이이이이이이이이이이이잉");
         AddHelpMassage("히이이이이이이이이이이이이이이이이이이이이이이이이이이이이이잉");
         AddHelpMassage("뀨이이이이이이이이이이이이이이이이이이이이이이이이이이이이이잉");
         PrintHelpMassage();
-    }
-
-    void Start()
-    {
-        originPos = transform.localPosition;
-        direction = Vector2.zero;
+        transform.parent = null;
     }
 
     void Update()
     {
-        if (transform.localPosition.y <= originPos.y)
+        if (TargetDistance() >= sqrt_maxDist)
         {
-            direction = Vector2.left + (Vector2.up * direction.y);
-            if (transform.localPosition.x <= originPos.x - xDist)
-            {
-                direction = Vector2.right + (Vector2.up * direction.y);
-            }
+            transform.Translate((player.transform.position - transform.position) * moveSpeed * Time.deltaTime);
         }
-        else
-        {
-            direction = Vector2.right + (Vector2.up * direction.y);
-            if (transform.localPosition.x >= originPos.x)
-            {
-                direction = Vector2.left + (Vector2.up * direction.y);
-            }
-        }
-        if (transform.localPosition.x <= originPos.x - (xDist * 0.5f))
-        {
-            direction = (Vector2.right * direction.x) + Vector2.up;
-            if (transform.localPosition.y >= originPos.y + (yDist * 0.5f))
-            {
-                direction = (Vector2.right * direction.x) + Vector2.up;
-            }
-        }
-        else
-        {
-            direction = (Vector2.right * direction.x) + Vector2.down;
-            if (transform.localPosition.y <= originPos.y - (yDist * 0.5f))
-            {
-                direction = (Vector2.right * direction.x) + Vector2.down;
-            }
-        }
-        transform.Translate(direction * floatingSpeed * Time.deltaTime, Space.Self);
+    }
+
+
+    private float TargetDistance()
+    {
+        Vector2 _dist = (player.transform.position - transform.position);
+        return (_dist.x) * (_dist.x) + (_dist.y) * (_dist.y);
     }
 
 

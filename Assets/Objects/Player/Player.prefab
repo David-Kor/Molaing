@@ -515,12 +515,16 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 07583a6b85724654396c13b504f5d391, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  floating: 0
   xDist: 0.1
   yDist: 0.1
   floatingSpeed: 0.05
+  sqrt_maxDist: 0.04
+  moveSpeed: 2
   txtPrintSpeed: 0.05
   defaultPrintTime: 3
   canvas: {fileID: 1123602661010596}
+  player: {fileID: 1309920821025196}
 --- !u!114 &114532881865622384
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -533,7 +537,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   m_Material: {fileID: 0}
-  m_Color: {r: 0.9716981, g: 0.9695467, b: 0.86627805, a: 1}
+  m_Color: {r: 0.990566, g: 0.9824324, b: 0.7709594, a: 0.43529412}
   m_RaycastTarget: 1
   m_OnCullStateChanged:
     m_PersistentCalls:
@@ -610,7 +614,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   m_Material: {fileID: 0}
-  m_Color: {r: 0.21698111, g: 0.023540407, b: 0.023540407, a: 1}
+  m_Color: {r: 0.0754717, g: 0, b: 0, a: 1}
   m_RaycastTarget: 0
   m_OnCullStateChanged:
     m_PersistentCalls:
@@ -620,7 +624,7 @@ MonoBehaviour:
   m_FontData:
     m_Font: {fileID: 12800000, guid: 0787c8adab9a66944abdbd79cd1cbcc3, type: 3}
     m_FontSize: 16
-    m_FontStyle: 0
+    m_FontStyle: 1
     m_BestFit: 0
     m_MinSize: 0
     m_MaxSize: 110

@@ -362,7 +362,7 @@ public class PlayerControl : ObjectControl
             {
                 isFalling = false;
                 isJumping = false;
-                StopCoroutine("VelocityYCheck");
+                if (onGround) { StopCoroutine("VelocityYCheck"); }
             }
 
             yield return null;

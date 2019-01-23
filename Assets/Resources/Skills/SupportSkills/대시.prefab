@@ -57,7 +57,7 @@ MonoBehaviour:
   maxHitCount: 10
   coolDown: 1
   firstDelay: 0
-  delay: 0.35
+  delay: 0.3
   usableOnMove: 1
   delayCancelable: 0
   isOnHead: 1
@@ -66,8 +66,8 @@ MonoBehaviour:
   effects: []
   frameTime: 0
   isLoop: 1
-  lifeTime: 0.2
-  value: 4
+  lifeTime: 0.3
+  value: 5
   dashTime: 0.3
   effectObj: {fileID: 1323501045341022, guid: cffd2452fb0823544b59b7764a5d3c4f, type: 2}
 --- !u!212 &212506023120852224
@@ -103,7 +103,7 @@ SpriteRenderer:
   m_AutoUVMaxAngle: 89
   m_LightmapParameters: {fileID: 0}
   m_SortingLayerID: -298385175
-  m_SortingLayer: 1
+  m_SortingLayer: 2
   m_SortingOrder: 0
   m_Sprite: {fileID: 0}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
