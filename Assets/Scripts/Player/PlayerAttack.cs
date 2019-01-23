@@ -36,11 +36,11 @@ public class PlayerAttack : MonoBehaviour
             if (attackTimer <= 0)
             {
                 //공격 속도가 0인 경우(공격 불가 상태) 실행 안함 / Divid zero 예외처리 겸용
-                if (playerStatus.attackSpeed == 0) { return; }
+                if (playerStatus.GetASP() == 0) { return; }
 
                 //공격 모션 적용
-                attackTimer = 1 / playerStatus.attackSpeed;
-                playerAnimation.SetAttackMotionSpeed(playerStatus.attackSpeed);
+                attackTimer = 1 / playerStatus.GetASP();
+                playerAnimation.SetAttackMotionSpeed(playerStatus.GetASP());
                 playerAnimation.StartAttack();
                 attackDirection = playerAnimation.GetPlayerSpriteDirection();
 
@@ -64,9 +64,9 @@ public class PlayerAttack : MonoBehaviour
                 basicAttack.skillCaster = transform.parent.gameObject;
                 basicAttack.SetSkillIndex(-1);
                 basicAttack.skillDirection = attackDirection;
-                basicAttack.knockBackPower += playerStatus.knockBackPower;
+                basicAttack.knockBackPower += playerStatus.GetKBP();
                 basicAttack.isKnockBack = true;
-                basicAttack.damage += playerStatus.attackDamage;
+                basicAttack.damage += playerStatus.GetATK();
                 basicAttack.ActivateSkill();
             }
         }

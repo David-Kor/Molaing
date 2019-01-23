@@ -6,7 +6,7 @@ public class PlayerSkill : MonoBehaviour
 {
     public GameObject[] skill_List;     //스킬 프리팹 목록
 
-    private float[] coolTimerList;       //스킬별 쿨타임 타이머
+    public float[] coolTimerList;       //스킬별 쿨타임 타이머
 
     private PlayerControl playerControl;
     private int i;

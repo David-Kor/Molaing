@@ -48,10 +48,10 @@ public class Haste : SupportSkill
     {
         timer = 0;
         player_c = skillCaster.GetComponent<PlayerControl>();
-        player_c.GetPlayerStatus().moveSpeed += value;
+        player_c.GetPlayerStatus().BonusMSP(value);
     }
     public override void ReleaseSkill()
     {
-        skillCaster.GetComponent<PlayerControl>().GetPlayerStatus().moveSpeed -= value;
+        skillCaster.GetComponent<PlayerControl>().GetPlayerStatus().CancelBonusMSP(value);
     }
 }

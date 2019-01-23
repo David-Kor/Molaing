@@ -21,17 +21,12 @@ public abstract class ObjectStatus : MonoBehaviour
     public int attackDamage;    //기본 공격력(ATK)
     public float attackSpeed;    //초당 기본 공격횟수(ASP)
     public float moveSpeed;     //이동 속도(MSP)
-    public float jumpPower;
+    public float jumpPower;     //점프력(JMP)
 
     public float knockBackPower;  //넉백 수치(KBP)
 
     public int knockBackResistance;  //넉백 저항률(KBR)
     public int hitStunResistance;      //피격 시 경직 저항률(HSR)
-
-    void Awake()
-    {
-        currentHP = maxHP;
-    }
 
 
     /* 공격을 받으면 데미지 수치만큼 현재 hp 감소 */

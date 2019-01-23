@@ -8,7 +8,7 @@ public class PlayerStatus : ObjectStatus
     public float gracePeriodTime; //피격 시 무적 지속시간(GPT)
     public float currentEXP;        //경험치
     public float requireEXP;        //다음 레벨까지 필요한 경험치
-    public int statusPoint = 0;     //스탯을 올릴 수 있는 횟수
+    public int statusPoint = 0;     //스탯을 올릴 수 있는 횟수(SP)
 
     private int bonusHP;            //추가 체력
 
@@ -19,12 +19,13 @@ public class PlayerStatus : ObjectStatus
     private int bonusATK;           //추가 공격력
     private float bonusASP;        //추가 공속
     private float bonusMSP;       //추가 이속
+    private float bonusJMP;       //추가 점프력
 
-    private float bonusKBP;        //추가 넉백
-    private float bonusKBR;        //추가 넉백저항
-    private float bonusHSR;        //추가 경직저항
+    private float bonusKBP;       //추가 넉백
+    private int bonusKBR;         //추가 넉백저항
+    private int bonusHSR;         //추가 경직저항
 
-    private float bonusGPT;        //추가 무적시간
+    private float bonusGPT;         //추가 무적시간
 
     private UI_Controller ui;
 
@@ -138,9 +139,19 @@ public class PlayerStatus : ObjectStatus
     /* 이속(MSP) 영구 증가 */
     public void MSP_Up(float bonus) { moveSpeed += bonus; }
     /* 추가 이속(MSP) 증가 */
-    public void BonusMSP(float bonus) { bonus += bonus; }
+    public void BonusMSP(float bonus) { bonusMSP += bonus; }
     /* 추가 이속(MSP) 감소 */
     public void CancelBonusMSP(float bonus) { bonusMSP -= bonus; }
+
+
+    /* 점프력 최종값 반환 */
+    public float GetJMP() { return jumpPower + bonusJMP; }
+    /* 점프력(JMP) 영구 증가 */
+    public void JMP_Up(float bonus) { jumpPower += bonus; }
+    /* 추가 점프력(JMP) 증가 */
+    public void BonusJMP(float bonus) { bonusJMP += bonus; }
+    /* 추가 점프력(JMP) 감소 */
+    public void CancelBonusJMP(float bonus) { bonusJMP -= bonus; }
 
 
     /* 넉백 최종값 반환 */

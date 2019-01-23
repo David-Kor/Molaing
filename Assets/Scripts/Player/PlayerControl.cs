@@ -72,7 +72,7 @@ public class PlayerControl : ObjectControl
                 {
                     if (!isFalling && !isJumping && onGround)
                     {
-                        ForceJump(status.jumpPower);
+                        ForceJump(status.GetJMP());
                     }
                 }
                 //이동키를 눌렀는지 확인

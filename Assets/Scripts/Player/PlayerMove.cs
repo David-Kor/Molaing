@@ -46,7 +46,7 @@ public class PlayerMove : MonoBehaviour
     public void Move(Vector2 _moveDirection)
     {
         if (hitStunTimer > 0) { return; }
-        transform.Translate(_moveDirection * playerStatus.moveSpeed * Time.deltaTime, Space.World);
+        transform.Translate(_moveDirection * playerStatus.GetMSP() * Time.deltaTime, Space.World);
     }
 
 
@@ -59,7 +59,7 @@ public class PlayerMove : MonoBehaviour
     /* 피격 시 경직 적용 */
     public void HitStun()
     {
-        hitStunTimer = (DEFAULT_HIT_STUN_TIME) * (100 - playerStatus.hitStunResistance) / 100;
+        hitStunTimer = (DEFAULT_HIT_STUN_TIME) * (100 - playerStatus.GetHSR()) / 100;
         StartCoroutine("StunBlock", hitStunTimer);
     }
 
@@ -68,6 +68,6 @@ public class PlayerMove : MonoBehaviour
     public void KnockBack(Vector2 dir_dist)
     {
         knockBackTimer = DEFAULT_KNOCK_BACK_TIME;
-        rigid2D.velocity = dir_dist * (100 - playerStatus.knockBackResistance) / 100 + rigid2D.velocity.y * Vector2.up;
+        rigid2D.velocity = dir_dist * (100 - playerStatus.GetKBR()) / 100 + rigid2D.velocity.y * Vector2.up;
     }
 }
