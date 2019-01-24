@@ -578,9 +578,9 @@ GameObject:
   - component: {fileID: 905340667}
   - component: {fileID: 905340666}
   - component: {fileID: 905340665}
-  m_Layer: 0
+  m_Layer: 11
   m_Name: rpg-game-scenery-background-pixel-art-tutorial
-  m_TagString: FieldObject
+  m_TagString: Earth
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0

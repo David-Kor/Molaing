@@ -7,11 +7,10 @@ public class PlayerSkill : MonoBehaviour
     public GameObject[] skill_List;     //스킬 프리팹 목록
 
     public float[] coolTimerList;       //스킬별 쿨타임 타이머
-
     private PlayerControl playerControl;
     private int i;
 
-    void Start()
+    void Awake()
     {
         playerControl = GetComponentInParent<PlayerControl>();
         coolTimerList = new float[skill_List.Length];
@@ -29,6 +28,7 @@ public class PlayerSkill : MonoBehaviour
             if (coolTimerList[i] > 0)
             {
                 coolTimerList[i] -= Time.deltaTime;
+                if (coolTimerList[i] < 0) { coolTimerList[i] = 0; }
             }
         }
     }
@@ -40,6 +40,10 @@ public class PlayerSkill : MonoBehaviour
         yield return new WaitForSeconds(_delay);
         playerControl.SetIsDelay(false);
     }
+
+
+    /*  */
+
 
 
     /* 스킬 하나를 사용 */
@@ -106,4 +110,5 @@ public class PlayerSkill : MonoBehaviour
         if (_index < 0) { return; }
         coolTimerList[_index] = _value;
     }
+
 }

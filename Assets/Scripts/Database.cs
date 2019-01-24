@@ -141,4 +141,21 @@ public class Database : MonoBehaviour
 
     /* DB의 초기화가 끝났는지를 반환 */
     public static bool IsInitialized() { return isInit; }
+
+
+    /* 스킬 리스트에서 이름으로 검색하여 프리팹반환 */
+    public static GameObject SkillNameToObject(string _name)
+    {
+        string sName = "";
+        for (int i = 0; i < skill_list.Count; i++)
+        {
+            sName = skill_list[i].GetComponent<Skill>().skillName;
+            if (sName == _name)
+            {
+                return skill_list[i];
+            }
+        }
+
+        return null;
+    }
 }
