@@ -655,7 +655,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   onGround: 0
-  isFalling: 1
+  isFalling: 0
   isJumping: 0
   isDelay: 0
 --- !u!212 &212799343599136072
