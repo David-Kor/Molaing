@@ -106,7 +106,6 @@
      <Compile Include="Assets\Scripts\UI\QuickSlot.cs" />
      <Compile Include="Assets\Scripts\UI\UI_Controller.cs" />
      <Compile Include="Assets\Scripts\UI\UI_Equipment.cs" />
-     <None Include="Assets\Sprite Pack\Tap and Fly\Readme.txt" />
  <Reference Include="UnityEditor.StandardEvents">
  <HintPath>C:/Users/David/Documents/공부자료/Unity/Molaing/Library/ScriptAssemblies/UnityEditor.StandardEvents.dll</HintPath>
  </Reference>
