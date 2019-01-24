@@ -19,6 +19,7 @@ TagManager:
   - Wall
   - Earth
   - NPC
+  - QuickSlot
   layers:
   - Default
   - TransparentFX

@@ -8,20 +8,24 @@ public class Inventory : MonoBehaviour
     public static Inventory instance;
     public Inventory_Slot[] slots;                  //아이템 슬롯
     public Inventory_Slot[] eSlots;
-
     bool bRemove = true;
+
+    
+
 
     private int prevIndex;
     private string tooltip;
-
     void Start()
     {
+        AddObject();
         instance = this;
-        slots = new Inventory_Slot[49];
-
         for (int i = 0; i < 49; i++)
         {
-            slots[i] = gameObject.transform.GetChild(0).GetChild(i).GetComponentInChildren<Inventory_Slot>();
+            slots[i] = gameObject.transform.GetChild(1).GetChild(0).GetChild(i).GetComponentInChildren<Inventory_Slot>();
+        }
+        for (int i = 0; i < 5; i++)
+        {
+            eSlots[i] = gameObject.transform.GetChild(0).GetChild(0).GetChild(0).GetChild(0).GetChild(i).GetComponent<Inventory_Slot>();
         }
         RemoveSlot();       //처음에 인벤토리 슬롯들의 이미지가 전부 하얀 사각형이니 일괄적으로 비활성화.
 
@@ -49,6 +53,11 @@ public class Inventory : MonoBehaviour
                 slots[i].RemoveItem();       //쓰레기값을 방지하기 위해 슬롯 일괄 초기화.
                 slots[i].transform.GetChild(1).gameObject.SetActive(false);
             }
+            for (int i = 0; i < eSlots.Length; i++)
+            {
+                eSlots[i].RemoveItem();
+                eSlots[i].transform.GetChild(1).gameObject.SetActive(false);
+            }
             bRemove = false;
         }
     }
@@ -71,7 +80,7 @@ public class Inventory : MonoBehaviour
                         slots[j].GetComponent<Inventory_Slot>().AddItem(Database.item[i], slots[j].Amount);
                         return;
                     }
-                    if(slots[j].itemID != 0)        //전달받은 itemID와 다른 ID를 슬롯이 가지고 있으면 다음 슬롯을 검색.
+                    if (slots[j].itemID != 0)        //전달받은 itemID와 다른 ID를 슬롯이 가지고 있으면 다음 슬롯을 검색.
                     {
                         continue;
                     }
@@ -82,4 +91,10 @@ public class Inventory : MonoBehaviour
             }
         }
     }
+    void AddObject()
+    { 
+        slots = new Inventory_Slot[49];
+        eSlots = new Inventory_Slot[5];
+    }
+    
 }

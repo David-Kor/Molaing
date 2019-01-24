@@ -10,6 +10,7 @@ public class InGameStatus : MonoBehaviour {
     public Image hpBar;
     PlayerStatus Player;
 
+    UI_Controller uI_Controller;
     float MAX_HP;
     float Current_HP;
     
