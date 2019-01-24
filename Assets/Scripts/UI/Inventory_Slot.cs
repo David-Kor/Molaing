@@ -28,6 +28,8 @@ public class Inventory_Slot : MonoBehaviour
     GameObject mainCamera;
     Image thisImage;
     Text thisText;
+    float floatx;
+    float floaty;
 
     private string tooltip;
     private bool itemOption;
@@ -148,8 +150,7 @@ public class Inventory_Slot : MonoBehaviour
         GUI.skin = skin;
         if (showTooltip && !mainCamera.GetComponent<UI_Controller>().bMouse0Down)
         {
-            style.richText = true;
-            GUI.Box(new Rect(Event.current.mousePosition.x + 5, Event.current.mousePosition.y + 2, 200, 200), tooltip, skin.GetStyle("tooltip"));
+            GUI.Box(new Rect(Event.current.mousePosition.x, Event.current.mousePosition.y, 200, 200), tooltip, skin.GetStyle("tooltip"));
         }
         //showTooltip이 true가 되면 마우스를 따라다니는 툴팁틀 생성한다.
 
@@ -402,6 +403,6 @@ public class Inventory_Slot : MonoBehaviour
         targetObject.Amount = count;
         target.transform.GetChild(0).GetComponent<Image>().sprite = thisImage.sprite;
         target.transform.GetChild(0).gameObject.SetActive(true);
-        target.transform.GetChild(2).GetComponent<Text>().text = targetObject.Amount.ToString();
+        target.transform.GetChild(3).GetComponent<Text>().text = targetObject.Amount.ToString();
     }
 }

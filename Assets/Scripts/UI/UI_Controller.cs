@@ -8,6 +8,8 @@ public class UI_Controller : MonoBehaviour
     GameObject Player;
     GameObject Inventory;
     GameObject InGameStatus;
+    Inventory_Slot[] iSlot;
+    QuickSlot[] qSlot;
 
     Button strengthButton;
     Button agilityButton;
@@ -35,6 +37,8 @@ public class UI_Controller : MonoBehaviour
 
         Inventory = transform.GetChild(0).GetChild(1).gameObject; //Main Camera/Canvas/Inventory
         InGameStatus = transform.GetChild(0).GetChild(0).gameObject;
+        iSlot = new Inventory_Slot[49];
+        qSlot = new QuickSlot[4];
 
         LV = Inventory.transform.GetChild(0).GetChild(1).GetChild(2).GetComponent<Text>();  //Inventory/Left/Bottom/LV
         HitPoint = Inventory.transform.GetChild(0).GetChild(1).GetChild(4).GetComponent<Text>();  //Inventory/Left/Bottom/HP
@@ -46,6 +50,15 @@ public class UI_Controller : MonoBehaviour
         strengthButton = Inventory.transform.GetChild(0).GetChild(1).GetChild(7).GetComponent<Button>();
         agilityButton = Inventory.transform.GetChild(0).GetChild(1).GetChild(10).GetComponent<Button>();
         intelligenceButton = Inventory.transform.GetChild(0).GetChild(1).GetChild(13).GetComponent<Button>();
+
+        for(int i = 0; i < 49; i++)
+        {
+            iSlot[i] = Inventory.transform.GetChild(1).GetChild(0).GetChild(i).GetComponent<Inventory_Slot>();
+        }
+        for(int i = 0; i< 4; i++)
+        {
+            qSlot[i] = Inventory.transform.parent.GetChild(2).GetChild(0).GetChild(i).GetComponent<QuickSlot>();
+        }
 
         bInventory = false;
     }
@@ -76,9 +89,9 @@ public class UI_Controller : MonoBehaviour
         }
         LV.text = Player.GetComponentInChildren<PlayerStatus>().level.ToString();
         HitPoint.text = Player.GetComponentInChildren<PlayerStatus>().currentHP.ToString() + "/" + Player.GetComponentInChildren<PlayerStatus>().maxHP.ToString();
-        Strength.text = Player.GetComponentInChildren<PlayerStatus>().strength.ToString();
-        Agility.text = Player.GetComponentInChildren<PlayerStatus>().agility.ToString();
-        Intelligence.text = Player.GetComponentInChildren<PlayerStatus>().intelligence.ToString();
+        Strength.text = Player.GetComponentInChildren<PlayerStatus>().GetSTR().ToString();
+        Agility.text = Player.GetComponentInChildren<PlayerStatus>().GetAGI().ToString();
+        Intelligence.text = Player.GetComponentInChildren<PlayerStatus>().GetINT().ToString();
         point = Player.GetComponentInChildren<PlayerStatus>().statusPoint;
         Point.text = point.ToString();
         if (point > 0)
@@ -105,6 +118,7 @@ public class UI_Controller : MonoBehaviour
     {
         Player.GetComponentInChildren<PlayerStatus>().STR_Up(1);
         point--;
+        Debug.Log(Player.GetComponent<PlayerStatus>().strength);
         if (point <= 0)
         {
             ButtonDeactivation();
