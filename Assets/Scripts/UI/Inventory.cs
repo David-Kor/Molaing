@@ -41,6 +41,17 @@ public class Inventory : MonoBehaviour
         GetItem(1001);
         GetItem(9001);
         GetItem(1001);
+        GetItem(1001);
+        GetItem(1001);
+        GetItem(1001);
+        GetItem(1001);
+        GetItem(1001);
+        GetItem(1001);
+        GetItem(1001);
+        GetItem(1001);
+        GetItem(1001);
+        GetItem(1001);
+        GetItem(1001);
         //====테스트 내용 끝.
     }
 
@@ -91,6 +102,24 @@ public class Inventory : MonoBehaviour
             }
         }
     }
+
+    public void GetItem(int itemID, int slotNumber, int count = 1)
+    {
+        if(slotNumber < 0) { return; }
+        else if(count < 0) { return; }
+
+        for(int i = 0; i < Database.item.Count; i++)
+        {
+            if (itemID == Database.item[i].itemID)
+            {
+                slots[slotNumber].itemID = itemID;
+                slots[slotNumber].Amount = count;
+                slots[slotNumber].transform.GetChild(1).gameObject.SetActive(true);
+                slots[slotNumber].GetComponent<Inventory_Slot>().AddItem(Database.item[i], count);
+            }
+        }
+    }
+
     void AddObject()
     { 
         slots = new Inventory_Slot[49];

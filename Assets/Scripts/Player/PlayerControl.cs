@@ -301,6 +301,11 @@ public class PlayerControl : ObjectControl
     public void SetIsDelay(bool value) { isDelay = value; }
     public bool GetIsDelay() { return isDelay; }
 
+
+    /* 인벤토리 활성화 상태 반환 */
+    public bool GetInventoryActive() { return inventoryActive; }
+
+
     public PlayerMove GetPlayerMove() { return playerMove; }
     public PlayerAnimation GetPlayerAnimation() { return playerAnimation; }
     public PlayerStatus GetPlayerStatus() { return status; }

@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.IO;
 using System.Runtime.Serialization.Formatters.Binary;
 using UnityEngine;
+using UnityEngine.UI;
 using UnityEngine.SceneManagement;
 
 public class SaveNLoad : MonoBehaviour
@@ -32,27 +33,36 @@ public class SaveNLoad : MonoBehaviour
         public int p_AGI;   //민
         public int p_INT;   //지
         public int p_ATK;  //공격력
-        public float p_ASP;     //공속
-        public float p_MSP;    //이속
-        public float p_JMP;     //점프력
-        public float p_KBP;     //넉백력
-        public int p_KBR;       //넉백저항
-        public int p_HSR;       //경직저항
-        public float p_GPT;     //무적시간
-        public float p_CurEXP; //현재경험치
+        public float p_ASP;      //공속
+        public float p_MSP;     //이속
+        public float p_JMP;      //점프력
+        public float p_KBP;      //넉백력
+        public int p_KBR;        //넉백저항
+        public int p_HSR;        //경직저항
+        public float p_GPT;      //무적시간
+        public float p_CurEXP;  //현재경험치
         public float p_ReqEXP; //필요경험치
         public int p_SP;          //스탯포인트
 
 
         public List<string> p_SkillList;        //스킬 리스트(스킬명)
         public float[] p_CoolDownList;        //스킬 쿨타임
+
+        //인벤토리 내용
+        public List<int> p_invenItemID;         //아이템 ID
+        public List<int> p_invenItemAmount;  //아이템 갯수
     }
 
     public SaveData saveData;
     public static bool actLoad;
+    public static int loadNum;
+
     private PlayerStatus playerStatus;
     private PlayerSkill playerSkill;
+    private PlayerControl playerControl;
     private Helper helper;
+    private Inventory inventory;
+    private UI_Controller ui;
 
 
     void Start()
@@ -67,7 +77,7 @@ public class SaveNLoad : MonoBehaviour
     {
         if (Input.GetKeyDown(KeyCode.F5))
         {
-            SaveGame();
+            GameSave();
             Debug.Log("F5!");
         }
         else if (Input.GetKeyDown(KeyCode.F6))
@@ -78,13 +88,29 @@ public class SaveNLoad : MonoBehaviour
         }
     }
 
-    public void SaveGame()
+    private IEnumerator SavingWork()
     {
+        yield return null;
         int i = 0;
 
         playerStatus = FindObjectOfType<PlayerStatus>();
         playerSkill = FindObjectOfType<PlayerSkill>();
         helper = FindObjectOfType<Helper>();
+        ui = FindObjectOfType<UI_Controller>();
+        playerControl = FindObjectOfType<PlayerControl>();
+        ui.Control_Inventory(true);
+        inventory = FindObjectOfType<Inventory>();
+        Image[] i_imgs = inventory.GetComponentsInChildren<Image>();
+        for (i = 0; i < i_imgs.Length; i++)
+        {
+            i_imgs[i].enabled = false;
+        }
+        yield return null;
+        for (i = 0; i < i_imgs.Length; i++)
+        {
+            i_imgs[i].enabled = true;
+        }
+        ui.Control_Inventory(playerControl.GetInventoryActive());
         saveData.scene = SceneManager.GetActiveScene().name;
         saveData.p_X = playerStatus.transform.position.x;
         saveData.p_Y = playerStatus.transform.position.y;
@@ -118,11 +144,26 @@ public class SaveNLoad : MonoBehaviour
             saveData.p_SkillList.Add(playerSkill.skill_List[i].GetComponent<Skill>().skillName);
         }
 
+
+        saveData.p_invenItemID = new List<int>();
+        saveData.p_invenItemAmount = new List<int>();
+
+        //인벤토리의 각 슬롯들 저장
+        for (i = 0; i < inventory.slots.Length; i++)
+        {
+            //해당 슬롯의 아이템 ID와 개수를 저장
+            saveData.p_invenItemID.Add(inventory.slots[i].itemID);
+            saveData.p_invenItemAmount.Add(inventory.slots[i].Amount);
+        }
+
         BinaryFormatter bf = new BinaryFormatter();
+
+        //"Save"디렉토리가 존재하지 않는 경우 새 디렉토리 생성
         if (!Directory.Exists(Application.dataPath+ "/Save"))
         {
             Directory.CreateDirectory(Application.dataPath+ "/Save");
         }
+
         FileStream file = File.Create(Application.dataPath + "/Save/SaveFile.dat");
 
         bf.Serialize(file, saveData);
@@ -145,6 +186,22 @@ public class SaveNLoad : MonoBehaviour
             playerStatus = FindObjectOfType<PlayerStatus>();
             playerSkill = FindObjectOfType<PlayerSkill>();
             helper = FindObjectOfType<Helper>();
+            ui = FindObjectOfType<UI_Controller>();
+            playerControl = FindObjectOfType<PlayerControl>();
+            ui.Control_Inventory(true);
+            inventory = FindObjectOfType<Inventory>();
+
+            Image[] i_imgs = inventory.GetComponentsInChildren<Image>();
+            for (i = 0; i < i_imgs.Length; i++)
+            {
+                i_imgs[i].enabled = false;
+            }
+            yield return null;
+            for (i = 0; i < i_imgs.Length; i++)
+            {
+                i_imgs[i].enabled = true;
+            }
+            ui.Control_Inventory(playerControl.GetInventoryActive());
             playerStatus.transform.position = new Vector3(saveData.p_X, saveData.p_Y, saveData.p_Z);
             helper.transform.position = new Vector3(saveData.h_X, saveData.h_Y, saveData.h_Z);
             playerStatus.objName = saveData.p_Name;
@@ -168,11 +225,23 @@ public class SaveNLoad : MonoBehaviour
 
             playerSkill.coolTimerList = saveData.p_CoolDownList;
 
-            //스킬 장착 로드
+            //장착된 스킬 로드
             for (i = 0; i < saveData.p_SkillList.Count; i++)
             {
                 playerSkill.skill_List[i] = Database.SkillNameToObject(saveData.p_SkillList[i]);
             }
+
+            Debug.Log(inventory.slots.Length);
+            //인벤토리의 각 슬롯별 아이템 불러오기
+            for (i = 0; i < inventory.slots.Length; i++)
+            {
+                Debug.Log("==========" + i + "번째 슬롯===========");
+                inventory.GetItem(saveData.p_invenItemID[i], i, saveData.p_invenItemAmount[i]);
+                Debug.Log(inventory.slots[i].itemID);
+                Debug.Log(inventory.slots[i].Amount);
+                Debug.Log("===============================");
+            }
+
         }
         else
         {
@@ -180,6 +249,12 @@ public class SaveNLoad : MonoBehaviour
         }
         file.Close();
         actLoad = false;
+    }
+
+
+    public void GameSave()
+    {
+        StartCoroutine("SavingWork");
     }
 
 
