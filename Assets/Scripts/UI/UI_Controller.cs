@@ -26,12 +26,11 @@ public class UI_Controller : MonoBehaviour
     public int point = 0;
 
     public bool bInventory;
-    public bool bMouse0Down;
+    public bool bMouse0Down = false;
     // Use this for initialization
     void Awake()
     {
         bInventory = false;
-        bMouse0Down = false;
 
         Player = GameObject.Find("Player").gameObject;
 
@@ -81,11 +80,16 @@ public class UI_Controller : MonoBehaviour
         {
             bInventory = false;
             Inventory.SetActive(true);
+            Inventory.GetComponent<Inventory>().RemoveSlot();
         }
         else
         {
             bInventory = false;
             Inventory.SetActive(false);
+            if(bMouse0Down == true)
+            {
+                bMouse0Down = false;
+            }
         }
         LV.text = Player.GetComponentInChildren<PlayerStatus>().level.ToString();
         HitPoint.text = Player.GetComponentInChildren<PlayerStatus>().currentHP.ToString() + "/" + Player.GetComponentInChildren<PlayerStatus>().maxHP.ToString();
@@ -94,6 +98,7 @@ public class UI_Controller : MonoBehaviour
         Intelligence.text = Player.GetComponentInChildren<PlayerStatus>().GetINT().ToString();
         point = Player.GetComponentInChildren<PlayerStatus>().statusPoint;
         Point.text = point.ToString();
+        
         if (point > 0)
         {
             ButtonActivation();

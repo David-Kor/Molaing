@@ -12,7 +12,7 @@ public class Inventory_Slot : MonoBehaviour
     public int Amount;
     public int nstSlot;
     public int itemType;
-    public int layerMask;
+    public LayerMask layerMask;
     public GUISkin skin;
     public bool showTooltip;
     private bool bDragItem;
@@ -33,40 +33,51 @@ public class Inventory_Slot : MonoBehaviour
 
     private string tooltip;
     private bool itemOption;
+
     void Start()
     {
+        mainCamera = Camera.main.gameObject;
+        Debug.Log(mainCamera);
+        takeObject();
         showTooltip = false;
         bDragItem = false;
-        mainCamera = Camera.main.gameObject;
-        image = mainCamera.transform.GetChild(0).GetChild(1).GetChild(2).GetComponent<Image>();
-        thisObject = this.GetComponent<Inventory_Slot>();
-        takeObject();
     }
-
-
     void CastRay()
     {
         target = null;
 
         Vector2 pos = Camera.main.ScreenToWorldPoint(Input.mousePosition);
 
-        //layerMask = (-1) - (1 << 11);
-        //layerMask = ~layerMask;
-        RaycastHit2D hit = Physics2D.Raycast(pos, Vector2.zero, 0f);
+        layerMask = (1 << 0) | (1 << 1) | (1 << 2) | (1 << 3) | (1 << 4) | (1 << 6) | (1 << 7) | (1 << 8) | (1 << 9) | ( 1 << 10) | ( 1 << 11) | (1 << 12) | (1 << 13);
+        Ray2D ray = new Ray2D(pos, Vector2.zero);
 
-        if (hit.collider != null)
+        RaycastHit2D[] hits = Physics2D.RaycastAll(ray.origin, ray.direction, 14, ~layerMask);
+        foreach(var hit in hits)
         {
-            target = hit.collider.gameObject;  //히트 된 게임 오브젝트를 타겟으로 지정
-            targetObject = target.GetComponent<Inventory_Slot>();
+            if ( hit.collider.gameObject.CompareTag("ItemSlot")
+                || hit.collider.gameObject.CompareTag("QuickSlot")
+                || hit.collider.gameObject.CompareTag("SkillSlot")
+                || hit.collider.gameObject.CompareTag("Weapon")
+                || hit.collider.gameObject.CompareTag("Head")
+                || hit.collider.gameObject.CompareTag("Body")
+                || hit.collider.gameObject.CompareTag("Hand")
+                || hit.collider.gameObject.CompareTag("Foot"))
+            {
+                target = hit.collider.gameObject;
+                targetObject = target.GetComponent<Inventory_Slot>();
+            }
+
         }
     }
 
     public void takeObject()
     {
-        if (icon == null) { icon = transform.GetChild(1).GetComponent<Image>(); }
-        if (itemCount == null) { itemCount = transform.GetChild(0).GetComponent<Text>(); }
+        mainCamera = Camera.main.gameObject;
+        image = mainCamera.transform.GetChild(0).GetChild(1).GetChild(2).GetComponent<Image>();
+        thisObject = this.GetComponent<Inventory_Slot>();
+        icon = transform.GetChild(1).GetComponent<Image>();
+        itemCount = transform.GetChild(0).GetComponent<Text>();
     }
-
     string CreateToolTip(int itemID)
     {
         int num = 0;
@@ -120,7 +131,6 @@ public class Inventory_Slot : MonoBehaviour
         itemOption = false;
         return tooltip;
     }
-
     public void Tooltip()
     {
         if (itemID > 0 && !mainCamera.GetComponent<UI_Controller>().bMouse0Down)
@@ -149,13 +159,13 @@ public class Inventory_Slot : MonoBehaviour
         style.richText = true;
         GUI.skin.button.wordWrap = true;
         GUI.skin = skin;
-        if (showTooltip && !mainCamera.GetComponent<UI_Controller>().bMouse0Down)
+        if (showTooltip)
         {
-            GUI.Box(new Rect(Event.current.mousePosition.x, Event.current.mousePosition.y, 200, 200), tooltip, skin.GetStyle("tooltip"));
+            GUI.Box(new Rect(Event.current.mousePosition.x + 5, Event.current.mousePosition.y + 5, 200, 200), tooltip, skin.GetStyle("tooltip"));
         }
         //showTooltip이 true가 되면 마우스를 따라다니는 툴팁틀 생성한다.
 
-        if (mainCamera.GetComponent<UI_Controller>().bMouse0Down) { GUI.DrawTexture(new Rect(Input.mousePosition.x, Event.current.mousePosition.y, 50, 50), image.mainTexture); }
+        if (mainCamera.GetComponent<UI_Controller>().bMouse0Down) { GUI.DrawTexture(new Rect(Input.mousePosition.x, Event.current.mousePosition.y, 32, 32), image.mainTexture); }
 
     }
     public void RemoveItem()
@@ -209,16 +219,20 @@ public class Inventory_Slot : MonoBehaviour
             image.transform.position = Input.mousePosition;
             mainCamera.GetComponent<UI_Controller>().bMouse0Down = true;
         }
+        if(Input.GetMouseButtonUp(0)) { OnMouseUp(); }
     }
     public void OnMouseUp()
     {
+        Debug.Log("Drop!");
         CastRay();
+        Debug.Log(target);
         if (this.itemID == 0)
         {
+            Debug.Log("here");
             mainCamera.GetComponent<UI_Controller>().bMouse0Down = false;
             return;
         }
-        else if (targetObject == null)
+        else if (target == null)
         {
             mainCamera.GetComponent<UI_Controller>().bMouse0Down = false;
             return;
