@@ -26,10 +26,6 @@ public class Helper : MonoBehaviour
         msgUI = transform.parent.GetComponentInChildren<Text>();
         msgUI.text = "";
         SetActiveHelpMassage(false);
-        AddHelpMassage("일뚜이이이이이이이이이이이이이이이이이이이이이이이이이이이이이이이이이이이이이이이이이이이이이이이이이잉");
-        AddHelpMassage("히이이이이이이이이이이이이이이이이이이이이이이이이이이이이이잉");
-        AddHelpMassage("뀨이이이이이이이이이이이이이이이이이이이이이이이이이이이이이잉");
-        PrintHelpMassage();
         transform.parent = null;
     }
 

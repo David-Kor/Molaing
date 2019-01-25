@@ -51,6 +51,7 @@ public class SaveNLoad : MonoBehaviour
         //인벤토리 내용
         public List<int> p_invenItemID;         //아이템 ID
         public List<int> p_invenItemAmount;  //아이템 갯수
+        public List<int> p_equipItemID;
     }
 
     public SaveData saveData;
@@ -82,12 +83,35 @@ public class SaveNLoad : MonoBehaviour
         }
         else if (Input.GetKeyDown(KeyCode.F6))
         {
-            actLoad = true;
-            SceneLoad();
+            GameLoad();
             Debug.Log("F6!");
         }
     }
 
+
+    private void InventoryVisible(bool _set)
+    {
+        int i;
+        Image[] i_imgs = inventory.GetComponentsInChildren<Image>();
+        RawImage[] i_rimgs = inventory.GetComponentsInChildren<RawImage>();
+        Text[] i_txt = inventory.GetComponentsInChildren<Text>();
+
+        for (i = 0; i < i_imgs.Length; i++)
+        {
+            i_imgs[i].enabled = _set;
+        }
+        for (i = 0; i < i_rimgs.Length; i++)
+        {
+            i_rimgs[i].enabled = _set;
+        }
+        for (i = 0; i < i_txt.Length; i++)
+        {
+            i_txt[i].enabled = _set;
+        }
+    }
+
+
+    /* 현재 상태를 세이브 파일로 기록하는 Coroutine */
     private IEnumerator SavingWork()
     {
         yield return null;
@@ -98,18 +122,13 @@ public class SaveNLoad : MonoBehaviour
         helper = FindObjectOfType<Helper>();
         ui = FindObjectOfType<UI_Controller>();
         playerControl = FindObjectOfType<PlayerControl>();
+        //인벤토리 컴포넌트를 받기 위해 일시적 활성화
         ui.Control_Inventory(true);
         inventory = FindObjectOfType<Inventory>();
-        Image[] i_imgs = inventory.GetComponentsInChildren<Image>();
-        for (i = 0; i < i_imgs.Length; i++)
-        {
-            i_imgs[i].enabled = false;
-        }
+        //인벤토리의 모습을 잠시 숨기고 초기화를 기다림
+        InventoryVisible(false);
         yield return null;
-        for (i = 0; i < i_imgs.Length; i++)
-        {
-            i_imgs[i].enabled = true;
-        }
+        InventoryVisible(true);
         ui.Control_Inventory(playerControl.GetInventoryActive());
         saveData.scene = SceneManager.GetActiveScene().name;
         saveData.p_X = playerStatus.transform.position.x;
@@ -141,19 +160,28 @@ public class SaveNLoad : MonoBehaviour
         saveData.p_SkillList = new List<string>();
         for (i = 0; i < playerSkill.skill_List.Length; i++)
         {
+            //스킬 슬롯이 비어있으면 무시
+            if (playerSkill.skill_List[i] == null) { continue; }
             saveData.p_SkillList.Add(playerSkill.skill_List[i].GetComponent<Skill>().skillName);
         }
 
-
+        //인벤토리의 각 슬롯들 저장
         saveData.p_invenItemID = new List<int>();
         saveData.p_invenItemAmount = new List<int>();
-
-        //인벤토리의 각 슬롯들 저장
         for (i = 0; i < inventory.slots.Length; i++)
         {
             //해당 슬롯의 아이템 ID와 개수를 저장
             saveData.p_invenItemID.Add(inventory.slots[i].itemID);
             saveData.p_invenItemAmount.Add(inventory.slots[i].Amount);
+        }
+
+
+
+        //장착된 장비 슬롯 저장
+        saveData.p_equipItemID = new List<int>();
+        for (i = 0; i < inventory.eSlots.Length; i++)
+        {
+            saveData.p_equipItemID.Add(inventory.eSlots[i].itemID);
         }
 
         BinaryFormatter bf = new BinaryFormatter();
@@ -171,10 +199,9 @@ public class SaveNLoad : MonoBehaviour
     }
 
     
+    /* 세이브 파일을 읽어서 적용시키는 Coroutine */
     private IEnumerator LoadingWork()
     {
-        yield return null;
-
         BinaryFormatter bf = new BinaryFormatter();
         FileStream file = File.Open(Application.dataPath + "/Save/SaveFile.dat", FileMode.Open);
 
@@ -188,19 +215,13 @@ public class SaveNLoad : MonoBehaviour
             helper = FindObjectOfType<Helper>();
             ui = FindObjectOfType<UI_Controller>();
             playerControl = FindObjectOfType<PlayerControl>();
+            //인벤토리 컴포넌트를 받기 위해 일시적 활성화
             ui.Control_Inventory(true);
             inventory = FindObjectOfType<Inventory>();
-
-            Image[] i_imgs = inventory.GetComponentsInChildren<Image>();
-            for (i = 0; i < i_imgs.Length; i++)
-            {
-                i_imgs[i].enabled = false;
-            }
+            //인벤토리의 모습을 잠시 숨기고 초기화를 기다림
+            InventoryVisible(false);
             yield return null;
-            for (i = 0; i < i_imgs.Length; i++)
-            {
-                i_imgs[i].enabled = true;
-            }
+            InventoryVisible(true);
             ui.Control_Inventory(playerControl.GetInventoryActive());
             playerStatus.transform.position = new Vector3(saveData.p_X, saveData.p_Y, saveData.p_Z);
             helper.transform.position = new Vector3(saveData.h_X, saveData.h_Y, saveData.h_Z);
@@ -231,15 +252,16 @@ public class SaveNLoad : MonoBehaviour
                 playerSkill.skill_List[i] = Database.SkillNameToObject(saveData.p_SkillList[i]);
             }
 
-            Debug.Log(inventory.slots.Length);
             //인벤토리의 각 슬롯별 아이템 불러오기
             for (i = 0; i < inventory.slots.Length; i++)
             {
-                Debug.Log("==========" + i + "번째 슬롯===========");
                 inventory.GetItem(saveData.p_invenItemID[i], i, saveData.p_invenItemAmount[i]);
-                Debug.Log(inventory.slots[i].itemID);
-                Debug.Log(inventory.slots[i].Amount);
-                Debug.Log("===============================");
+            }
+
+            //장비 장착슬롯별 아이템 불러오기
+            for (i = 0; i < inventory.eSlots.Length; i++)
+            {
+                inventory.GetEItem(saveData.p_equipItemID[i], i);
             }
 
         }
@@ -252,19 +274,23 @@ public class SaveNLoad : MonoBehaviour
     }
 
 
+    /* 게임 세이브를 원할 때 호출 */
     public void GameSave()
     {
         StartCoroutine("SavingWork");
     }
 
 
-    public void SceneLoad()
+    /* 게임을 로드할 때 호출 */
+    public void GameLoad()
     {
         BinaryFormatter bf = new BinaryFormatter();
         FileStream file = File.Open(Application.dataPath + "/Save/SaveFile.dat", FileMode.Open);
 
         if (file != null && file.Length > 0)
         {
+            //actLoad를 활성화시키고 씬을 불러옴
+            actLoad = true;
             SceneManager.LoadScene((bf.Deserialize(file) as SaveData).scene);
         }
         file.Close();

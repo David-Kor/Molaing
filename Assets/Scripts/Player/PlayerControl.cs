@@ -201,21 +201,33 @@ public class PlayerControl : ObjectControl
     /* 스킬 사용 키 입력 확인 */
     private int CheckSkillKeyInput()
     {
-        if (Input.GetButtonDown("Skill_1"))
+        if (Input.GetButtonDown("BackStep"))
         {
             return 0;
         }
-        else if (Input.GetButtonDown("Skill_2"))
+        else if (Input.GetButtonDown("Dash"))
         {
             return 1;
         }
-        else if (Input.GetButtonDown("Skill_3"))
+        else if (Input.GetButtonDown("Skill_1"))
         {
             return 2;
         }
-        else if (Input.GetButtonDown("Skill_4"))
+        else if (Input.GetButtonDown("Skill_2"))
         {
             return 3;
+        }
+        else if (Input.GetButtonDown("Skill_3"))
+        {
+            return 4;
+        }
+        else if (Input.GetButtonDown("Skill_4"))
+        {
+            return 5;
+        }
+        else if (Input.GetButtonDown("Skill_5"))
+        {
+            return 6;
         }
         return -1;
     }

@@ -25,7 +25,7 @@ public class PlayerStatus : ObjectStatus
     private int bonusKBR;         //추가 넉백저항
     private int bonusHSR;         //추가 경직저항
 
-    private float bonusGPT;         //추가 무적시간
+    private float bonusGPT;       //추가 무적시간
 
     private UI_Controller ui;
 

@@ -120,6 +120,20 @@ public class Inventory : MonoBehaviour
         }
     }
 
+    public void GetEItem(int itemID, int slotNumber, int count = 1)
+    {
+        for(int i = 0; i < Database.item.Count; i++)
+        {
+            if(itemID == Database.item[i].itemID)
+            {
+                eSlots[slotNumber].itemID = itemID;
+                eSlots[slotNumber].Amount = count;
+                eSlots[slotNumber].transform.GetChild(1).gameObject.SetActive(true);
+                eSlots[slotNumber].GetComponent<Inventory_Slot>().AddItem(Database.item[i], count);
+            }
+        }
+    }
+
     void AddObject()
     { 
         slots = new Inventory_Slot[49];

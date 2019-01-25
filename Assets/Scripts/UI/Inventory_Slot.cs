@@ -58,7 +58,6 @@ public class Inventory_Slot : MonoBehaviour
         {
             target = hit.collider.gameObject;  //히트 된 게임 오브젝트를 타겟으로 지정
             targetObject = target.GetComponent<Inventory_Slot>();
-            Debug.Log(target);
         }
     }
 
@@ -147,6 +146,8 @@ public class Inventory_Slot : MonoBehaviour
     void OnGUI()
     {
         GUIStyle style = new GUIStyle();
+        style.richText = true;
+        GUI.skin.button.wordWrap = true;
         GUI.skin = skin;
         if (showTooltip && !mainCamera.GetComponent<UI_Controller>().bMouse0Down)
         {
@@ -321,7 +322,7 @@ public class Inventory_Slot : MonoBehaviour
                 {
                     if (thisObject.itemType == 5)
                     {
-                        Debug.Log("작동됨");
+
                     }
                 }
                 else
@@ -356,7 +357,6 @@ public class Inventory_Slot : MonoBehaviour
     }
     void SwapSlot()
     {
-        Debug.Log("교체");
         int i;
         Sprite sprite;
         i = this.gameObject.GetComponent<Inventory_Slot>().itemID;
