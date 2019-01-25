@@ -129,7 +129,7 @@ public abstract class EnemyControl : ObjectControl
             {
                 isFalling = false;
                 isJumping = false;
-                if (onGround) { StopCoroutine("VelocityYCheck"); }
+                if (onGround) { break; }
             }
 
             yield return null;

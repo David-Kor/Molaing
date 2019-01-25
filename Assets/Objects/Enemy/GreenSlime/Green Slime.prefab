@@ -371,14 +371,13 @@ MonoBehaviour:
   strength: 0
   agility: 0
   intelligence: 10
-  attackDamage: 1
+  attackDamage: 5
   attackSpeed: 0.7
   moveSpeed: 0.5
   jumpPower: 0
   knockBackPower: 1
   knockBackResistance: 30
   hitStunResistance: 0
-  tackleDamage: 5
   autoAggro: 0
   gainableEXP: 5
 --- !u!114 &114424583690214152

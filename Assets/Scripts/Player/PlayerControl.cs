@@ -50,6 +50,7 @@ public class PlayerControl : ObjectControl
 
     void Update()
     {
+        //Debug.Log("(x : " + rigid.velocity.x + "  , y : " + rigid.velocity.y + ")");
         //조작키(Control)가 블록 되어있으면 동작 안함
         if (controllable == false) { return; }
 
@@ -379,7 +380,7 @@ public class PlayerControl : ObjectControl
             {
                 isFalling = false;
                 isJumping = false;
-                if (onGround) { StopCoroutine("VelocityYCheck"); }
+                if (onGround) { break; }
             }
 
             yield return null;

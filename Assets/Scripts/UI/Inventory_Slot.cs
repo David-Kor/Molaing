@@ -52,19 +52,30 @@ public class Inventory_Slot : MonoBehaviour
 
         //layerMask = (-1) - (1 << 11);
         //layerMask = ~layerMask;
-        RaycastHit2D hit = Physics2D.Raycast(pos, Vector2.zero, 0f);
+        Ray2D ray = new Ray2D(pos, Vector2.zero);
+        RaycastHit2D[] hits = Physics2D.RaycastAll(ray.origin, ray.direction);
 
-        if (hit.collider != null)
+        foreach(var hit in hits)
         {
-            target = hit.collider.gameObject;  //히트 된 게임 오브젝트를 타겟으로 지정
+            if (!hit.collider.gameObject.CompareTag("ItemSlot")
+                && !hit.collider.gameObject.CompareTag("QuickSlot")
+                && !hit.collider.gameObject.CompareTag("SkillSlot")
+                && !hit.collider.gameObject.CompareTag("Weapon")
+                && !hit.collider.gameObject.CompareTag("Head")
+                && !hit.collider.gameObject.CompareTag("Body")
+                && !hit.collider.gameObject.CompareTag("Hand")
+                && !hit.collider.gameObject.CompareTag("Foot"))
+                continue;
+
+            target = hit.collider.gameObject;
             targetObject = target.GetComponent<Inventory_Slot>();
         }
     }
 
     public void takeObject()
     {
-        if (icon == null) { icon = transform.GetChild(1).GetComponent<Image>(); }
-        if (itemCount == null) { itemCount = transform.GetChild(0).GetComponent<Text>(); }
+        icon = transform.GetChild(1).GetComponent<Image>();
+        itemCount = transform.GetChild(0).GetComponent<Text>();
     }
 
     string CreateToolTip(int itemID)
@@ -149,9 +160,9 @@ public class Inventory_Slot : MonoBehaviour
         style.richText = true;
         GUI.skin.button.wordWrap = true;
         GUI.skin = skin;
-        if (showTooltip && !mainCamera.GetComponent<UI_Controller>().bMouse0Down)
+        if (showTooltip)
         {
-            GUI.Box(new Rect(Event.current.mousePosition.x, Event.current.mousePosition.y, 200, 200), tooltip, skin.GetStyle("tooltip"));
+            GUI.Box(new Rect(Event.current.mousePosition.x + 5, Event.current.mousePosition.y + 5, 200, 200), tooltip, skin.GetStyle("tooltip"));
         }
         //showTooltip이 true가 되면 마우스를 따라다니는 툴팁틀 생성한다.
 

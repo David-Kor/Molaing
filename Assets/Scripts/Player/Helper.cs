@@ -26,6 +26,10 @@ public class Helper : MonoBehaviour
         msgUI = transform.parent.GetComponentInChildren<Text>();
         msgUI.text = "";
         SetActiveHelpMassage(false);
+        AddHelpMassage("TESTESTESTESTST");
+        AddHelpMassage("TESTESTESTESTST");
+        AddHelpMassage("TESTESTESTESTST");
+        PrintHelpMassage();
         transform.parent = null;
     }
 
@@ -50,6 +54,7 @@ public class Helper : MonoBehaviour
     {
         Queue<char> _txtQueue = new Queue<char>();
         string _msg;
+        if (!GetActiveMassage()) { SetActiveHelpMassage(true); }
 
         while (msgQueue.Count > 0)
         {
@@ -89,9 +94,6 @@ public class Helper : MonoBehaviour
         }
         //새 메시지를 큐에 추가
         msgQueue.Enqueue(_msg);
-        
-        //UI가 비활성화 상태라면 활성화시킴
-        if (!GetActiveMassage()) { SetActiveHelpMassage(true); }
         msgUI.text = "";
     }
 

@@ -52,7 +52,12 @@ public class PlayerMove : MonoBehaviour
 
     public void Jump(float force)
     {
-        if (hitStunTimer > 0) { return; }
+        //경직상태면 점프를 하지 않음
+        if (hitStunTimer > 0)
+        {
+            playerControl.StartCoroutine("VelocityYCheck");
+            return;
+        }
         rigid2D.AddForce(Vector2.up * force, ForceMode2D.Impulse);
     }
 

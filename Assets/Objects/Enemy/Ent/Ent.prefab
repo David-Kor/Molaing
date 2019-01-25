@@ -371,14 +371,13 @@ MonoBehaviour:
   strength: 0
   agility: 0
   intelligence: 10
-  attackDamage: 1
+  attackDamage: 8
   attackSpeed: 0.7
   moveSpeed: 0.5
   jumpPower: 0
   knockBackPower: 1.3
   knockBackResistance: 0
   hitStunResistance: 0
-  tackleDamage: 10
   autoAggro: 100
   gainableEXP: 10
 --- !u!114 &114371067744934898
@@ -403,9 +402,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 0820544d455665346a8a0a2260b3721c, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  minPatrolDelay: 1
-  maxPatrolDelay: 5
-  maxDistancePatrol: 1
+  minPatrolDelay: 0
+  maxPatrolDelay: 0.5
+  maxDistancePatrol: 0.5
 --- !u!114 &114540941118327218
 MonoBehaviour:
   m_ObjectHideFlags: 1

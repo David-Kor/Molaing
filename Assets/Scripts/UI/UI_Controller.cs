@@ -81,6 +81,7 @@ public class UI_Controller : MonoBehaviour
         {
             bInventory = false;
             Inventory.SetActive(true);
+            Inventory.GetComponent<Inventory>().RemoveSlot();
         }
         else
         {
@@ -94,6 +95,7 @@ public class UI_Controller : MonoBehaviour
         Intelligence.text = Player.GetComponentInChildren<PlayerStatus>().GetINT().ToString();
         point = Player.GetComponentInChildren<PlayerStatus>().statusPoint;
         Point.text = point.ToString();
+        
         if (point > 0)
         {
             ButtonActivation();
