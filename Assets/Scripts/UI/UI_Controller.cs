@@ -111,39 +111,43 @@ public class UI_Controller : MonoBehaviour
         agilityButton.gameObject.SetActive(false);
         intelligenceButton.gameObject.SetActive(false);
     }
-
     void ButtonActivation()
     {
         strengthButton.gameObject.SetActive(true);
         agilityButton.gameObject.SetActive(true);
         intelligenceButton.gameObject.SetActive(true);
     }
-
     public void StrengthUP()
     {
         Player.GetComponentInChildren<PlayerStatus>().STR_Up(1);
         point--;
-        Debug.Log(Player.GetComponent<PlayerStatus>().strength);
+        Strength.text = Player.GetComponentInChildren<PlayerStatus>().GetSTR().ToString();
+        Point.text = point.ToString();
+
         if (point <= 0)
         {
             ButtonDeactivation();
         }
     }
-
     public void AgilityUP()
     {
         Player.GetComponentInChildren<PlayerStatus>().AGI_Up(1);
+        Agility.text = Player.GetComponentInChildren<PlayerStatus>().GetAGI().ToString();
         point--;
+        Point.text = point.ToString();
+
         if (point <= 0)
         {
             ButtonDeactivation();
         }
     }
-
     public void IntelligenceUP()
     {
         Player.GetComponentInChildren<PlayerStatus>().INT_Up(1);
+        Intelligence.text = Player.GetComponentInChildren<PlayerStatus>().GetINT().ToString();
         point--;
+        Point.text = point.ToString();
+
         if (point <= 0)
         {
             ButtonDeactivation();

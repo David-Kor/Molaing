@@ -113,6 +113,7 @@
     <Compile Include="Assets\Scripts\UI\QuickSlot.cs" />
     <Compile Include="Assets\Scripts\UI\UI_Controller.cs" />
     <Compile Include="Assets\Scripts\UI\UI_Equipment.cs" />
+    <Compile Include="Assets\TalkSyetem.cs" />
     <Reference Include="UnityEditor.StandardEvents">
       <HintPath>C:/Users/csh82/Desktop/Molaing/Library/ScriptAssemblies/UnityEditor.StandardEvents.dll</HintPath>
     </Reference>
