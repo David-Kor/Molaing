@@ -12,6 +12,7 @@ public class Dash : SupportSkill
     void Start()
     {
         timer = 0;
+        GetComponent<SpriteRenderer>().sprite = null;
     }
 
     void Update()

@@ -23,7 +23,7 @@ GameObject:
   - component: {fileID: 70629245809924312}
   m_Layer: 0
   m_Name: "\uAC80_3"
-  m_TagString: Untagged
+  m_TagString: Skill
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -40,7 +40,7 @@ GameObject:
   - component: {fileID: 70317561373599856}
   m_Layer: 0
   m_Name: "\uAC80_1"
-  m_TagString: Untagged
+  m_TagString: Skill
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -57,7 +57,7 @@ GameObject:
   - component: {fileID: 70862584103494088}
   m_Layer: 0
   m_Name: "\uAC80_2"
-  m_TagString: Untagged
+  m_TagString: Skill
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -75,7 +75,7 @@ GameObject:
   - component: {fileID: 50515112598033512}
   m_Layer: 0
   m_Name: "\uC774\uAE30\uC5B4\uAC80"
-  m_TagString: Untagged
+  m_TagString: Skill
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -221,7 +221,7 @@ MonoBehaviour:
   delayCancelable: 0
   isOnHead: 1
   skillDirection: {x: 0, y: 0}
-  skill_IMG: {fileID: 0}
+  skill_IMG: {fileID: 21300000, guid: 1929531cf77142c4a9ab4578c087de35, type: 3}
   effects: []
   frameTime: 0
   isLoop: 1
@@ -403,14 +403,14 @@ SpriteRenderer:
   m_SortingLayerID: -298385175
   m_SortingLayer: 2
   m_SortingOrder: 0
-  m_Sprite: {fileID: 0}
+  m_Sprite: {fileID: 21300000, guid: 1929531cf77142c4a9ab4578c087de35, type: 3}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
   m_FlipX: 0
   m_FlipY: 0
   m_DrawMode: 0
-  m_Size: {x: 1, y: 1}
+  m_Size: {x: 0.35, y: 0.43}
   m_AdaptiveModeThreshold: 0.5
   m_SpriteTileMode: 0
-  m_WasSpriteAssigned: 0
+  m_WasSpriteAssigned: 1
   m_MaskInteraction: 0
   m_SpriteSortPoint: 0

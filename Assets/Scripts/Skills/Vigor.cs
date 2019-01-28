@@ -21,6 +21,7 @@ public class Vigor : SupportSkill
     void Start()
     {
         timer = 0;
+        GetComponent<SpriteRenderer>().sprite = null;
     }
 
     void Update()
@@ -46,7 +47,7 @@ public class Vigor : SupportSkill
     public override void ActivateSkill()
     {
         transform.SetParent(null);
-        //버서커 상태가 이미 활성화되어 있으면 비활성화시키고 오브젝트 제거
+        //활력 상태가 이미 활성화되어 있으면 비활성화시키고 오브젝트 제거
         Vigor healAlready = skillCaster.GetComponentInChildren<Vigor>();
         if (healAlready != null)
         {

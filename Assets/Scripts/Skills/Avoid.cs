@@ -7,6 +7,11 @@ public class Avoid : SupportSkill
     public float value;
     public float moveTime;
 
+    void Start()
+    {
+        GetComponent<SpriteRenderer>().sprite = null;
+    }
+
     public override void ActivateSkill()
     {
         transform.localEulerAngles = Vector3.zero;

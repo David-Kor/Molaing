@@ -23,7 +23,7 @@ GameObject:
   - component: {fileID: 114264260546052562}
   m_Layer: 0
   m_Name: "\uAD11\uD3ED"
-  m_TagString: Untagged
+  m_TagString: Skill
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -67,11 +67,11 @@ MonoBehaviour:
   frameTime: 0
   isLoop: 0
   lifeTime: 0
-  costTimeCycle: 1
-  costHP: 5
+  costTimeCycle: 0.25
+  costHP: 1
   bonusATK: 5
   bonusASP: 1
-  bonusKBP: 1.5
+  bonusKBP: 1.8
   bonusKBR: 50
   bonusHSR: 50
 --- !u!212 &212288740902469516

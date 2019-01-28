@@ -6,6 +6,11 @@ using UnityEngine;
  */
 public class Smite : AttackSkill
 {
+    void Start()
+    {
+        GetComponent<SpriteRenderer>().sprite = null;
+    }
+
     public override void ActivateSkill()
     {
         transform.SetParent(null);

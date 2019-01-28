@@ -8,6 +8,10 @@ public class FloatingSword : AttackSkill
 
     private SpriteRenderer[] childRenderers;
 
+    void Start()
+    {
+        GetComponent<SpriteRenderer>().sprite = null;
+    }
 
     void Update()
     {

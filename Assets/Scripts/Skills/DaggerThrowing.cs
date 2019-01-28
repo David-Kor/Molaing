@@ -7,6 +7,11 @@ public class DaggerThrowing : AttackSkill
     public float daggerSpeed;
     public GameObject bullet_dagger;
 
+    void Start()
+    {
+        GetComponent<SpriteRenderer>().sprite = null;
+    }
+
     public override void ActivateSkill()
     {
         Instantiate(bullet_dagger, transform).GetComponent<Bullet>().ShotToDirection(this, skillDirection, daggerSpeed, lifeTime);
