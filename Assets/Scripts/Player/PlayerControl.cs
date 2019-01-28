@@ -21,9 +21,10 @@ public class PlayerControl : ObjectControl
 
     private bool inventoryActive;    //인벤토리 창의 활성화 여부
     private int skillIndex;              //스킬 입력 인덱스(1~4)
-    public bool isDelay;              //딜레이 상태
+    private bool isDelay;              //딜레이 상태
+    private bool controllable;        //조작 가능 상태(통상 시 모든 키 입력불가)
 
-    private bool controllable;
+    private Skill usedSkill;
 
     void Start()
     {
@@ -50,7 +51,6 @@ public class PlayerControl : ObjectControl
 
     void Update()
     {
-        //Debug.Log("(x : " + rigid.velocity.x + "  , y : " + rigid.velocity.y + ")");
         //조작키(Control)가 블록 되어있으면 동작 안함
         if (controllable == false) { return; }
 
@@ -65,6 +65,7 @@ public class PlayerControl : ObjectControl
         {
             //스킬 키를 눌렀는지 확인
             skillIndex = CheckSkillKeyInput();
+            usedSkill = playerSkill.GetSkill(skillIndex);
 
             //딜레이 상태가 아니라면
             if (!isDelay)
@@ -91,7 +92,8 @@ public class PlayerControl : ObjectControl
                     //이동 중 사용 가능한 스킬을 사용했을 경우
                     if (skillIndex >= 0)
                     {
-                        if (playerSkill.GetSkill(skillIndex).usableOnMove)
+                        if (usedSkill != null &&
+                            usedSkill.usableOnMove)
                         {
                             playerSkill.UseSkill(skillIndex, spriteDirection);
                         }
@@ -124,7 +126,8 @@ public class PlayerControl : ObjectControl
                 playerAnimation.StopWalking();
                 playerAnimation.StopAttack();
 
-                if (skillIndex >= 0 && playerSkill.GetSkill(skillIndex).delayCancelable)
+                if (skillIndex >= 0 && usedSkill != null &&
+                    playerSkill.GetSkill(skillIndex).delayCancelable)
                 {
                     playerSkill.CancelSpell();
                     playerSkill.UseSkill(skillIndex, spriteDirection);

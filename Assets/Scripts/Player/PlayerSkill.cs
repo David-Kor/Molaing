@@ -79,7 +79,11 @@ public class PlayerSkill : MonoBehaviour
     /* 플레이어가 가진 스킬 하나를 반환 */
     public Skill GetSkill(int index)
     {
+        //Out of Index
         if (index < 0 || skill_List.Length < index) { return null; }
+        //Null Reference
+        if (skill_List[index] == null) { return null; }
+
         return skill_List[index].GetComponent<Skill>();
     }
 

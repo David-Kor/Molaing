@@ -25,6 +25,7 @@ public class Berserk : SupportSkill
     void Start()
     {
         timer = 0;
+        GetComponent<SpriteRenderer>().sprite = null;
     }
 
     void Update()

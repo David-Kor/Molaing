@@ -5,7 +5,15 @@
 //  https://github.com/pb0/DebugDisabler/blob/master/Debug.cs
 //  
 
+#define ENABLE_LOG
+
+
+#if UNITY_EDITOR
+#undef ENABLE_LOG
+#endif
+
 #if !ENABLE_LOG
+
 using UnityEngine;
 
 public class Debug
@@ -116,5 +124,6 @@ public class Debug
     {
     }
 }
+
 
 #endif

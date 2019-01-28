@@ -5,6 +5,7 @@ using UnityEngine;
 public class CameraControl : MonoBehaviour
 {
     public GameObject player;
+    public float cam_speed;
 
 	void Start () {
 	}
@@ -14,7 +15,8 @@ public class CameraControl : MonoBehaviour
     {
         if (player != null)
         {
-            transform.position = player.transform.position + (Vector3.back * 10);
+            transform.Translate((Vector2)(player.transform.position - transform.position) * cam_speed * Time.deltaTime, Space.World);
+            //transform.position = player.transform.position + (Vector3.back * 10);
         }
     }
 }
