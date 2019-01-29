@@ -44,7 +44,7 @@ public abstract class Bullet : MonoBehaviour
     {
         if (col.CompareTag("HitPoint"))
         {
-            if (col.transform.parent.gameObject == skillInfo.skillCaster) { return; }
+            if (col.transform.parent.tag == skillInfo.skillCaster.tag) { return; }
             OnHitBullet(col.GetComponent<HitObject>());
         }
     }

@@ -6,24 +6,16 @@ using DIRECTION = EnumInterface.DIRECTTION_TO_INT;
 
 public class EnemyMove : MonoBehaviour
 {
-    public float minPatrolDelay;
-    public float maxPatrolDelay;
-    public float maxDistancePatrol;
-
     private const int LEFT = (int)DIRECTION.LEFT;
     private const int RIGHT = (int)DIRECTION.RIGHT;
 
     private EnemyStatus status;
     private EnemyControl control;
     private Rigidbody2D rigid2D;
-    private GameObject targetObject;
-    private Vector2 targetPosition;
+    public GameObject targetObject;
 
-    private Vector2 randDirection;
-    private float distance;
-    private float patrolDelay;
-    private float patrolTimer;
     private bool isPatrol;
+    private bool isMovable;
 
     private const float DEFAULT_HIT_STUN_TIME = 0.25f;       //피격 경직시간 기본값
     private const float DEFAULT_KNOCK_BACK_TIME = 0.05f;  //넉백시간 기본값
@@ -36,11 +28,9 @@ public class EnemyMove : MonoBehaviour
         status = GetComponent<EnemyStatus>();
         rigid2D = GetComponent<Rigidbody2D>();
         targetObject = null;
-        targetPosition = transform.position;
-        patrolTimer = 0f;
-        patrolDelay = Random.Range(minPatrolDelay, maxPatrolDelay);
         isPatrol = false;
         hitStunTime = 0;
+        isMovable = true;
     }
 
 
@@ -49,11 +39,19 @@ public class EnemyMove : MonoBehaviour
         if (hitStunTime > 0) { hitStunTime -= Time.deltaTime; }
         if (knockBackTimer > 0) { knockBackTimer -= Time.deltaTime; }
 
+        if (rigid2D.velocity.x != 0 && knockBackTimer <= 0)
+        {
+            rigid2D.velocity = rigid2D.velocity.y * Vector2.up;
+        }
+
+        if (!isMovable)
+        {
+            /* 추가 */
+            return;
+        }
+
         if (targetObject != null)
         {
-            //순찰 중지
-            isPatrol = false;
-            iTween.Stop(gameObject);
             if (hitStunTime <= 0)
             {
                 if (targetObject.transform.position.x < transform.position.x)
@@ -67,68 +65,36 @@ public class EnemyMove : MonoBehaviour
             }
 
         }
-        else if (!isPatrol)
-        {
-            patrolTimer += Time.deltaTime;
+    }
 
-            if (patrolTimer >= patrolDelay)
-            {
-                patrolTimer = 0;
-                //임의의 시간 (min ~ max 실수)
-                patrolDelay = Random.Range(minPatrolDelay, maxPatrolDelay);
-
-                //임의의 거리 (0 ~ maxDistancePatrol 실수)
-                distance = Random.Range(0, maxDistancePatrol);
-                //임의의 정수 (0~3)
-                switch (Random.Range(2, 4))
-                {
-                    case LEFT:
-                        randDirection = Vector2.left;
-                        break;
-                    case RIGHT:
-                        randDirection = Vector2.right;
-                        break;
-                }
-
-                iTween.MoveBy(gameObject, iTween.Hash(
-                    "x", randDirection.x * distance,
-                    "speed", status.moveSpeed,
-                    "easetype", iTween.EaseType.linear,
-                    "onstart", "StartPatrol",
-                    "oncomplete", "CompletePatrol")
-                    );
-
-            }
-
-        }
-
-        if (rigid2D.velocity != Vector2.zero && knockBackTimer <= 0)
-        {
-            rigid2D.velocity = rigid2D.velocity.y * Vector2.up;
-        }
+    private void CompletePatrol()
+    {
+        control.Hold();
     }
 
 
-    void StartPatrol()
+    public void StartPatrol(Vector2 _dir_dist)
     {
         isPatrol = true;
-        control.Patrol(randDirection);
+        iTween.MoveBy(gameObject, iTween.Hash(
+                    "x", _dir_dist.x,
+                    "speed", status.moveSpeed,
+                    "easetype", iTween.EaseType.linear,
+                    "oncomplete", "CompletePatrol")
+                    );
     }
 
-    void CompletePatrol()
+    public void StopPatrol()
     {
         isPatrol = false;
-        control.Hold();
+        iTween.Stop(gameObject);
     }
 
 
     public void MoveToThisObject(GameObject _target) { targetObject = _target; }
 
 
-    public void MoveToThisPosition(Vector2 _pos) { targetPosition = _pos; }
-
-
-    public void StopMove() { targetObject = null; }
+    public void StopMoveToObject() { targetObject = null; }
 
 
     public void KnockBack(Vector2 dir_val)
@@ -138,4 +104,6 @@ public class EnemyMove : MonoBehaviour
         knockBackTimer = DEFAULT_KNOCK_BACK_TIME;
     }
 
+
+    public void SetMovable(bool _value) { isMovable = _value; }
 }

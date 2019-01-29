@@ -93,7 +93,7 @@ GameObject:
   - component: {fileID: 61876418296501260}
   - component: {fileID: 114975088688016838}
   m_Layer: 9
-  m_Name: EnemyTackle
+  m_Name: Enemy_Attack_Point
   m_TagString: Enemy
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -442,6 +442,9 @@ MonoBehaviour:
   onGround: 0
   isFalling: 0
   isJumping: 0
+  minPatrolDelay: 0
+  maxPatrolDelay: 2.5
+  maxDistancePatrol: 0.5
 --- !u!114 &114974477352970994
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -465,6 +468,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 5f2975717b079ba41a032079fdc2a4f2, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  skill_list: []
+  coolTimerList: []
 --- !u!212 &212959643329093822
 SpriteRenderer:
   m_ObjectHideFlags: 1

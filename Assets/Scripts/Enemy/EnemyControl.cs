@@ -4,19 +4,32 @@ using UnityEngine;
 
 public abstract class EnemyControl : ObjectControl
 {
+    public float minPatrolDelay;
+    public float maxPatrolDelay;
+    public float maxDistancePatrol;
+
     protected Vector2 lookDirection;
-    protected GameObject target;  // 공격 대상
+    public GameObject target;  // 공격 대상
     protected EnemyAnimation aniControl;
     protected EnemyMove move;
     protected EnemyStatus status;
+    protected EnemyAttack attack;
     protected Collider2D[] allGround;
     protected Collider2D myCollider;
+
+    
+    protected bool isDelay;
+    protected float patrolTimer;
+    protected float patrolDelay;
+    protected float distance;
+    protected Vector2 randDirection;
 
     void Start()
     {
         aniControl = GetComponentInChildren<EnemyAnimation>();
         move = GetComponent<EnemyMove>();
         status = GetComponent<EnemyStatus>();
+        attack = GetComponentInChildren<EnemyAttack>();
         lookDirection = aniControl.GetDirection();
         //적끼리의 물리적 충돌 무시 (밀림현상 방지)
         Physics2D.IgnoreLayerCollision(LayerMask.NameToLayer("Enemy"), LayerMask.NameToLayer("Enemy"), true);
@@ -28,33 +41,81 @@ public abstract class EnemyControl : ObjectControl
         {
             allGround[i] = grounds[i].GetComponent<Collider2D>();
         }
+
+        patrolTimer = 0f;
+        patrolDelay = Random.Range(minPatrolDelay, maxPatrolDelay);
+        isDelay = false;
     }
+
+    void Update()
+    {
+        //if (Input.GetKeyDown(KeyCode.Alpha1)) { SetIsDelay(!isDelay); }
+        if (target == null && !isDelay)
+        {
+            patrolTimer += Time.deltaTime;
+
+            if (patrolTimer >= patrolDelay)
+            {
+                patrolTimer = 0;
+                //임의의 시간 (min ~ max 실수)
+                patrolDelay = Random.Range(minPatrolDelay, maxPatrolDelay);
+
+                //임의의 거리 (0 ~ maxDistancePatrol 실수)
+                distance = Random.Range(0, maxDistancePatrol);
+                //임의의 정수 (0~3)
+                switch (Random.Range(0, 2))
+                {
+                    case 0:
+                        randDirection = Vector2.left;
+                        break;
+                    case 1:
+                        randDirection = Vector2.right;
+                        break;
+                }
+                Patrol(randDirection, distance);
+            }
+        }
+    }
+
+
+    /* 딜레이 상태 Set / Get */
+    public void SetIsDelay(bool value)
+    {
+        isDelay = value;
+        move.SetMovable(isDelay);
+    }
+    public bool GetIsDelay() { return isDelay; }
+
 
 
     /* 타겟 발견 */
-    public void DiscoverTarget(GameObject _target)
-    {
-        target = _target;
-        move.MoveToThisObject(target);
-        aniControl.LookAtTarget(target);
-    }
+    public abstract void DiscoverTarget(GameObject _target);
 
 
     /* 타겟 분실 */
     public void TargetLost()
     {
         target = null;
-        move.StopMove();
-        aniControl.Standing();
+        move.StopMoveToObject();
+        patrolTimer = 0f;
+        Hold();
     }
 
 
     /* 순찰 중 */
-    public void Patrol(Vector2 _direction) { aniControl.PlayPatrol(_direction); }
+    public void Patrol(Vector2 _direction, float _distance)
+    {
+        aniControl.PlayPatrol(_direction);
+        move.StartPatrol(_direction * _distance);
+    }
 
 
     /* 대기 중 */
-    public void Hold() { aniControl.Standing(); }
+    public void Hold()
+    {
+        aniControl.Standing();
+        move.StopPatrol();
+    }
 
 
     /* 공격당할 때 호출되는 함수 */

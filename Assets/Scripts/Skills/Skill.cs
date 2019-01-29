@@ -108,7 +108,7 @@ public abstract class Skill : MonoBehaviour
             hitObj = hits[i].GetComponent<HitObject>();
 
             //시전자와 대상이 같으면 무시
-            if (skillCaster.GetComponentInChildren<HitObject>().GetName() == hitObj.GetName()) { continue; }
+            if (skillCaster.tag == hitObj.transform.parent.tag) { continue; }
 
             hitObjects.Add(hitObj);
         }
@@ -137,9 +137,10 @@ public abstract class Skill : MonoBehaviour
     }
 
 
-    /* 스킬 시전을 취소 -> 이미 시전이 됐다면 취소불가 */
+    /* 스킬 시전을 취소 */
     public void CancelFirstDelay()
     {
+        //이미 시전이 됐다면 취소불가
         if (f_delayEnd) { return; }
 
         CoolDownStart();

@@ -85,11 +85,13 @@
      <Compile Include="Assets\Scripts\Skills\BasicAttack.cs" />
      <Compile Include="Assets\Scripts\Skills\Berserk.cs" />
      <Compile Include="Assets\Scripts\Skills\BulletDagger.cs" />
+     <Compile Include="Assets\Scripts\Skills\BulletOctopusBall.cs" />
      <Compile Include="Assets\Scripts\Skills\BulletTanGang.cs" />
      <Compile Include="Assets\Scripts\Skills\DaggerThrowing.cs" />
      <Compile Include="Assets\Scripts\Skills\Dash.cs" />
      <Compile Include="Assets\Scripts\Skills\FloatingSword.cs" />
      <Compile Include="Assets\Scripts\Skills\Haste.cs" />
+     <Compile Include="Assets\Scripts\Skills\OctopusShot.cs" />
      <Compile Include="Assets\Scripts\Skills\Skill.cs" />
      <Compile Include="Assets\Scripts\Skills\Smite.cs" />
      <Compile Include="Assets\Scripts\Skills\SupportSkill.cs" />

@@ -42,13 +42,12 @@ public class PlayerSkill : MonoBehaviour
     }
 
 
-    /*  */
-
-
 
     /* 스킬 하나를 사용 */
     public void UseSkill(int index, Vector2 direction)
     {
+        //Out Of Index
+        if (index < 0 || skill_List.Length <= index) { return; }
         //스킬이 없으면 사용 불가
         if (skill_List[index] == null) { return; }
         //해당 스킬의 쿨타임이 남아있으면 사용 불가
@@ -80,7 +79,7 @@ public class PlayerSkill : MonoBehaviour
     public Skill GetSkill(int index)
     {
         //Out of Index
-        if (index < 0 || skill_List.Length < index) { return null; }
+        if (index < 0 || skill_List.Length <= index) { return null; }
         //Null Reference
         if (skill_List[index] == null) { return null; }
 
@@ -111,7 +110,7 @@ public class PlayerSkill : MonoBehaviour
     /* 쿨타임 활성화 */
     public void CoolDownTimerActive(int _index, float _value)
     {
-        if (_index < 0) { return; }
+        if (_index < 0 || coolTimerList.Length <= _index) { return; }
         coolTimerList[_index] = _value;
     }
 

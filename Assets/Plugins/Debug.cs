@@ -12,7 +12,7 @@
 #undef ENABLE_LOG
 #endif
 
-#if !ENABLE_LOG
+#if ENABLE_LOG
 
 using UnityEngine;
 

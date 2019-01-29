@@ -17,7 +17,7 @@ public class EnemyAnimation : MonoBehaviour
 
     private EnemyControl control;
     private SpriteRenderer sprite;
-    private GameObject target;
+    public GameObject target;
     private Vector2 directionToTarget;
 
     private bool isGetDamage;
