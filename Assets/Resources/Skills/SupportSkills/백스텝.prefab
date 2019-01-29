@@ -55,7 +55,7 @@ MonoBehaviour:
   skillName: "\uBC31\uC2A4\uD15D"
   skillCaster: {fileID: 0}
   maxHitCount: 0
-  coolDown: 0
+  coolDown: 1
   firstDelay: 0
   delay: 0.135
   usableOnMove: 1

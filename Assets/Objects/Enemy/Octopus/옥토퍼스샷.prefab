@@ -55,9 +55,9 @@ MonoBehaviour:
   skillName: Octopus Shot
   skillCaster: {fileID: 0}
   maxHitCount: 1
-  coolDown: 3.5
-  firstDelay: 0.8
-  delay: 1
+  coolDown: 2.8
+  firstDelay: 0
+  delay: 0
   usableOnMove: 0
   delayCancelable: 0
   isOnHead: 0
@@ -66,7 +66,7 @@ MonoBehaviour:
   effects: []
   frameTime: 0
   isLoop: 1
-  lifeTime: 0.65
+  lifeTime: 1.5
   isKnockBack: 1
   knockBackPower: 2
   damage: 9

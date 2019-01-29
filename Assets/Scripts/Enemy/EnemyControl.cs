@@ -81,8 +81,6 @@ public abstract class EnemyControl : ObjectControl
     /* 딜레이 상태 Set / Get */
     public void SetIsDelay(bool value)
     {
-        isDelay = value;
-        move.SetMovable(isDelay);
     }
     public bool GetIsDelay() { return isDelay; }
 

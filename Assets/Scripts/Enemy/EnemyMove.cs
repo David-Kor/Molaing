@@ -44,12 +44,6 @@ public class EnemyMove : MonoBehaviour
             rigid2D.velocity = rigid2D.velocity.y * Vector2.up;
         }
 
-        if (!isMovable)
-        {
-            /* 추가 */
-            return;
-        }
-
         if (targetObject != null)
         {
             if (hitStunTime <= 0)

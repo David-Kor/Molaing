@@ -491,7 +491,7 @@ MonoBehaviour:
   knockBackPower: 1.3
   knockBackResistance: 20
   hitStunResistance: 0
-  autoAggro: 100
+  autoAggro: 20
   gainableEXP: 10
 --- !u!114 &114817016498265890
 MonoBehaviour:
@@ -505,6 +505,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   aggroDelay: 0.35
+  lostTime: 3
 --- !u!114 &114861012030551010
 MonoBehaviour:
   m_ObjectHideFlags: 1

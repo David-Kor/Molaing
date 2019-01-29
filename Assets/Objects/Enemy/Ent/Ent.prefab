@@ -402,9 +402,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 0820544d455665346a8a0a2260b3721c, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  minPatrolDelay: 0.5
-  maxPatrolDelay: 2.2
-  maxDistancePatrol: 1
+  targetObject: {fileID: 0}
 --- !u!114 &114540941118327218
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -417,6 +415,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   aggroDelay: 0.35
+  lostTime: 3
 --- !u!114 &114905742248602252
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -445,6 +444,7 @@ MonoBehaviour:
   minPatrolDelay: 0.5
   maxPatrolDelay: 2.2
   maxDistancePatrol: 1
+  target: {fileID: 0}
 --- !u!114 &114974477352970994
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -457,6 +457,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   animator: {fileID: 95754334422718072}
+  target: {fileID: 0}
 --- !u!114 &114975088688016838
 MonoBehaviour:
   m_ObjectHideFlags: 1
