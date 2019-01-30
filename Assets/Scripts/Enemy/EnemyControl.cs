@@ -78,9 +78,19 @@ public abstract class EnemyControl : ObjectControl
     }
 
 
-    /* 딜레이 상태 Set / Get */
+    /* 딜레이 상태 (Set / Get) */
     public void SetIsDelay(bool value)
     {
+        isDelay = value;
+        if (isDelay)
+        {
+            move.StopPatrol();
+            move.SetMovable(false);
+        }
+        else
+        {
+            move.SetMovable(true);
+        }
     }
     public bool GetIsDelay() { return isDelay; }
 

@@ -72,7 +72,7 @@ public class PlayerControl : ObjectControl
             {
                 if (CheckJumpKeyInput())
                 {
-                    if (!isFalling && !isJumping && onGround)
+                    if (!isJumping && onGround)
                     {
                         ForceJump(status.GetJMP());
                     }
@@ -143,6 +143,7 @@ public class PlayerControl : ObjectControl
             if (gracePeriodTimer <= 0)
             {
                 isAttackable = true;
+                GetComponentInChildren<HitObject>().GetComponent<Collider2D>().enabled = true;
             }
         }
     }
@@ -290,6 +291,7 @@ public class PlayerControl : ObjectControl
         {
             gracePeriodTimer = time;
         }
+        GetComponentInChildren<HitObject>().GetComponent<Collider2D>().enabled = false;
         isAttackable = false;
     }
 

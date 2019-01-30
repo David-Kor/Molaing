@@ -14,7 +14,6 @@ public class EnemyMove : MonoBehaviour
     private Rigidbody2D rigid2D;
     public GameObject targetObject;
 
-    private bool isPatrol;
     private bool isMovable;
 
     private const float DEFAULT_HIT_STUN_TIME = 0.25f;       //피격 경직시간 기본값
@@ -28,7 +27,6 @@ public class EnemyMove : MonoBehaviour
         status = GetComponent<EnemyStatus>();
         rigid2D = GetComponent<Rigidbody2D>();
         targetObject = null;
-        isPatrol = false;
         hitStunTime = 0;
         isMovable = true;
     }
@@ -44,7 +42,7 @@ public class EnemyMove : MonoBehaviour
             rigid2D.velocity = rigid2D.velocity.y * Vector2.up;
         }
 
-        if (targetObject != null)
+        if (targetObject != null && isMovable)
         {
             if (hitStunTime <= 0)
             {
@@ -69,7 +67,6 @@ public class EnemyMove : MonoBehaviour
 
     public void StartPatrol(Vector2 _dir_dist)
     {
-        isPatrol = true;
         iTween.MoveBy(gameObject, iTween.Hash(
                     "x", _dir_dist.x,
                     "speed", status.moveSpeed,
@@ -80,7 +77,6 @@ public class EnemyMove : MonoBehaviour
 
     public void StopPatrol()
     {
-        isPatrol = false;
         iTween.Stop(gameObject);
     }
 

@@ -4,7 +4,6 @@ using UnityEngine;
 
 public class E_Ent : EnemyControl
 {
-
     public override void CoolDownActive(int _index, float _value)
     {
     }

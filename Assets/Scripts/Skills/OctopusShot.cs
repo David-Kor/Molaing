@@ -12,9 +12,17 @@ public class OctopusShot : AttackSkill
         GetComponent<SpriteRenderer>().sprite = null;
     }
 
+    private IEnumerator Shoot()
+    {
+        //선딜이 끝날때까지 기다렸다가 발사
+        while (!f_delayEnd) { yield return null; }
+        Instantiate(oct_bullet, transform).GetComponent<Bullet>().ShotToDirection(this, skillDirection, bulletSpeed, lifeTime);
+    }
+
+
     public override void ActivateSkill()
     {
-        Instantiate(oct_bullet, transform).GetComponent<Bullet>().ShotToDirection(this, skillDirection, bulletSpeed, lifeTime);
+        StartCoroutine("Shoot");
     }
 
     public override void ReleaseSkill()

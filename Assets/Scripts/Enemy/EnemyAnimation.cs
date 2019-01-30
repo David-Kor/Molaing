@@ -36,9 +36,7 @@ public class EnemyAnimation : MonoBehaviour
     {
         if (target != null)
         {
-            float x = target.transform.position.x - transform.position.x;
-
-            if (x < 0) { directionToTarget = Vector2.left; }
+            if (target.transform.position.x - transform.position.x < 0) { directionToTarget = Vector2.left; }
             else { directionToTarget = Vector2.right; }
 
             PlayPatrol(directionToTarget);
@@ -64,23 +62,15 @@ public class EnemyAnimation : MonoBehaviour
     public void PlayPatrol(Vector2 _direction)
     {
         animator.SetBool("IsWalk", true);
-        transform.rotation = Quaternion.Euler(0, 0, 0);
 
-        if (_direction == Vector2.down)
-        {
-            animator.SetFloat("Direction", DOWN);
-        }
-        if (_direction == Vector2.up)
-        {
-            animator.SetFloat("Direction", UP);
-        }
         if (_direction == Vector2.right)
         {
+            transform.localScale = Vector2.right + Vector2.up;
             animator.SetFloat("Direction", RIGHT);
         }
         if (_direction == Vector2.left)
         {
-            transform.rotation = Quaternion.Euler(0, 180, 0);
+            transform.localScale = Vector2.left + Vector2.up;
             animator.SetFloat("Direction", LEFT);
         }
 
