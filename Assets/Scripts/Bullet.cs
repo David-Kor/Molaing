@@ -42,6 +42,11 @@ public abstract class Bullet : MonoBehaviour
     /* 탄환 충돌 감지 */
     private void OnTriggerEnter2D(Collider2D col)
     {
+        if (col.CompareTag("Earth"))
+        {
+            Destroy(gameObject);
+        }
+
         if (col.CompareTag("HitPoint"))
         {
             if (col.transform.parent.tag == skillInfo.skillCaster.tag) { return; }

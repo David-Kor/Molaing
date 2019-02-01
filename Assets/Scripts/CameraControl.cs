@@ -16,7 +16,6 @@ public class CameraControl : MonoBehaviour
         if (player != null)
         {
             transform.Translate((Vector2)(player.transform.position - transform.position) * cam_speed * Time.deltaTime, Space.World);
-            //transform.position = player.transform.position + (Vector3.back * 10);
         }
     }
 }

@@ -173,7 +173,7 @@ GameObject:
   - component: {fileID: 4234886092880442}
   - component: {fileID: 61273759408050550}
   - component: {fileID: 114855797868659822}
-  m_Layer: 8
+  m_Layer: 0
   m_Name: FootHold
   m_TagString: Player
   m_Icon: {fileID: 0}
@@ -580,7 +580,7 @@ MonoBehaviour:
   - {fileID: 1338790028357304, guid: 617243720105fca448a740948448c949, type: 2}
   - {fileID: 1338790028357304, guid: dfde64a2c8920a740a5e1d03d31f4572, type: 2}
   - {fileID: 1338790028357304, guid: 5abf743c209f5d747a6e2a87cae728e3, type: 2}
-  - {fileID: 1057665496507564, guid: 20f512dbb78c5f64eb84109f69909b6f, type: 2}
+  - {fileID: 1057665496507564, guid: 20a81a9aaf991d34a93fba4dfffc194b, type: 2}
   - {fileID: 1718895619159584, guid: 05baa5f78c0b4ee498ef80bc65621ed8, type: 2}
   - {fileID: 1057665496507564, guid: e1e00485915983e4a80e45a2281042ab, type: 2}
   - {fileID: 0}
@@ -643,7 +643,6 @@ MonoBehaviour:
   onGround: 0
   isFalling: 0
   isJumping: 0
-  isDelay: 0
 --- !u!212 &212799343599136072
 SpriteRenderer:
   m_ObjectHideFlags: 1
@@ -677,7 +676,7 @@ SpriteRenderer:
   m_AutoUVMaxAngle: 89
   m_LightmapParameters: {fileID: 0}
   m_SortingLayerID: 2083228411
-  m_SortingLayer: 1
+  m_SortingLayer: 2
   m_SortingOrder: 0
   m_Sprite: {fileID: 21300048, guid: 45b66bc3a31280b419ce9423de863c87, type: 3}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
@@ -723,7 +722,7 @@ SpriteRenderer:
   m_AutoUVMaxAngle: 89
   m_LightmapParameters: {fileID: 0}
   m_SortingLayerID: 2083228411
-  m_SortingLayer: 1
+  m_SortingLayer: 2
   m_SortingOrder: 1
   m_Sprite: {fileID: 21300000, guid: dfdf49aaae7f5f346877f5d0226c98bc, type: 3}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
