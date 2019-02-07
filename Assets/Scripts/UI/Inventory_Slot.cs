@@ -15,8 +15,8 @@ public class Inventory_Slot : MonoBehaviour
     public LayerMask layerMask;
     public GUISkin skin;
     public bool showTooltip;
-    private bool bDragItem;
-    GameObject thisSlot;
+    private bool bDragItem = false;
+    GameObject thisSlot = null;
     private Image image;
 
     public Inventory_Slot thisObject;
@@ -37,7 +37,6 @@ public class Inventory_Slot : MonoBehaviour
     void Start()
     {
         mainCamera = Camera.main.gameObject;
-        Debug.Log(mainCamera);
         takeObject();
         showTooltip = false;
         bDragItem = false;

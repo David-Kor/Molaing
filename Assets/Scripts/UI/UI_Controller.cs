@@ -7,14 +7,14 @@ public class UI_Controller : MonoBehaviour
 {
     GameObject Player;
     GameObject Inventory;
+    GameObject SkillWindow;
     GameObject InGameStatus;
+    GameObject QuickSlot;
     Inventory_Slot[] iSlot;
     QuickSlot[] qSlot;
-
     Button strengthButton;
     Button agilityButton;
     Button intelligenceButton;
-
     Text LV;
     Text currentExp;
     Text requireExp;
@@ -24,7 +24,6 @@ public class UI_Controller : MonoBehaviour
     Text Intelligence;
     public Text Point;
     public int point = 0;
-
     public bool bInventory;
     public bool bMouse0Down = false;
     // Use this for initialization
@@ -35,7 +34,10 @@ public class UI_Controller : MonoBehaviour
         Player = GameObject.Find("Player").gameObject;
 
         Inventory = transform.GetChild(0).GetChild(1).gameObject; //Main Camera/Canvas/Inventory
-        InGameStatus = transform.GetChild(0).GetChild(0).gameObject;
+        SkillWindow = transform.GetChild(0).GetChild(5).gameObject; //Main Camera/Canvas/SkillWindow
+        InGameStatus = transform.GetChild(0).GetChild(0).gameObject; //Main Camera/Canvas/InGameStatus
+        QuickSlot = transform.GetChild(0).GetChild(2).gameObject; //Main Camera/Canvas/QuickSlot
+
         iSlot = new Inventory_Slot[49];
         qSlot = new QuickSlot[4];
 
@@ -61,22 +63,19 @@ public class UI_Controller : MonoBehaviour
 
         bInventory = false;
     }
-
     public void Exp(float currentExp, float requireExp, int level)
     {
         InGameStatus.GetComponent<InGameStatus>().ExpBar(currentExp, requireExp);
         InGameStatus.GetComponent<InGameStatus>().level.text = level.ToString();
     }
-
     public void HP(int currentHP, int maxHP)
     {
         InGameStatus.GetComponent<InGameStatus>().HP_Bar(currentHP, maxHP);
         InGameStatus.GetComponent<InGameStatus>().hpText.text = currentHP + "/" + maxHP;
     }
-
-    public void Control_Inventory(bool i)
+    public void Control_Inventory(bool b)
     {
-        if (i == true)
+        if (b == true)
         {
             bInventory = false;
             Inventory.SetActive(true);
@@ -103,6 +102,17 @@ public class UI_Controller : MonoBehaviour
         {
             ButtonActivation();
             Debug.Log("활성화");
+        }
+    }
+    public void Control_SkillWindow(bool b)
+    {
+        if (b == true)
+        {
+            SkillWindow.SetActive(true);
+        }
+        else
+        {
+            SkillWindow.SetActive(false);
         }
     }
     void ButtonDeactivation()
@@ -151,6 +161,22 @@ public class UI_Controller : MonoBehaviour
         if (point <= 0)
         {
             ButtonDeactivation();
+        }
+    }
+    public void UseItem(int i)
+    {
+        if(i > 0 && i < 5)
+        {
+            if(QuickSlot.transform.GetChild(0).GetChild(i-1).GetComponent<Inventory_Slot>().itemID == 0) { return; }
+            else
+            {
+                QuickSlot.transform.GetChild(0).GetChild(i - 1).GetComponent<Inventory_Slot>().Amount -= 1;
+                if(QuickSlot.transform.GetChild(0).GetChild(i - 1).GetComponent<Inventory_Slot>().Amount <= 0)
+                {
+                    QuickSlot.transform.GetChild(0).GetChild(i - 1).GetComponent<Inventory_Slot>().RemoveItem();
+                    return;
+                }
+            }
         }
     }
 }

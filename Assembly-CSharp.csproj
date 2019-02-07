@@ -111,9 +111,11 @@
     <Compile Include="Assets\Scripts\UI\PickupItem.cs" />
     <Compile Include="Assets\Scripts\UI\Potion.cs" />
     <Compile Include="Assets\Scripts\UI\QuickSlot.cs" />
+    <Compile Include="Assets\Scripts\UI\ScrollPractice.cs" />
+    <Compile Include="Assets\Scripts\UI\SkillWindowSlot.cs" />
+    <Compile Include="Assets\Scripts\UI\TalkSyetem.cs" />
     <Compile Include="Assets\Scripts\UI\UI_Controller.cs" />
     <Compile Include="Assets\Scripts\UI\UI_Equipment.cs" />
-    <Compile Include="Assets\TalkSyetem.cs" />
     <Reference Include="UnityEditor.StandardEvents">
       <HintPath>C:/Users/csh82/Desktop/Molaing/Library/ScriptAssemblies/UnityEditor.StandardEvents.dll</HintPath>
     </Reference>
