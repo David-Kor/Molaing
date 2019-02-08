@@ -341,7 +341,7 @@ public class PlayerControl : ObjectControl
     }
 
 
-    public void ForceJump(float force_value)
+    public override void ForceJump(float force_value)
     {
         isJumping = true;
         playerMove.Jump(force_value);

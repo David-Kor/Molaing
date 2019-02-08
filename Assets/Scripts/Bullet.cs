@@ -2,6 +2,8 @@
 
 public abstract class Bullet : MonoBehaviour
 {
+    public bool isPassable;
+
     protected AttackSkill skillInfo;
     protected Vector2 direction;
     protected bool isPullTrigger = false;
@@ -42,7 +44,7 @@ public abstract class Bullet : MonoBehaviour
     /* 탄환 충돌 감지 */
     private void OnTriggerEnter2D(Collider2D col)
     {
-        if (col.CompareTag("Earth"))
+        if (col.CompareTag("Earth") && !isPassable)
         {
             Destroy(gameObject);
         }

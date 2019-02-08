@@ -52,7 +52,7 @@ public class FloatingSword : AttackSkill
             HitObject hit = col.GetComponent<HitObject>();
             if (hit == null) { return; }
             if (hit.transform.parent.tag == skillCaster.tag) { return; }      //시전자라면 무시
-            col.GetComponent<HitObject>().OnHitSkill(this);
+            hit.OnHitSkill(this);
         }
     }
 

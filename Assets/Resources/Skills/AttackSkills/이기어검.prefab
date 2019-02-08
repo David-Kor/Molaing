@@ -213,6 +213,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   skillName: "\uC774\uAE30\uC5B4\uAC80"
   skillCaster: {fileID: 0}
+  skillLevel: 1
   maxHitCount: 5
   coolDown: 15
   firstDelay: 0.8
@@ -263,7 +264,7 @@ SpriteRenderer:
   m_AutoUVMaxAngle: 89
   m_LightmapParameters: {fileID: 0}
   m_SortingLayerID: -298385175
-  m_SortingLayer: 2
+  m_SortingLayer: 3
   m_SortingOrder: 0
   m_Sprite: {fileID: 21300000, guid: 07582876e39735f48bd9b11283a6133a, type: 3}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
@@ -309,7 +310,7 @@ SpriteRenderer:
   m_AutoUVMaxAngle: 89
   m_LightmapParameters: {fileID: 0}
   m_SortingLayerID: -298385175
-  m_SortingLayer: 2
+  m_SortingLayer: 3
   m_SortingOrder: 0
   m_Sprite: {fileID: 21300000, guid: 07582876e39735f48bd9b11283a6133a, type: 3}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
@@ -355,7 +356,7 @@ SpriteRenderer:
   m_AutoUVMaxAngle: 89
   m_LightmapParameters: {fileID: 0}
   m_SortingLayerID: -298385175
-  m_SortingLayer: 2
+  m_SortingLayer: 3
   m_SortingOrder: 0
   m_Sprite: {fileID: 21300000, guid: 07582876e39735f48bd9b11283a6133a, type: 3}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
@@ -401,7 +402,7 @@ SpriteRenderer:
   m_AutoUVMaxAngle: 89
   m_LightmapParameters: {fileID: 0}
   m_SortingLayerID: -298385175
-  m_SortingLayer: 2
+  m_SortingLayer: 3
   m_SortingOrder: 0
   m_Sprite: {fileID: 21300000, guid: 1929531cf77142c4a9ab4578c087de35, type: 3}
   m_Color: {r: 1, g: 1, b: 1, a: 1}

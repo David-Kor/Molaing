@@ -174,6 +174,14 @@ public abstract class EnemyControl : ObjectControl
     }
 
 
+    public override void ForceJump(float force_value)
+    {
+        isJumping = true;
+        move.Jump(force_value);
+        IgnoreAllGround();
+    }
+
+
     /* Y방향 속도에 따라 변수 조정 */
     protected override IEnumerator VelocityYCheck()
     {

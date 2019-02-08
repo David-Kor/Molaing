@@ -96,4 +96,11 @@ public class EnemyMove : MonoBehaviour
 
 
     public void SetMovable(bool _value) { isMovable = _value; }
+
+
+    public void Jump(float force)
+    {
+        //경직상태면 점프를 하지 않음
+        rigid2D.AddForce(Vector2.up * force, ForceMode2D.Impulse);
+    }
 }

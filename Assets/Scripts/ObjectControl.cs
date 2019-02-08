@@ -39,4 +39,8 @@ public abstract class ObjectControl : MonoBehaviour
 
     /* 쿨타임 활성화 함수 */
     public abstract void CoolDownActive(int _index, float _value);
+
+
+    /* 점프 함수 */
+    public abstract void ForceJump(float force_value);
 }
