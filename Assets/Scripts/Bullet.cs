@@ -44,6 +44,7 @@ public abstract class Bullet : MonoBehaviour
     /* 탄환 충돌 감지 */
     private void OnTriggerEnter2D(Collider2D col)
     {
+        if (col == null) { return; }
         if (col.CompareTag("Earth") && !isPassable)
         {
             Destroy(gameObject);
@@ -76,4 +77,7 @@ public abstract class Bullet : MonoBehaviour
         //Bullet이 바라보는 방향을 향해 움직임
         transform.Translate(Vector2.up * Time.deltaTime * speed, Space.Self);
     }
+
+
+    public AttackSkill GetSkillInfo() { return skillInfo; }
 }

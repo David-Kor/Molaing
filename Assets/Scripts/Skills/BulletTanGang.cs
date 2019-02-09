@@ -38,13 +38,13 @@ public class BulletTanGang : Bullet
 
     protected override void OnHitBullet(HitObject hit)
     {
+        hitCount++;
+        hit.OnHitSkill(skillInfo);
+
         if (hitCount >= skillInfo.maxHitCount)
         {
             Destroy(gameObject);
             return;
         }
-
-        hitCount++;
-        hit.OnHitSkill(skillInfo);
     }
 }

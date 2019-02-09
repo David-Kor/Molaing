@@ -38,12 +38,6 @@ public class BulletMeteor : Bullet
 
     protected override void OnHitBullet(HitObject hit)
     {
-        if (hitCount >= skillInfo.maxHitCount)
-        {
-            Destroy(gameObject);
-            return;
-        }
-
         hitCount++;
         hit.OnHitSkill(skillInfo);
     }
