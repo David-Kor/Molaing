@@ -12,7 +12,7 @@ public class DaggerThrowing : AttackSkill
 
     public override void ActivateSkill()
     {
-        Instantiate(bullet_dagger, transform).GetComponent<Bullet>().ShotToDirection(this, skillDirection, daggerSpeed, lifeTime);
+        Instantiate(bullet_dagger, transform).GetComponent<Bullet>().InitInfo(this, skillDirection, daggerSpeed, lifeTime);
     }
 
     public override void ReleaseSkill()

@@ -19,9 +19,20 @@ public class TrueFloatingSword : AttackSkill
     {
         while (!f_delayEnd) { yield return null; }
 
-        for (int i = 0; i < swordCount; i++)
+        int i;
+        Bullet[] bullets = new Bullet[swordCount];
+
+        for (i = 0; i < swordCount; i++)
         {
-            Instantiate(bullet_sword, transform).GetComponent<Bullet>().ShotToDirection(this, skillDirection, swordSpeed, lifeTime);
+            bullets[i] = Instantiate(bullet_sword, transform).GetComponent<Bullet>().InitInfo(this, skillDirection, swordSpeed, lifeTime, false);
+            yield return new WaitForSeconds(summonInterval);
+        }
+
+        yield return new WaitForSeconds(1.0f);
+
+        for (i = 0; i < swordCount; i++)
+        {
+            bullets[i].ShootTrigger();
             yield return new WaitForSeconds(summonInterval);
         }
     }

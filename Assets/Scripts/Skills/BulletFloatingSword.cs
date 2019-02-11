@@ -23,7 +23,7 @@ public class BulletFloatingSword : Bullet
     void Update()
     {
 
-        if (target != null)
+        if (target != null && isPullTrigger)
         {
             targetPosition = target.transform.position - transform.position;
             targetPosition.Normalize();
@@ -34,7 +34,7 @@ public class BulletFloatingSword : Bullet
         if (caster != null)
         {
             timeStream += Time.deltaTime * speed;
-            if (target == null)
+            if (target == null || !isPullTrigger)
             {
                 rigid.velocity = Vector2.zero;
                 targetPosition.Set(caster.transform.position.x + 0.6f * Mathf.Cos(timeStream),

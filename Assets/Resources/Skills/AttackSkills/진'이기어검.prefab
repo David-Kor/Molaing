@@ -76,25 +76,25 @@ MonoBehaviour:
   skillName: "\uC9C4'\uC774\uAE30\uC5B4\uAC80"
   skillCaster: {fileID: 0}
   skillLevel: 1
-  maxHitCount: 15
+  maxHitCount: 0
   coolDown: 0
-  firstDelay: 2.5
-  delay: 3
+  firstDelay: 0
+  delay: 0
   usableOnMove: 0
   delayCancelable: 0
-  isOnHead: 1
+  isOnHead: 0
   skillDirection: {x: 0, y: 0}
   skill_IMG: {fileID: 0}
   effects: []
   frameTime: 0
   isLoop: 1
-  lifeTime: 10
+  lifeTime: 15
   isKnockBack: 0
   knockBackPower: 0
   damage: 3
   swordSpeed: 4.3
-  swordCount: 10
-  summonInterval: 0.14
+  swordCount: 15
+  summonInterval: 0.093
   bullet_sword: {fileID: 1090007511327314, guid: 5aadad982e7b86f4393cd8b7d9f770e7,
     type: 2}
 --- !u!212 &212410643955294682

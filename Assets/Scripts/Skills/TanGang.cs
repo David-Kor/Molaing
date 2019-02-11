@@ -14,7 +14,7 @@ public class TanGang : AttackSkill
 
     public override void ActivateSkill()
     {
-        Instantiate(bullet_TanGang, transform).GetComponent<Bullet>().ShotToDirection(this, skillDirection, speed, lifeTime);
+        Instantiate(bullet_TanGang, transform).GetComponent<Bullet>().InitInfo(this, skillDirection, speed, lifeTime);
     }
 
     public override void ReleaseSkill()

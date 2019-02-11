@@ -47,7 +47,8 @@ public class PartOfEarthquake : MonoBehaviour
             HitObject hit = col.GetComponent<HitObject>();
             if (hit == null) { return; }
             if (col.transform.parent.tag == casterTag) { return; }
-            hit.GetComponentInParent<ObjectControl>().ForceJump(bouncePower);
+            Rigidbody2D rigid = hit.GetComponentInParent<Rigidbody2D>();
+            rigid.velocity = (rigid.velocity.x * Vector2.right) + (bouncePower * Vector2.up);
             hit.OnHitSkill(earthquake);
         }
     }

@@ -58,8 +58,8 @@ MonoBehaviour:
   maxHitCount: 0
   coolDown: 1
   firstDelay: 0
-  delay: 0
-  usableOnMove: 0
+  delay: 0.5
+  usableOnMove: 1
   delayCancelable: 0
   isOnHead: 0
   skillDirection: {x: 0, y: 0}
@@ -67,13 +67,13 @@ MonoBehaviour:
   effects: []
   frameTime: 0
   isLoop: 1
-  lifeTime: 0.75
+  lifeTime: 0.35
   isKnockBack: 1
-  knockBackPower: 1.2
+  knockBackPower: 0.3
   damage: 10
   bouncePower: 1.6
   speed: 3.5
-  interval: 0.2
+  interval: 0.1
   part_earthquake: {fileID: 1038552657741674, guid: 01f1c7a5081886340bd34974b6b4295c,
     type: 2}
 --- !u!212 &212706610675645786

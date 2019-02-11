@@ -23,7 +23,7 @@ public abstract class Bullet : MonoBehaviour
 
 
     /* 특정 방향으로 쏘는 경우 호출 */
-    public void ShotToDirection(AttackSkill _skillInfo, Vector2 _direction, float _speed, float _lifeTime)
+    public Bullet InitInfo(AttackSkill _skillInfo, Vector2 _direction, float _speed, float _lifeTime, bool isShoot = true)
     {
         //초기화
         transform.SetParent(null);
@@ -33,7 +33,16 @@ public abstract class Bullet : MonoBehaviour
         direction = _direction.normalized;
         hitCount = 0;
         lifeTime = _lifeTime;
+        if (isShoot)
+        {
+            ShootTrigger();
+        }
 
+        return this;
+    }
+
+    public void ShootTrigger()
+    {
         //목표 방향을 바라보도록 설정
         float angle = Mathf.Rad2Deg * Mathf.Atan2(direction.y, direction.x) - 90;
         transform.rotation = Quaternion.Euler(0, 0, angle);
@@ -41,8 +50,8 @@ public abstract class Bullet : MonoBehaviour
     }
 
 
-    /* 탄환 충돌 감지 */
-    private void OnTriggerEnter2D(Collider2D col)
+        /* 탄환 충돌 감지 */
+        private void OnTriggerEnter2D(Collider2D col)
     {
         if (col == null) { return; }
         if (col.CompareTag("Earth") && !isPassable)

@@ -79,7 +79,7 @@ public class Meteor : AttackSkill
         while (doCreate)
         {
             Instantiate(bullet_meteor, transform).GetComponent<Bullet>()
-                .ShotToDirection(this, Vector2.down + skillDirection, fallingSpeed, lifeTime);
+                .InitInfo(this, Vector2.down + skillDirection, fallingSpeed, lifeTime);
             yield return new WaitForSeconds(createDelay);
         }
     }

@@ -12,8 +12,10 @@ public class BulletHoming : MonoBehaviour
         bullet = GetComponentInParent<BulletFloatingSword>();
     }
 
-    void OnTriggerEnter2D(Collider2D col)
+    void OnTriggerStay2D(Collider2D col)
     {
+        if (target != null) { return; }
+
         if (col.CompareTag("HitPoint"))
         {
             if (!col.transform.parent.CompareTag(bullet.GetSkillInfo().skillCaster.tag))
