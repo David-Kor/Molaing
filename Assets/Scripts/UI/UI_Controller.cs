@@ -33,10 +33,10 @@ public class UI_Controller : MonoBehaviour
 
         Player = GameObject.Find("Player").gameObject;
 
-        Inventory = transform.GetChild(0).GetChild(1).gameObject; //Main Camera/Canvas/Inventory
-        SkillWindow = transform.GetChild(0).GetChild(5).gameObject; //Main Camera/Canvas/SkillWindow
         InGameStatus = transform.GetChild(0).GetChild(0).gameObject; //Main Camera/Canvas/InGameStatus
+        Inventory = transform.GetChild(0).GetChild(1).gameObject; //Main Camera/Canvas/Inventory
         QuickSlot = transform.GetChild(0).GetChild(2).gameObject; //Main Camera/Canvas/QuickSlot
+        SkillWindow = transform.GetChild(0).GetChild(5).gameObject; //Main Camera/Canvas/SkillWindow
 
         iSlot = new Inventory_Slot[49];
         qSlot = new QuickSlot[4];
