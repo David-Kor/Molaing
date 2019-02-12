@@ -7,14 +7,14 @@ public class UI_Controller : MonoBehaviour
 {
     GameObject Player;
     GameObject Inventory;
+    GameObject SkillWindow;
     GameObject InGameStatus;
+    GameObject QuickSlot;
     Inventory_Slot[] iSlot;
     QuickSlot[] qSlot;
-
     Button strengthButton;
     Button agilityButton;
     Button intelligenceButton;
-
     Text LV;
     Text currentExp;
     Text requireExp;
@@ -24,19 +24,20 @@ public class UI_Controller : MonoBehaviour
     Text Intelligence;
     public Text Point;
     public int point = 0;
-
     public bool bInventory;
-    public bool bMouse0Down;
+    public bool bMouse0Down = false;
     // Use this for initialization
     void Awake()
     {
         bInventory = false;
-        bMouse0Down = false;
 
         Player = GameObject.Find("Player").gameObject;
 
+        InGameStatus = transform.GetChild(0).GetChild(0).gameObject; //Main Camera/Canvas/InGameStatus
         Inventory = transform.GetChild(0).GetChild(1).gameObject; //Main Camera/Canvas/Inventory
-        InGameStatus = transform.GetChild(0).GetChild(0).gameObject;
+        QuickSlot = transform.GetChild(0).GetChild(2).gameObject; //Main Camera/Canvas/QuickSlot
+        SkillWindow = transform.GetChild(0).GetChild(5).gameObject; //Main Camera/Canvas/SkillWindow
+
         iSlot = new Inventory_Slot[49];
         qSlot = new QuickSlot[4];
 
@@ -62,22 +63,19 @@ public class UI_Controller : MonoBehaviour
 
         bInventory = false;
     }
-
     public void Exp(float currentExp, float requireExp, int level)
     {
         InGameStatus.GetComponent<InGameStatus>().ExpBar(currentExp, requireExp);
         InGameStatus.GetComponent<InGameStatus>().level.text = level.ToString();
     }
-
     public void HP(int currentHP, int maxHP)
     {
         InGameStatus.GetComponent<InGameStatus>().HP_Bar(currentHP, maxHP);
         InGameStatus.GetComponent<InGameStatus>().hpText.text = currentHP + "/" + maxHP;
     }
-
-    public void Control_Inventory(bool i)
+    public void Control_Inventory(bool b)
     {
-        if (i == true)
+        if (b == true)
         {
             bInventory = false;
             Inventory.SetActive(true);
@@ -87,6 +85,10 @@ public class UI_Controller : MonoBehaviour
         {
             bInventory = false;
             Inventory.SetActive(false);
+            if(bMouse0Down == true)
+            {
+                bMouse0Down = false;
+            }
         }
         LV.text = Player.GetComponentInChildren<PlayerStatus>().level.ToString();
         HitPoint.text = Player.GetComponentInChildren<PlayerStatus>().currentHP.ToString() + "/" + Player.GetComponentInChildren<PlayerStatus>().maxHP.ToString();
@@ -102,48 +104,79 @@ public class UI_Controller : MonoBehaviour
             Debug.Log("활성화");
         }
     }
+    public void Control_SkillWindow(bool b)
+    {
+        if (b == true)
+        {
+            SkillWindow.SetActive(true);
+        }
+        else
+        {
+            SkillWindow.SetActive(false);
+        }
+    }
     void ButtonDeactivation()
     {
         strengthButton.gameObject.SetActive(false);
         agilityButton.gameObject.SetActive(false);
         intelligenceButton.gameObject.SetActive(false);
     }
-
     void ButtonActivation()
     {
         strengthButton.gameObject.SetActive(true);
         agilityButton.gameObject.SetActive(true);
         intelligenceButton.gameObject.SetActive(true);
     }
-
     public void StrengthUP()
     {
         Player.GetComponentInChildren<PlayerStatus>().STR_Up(1);
         point--;
-        Debug.Log(Player.GetComponent<PlayerStatus>().strength);
+        Strength.text = Player.GetComponentInChildren<PlayerStatus>().GetSTR().ToString();
+        Point.text = point.ToString();
+
         if (point <= 0)
         {
             ButtonDeactivation();
         }
     }
-
     public void AgilityUP()
     {
         Player.GetComponentInChildren<PlayerStatus>().AGI_Up(1);
+        Agility.text = Player.GetComponentInChildren<PlayerStatus>().GetAGI().ToString();
         point--;
+        Point.text = point.ToString();
+
         if (point <= 0)
         {
             ButtonDeactivation();
         }
     }
-
     public void IntelligenceUP()
     {
         Player.GetComponentInChildren<PlayerStatus>().INT_Up(1);
+        Intelligence.text = Player.GetComponentInChildren<PlayerStatus>().GetINT().ToString();
         point--;
+        Point.text = point.ToString();
+
         if (point <= 0)
         {
             ButtonDeactivation();
+        }
+    }
+    public void UseItem(int i)
+    {
+        if(i > 0 && i < 5)
+        {
+            if(QuickSlot.transform.GetChild(0).GetChild(i-1).GetComponent<Inventory_Slot>().itemID == 0) { return; }
+            else
+            {
+                QuickSlot.transform.GetChild(0).GetChild(i - 1).GetComponent<Inventory_Slot>().Amount -= 1;
+                if(QuickSlot.transform.GetChild(0).GetChild(i - 1).GetComponent<Inventory_Slot>().Amount <= 0)
+                {
+                    QuickSlot.transform.GetChild(0).GetChild(i - 1).GetComponent<Inventory_Slot>().RemoveItem();
+                    return;
+                }
+            }
         }
     }
 }

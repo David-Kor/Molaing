@@ -3,12 +3,8 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
 
-public class QuickSlot : MonoBehaviour {
+public class QuickSlot : Inventory_Slot {
     public Text ItemCount;
-    public Image icon;
-    public int itemID;
-    public int Amount;
-    public int ItemType;
 
     // Use this for initialization
     void Start()
@@ -16,9 +12,31 @@ public class QuickSlot : MonoBehaviour {
         icon = gameObject.transform.GetChild(0).GetComponent<Image>();
         ItemCount = gameObject.transform.GetChild(2).GetComponent<Text>();
     }
-    
-    void RemoveSlot()
+    public new void OnMouseDown()
     {
-        
+
+    }
+
+    public new void OnMouseUp()
+    {
+        CastRay();
+        if(targetObject.CompareTag("QuickSlot"))
+        {
+            if(targetObject.itemID == 0) { MoveSlot(); }
+            else { SwapSlot(); }
+        }
+        else
+        {
+            RemoveItem();
+        }
+    }
+
+    public void UseItem()
+    {
+        if(CheckSlot(itemID) == true)
+        {
+            Amount--;
+            if(Amount <= 0) { RemoveItem(); }
+        }
     }
 }

@@ -108,16 +108,21 @@
      <Compile Include="Assets\Scripts\Skills\TrueFloatingSword.cs" />
      <Compile Include="Assets\Scripts\Skills\Vigor.cs" />
      <Compile Include="Assets\Scripts\SpriteOrder.cs" />
-     <Compile Include="Assets\Scripts\UI\CSVReader.cs" />
-     <Compile Include="Assets\Scripts\UI\InGameStatus.cs" />
-     <Compile Include="Assets\Scripts\UI\Inventory.cs" />
-     <Compile Include="Assets\Scripts\UI\Inventory_Slot.cs" />
-     <Compile Include="Assets\Scripts\UI\Item.cs" />
+     <Compile Include="Assets\Scripts\UI\Item\ArmorItem.cs" />
+     <Compile Include="Assets\Scripts\UI\Item\Item.cs" />
+     <Compile Include="Assets\Scripts\UI\Item\UsingItem.cs" />
+     <Compile Include="Assets\Scripts\UI\Item\WeaponItem.cs" />
      <Compile Include="Assets\Scripts\UI\PickupItem.cs" />
-     <Compile Include="Assets\Scripts\UI\Potion.cs" />
      <Compile Include="Assets\Scripts\UI\QuickSlot.cs" />
      <Compile Include="Assets\Scripts\UI\UI_Controller.cs" />
-     <Compile Include="Assets\Scripts\UI\UI_Equipment.cs" />
+     <Compile Include="Assets\Scripts\UI\Window\InGameStatus.cs" />
+     <Compile Include="Assets\Scripts\UI\Window\Inventory.cs" />
+     <Compile Include="Assets\Scripts\UI\Window\Inventory_Slot.cs" />
+     <Compile Include="Assets\Scripts\UI\Window\ScrollPractice.cs" />
+     <Compile Include="Assets\Scripts\UI\Window\SkillSlot.cs" />
+     <Compile Include="Assets\Scripts\UI\Window\SkillWindowSlot.cs" />
+     <Compile Include="Assets\Scripts\UI\Window\TalkSyetem.cs" />
+     <Compile Include="Assets\Scripts\UI\Window\UI_Equipment.cs" />
  <Reference Include="UnityEditor.StandardEvents">
  <HintPath>C:/Users/David/Documents/공부자료/Unity/Molaing/Library/ScriptAssemblies/UnityEditor.StandardEvents.dll</HintPath>
  </Reference>
