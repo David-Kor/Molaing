@@ -74,11 +74,11 @@ MonoBehaviour:
   isKnockBack: 1
   knockBackPower: 3
   damage: 40
-  spawnHeight: 3.5
+  spawnHeight: 2.85
   spawnWidth: 7.3
   moveSpeed: 37
-  fallingSpeed: 5.5
-  createDelay: 0.07
+  fallingSpeed: 2.5
+  createDelay: 0.085
   bullet_meteor: {fileID: 1671110095241134, guid: d5adc148f3eb9c4418f1f27bf81f0136,
     type: 2}
 --- !u!212 &212213378704447908

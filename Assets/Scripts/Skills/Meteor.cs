@@ -32,22 +32,22 @@ public class Meteor : AttackSkill
 
         if (skillDirection.x > 0)
         {
-            if (transform.localPosition.x < (spawnWidth * -0.75))
+            if (transform.localPosition.x < (spawnWidth * -0.85))
             {
                 horDirection = Vector2.right;
             }
-            if (transform.localPosition.x > (spawnWidth * 0.25))
+            if (transform.localPosition.x > (spawnWidth * 0.15))
             {
                 horDirection = Vector2.left;
             }
         }
         else
         {
-            if (transform.localPosition.x < (spawnWidth * -0.25))
+            if (transform.localPosition.x < (spawnWidth * -0.15))
             {
                 horDirection = Vector2.right;
             }
-            if (transform.localPosition.x > (spawnWidth * 0.75))
+            if (transform.localPosition.x > (spawnWidth * 0.85))
             {
                 horDirection = Vector2.left;
             }

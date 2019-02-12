@@ -84,14 +84,14 @@ MonoBehaviour:
   delayCancelable: 0
   isOnHead: 0
   skillDirection: {x: 0, y: 0}
-  skill_IMG: {fileID: 0}
+  skill_IMG: {fileID: 21300000, guid: 926f1677df5ca6145ab65cfdd56a2b41, type: 3}
   effects: []
   frameTime: 0
   isLoop: 1
-  lifeTime: 15
+  lifeTime: 13
   isKnockBack: 0
   knockBackPower: 0
-  damage: 3
+  damage: 2
   swordSpeed: 4.3
   swordCount: 15
   summonInterval: 0.093
@@ -132,7 +132,7 @@ SpriteRenderer:
   m_SortingLayerID: -298385175
   m_SortingLayer: 3
   m_SortingOrder: 0
-  m_Sprite: {fileID: 21300000, guid: 1929531cf77142c4a9ab4578c087de35, type: 3}
+  m_Sprite: {fileID: 21300000, guid: 926f1677df5ca6145ab65cfdd56a2b41, type: 3}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
   m_FlipX: 0
   m_FlipY: 0

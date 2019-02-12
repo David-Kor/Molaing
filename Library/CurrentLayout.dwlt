@@ -110,7 +110,7 @@ MonoBehaviour:
   m_MinSize: {x: 713, y: 492}
   m_MaxSize: {x: 18008, y: 14042}
   vertical: 0
-  controlID: 45
+  controlID: 1403
 --- !u!114 &6
 MonoBehaviour:
   m_ObjectHideFlags: 52
@@ -134,7 +134,7 @@ MonoBehaviour:
   m_MinSize: {x: 232, y: 492}
   m_MaxSize: {x: 10002, y: 14042}
   vertical: 1
-  controlID: 46
+  controlID: 1404
 --- !u!114 &7
 MonoBehaviour:
   m_ObjectHideFlags: 52
@@ -212,7 +212,7 @@ MonoBehaviour:
   m_MinSize: {x: 204, y: 342}
   m_MaxSize: {x: 4004, y: 8042}
   vertical: 1
-  controlID: 99
+  controlID: 1453
 --- !u!114 &10
 MonoBehaviour:
   m_ObjectHideFlags: 52
@@ -256,8 +256,8 @@ MonoBehaviour:
     y: 366
     width: 342
     height: 402
-  m_MinSize: {x: 100, y: 100}
-  m_MaxSize: {x: 4000, y: 4000}
+  m_MinSize: {x: 104, y: 121}
+  m_MaxSize: {x: 4004, y: 4021}
   m_ActualView: {fileID: 20}
   m_Panes:
   - {fileID: 20}
@@ -394,14 +394,14 @@ MonoBehaviour:
     height: 392
   m_PersistentViewDataDictionary: {fileID: 0}
   m_SceneLighting: 1
-  lastFramingTime: 14990.542214810994
+  lastFramingTime: 10827.783050633268
   m_2DMode: 1
   m_isRotationLocked: 0
   m_AudioPlay: 0
   m_Position:
-    m_Target: {x: -13.812321, y: 2.8625991, z: 12.202465}
+    m_Target: {x: -11.611331, y: 2.5692906, z: 389.24805}
     speed: 2
-    m_Value: {x: -13.812321, y: 2.8625991, z: 12.202465}
+    m_Value: {x: -11.611331, y: 2.5692906, z: 389.24805}
   m_RenderMode: 0
   m_CameraMode:
     drawMode: 0
@@ -433,9 +433,9 @@ MonoBehaviour:
     speed: 2
     m_Value: {x: 0, y: 0, z: 0, w: 1}
   m_Size:
-    m_Target: 3.180284
+    m_Target: 9.560292
     speed: 2
-    m_Value: 3.180284
+    m_Value: 9.560292
   m_Ortho:
     m_Target: 1
     speed: 2
@@ -784,20 +784,20 @@ MonoBehaviour:
     m_ShowAllHits: 0
     m_SearchArea: 1
     m_Folders:
-    - Assets/Resources/Skills/AttackSkills
+    - Assets/Resources/Skills/SupportSkills
   m_ViewMode: 1
   m_StartGridSize: 55
   m_LastFolders:
-  - Assets/Resources/Skills/AttackSkills
+  - Assets/Resources/Skills/SupportSkills
   m_LastFoldersGridSize: 55
   m_LastProjectPath: "C:\\Users\\David\\Documents\\\uACF5\uBD80\uC790\uB8CC\\Unity\\Molaing"
   m_LockTracker:
     m_IsLocked: 0
   m_FolderTreeState:
-    scrollPos: {x: 0, y: 291}
-    m_SelectedIDs: 30150000
-    m_LastClickedID: 5424
-    m_ExpandedIDs: 00000000c20900009e0b00001e0e00004e0f0000ae14000020160000d217000018180000ee1800004019000048190000301a0000c24d0000c44d0000c64d0000c84d0000ca4d0000cc4d0000ce4d0000d04d000000ca9a3b
+    scrollPos: {x: 0, y: 419}
+    m_SelectedIDs: 301a0000
+    m_LastClickedID: 6704
+    m_ExpandedIDs: 00000000c20900009e0b00001e0e00004e0f0000ae14000020160000d217000018180000ee1800004019000048190000301a0000c04d0000c24d0000c44d0000c64d0000c84d0000ca4d0000cc4d0000ce4d000000ca9a3b
     m_RenameOverlay:
       m_UserAcceptedRename: 0
       m_Name: 
@@ -825,7 +825,7 @@ MonoBehaviour:
     scrollPos: {x: 0, y: 0}
     m_SelectedIDs: 
     m_LastClickedID: 0
-    m_ExpandedIDs: 00000000c20900009e0b00001e0e00004e0f000020160000d217000018180000ee1800004019000048190000301a0000c24d0000c44d0000c64d0000c84d0000ca4d0000cc4d0000ce4d0000d04d0000
+    m_ExpandedIDs: 00000000c20900009e0b00001e0e00004e0f000020160000d217000018180000ee1800004019000048190000301a0000c04d0000c24d0000c44d0000c64d0000c84d0000ca4d0000cc4d0000ce4d000000ca9a3b
     m_RenameOverlay:
       m_UserAcceptedRename: 0
       m_Name: 
@@ -852,8 +852,8 @@ MonoBehaviour:
   m_ListAreaState:
     m_SelectedInstanceIDs: 
     m_LastClickedInstanceID: 0
-    m_HadKeyboardFocusLastEvent: 1
-    m_ExpandedInstanceIDs: c62300009412000014d30000b4570000e01200008e7c0000d83d0000c61300003e0a00005e1300001011000026340000062c0000102b00005c2c00001a8c0100200f0000ecba0000360a0000d63c0000080f0000683d0000440b00002a0f0000e20e0000e609000096140000
+    m_HadKeyboardFocusLastEvent: 0
+    m_ExpandedInstanceIDs: c62300009412000014d30000b4570000e01200008e7c0000d83d0000c61300003e0a00005e1300001011000026340000062c0000102b00005c2c00001a8c0100200f0000ecba0000360a0000d63c0000080f0000683d0000440b00002a0f0000e20e0000e6090000801c0000
     m_RenameOverlay:
       m_UserAcceptedRename: 0
       m_Name: 
@@ -907,20 +907,20 @@ MonoBehaviour:
   m_PersistentViewDataDictionary: {fileID: 0}
   m_TreeViewState:
     scrollPos: {x: 0, y: 0}
-    m_SelectedIDs: 
-    m_LastClickedID: 0
-    m_ExpandedIDs: 6aefffffe6fbffff000000009e1e0000
+    m_SelectedIDs: 2634ebff
+    m_LastClickedID: -1362906
+    m_ExpandedIDs: f642ebffe0a6f0ff4486f2ff8645f3ff4800fcff4a00fcffb06afeffdc79feffe6fbffff000000004c1401006e210300404f0400
     m_RenameOverlay:
       m_UserAcceptedRename: 0
-      m_Name: "\uC9C0\uC9C4"
-      m_OriginalName: "\uC9C0\uC9C4"
+      m_Name: Part_Of_Earthquake(Clone)
+      m_OriginalName: Part_Of_Earthquake(Clone)
       m_EditFieldRect:
         serializedVersion: 2
         x: 0
         y: 0
         width: 0
         height: 0
-      m_UserData: -172516
+      m_UserData: -920972
       m_IsWaitingForDelay: 0
       m_IsRenaming: 0
       m_OriginalEventType: 0

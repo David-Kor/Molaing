@@ -15,7 +15,7 @@ public class PartOfEarthquake : MonoBehaviour
     void Update()
     {
         transform.localScale += Vector3.down * speed * Time.deltaTime;
-        transform.localPosition += Vector3.down * speed * 0.13f * Time.deltaTime;
+        transform.localPosition += Vector3.down * speed * 0.19f * Time.deltaTime;
         if (transform.localScale.y <= 0.1f)
         {
             Destroy(gameObject);

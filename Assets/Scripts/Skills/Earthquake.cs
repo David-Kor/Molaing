@@ -12,6 +12,11 @@ public class Earthquake : AttackSkill
     private Vector2 prevPosition;
     private Collider2D myCollider;
 
+    void Start()
+    {
+        GetComponent<SpriteRenderer>().sprite = null;
+    }
+
 
     private IEnumerator Move()
     {
@@ -65,6 +70,7 @@ public class Earthquake : AttackSkill
     public override void ActivateSkill()
     {
         transform.SetParent(null);
+        transform.position += Vector3.up * 0.15f;
         myCollider = GetComponent<Collider2D>();
         transform.localRotation = Quaternion.Euler(Vector3.zero);
         prevPosition = transform.position;
