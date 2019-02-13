@@ -25,12 +25,11 @@ public class UI_Controller : MonoBehaviour
     public Text Point;
     public int point = 0;
     public bool bInventory;
+    public bool bSkillWindow;
     public bool bMouse0Down = false;
     // Use this for initialization
     void Awake()
     {
-        bInventory = false;
-
         Player = GameObject.Find("Player").gameObject;
 
         InGameStatus = transform.GetChild(0).GetChild(0).gameObject; //Main Camera/Canvas/InGameStatus
@@ -62,6 +61,7 @@ public class UI_Controller : MonoBehaviour
         }
 
         bInventory = false;
+        bSkillWindow = false;
     }
     public void Exp(float currentExp, float requireExp, int level)
     {
@@ -108,11 +108,18 @@ public class UI_Controller : MonoBehaviour
     {
         if (b == true)
         {
+            bSkillWindow = b;
             SkillWindow.SetActive(true);
         }
         else
         {
             SkillWindow.SetActive(false);
+            bSkillWindow = b;
+            if (bMouse0Down == true)
+            {
+                bMouse0Down = false;
+                return;
+            }
         }
     }
     void ButtonDeactivation()

@@ -15,7 +15,8 @@ public class ScrollPractice : MonoBehaviour {
         scrollRect = GetComponent<ScrollRect>();
         content = gameObject.transform.GetChild(0).GetChild(0).gameObject;
         SkillWindow = content.transform.GetChild(0).GetComponent<SkillWindowSlot>();
-        AddSkill("스킬이름", "설명", null);
+        AddSkill("강타", "");
+        AddSkill("이기어검", "");
 	}
     public void SetContentSize()
     {
@@ -33,11 +34,20 @@ public class ScrollPractice : MonoBehaviour {
         height = count * 100 + 20;
         rt.sizeDelta = new Vector2(width, height);
     }
-    public void AddSkill(string name, string des, Image icon)
+    public void AddSkill(string name, string des)
     {
+        Debug.Log("스킬 추가 시작");
         SkillWindow.Start();
+        SkillWindow.skillName.text = name;
         SkillWindow.skillDes.text = des;
-        SkillWindow.skill_Icon = icon;
+        Debug.Log(gameObject.transform.GetChild(0).GetChild(0).GetChild(0).GetChild(1));
+        for(int i = 0; i<Database.skill_list.Count; i++)
+        {
+            if(Database.skill_list[i].name.Equals(name))
+            {
+                gameObject.transform.GetChild(0).GetChild(0).GetChild(0).GetChild(1).GetComponent<Image>().sprite = Database.skill_list[i].GetComponent<Skill>().skill_IMG;
+            }
+        }
         Instantiate(SkillWindow, SkillWindow.transform.parent);
         content.transform.GetChild(content.transform.childCount - 1).gameObject.SetActive(true);
         SkillWindow.SetContentSize();
