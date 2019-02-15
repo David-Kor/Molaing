@@ -28,26 +28,26 @@ public class Inventory : MonoBehaviour
         //=====아래는 테스트를 위한 내용.
         //아이템 획득하는 함수를 실행시키려면 UI/PickupItem.cs 참조.
         //만약 스타팅 아이템을 넣어주고 싶으면 이런 식으로 입력.
-        //GetItem(9001);
-        //GetItem(9002);
-        //GetItem(9001);
-        //GetItem(9001);
-        //GetItem(9001);
-        //GetItem(9001);
-        //GetItem(1001);
-        //GetItem(9001);
-        //GetItem(1001);
-        //GetItem(1001);
-        //GetItem(1001);
-        //GetItem(1001);
-        //GetItem(1001);
-        //GetItem(1001);
-        //GetItem(1001);
-        //GetItem(1001);
-        //GetItem(1001);
-        //GetItem(1001);
-        //GetItem(1001);
-        //GetItem(1001);
+        GetItem(9001);
+        GetItem(9002);
+        GetItem(9001);
+        GetItem(9001);
+        GetItem(9001);
+        GetItem(9001);
+        GetItem(1001);
+        GetItem(9001);
+        GetItem(1001);
+        GetItem(1001);
+        GetItem(1001);
+        GetItem(1001);
+        GetItem(1001);
+        GetItem(1001);
+        GetItem(1001);
+        GetItem(1001);
+        GetItem(1001);
+        GetItem(1001);
+        GetItem(1001);
+        GetItem(1001);
         //==== 테스트 내용 끝.
     }
 

@@ -6,41 +6,39 @@ using UnityEngine.UI;
 public class SkillSlot : MonoBehaviour
 {
     public Image skillIcon;
-    bool enterSkillSlot;
     public string skillName;
     GameObject mainCamera;
+    PlayerSkill playerSkill;
 
     // Use this for initialization
     void Start()
     {
         skillIcon = gameObject.transform.GetChild(0).GetComponent<Image>();
         mainCamera = Camera.main.gameObject;
+        playerSkill = mainCamera.GetComponent<CameraControl>().player.GetComponentInChildren<PlayerSkill>();
+    }
+    public void RemoveSkillSlot()
+    {
+        skillIcon = null;
+        skillName = null;
+        gameObject.transform.GetChild(0).gameObject.SetActive(false);
     }
 
-    void OnGUI()
+    /* 슬롯 이미지 변경함수 */
+    public void SetSkillImage(Sprite img)
     {
-        if (mainCamera.GetComponent<UI_Controller>().bMouse0Down && mainCamera.GetComponent<UI_Controller>().bInventory == false)
+        if (skillIcon == null)
         {
-            GUI.DrawTexture(new Rect(Input.mousePosition.x, Event.current.mousePosition.y, 32, 32), skillIcon.mainTexture);
+            skillIcon = gameObject.transform.GetChild(0).GetComponent<Image>();
         }
-    }
-    public void OnMouseDown()
-    {
-        if (enterSkillSlot == true)
+        skillIcon.sprite = img;
+        if (img != null)
         {
-            mainCamera.GetComponent<UI_Controller>().bMouse0Down = true;
+            skillIcon.color = Color.white;
         }
-    }
-    public void OnMouseUp()
-    {
-        mainCamera.GetComponent<UI_Controller>().bMouse0Down = false;
-    }
-    public void OnMouseEnter()
-    {
-        enterSkillSlot = true;
-    }
-    public void OnMouseExit()
-    {
-        enterSkillSlot = false;
+        else
+        {
+            skillIcon.color = Color.clear;
+        }
     }
 }

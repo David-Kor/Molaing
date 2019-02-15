@@ -56,7 +56,6 @@ public class Inventory_Slot : MonoBehaviour
         { 
             if ( hit.collider.gameObject.CompareTag("ItemSlot")
                 || hit.collider.gameObject.CompareTag("QuickSlot")
-                || hit.collider.gameObject.CompareTag("SkillSlot")
                 || hit.collider.gameObject.CompareTag("Weapon")
                 || hit.collider.gameObject.CompareTag("Head")
                 || hit.collider.gameObject.CompareTag("Body")
@@ -163,7 +162,9 @@ public class Inventory_Slot : MonoBehaviour
             GUI.Box(new Rect(Event.current.mousePosition.x + 5, Event.current.mousePosition.y + 5, 200, 200), tooltip, skin.GetStyle("tooltip"));
         }
         //showTooltip이 true가 되면 마우스를 따라다니는 툴팁틀 생성한다.
-        if (mainCamera.GetComponent<UI_Controller>().bMouse0Down)
+        if (mainCamera.GetComponent<UI_Controller>().bInventory
+            && !mainCamera.GetComponent<UI_Controller>().bSkillWindow
+            && mainCamera.GetComponent<UI_Controller>().bMouse0Down)
         {
             GUI.DrawTexture(new Rect(Input.mousePosition.x, Event.current.mousePosition.y, 32, 32), image.mainTexture);
         }
@@ -430,4 +431,4 @@ public class Inventory_Slot : MonoBehaviour
         }
         return false;
     }
-}
+}   

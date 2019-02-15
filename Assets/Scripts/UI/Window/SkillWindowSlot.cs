@@ -10,12 +10,14 @@ public class SkillWindowSlot : MonoBehaviour
     GameObject target = null;
     LayerMask layerMask;
     GameObject mainCamera;
-    Image image;
+    //Image image;
     bool enterSkillWindow;
     public Text skillName;
     public Text skillDes;
     public Image skill_Icon;
     public GameObject content;
+    public GameObject skillEquip;
+    private GameObject skill_object;
 
     public void Start()
     {
@@ -24,9 +26,10 @@ public class SkillWindowSlot : MonoBehaviour
         skill_Icon = gameObject.transform.GetChild(1).GetComponent<Image>();
         content = skillDes.transform.parent.gameObject;
         mainCamera = Camera.main.gameObject;
-        image = gameObject.transform.GetChild(2).GetComponent<Image>();
+        //image = gameObject.transform.parent.parent.parent.GetChild(2).GetComponent<Image>();
         SetContentSize();
     }
+
     public void SetContentSize()
     {
         float width = 281.1f;
@@ -59,17 +62,20 @@ public class SkillWindowSlot : MonoBehaviour
     }
     private void OnGUI()
     {
-        if (mainCamera.transform.GetChild(0).GetChild(5).gameObject.activeSelf == true && mainCamera.GetComponent<UI_Controller>().bMouse0Down == true)
+        if (!mainCamera.GetComponent<UI_Controller>().bInventory
+            && enterSkillWindow
+            && mainCamera.GetComponent<UI_Controller>().bMouse0Down)
             {
-                GUI.DrawTexture(new Rect(Input.mousePosition.x, Event.current.mousePosition.y, 45, 45), skill_Icon.mainTexture);
+                Debug.Log(target.GetComponent<SkillWindowSlot>().skill_Icon.mainTexture);
+                GUI.DrawTexture(new Rect(Input.mousePosition.x, Event.current.mousePosition.y, 45, 45), target.GetComponent<SkillWindowSlot>().skill_Icon.mainTexture);
             }
     }
-    public void OnMouseDown()
+    public void MouseDown()
     {
-        CastRay();
-        Debug.Log(target);
         if (enterSkillWindow == true)
         {
+            CastRay();
+            target.GetComponent<SkillWindowSlot>().skill_Icon = this.skill_Icon;
             if (target.GetComponent<SkillWindowSlot>().skillName.text == null)
             {
                 return;
@@ -80,7 +86,7 @@ public class SkillWindowSlot : MonoBehaviour
             }
         }
     }
-    public void OnMouseUp()
+    public void MouseUp()
     {
         CastRay();
         if (target == null)
@@ -102,12 +108,24 @@ public class SkillWindowSlot : MonoBehaviour
             return;
         }
     }
-    public void OnMouseEnter()
+    public void MouseEnter()
     {
-        enterSkillWindow = true;
+        if (!mainCamera.GetComponent<UI_Controller>().bMouse0Down) { this.enterSkillWindow = true; }
     }
-    public void OnMouseExit()
+    public void MouseExit()
     {
-        enterSkillWindow = false;
+        if (!mainCamera.GetComponent<UI_Controller>().bMouse0Down) { this.enterSkillWindow = false; }
+    }
+
+
+    public void SetSkillObject(GameObject skillObj)
+    {
+        skill_object = skillObj;
+    }
+
+    public void Active_EquipSkill()
+    {
+        skillEquip.SetActive(true);
+        skillEquip.GetComponentInChildren<EquipSkill>().SelectedSkill(skill_object);
     }
 }
