@@ -20,6 +20,7 @@ public class PlayerControl : ObjectControl
     private float gracePeriodTimer;  //피격 시 무적 타이머
 
     private bool inventoryActive;    //인벤토리 창의 활성화 여부
+    private bool skillConfigActive;     //스킬창 활성화 여부
     private int skillIndex;              //스킬 입력 인덱스(1~4)
     private bool isDelay;              //딜레이 상태
     private bool controllable;        //조작 가능 상태(통상 시 모든 키 입력불가)
@@ -29,6 +30,7 @@ public class PlayerControl : ObjectControl
     void Start()
     {
         inventoryActive = false;
+        skillConfigActive = false;
         isDelay = false;
         isAttackable = true;
         controllable = true;
@@ -60,8 +62,14 @@ public class PlayerControl : ObjectControl
             inventoryActive = !inventoryActive;
             ui.Control_Inventory(inventoryActive);
         }
+        //스킬창 키 입력 확인
+        if (CheckSkillConfigKeyInput())
+        {
+            skillConfigActive = !skillConfigActive;
+            ui.Control_SkillWindow(skillConfigActive);
+        }
 
-        if (!inventoryActive)
+        if (!inventoryActive && !skillConfigActive)
         {
             //스킬 키를 눌렀는지 확인
             skillIndex = CheckSkillKeyInput();
@@ -203,14 +211,21 @@ public class PlayerControl : ObjectControl
     }
 
 
+    /* 스킬창 키 입력 확인 */
+    private bool CheckSkillConfigKeyInput()
+    {
+        return Input.GetButtonDown("Skill_Config");
+    }
+
+
     /* 스킬 사용 키 입력 확인 */
     private int CheckSkillKeyInput()
     {
-        if (Input.GetButtonDown("BackStep"))
+        if (Input.GetButtonDown("Sub_Skill_1"))
         {
             return 0;
         }
-        else if (Input.GetButtonDown("Dash"))
+        else if (Input.GetButtonDown("Sub_Skill_2"))
         {
             return 1;
         }

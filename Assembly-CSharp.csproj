@@ -116,12 +116,15 @@
     <Compile Include="Assets\Scripts\Skills\TrueFloatingSword.cs" />
     <Compile Include="Assets\Scripts\Skills\Vigor.cs" />
     <Compile Include="Assets\Scripts\SpriteOrder.cs" />
+    <Compile Include="Assets\Scripts\UI\EquipSkill.cs" />
     <Compile Include="Assets\Scripts\UI\Item\ArmorItem.cs" />
     <Compile Include="Assets\Scripts\UI\Item\Item.cs" />
     <Compile Include="Assets\Scripts\UI\Item\UsingItem.cs" />
     <Compile Include="Assets\Scripts\UI\Item\WeaponItem.cs" />
     <Compile Include="Assets\Scripts\UI\PickupItem.cs" />
     <Compile Include="Assets\Scripts\UI\QuickSlot.cs" />
+    <Compile Include="Assets\Scripts\UI\SkillSlotControl.cs" />
+    <Compile Include="Assets\Scripts\UI\SkillSlotGroup.cs" />
     <Compile Include="Assets\Scripts\UI\UI_Controller.cs" />
     <Compile Include="Assets\Scripts\UI\Window\InGameStatus.cs" />
     <Compile Include="Assets\Scripts\UI\Window\Inventory.cs" />

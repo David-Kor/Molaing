@@ -16,8 +16,6 @@ public class Inventory_Slot : MonoBehaviour
     public LayerMask layerMask;
     public GUISkin skin;
     public bool showTooltip;
-    private bool bDragItem;
-    GameObject thisSlot = null;
     private Image image;
 
     public Inventory_Slot thisObject;
@@ -40,7 +38,6 @@ public class Inventory_Slot : MonoBehaviour
         mainCamera = Camera.main.gameObject;
         takeObject();
         showTooltip = false;
-        bDragItem = false;
     }
     public void CastRay()
     {
@@ -207,7 +204,6 @@ public class Inventory_Slot : MonoBehaviour
         }
         else
         {
-            thisSlot = this.GetComponent<Inventory_Slot>().gameObject;
             thisText = this.transform.GetChild(0).GetComponent<Text>();
             if (thisObject.CompareTag("QuickSlot"))
             {
@@ -239,7 +235,6 @@ public class Inventory_Slot : MonoBehaviour
         {
             if (targetObject.CompareTag("ItemSlot") && targetObject.itemID != 0)
             {
-                thisSlot = null;
                 thisText = null;
                 thisImage = null;
                 image.sprite = null;
@@ -249,6 +244,7 @@ public class Inventory_Slot : MonoBehaviour
             }
             else if (targetObject.CompareTag("ItemSlot") && targetObject.itemID == 0)
             {
+
                 MoveSlot();
                 this.transform.GetChild(1).gameObject.SetActive(false);
             }
@@ -342,7 +338,6 @@ public class Inventory_Slot : MonoBehaviour
                     SwapSlot();
                 }
             }
-            bDragItem = false;
         }
         mainCamera.GetComponent<UI_Controller>().bMouse0Down = false;
         showTooltip = false;

@@ -5,6 +5,7 @@ using UnityEngine;
 public abstract class Skill : MonoBehaviour
 {
     public string skillName;            //스킬명
+    public string detail;                 //상세 설명
     public GameObject skillCaster;   //시전자
     public int skillLevel = 1;
     public int maxHitCount = 10;    //최대 Hit 대상의 수

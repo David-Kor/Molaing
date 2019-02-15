@@ -10,12 +10,14 @@ public class SkillWindowSlot : MonoBehaviour
     GameObject target = null;
     LayerMask layerMask;
     GameObject mainCamera;
-    Image image;
+    //Image image;
     bool enterSkillWindow;
     public Text skillName;
     public Text skillDes;
     public Image skill_Icon;
     public GameObject content;
+    public GameObject skillEquip;
+    private GameObject skill_object;
 
     public void Start()
     {
@@ -24,9 +26,10 @@ public class SkillWindowSlot : MonoBehaviour
         skill_Icon = gameObject.transform.GetChild(1).GetComponent<Image>();
         content = skillDes.transform.parent.gameObject;
         mainCamera = Camera.main.gameObject;
-        image = gameObject.transform.parent.parent.parent.GetChild(2).GetComponent<Image>();
+        //image = gameObject.transform.parent.parent.parent.GetChild(2).GetComponent<Image>();
         SetContentSize();
     }
+
     public void SetContentSize()
     {
         float width = 281.1f;
@@ -60,6 +63,7 @@ public class SkillWindowSlot : MonoBehaviour
     private void OnGUI()
     {
         if (!mainCamera.GetComponent<UI_Controller>().bInventory
+            && enterSkillWindow
             && mainCamera.GetComponent<UI_Controller>().bMouse0Down)
             {
                 Debug.Log(target.GetComponent<SkillWindowSlot>().skill_Icon.mainTexture);
@@ -106,10 +110,22 @@ public class SkillWindowSlot : MonoBehaviour
     }
     public void MouseEnter()
     {
-        this.enterSkillWindow = true;
+        if (!mainCamera.GetComponent<UI_Controller>().bMouse0Down) { this.enterSkillWindow = true; }
     }
     public void MouseExit()
     {
-        this.enterSkillWindow = false;
+        if (!mainCamera.GetComponent<UI_Controller>().bMouse0Down) { this.enterSkillWindow = false; }
+    }
+
+
+    public void SetSkillObject(GameObject skillObj)
+    {
+        skill_object = skillObj;
+    }
+
+    public void Active_EquipSkill()
+    {
+        skillEquip.SetActive(true);
+        skillEquip.GetComponentInChildren<EquipSkill>().SelectedSkill(skill_object);
     }
 }
