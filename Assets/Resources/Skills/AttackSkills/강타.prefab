@@ -80,6 +80,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   skillName: "\uAC15\uD0C0"
   skillCaster: {fileID: 0}
+  skillLevel: 1
   maxHitCount: 10
   coolDown: 5
   firstDelay: 0
@@ -88,7 +89,7 @@ MonoBehaviour:
   delayCancelable: 0
   isOnHead: 0
   skillDirection: {x: 0, y: 0}
-  skill_IMG: {fileID: 21300000, guid: 5d787b3952954e44da80e9908fa7ffd6, type: 3}
+  skill_IMG: {fileID: 21300000, guid: ae4ff6b43178cb948a272f4dd5daded7, type: 3}
   effects:
   - {fileID: 21300000, guid: 5d787b3952954e44da80e9908fa7ffd6, type: 3}
   - {fileID: 21300000, guid: 2f0a563f16f2e5e4e9136bbb38a809d4, type: 3}
@@ -133,7 +134,7 @@ SpriteRenderer:
   m_AutoUVMaxAngle: 89
   m_LightmapParameters: {fileID: 0}
   m_SortingLayerID: -298385175
-  m_SortingLayer: 2
+  m_SortingLayer: 3
   m_SortingOrder: 0
   m_Sprite: {fileID: 21300000, guid: ae4ff6b43178cb948a272f4dd5daded7, type: 3}
   m_Color: {r: 1, g: 1, b: 1, a: 1}

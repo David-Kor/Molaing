@@ -14429,6 +14429,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   player: {fileID: 0}
+  cam_speed: 3.5
 --- !u!114 &114518132089134218
 MonoBehaviour:
   m_ObjectHideFlags: 1

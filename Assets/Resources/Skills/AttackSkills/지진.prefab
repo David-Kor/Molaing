@@ -54,7 +54,7 @@ BoxCollider2D:
   m_IsTrigger: 1
   m_UsedByEffector: 0
   m_UsedByComposite: 0
-  m_Offset: {x: 0, y: 0}
+  m_Offset: {x: -0.0875, y: 0}
   m_SpriteTilingProperty:
     border: {x: 0, y: 0, z: 0, w: 0}
     pivot: {x: 0.5, y: 0.5}
@@ -65,7 +65,7 @@ BoxCollider2D:
     adaptiveTiling: 0
   m_AutoTiling: 0
   serializedVersion: 2
-  m_Size: {x: 0.175, y: 0.5}
+  m_Size: {x: 0.35, y: 0.5}
   m_EdgeRadius: 0
 --- !u!114 &114102229461824152
 MonoBehaviour:
@@ -81,7 +81,7 @@ MonoBehaviour:
   skillName: "\uC9C0\uC9C4"
   skillCaster: {fileID: 0}
   skillLevel: 1
-  maxHitCount: 10
+  maxHitCount: 5
   coolDown: 1
   firstDelay: 0
   delay: 0.5
@@ -95,11 +95,11 @@ MonoBehaviour:
   isLoop: 1
   lifeTime: 0.35
   isKnockBack: 1
-  knockBackPower: 0.6
+  knockBackPower: 1.2
   damage: 10
   bouncePower: 0.92
   speed: 3.5
-  interval: 0.1
+  interval: 0.12
   part_earthquake: {fileID: 1038552657741674, guid: 01f1c7a5081886340bd34974b6b4295c,
     type: 2}
 --- !u!212 &212706610675645786
